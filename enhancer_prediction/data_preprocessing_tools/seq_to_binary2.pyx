@@ -1,6 +1,6 @@
-
 cimport cython
 import sys
+
 def label_reader(file_):
     cdef list label_position=[]
     cdef list label_list=[]

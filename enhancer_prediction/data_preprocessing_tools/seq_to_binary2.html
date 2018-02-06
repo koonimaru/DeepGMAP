@@ -371,29 +371,29 @@ body.cython { font-family: courier; font-size: 12; }
     Click on a line that starts with a "<code>+</code>" to see the C code that Cython generated for it.
 </p>
 <p>Raw output: <a href="seq_to_binary2.c">seq_to_binary2.c</a></p>
-<div class="cython"><pre class="cython line score-0">&#xA0;<span class="">01</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">02</span>: <span class="k">cimport</span> <span class="nn">cython</span></pre>
-<pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">03</span>: <span class="k">import</span> <span class="nn">sys</span></pre>
-<pre class='cython code score-8 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_Import</span>(__pyx_n_s_sys, 0, -1);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)</span>
+<div class="cython"><pre class="cython line score-0">&#xA0;<span class="">01</span>: <span class="k">cimport</span> <span class="nn">cython</span></pre>
+<pre class="cython line score-8" onclick='toggleDiv(this)'>+<span class="">02</span>: <span class="k">import</span> <span class="nn">sys</span></pre>
+<pre class='cython code score-8 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_Import</span>(__pyx_n_s_sys, 0, -1);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_sys, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 3, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_sys, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 2, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-25" onclick='toggleDiv(this)'>+<span class="">04</span>: <span class="k">def</span> <span class="nf">label_reader</span><span class="p">(</span><span class="n">file_</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">03</span>: </pre>
+<pre class="cython line score-25" onclick='toggleDiv(this)'>+<span class="">04</span>: <span class="k">def</span> <span class="nf">label_reader</span><span class="p">(</span><span class="n">file_</span><span class="p">):</span></pre>
 <pre class='cython code score-25 '>/* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_1label_reader(PyObject *__pyx_self, PyObject *__pyx_v_file_); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_1label_reader = {"label_reader", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_1label_reader, METH_O, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_1label_reader(PyObject *__pyx_self, PyObject *__pyx_v_file_) {
+static PyObject *__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_1label_reader(PyObject *__pyx_self, PyObject *__pyx_v_file_); /*proto*/
+static PyMethodDef __pyx_mdef_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_1label_reader = {"label_reader", (PyCFunction)__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_1label_reader, METH_O, 0};
+static PyObject *__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_1label_reader(PyObject *__pyx_self, PyObject *__pyx_v_file_) {
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
   <span class='refnanny'>__Pyx_RefNannySetupContext</span>("label_reader (wrapper)", 0);
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_reader(__pyx_self, ((PyObject *)__pyx_v_file_));
+  __pyx_r = __pyx_pf_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_label_reader(__pyx_self, ((PyObject *)__pyx_v_file_));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_reader(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_) {
+static PyObject *__pyx_pf_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_label_reader(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_) {
   PyObject *__pyx_v_label_position = 0;
   PyObject *__pyx_v_label_list = 0;
   PyObject *__pyx_v_line_ = 0;
@@ -411,7 +411,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_8);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_10);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_11);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("data_preprocessing_tools.seq_to_binary2.label_reader", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("enhancer_prediction.data_preprocessing_tools.seq_to_binary2.label_reader", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_label_position);
@@ -427,11 +427,11 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__10);
   <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__10);
 /* … */
-  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_1label_reader, NULL, __pyx_n_s_data_preprocessing_tools_seq_to_2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)</span>
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_1label_reader, NULL, __pyx_n_s_enhancer_prediction_data_preproc_2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_label_reader, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 4, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_codeobj__11 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_data_preprocessing_tools_seq_to, __pyx_n_s_label_reader, 4, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 4, __pyx_L1_error)</span>
+  __pyx_codeobj__11 = (PyObject*)<span class='pyx_c_api'>__Pyx_PyCode_New</span>(1, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_enhancer_prediction_data_preproc, __pyx_n_s_label_reader, 4, __pyx_empty_bytes);<span class='error_goto'> if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 4, __pyx_L1_error)</span>
 </pre><pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">05</span>:     <span class="k">cdef</span> <span class="kt">list</span> <span class="nf">label_position</span><span class="o">=</span><span class="p">[]</span></pre>
 <pre class='cython code score-5 '>  __pyx_t_1 = <span class='py_c_api'>PyList_New</span>(0);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
@@ -837,9 +837,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
 </pre><pre class="cython line score-0">&#xA0;<span class="">25</span>: </pre>
 <pre class="cython line score-61" onclick='toggleDiv(this)'>+<span class="">26</span>: <span class="k">def</span> <span class="nf">AGCTtoArray3</span><span class="p">(</span><span class="n">char</span> <span class="o">*</span><span class="n">Seq</span><span class="p">,</span> <span class="nb">int</span> <span class="n">seqlen</span><span class="p">):</span></pre>
 <pre class='cython code score-61 '>/* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3 = {"AGCTtoArray3", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3 = {"AGCTtoArray3", (PyCFunction)__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -887,18 +887,18 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArr
   __pyx_L5_argtuple_error:;
   <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("AGCTtoArray3", 1, 2, 2, <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args)); <span class='error_goto'>__PYX_ERR(0, 26, __pyx_L3_error)</span>
   __pyx_L3_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("data_preprocessing_tools.seq_to_binary2.AGCTtoArray3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("enhancer_prediction.data_preprocessing_tools.seq_to_binary2.AGCTtoArray3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray3(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray3(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -911,7 +911,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_5);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_6);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("data_preprocessing_tools.seq_to_binary2.AGCTtoArray3", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("enhancer_prediction.data_preprocessing_tools.seq_to_binary2.AGCTtoArray3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_onehot);
@@ -924,7 +924,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__12);
   <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__12);
 /* … */
-  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3, NULL, __pyx_n_s_data_preprocessing_tools_seq_to_2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)</span>
+  __pyx_t_1 = PyCFunction_NewEx(&amp;__pyx_mdef_19enhancer_prediction_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray3, NULL, __pyx_n_s_enhancer_prediction_data_preproc_2);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_AGCTtoArray3, __pyx_t_1) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 26, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;

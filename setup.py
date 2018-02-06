@@ -44,6 +44,6 @@ setup_info = dict(
     
     ],
     install_requires=['tensorflow-gpu'],
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
 )
 setup(**setup_info)

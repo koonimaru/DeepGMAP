@@ -4,7 +4,7 @@ import glob as glb
 from genome_labeling2 import genome_label
 import os
 import subprocess as sp
-import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
+import seq_to_binary2 as sb2
 from inputfileGenerator_multiple_label3 import seqtobinarydict
 from inputfileGenerator_multiple_label3 import dicttoarray
 from inputfileGenerator_multiple_label3 import array_saver
@@ -15,7 +15,7 @@ def main():
     start=time.time()
     
     try:
-        options, args =getopt.getopt(sys.argv[1:], 'b:g:w:t:p:s:r:', ['bed=', 'genome=', 'window_size=' 'threads=', 'test_batch_num=','prefix=','sample_number=','reduce_genome='])
+        options, args =getopt.getopt(sys.argv[1:], 'b:g:w:t:p:s:r:', ['bed=', 'genome=', 'window_size=' 'threads=', 'prefix=','sample_number=','reduce_genome='])
     except getopt.GetoptError as err:
         print str(err)
         sys.exit(2)
