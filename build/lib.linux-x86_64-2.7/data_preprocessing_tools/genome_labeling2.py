@@ -1,0 +1,122 @@
+
+import glob as glb
+import sys
+import numpy as np
+from sklearn.decomposition import KernelPCA as pca_f
+import os
+import matplotlib.pyplot as plt
+from scipy.spatial.distance import pdist
+import scipy.cluster.hierarchy as sch
+
+
+def genome_label(bed_file_list, genome_1000,out_dir, pref):
+    
+    file_num=len(bed_file_list)
+
+    #print file_num
+    peak_set_list=[]
+    i=0
+    for f in bed_file_list:
+        peak_set=set()
+        with open(f, 'r') as fin:
+            for line in fin:
+                if i==0:
+                    _,a,b=line.split()
+                    check_length=int(b)-int(a)
+                    
+                peak_set.add(line)
+        peak_set_list.append(peak_set)
+                
+        i+=1
+    
+    #print len(peak_set_list)
+    
+    head, tail = os.path.split(genome_1000)
+
+    
+    #with open(str(out_dir)+str(pref)+'_'+str(tail)+'.labelenames','w') as fout:
+        
+    fo_name=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
+    label_array_list=[]
+    with open(genome_1000,'r') as fin:
+        with open(fo_name,'w') as fout:
+            fout.write("#sample_list: "+"\t".join(bed_file_list)+"\n")
+            i=0
+            for line in fin:
+                k=0
+                label_array=[0 for h in range(file_num)]
+
+                for s in peak_set_list:
+                    if i==0:
+                        _,a,b=line.split()
+                        assert check_length==int(b)-int(a), "mismatches in sequence lengths"
+                    
+                    
+                    
+                    if line in s:
+                        label_array[k]=1
+                    k+=1 
+                fout.write(line.strip('\n')+'\t'+' '.join(map(str, list(label_array)))+'\n')
+                if sum(label_array)>0:
+                    #print sum(label_array)
+                    label_array_list.append(label_array)
+                i+=1
+                if i%200000==0:
+                    print("writing labeled file "+ line.strip("\n"))
+    print(fo_name+" is saved")
+    return label_array_list
+
+def main():
+    bed_file_dir, genome_1000, out_dir, pref=sys.argv[1:]
+    bed_file_list=[]
+    if not "*" in bed_file_dir and bed_file_dir.endswith('.bed'):
+        bed_file_list.append(bed_file_dir)
+    elif not '*' in bed_file_dir:
+        bed_file_dir=bed_file_dir+"*.bed"
+    
+    bed_file_list=glb.glob(bed_file_dir)
+    print bed_file_list
+    if len(bed_file_list)==0:
+        print("no files in "+str(bed_file_dir))
+        sys.exit()
+    label_array_list=genome_label(bed_file_list, genome_1000,out_dir,pref)
+    print label_array_list[0]
+    label_array_list_=np.transpose(label_array_list)
+    print sum(label_array_list_[0])
+    pca = pca_f(n_components=2, kernel="rbf")
+    X_pca=pca.fit_transform(label_array_list_)
+    dist1=pdist(label_array_list_, 'cosine')
+    _, ax1=plt.subplots()
+    
+    Y = sch.linkage(dist1, method='ward')
+    Z1 = sch.dendrogram(Y)
+    idx1 = Z1['leaves']
+    
+    new_sample_list=[]
+    
+    for i in idx1:
+        txt=bed_file_list[i].split("/")[-1]
+        new_sample_list.append(txt)
+    ax1.set_xticklabels(new_sample_list , rotation=90)
+    
+    
+    print X_pca.shape
+    _, ax2=plt.subplots()
+    ax2.scatter(X_pca[:,0], X_pca[:,1])
+    for i, txt in enumerate(bed_file_list):
+        txt=txt.split("/")[-1]
+        ax2.annotate(txt, (X_pca[i,0],X_pca[i,1]))
+    
+    plt.show()
+if __name__ == '__main__':
+    main()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

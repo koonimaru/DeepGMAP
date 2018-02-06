@@ -1,5 +1,5 @@
 #from distutils.core import setup
-from setuptools import setup
+from setuptools import setup, find_packages
 from distutils.extension import Extension
 VERSION ='0.0'
 try:
@@ -24,14 +24,19 @@ else:
         Extension("enhancer_prediction.post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.c" ]),
     ]
 
-setup_info = dict(
+setup(
     name='DeepShark',
     version=VERSION,
     description='Learning and predicting gene regulatory sequences in genomes',
     author='Koh Onimaru',
     author_email='koh.onimaru@gmail.com',
     url='',
-    packages=['enhancer_prediction/train','enhancer_prediction/network_constructors','enhancer_prediction/post_train_tools','enhancer_prediction/data_preprocessing_tools','enhancer_prediction/misc'],
+    #package_dir={'enhancer_prediction' : 'enhancer_prediction'},
+    #packages=['enhancer_prediction','enhancer_prediction.train','enhancer_prediction.network_constructors','enhancer_prediction.post_train_tools','enhancer_prediction.data_preprocessing_tools','enhancer_prediction.misc'],
+    packages=find_packages('enhancer_prediction'),
+    
+    package_dir={'':'enhancer_prediction'},
+    #packages=find_packages(),
     cmdclass = cmdclass,
     ext_modules=ext_modules,
     classifiers=[
@@ -46,4 +51,5 @@ setup_info = dict(
     install_requires=['tensorflow-gpu'],
     long_description=open('README.md').read(),
 )
-setup(**setup_info)
+
+

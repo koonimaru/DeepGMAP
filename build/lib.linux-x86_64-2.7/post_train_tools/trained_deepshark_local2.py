@@ -221,7 +221,7 @@ def main():
         model_name="_".join(model_name[:4])
     print("runing "+str(model_name))
     try:
-        nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
+        nc=il.import_module("network_constructors."+str(model_name))
     except ImportError:
         print(str(model_name)+" does not exist")
         sys.exit(0)
