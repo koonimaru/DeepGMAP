@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="mm10" hasGeneTrack="true" hasSequenceTrack="true" locus="chr10:4531251-4641378" path="/home/koh/workspace/MLforShark/igv_session.xml" version="8">
+    <Resources>
+        <Resource path="/media/koh/HD-PCFU3/PublicData/Conserved_element/mm10.60way.phastCons.bw"/>
+        <Resource path="/media/koh/HD-PCFU3/mouse/various_dnase_data/bedfiles/all_peak_for_comparision_srt_mrg.bed"/>
+        <Resource path="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chrX_17.bed"/>
+        <Resource path="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chr10_8.bed"/>
+        <Resource path="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chr10_0.bed"/>
+        <Resource path="/media/koh/HD-PCFU3/mouse/prediction/Sun_Jan_22_181643_2017chr10_0.bed"/>
+        <Resource path="/media/koh/HD-PCFU3/mouse/prediction/Sun_Jan_22_181643_2017chr10_3.bed"/>
+    </Resources>
+    <Panel height="830" name="DataPanel" width="2541">
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;0.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/media/koh/HD-PCFU3/mouse/prediction/Sun_Jan_22_181643_2017chr10_0.bed" name="Sun_Jan_22_181643_2017chr10_0.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chr10_0.bed" name="Fri_Feb__3_184349_2017chr10_0.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;0.0;255,255,255;0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/media/koh/HD-PCFU3/mouse/prediction/Sun_Jan_22_181643_2017chr10_3.bed" name="Sun_Jan_22_181643_2017chr10_3.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/media/koh/HD-PCFU3/mouse/various_dnase_data/bedfiles/all_peak_for_comparision_srt_mrg.bed" name="all_peak_for_comparision_srt_mrg.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;185.0;255,255,255;0,0,178" displayMode="EXPANDED" featureVisibilityWindow="-1" fontSize="10" height="35" id="mm10_genes" name="Refseq genes" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="185.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track altColor="0,0,178" autoScale="true" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/media/koh/HD-PCFU3/PublicData/Conserved_element/mm10.60way.phastCons.bw" name="mm10.60way.phastCons.bw" normalize="false" renderer="BAR_CHART" sortable="true" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="0.9995429" minimum="0.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <Panel height="328" name="FeaturePanel" width="2541">
+        <Track altColor="0,0,178" autoScale="false" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="Reference sequence" name="Reference sequence" sortable="false" visible="true"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chr10_8.bed" name="Fri_Feb__3_184349_2017chr10_8.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+        <Track altColor="0,0,178" autoScale="false" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" displayMode="COLLAPSED" featureVisibilityWindow="-1" fontSize="10" id="/run/user/1000/gvfs/sftp:host=172.21.31.92/home/onimaru/workspace/data/predction/Fri_Feb__3_184349_2017chrX_17.bed" name="Fri_Feb__3_184349_2017chrX_17.bed" renderer="BASIC_FEATURE" sortable="false" visible="true" windowFunction="count"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.7141630901287553"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>
