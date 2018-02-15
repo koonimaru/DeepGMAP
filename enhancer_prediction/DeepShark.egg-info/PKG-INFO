@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: DeepShark
+Version: 0.0
+Summary: Learning and predicting gene regulatory sequences in genomes
+Home-page: UNKNOWN
+Author: Koh Onimaru
+Author-email: koh.onimaru@gmail.com
+License: UNKNOWN
+Description-Content-Type: UNKNOWN
+Description: # enhancer_prediction
+Platform: UNKNOWN
+Classifier: Development Status :: 0
+Classifier: Environment :: X11 Applications
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: UBUNTU :: Linux
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Biology/Machine learning
