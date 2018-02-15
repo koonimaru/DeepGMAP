@@ -25,14 +25,11 @@ VERSION=""
 
 def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
-    function first.
-    
+    function first.   
     """
+    
     description = "%(prog)s -- regulatory sequence prediction"
     epilog = "For command line options of each command, type: %(prog)s COMMAND -h"
-    #Check community site: http://groups.google.com/group/macs-announcement/
-    #Source code: https://github.com/taoliu/MACS/"
-    # top-level parser
     argparser = ap.ArgumentParser( description = description, epilog = epilog ) #, usage = usage )
     argparser.add_argument("--version", action="version", version="%(prog)s "+VERSION)
     subparsers = argparser.add_subparsers( dest = 'subcommand_name' ) #help="sub-command help")
