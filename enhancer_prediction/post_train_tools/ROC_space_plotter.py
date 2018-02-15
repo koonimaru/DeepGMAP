@@ -95,18 +95,27 @@ def roc_space_plotter(label, predictions, name_list,outfile_name):
 def main():
     outfile_name="/home/fast/onimaru/data/prediction/ROC_space_curve_comp_limb_brain.pdf"
     npload_list=[]
+    label_array=[]
+    chromosome="chr2"
     #name_list=["DeepSEA", "Bidirectional","Conv_plus","Conv+Bidirectional"]
     name_list=["DeepSEA", "DanQ","Conv+Bidirectional"]
     file_list=['/home/fast/onimaru/data/prediction/network_constructor_danq_1d_Sat_Nov_18_151721_2017.ckpt-12123_label_prediction.npz',
                #'/home/fast/onimaru/data/prediction/network_constructor_deepsea_1d4_Fri_Oct__6_183716_2017.ckpt-11467_label_prediction.npz',
                "/home/fast/onimaru/data/prediction/network_constructor_danq_1d_Sat_Nov_18_151721_2017.ckpt-12123_label_prediction.npz",
                "/home/fast/onimaru/data/prediction/network_constructor_deepsea_1d3_Fri_Nov_17_170434_2017.ckpt-12123_label_prediction.npz"]
+    label_file=''
+    
+    with open(label_file, 'r') as fin:
+        for line in fin:
+            if line.startswith(chromosome):
+                label_array.append(map(int, line[3:]))
+    label_array=np.array(label_array)
     
     for f in file_list:
         npload_list.append(np.load(f))
-
+        
     
-    roc_space_plotter(npload_list[0]["label_array"], npload_list, name_list,outfile_name)
+    roc_space_plotter(label_array, npload_list, name_list,outfile_name)
 
 
 if __name__== '__main__':

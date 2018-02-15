@@ -8,7 +8,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pylab
-import unpooling
+from enhancer_prediction.post_train_tools import unpooling
 import importlib as il
 import getopt
 
@@ -80,7 +80,7 @@ keep_prob3 = tf.placeholder(tf.float32)
 
 
 x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-y_ = tf.placeholder(tf.float32, shape=[None, 2])
+y_ = tf.placeholder(tf.float32, shape=[None, 20])
 phase=tf.placeholder(tf.bool)
 dropout_1=0.95
 dropout_2=0.9

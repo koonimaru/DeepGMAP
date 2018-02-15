@@ -36,6 +36,8 @@ setup(
     packages=find_packages('enhancer_prediction'),
     
     package_dir={'':'enhancer_prediction'},
+    scripts=['bin/enhancer_prediction.py',
+                   ],
     #packages=find_packages(),
     cmdclass = cmdclass,
     ext_modules=ext_modules,

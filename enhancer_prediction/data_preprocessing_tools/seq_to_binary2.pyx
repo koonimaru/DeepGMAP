@@ -46,3 +46,48 @@ def AGCTtoArray3(char *Seq, int seqlen):
     
     return onehot
 
+def ACGTtoArray(char *Seq, int seqlen):
+    cdef list onehot=[]
+    cdef char Nuc
+    cdef int i
+    for i in range(seqlen):
+        Nuc=Seq[i]
+        #print Nuc
+        if Nuc=='A' or Nuc=='a':
+            onehot.append((1, 0, 0, 0))
+        elif Nuc=='C' or Nuc=='c':
+            onehot.append((0, 1, 0, 0))
+        elif Nuc=='G' or Nuc=='g':
+            onehot.append((0, 0, 1, 0))
+        elif Nuc=='T' or Nuc=='t':
+            onehot.append((0, 0, 0, 1))
+        elif Nuc=='N' or Nuc=='n':
+            onehot.append((0, 0, 0, 0))
+        else:
+            print("sequence contains unreadable characters: "+str(Nuc))
+            sys.exit()
+    
+    return onehot
+
+def ATGCtoArray(char *Seq, int seqlen):
+    cdef list onehot=[]
+    cdef char Nuc
+    cdef int i
+    for i in range(seqlen):
+        Nuc=Seq[i]
+        #print Nuc
+        if Nuc=='A' or Nuc=='a':
+            onehot.append((1, 0, 0, 0))
+        elif Nuc=='T' or Nuc=='t':
+            onehot.append((0, 1, 0, 0))
+        elif Nuc=='G' or Nuc=='g':
+            onehot.append((0, 0, 1, 0))
+        elif Nuc=='C' or Nuc=='c':
+            onehot.append((0, 0, 0, 1))
+        elif Nuc=='N' or Nuc=='n':
+            onehot.append((0, 0, 0, 0))
+        else:
+            print("sequence contains unreadable characters: "+str(Nuc))
+            sys.exit()
+    
+    return onehot

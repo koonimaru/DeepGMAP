@@ -7,7 +7,7 @@ import time
 import math
 import os
 from natsort import natsorted, ns
-import network_constructor_deepsea_1d3 as nc
+from enhancer_prediction.network_constructors import deepshark
 import subprocess as sp
 from itertools import cycle
 import matplotlib.pyplot as plt
@@ -22,7 +22,9 @@ from glob import glob
 from natsort import natsorted
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
-
+from sklearn.decomposition import PCA, IncrementalPCA
+from sklearn.manifold import MDS, Isomap
+from MulticoreTSNE import MulticoreTSNE as TSNE
 start=time.time()
 #dimension1_2=16
 
@@ -108,7 +110,7 @@ def batch_queuing(file_list, batch_size, data_length):
  
 def main():
     try:
-        options, args =getopt.getopt(sys.argv[1:], 'i:o:c:b:t:g:', ['input_dir=','output_dir=','network_constructor=', 'test_genome'])
+        options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
     except getopt.GetoptError as err:
         print str(err)
         sys.exit(2)
@@ -123,7 +125,7 @@ def main():
                 sys.exit(0)
         elif opt in ('-o', '--output_dir'):
             output_dir=arg
-        elif opt in ('-c', '--network_constructor'):
+        elif opt in ('-n', '--network_constructor'):
             model_name=arg
             #if not os.path.isfile(model_name):
                 #print(model_name+' does not exist')
@@ -154,12 +156,13 @@ def main():
     sess = tf.Session(config=config)        
 
     x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-    y_ = tf.placeholder(tf.float32, shape=[None, 1])
+    y_ = tf.placeholder(tf.float32, shape=[None, 20])
     keep_prob = tf.placeholder(tf.float32)
     keep_prob2 = tf.placeholder(tf.float32)
     keep_prob3 = tf.placeholder(tf.float32)
     phase=tf.placeholder(tf.bool)
     data_length=1000
+    max_to_keep=2
     if 'ckpt' in input_dir.rsplit('.', 1)[1]: 
         input_dir=input_dir
     elif 'meta'  in input_dir.rsplit('.', 1)[1] or 'index'  in input_dir.rsplit('.', 1)[1]:
@@ -167,7 +170,7 @@ def main():
     else:
         print "the input file should be a ckpt file"
         sys.exit(1)
-    nc=il.import_module(str(model_name))
+    nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
     print("runing "+str(model_name))
     model = nc.Model(image=x_image, label=y_, 
                  output_dir=None,
@@ -176,7 +179,8 @@ def main():
                  keep_prob=keep_prob, 
                  keep_prob2=keep_prob2, 
                  keep_prob3=keep_prob3, 
-                 data_length=data_length)
+                 data_length=data_length,
+                 max_to_keep=max_to_keep)
     sess.run(tf.global_variables_initializer())
     saver=model.saver
     try:
@@ -199,7 +203,9 @@ def main():
             position_list=position_list_
         else:
             position_list=np.concatenate([position_list,position_list_])
-        seq_list=np.array(seq_list, np.int16).reshape(-1, 1000, 4, 1)
+        seq_list=np.array(seq_list, np.int16)
+        seq_list=seq_list[np.random.randint(seq_list.shape[0], size=10000), :]
+        seq_list=seq_list.reshape(-1, 1000, 4, 1)
         seq_length=seq_list.shape[0]
         print seq_length
         loop=seq_length/1000+1
@@ -229,13 +235,11 @@ def main():
     print neuron_monitor[0], np.max(neuron_monitor[0])
     #print y_prediction2.shape    
     
-    from sklearn.decomposition import PCA, IncrementalPCA
-    from sklearn.manifold import MDS, Isomap
-    from MulticoreTSNE import MulticoreTSNE as TSNE
+
     n_components = 2
     C=[]
     for i in range(len(y_prediction2)):
-        C.append([float(y_prediction2[i]),0.0,0.0])
+        C.append([np.mean(y_prediction2[i]),0.0,0.0])
     #print X_ipca.shape
     
     #pca = PCA(n_components=2)
@@ -244,7 +248,7 @@ def main():
     #X_pca = ism.fit_transform(neuron_monitor)
     #pca2 = PCA(n_components=50)
     #X_pca2 = pca2.fit_transform(neuron_monitor)
-    tsne = TSNE(n_jobs=18,perplexity = 50.000000)
+    tsne = TSNE(n_jobs=18,perplexity = 20.000000)
     neuron_monitor=np.array(neuron_monitor, np.float64)
     #X_pca2=np.array(X_pca2, np.float64)
     X_tsne = tsne.fit_transform(neuron_monitor)

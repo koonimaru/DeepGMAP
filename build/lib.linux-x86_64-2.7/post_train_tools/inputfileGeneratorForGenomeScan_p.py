@@ -11,7 +11,11 @@ import os.path
 import multiprocessing
 import sys
 import glob
-import data_preprocessing_tools.seq_to_binary2 as sb2
+import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
+
+import psutil
+import getopt
+
 
 def DNA_to_array_converter(input_file,target_chr):
     seq_list=[]
@@ -23,9 +27,9 @@ def DNA_to_array_converter(input_file,target_chr):
         SEQ=False
         if target_chr=="all":
             for line in fin:
-                if line[:4]=='>chr':
+                if line.startswith('>'):
                     if not "_" in line and not line.startswith('>chrM'):
-                        print line
+                        print line,
                         position_list.append(line.strip('\n'))
                         SEQ=True
                     else:
@@ -37,7 +41,7 @@ def DNA_to_array_converter(input_file,target_chr):
                     seq_list.append(sequence)
         else:
             for line in fin:
-                if line[:4]=='>chr':
+                if line.startswith('>'):
                     if line.startswith('>'+str(target_chr)+':'):
                         print line
                         position_list.append(line.strip('\n'))
@@ -58,9 +62,9 @@ def array_saver(outfile,positions,sequences):
     print('saving '+outfile)
     np.savez_compressed(outfile,positions=positions,sequences=sequences)
         
-
-import psutil
-import getopt
+def run(args):
+    
+    main()
 
 def main():
     
@@ -89,12 +93,10 @@ def main():
     
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)
+    print seq_num
     
-    
-    if target_chr=="all":
-        DIVIDES_NUM=72
-    else:
-        DIVIDES_NUM=3
+    DIVIDES_NUM=seq_num/120000
+
     if DIVIDES_NUM%threads==0:
         outerloop=DIVIDES_NUM/threads
     else:
@@ -102,7 +104,7 @@ def main():
         
         
     
-    jobs = []
+    
     if seq_num%DIVIDES_NUM==0:
         chunk_num=seq_num/DIVIDES_NUM
     else:
@@ -111,8 +113,12 @@ def main():
         job_num=threads
     else:
         job_num=DIVIDES_NUM
+        
+    print DIVIDES_NUM, threads, outerloop, job_num
+    
+    
     for l in range(outerloop):
-            
+        jobs = []    
         for i in range(job_num):
             if i*chunk_num+l*threads>seq_num:
                 break
@@ -125,7 +131,6 @@ def main():
             
         for j in jobs:
             j.join()
-
         
 
     
