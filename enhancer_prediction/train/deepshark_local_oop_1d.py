@@ -144,46 +144,94 @@ def Three_label_ROCspace_calculator(a, b):
     FNR=float(ROC_counter[3])/(float(ROC_counter[0])+float(ROC_counter[3])+0.0001)  
     return FPR, FNR
     
+def run(args):
+    main(args)
 
-def main():
+
+def main(args=None):
     start=time.time()
     a=time.asctime()
     b=a.replace(':', '')
     start_at=b.replace(' ', '_')
-
+    mode="train"
     loop_num_=None
     test_batch_num=None
     max_to_keep=2
-    try:
-        options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'input_dir=', 'loop_num=', 'test_batch_num=', 'output_dir=','network_constructor=','pretrained_model='])
-    except getopt.GetoptError as err:
-        print str(err)
-        sys.exit(2)
-    if len(options)<4:
-        print('too few argument')
-        sys.exit(0)
-    for opt, arg in options:
-        if opt in ('-m', '--mode'):
-            mode=arg
-        elif opt in ('-i', '--input_dir'):
-            input_dir=arg
-            if input_dir.endswith("/"):
-                input_dir=str(input_dir)+"*"
-            elif input_dir.endswith("*"):
-                pass
-            else:
-                input_dir=str(input_dir)+"/*"
-                
-        elif opt in ('-n', '--loop_num'):
-            loop_num_=int(arg)
-        elif opt in ('-b', '--test_batch_num'):
-            test_batch_num=int(arg)
-        elif opt in ('-o', '--output_dir'):
-            output_dir=arg
-        elif opt in ('-c', '--network_constructor'):
-            model_name=arg
-        elif opt in ('-p', '--pretrained_model'):
-            pretrained_dir=arg
+    
+    
+    if args!=None:
+        """
+            argparser_train = subparsers.add_parser("train", help="Train a network with genomic sequences.")
+    
+            # group for input files
+            group_input = argparser_train.add_argument_group( "Input arguments" )
+            group_input.add_argument( "-i", "--in_dir", dest = "in_directory", type = str, required = True,
+                                      help = "The directory of a traing data set. Labeled and shuffled genomic seuqences in a format of numpy array, produced by 'input_generate' command. REQUIRED." )
+            group_input.add_argument( "-c", "--network_constructor", dest = "model",required = True, type = str,
+                                            help = "The name of a model to train (without .py extention). Model files should be in network_constructors directory. REQUIRED.")
+            group_input.add_argument( "-m", "--mode", dest = "mode", type = str,
+                                      choices = ("train", "pretrain"),
+                                      help = "Training mode. \"train\", \"pretrain\". If users want to retrain a model, select pretrain mode. But, pretrain is still in prep, Default: train",
+                                      default = "train" )
+            group_input.add_argument( "-n", "--loop_num", dest = "loop_number", type = int, default = None,
+                                      help = "The number of mini-batches to train. If not provided, the program will go through all mini-batches (i.e. all npz files) except test batches." )
+            group_input.add_argument( "--test_batch_num", dest = "test_batch_number", type = int, default = None,
+                                      help = "A file number for test batches. If not provided, the program automatically select the last three batches in a series of npz files." )
+            group_input.add_argument( "-p", "--pretrained_model", dest = "ckpt_file", type = str,
+                                      help = "the ckpt file of pretrained model. If \"pretrain\" mode is selected, this option is recquired." )
+            group_input.add_argument( "-G", "--GPU", dest = "GPU_number", type = int,default = 1,
+                                      help = "The number of GPU on your machine. Default: 1" )
+            # group for output files
+            group_output = argparser_train.add_argument_group( "Output arguments" )
+            #add_outdir_option( group_output )
+            group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                                       help = "An output directory. REQUIRED.")
+        """
+
+        mode=args.mode
+        loop_num_=args.loop_number
+        test_batch_num=args.test_batch_number
+        max_to_keep=args.max_to_keep
+        input_dir=args.in_directory
+        model_name=args.model
+        pretrained_dir=args.pretrained_model
+        output_dir=args.out_directory
+        
+        
+        
+        
+        
+    else:
+        try:
+            options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
+        except getopt.GetoptError as err:
+            print str(err)
+            sys.exit(2)
+        if len(options)<3:
+            print('too few argument')
+            sys.exit(0)
+        for opt, arg in options:
+            if opt in ('-m', '--mode'):
+                mode=arg
+            elif opt in ('-i', '--in_dir'):
+                input_dir=arg
+                if input_dir.endswith("/"):
+                    input_dir=str(input_dir)+"*"
+                elif input_dir.endswith("*"):
+                    pass
+                else:
+                    input_dir=str(input_dir)+"/*"
+                    
+            elif opt in ('-n', '--loop_num'):
+                loop_num_=int(arg)
+            elif opt in ('-b', '--test_batch_num'):
+                test_batch_num=int(arg)
+            elif opt in ('-o', '--out_dir'):
+                output_dir=arg
+            elif opt in ('-c', '--network_constructor'):
+                model_name=arg
+            elif opt in ('-p', '--pretrained_model'):
+                pretrained_dir=arg
     f = glob.glob(input_dir)
     if len(f)==0:
         print("can't open input files, no such a directory")
@@ -207,8 +255,9 @@ def main():
         _, data_length, _2=_data.shape
         print batch_size, label_dim    
 
-    config = tf.ConfigProto(device_count = {'GPU': 1})
+    config = tf.ConfigProto(device_count = {'GPU': 2})
     config.gpu_options.allow_growth=True
+    #config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
     sess = tf.Session(config=config)
     x_image = tf.placeholder(tf.float32, shape=[None, data_length, 4, 1])
     y_ = tf.placeholder(tf.float32, shape=[None, label_dim])
@@ -221,7 +270,7 @@ def main():
     keep_prob = tf.placeholder(tf.float32)
     keep_prob2 = tf.placeholder(tf.float32)
     keep_prob3 = tf.placeholder(tf.float32)
-    nc=il.import_module("network_constructors."+str(model_name))
+    nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
     print("runing "+str(model_name))
 
     model = nc.Model(image=x_image, label=y_, 
@@ -258,6 +307,7 @@ def main():
         image_list, label_list=batch_queuing(input_files, batch_size, data_length)
         
         for k in range(len(image_list)):
+            start_tmp=time.time()
             a=np.shape(image_list[k])
             #print a
             if len(a)==4:
@@ -283,8 +333,7 @@ def main():
             print("step "+str(i*queue_len+k)
                   +", cost: "+str(loss_val)
                   +", train_accuracy: "
-                  +str(list([curr_accu]))
-                  )            
+                  +str(list([curr_accu]))+", "+str(time.time()-start_tmp))            
             
             
             #train_accuracy_record.append(TPR_list[0]-FPR_list[0])

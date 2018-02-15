@@ -79,7 +79,7 @@ class Model:
         self.error
         self.saver
         self.cost
-        print 'Running deapsea model'
+        print 'Running deap shark model'
         if self.output_dir is not None:
             flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"

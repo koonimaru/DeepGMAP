@@ -66,7 +66,7 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
         labels=np.array(label_list_shuf[i*sample_num:(i*sample_num+sample_num)], np.int32)
         #print np.shape(labels)
                 
-        filename = out_dir+"labeled_genome_"+str(index_list[i])+".npz"
+        filename = out_dir+"batch_"+str(index_list[i])+".npz"
         #print "saving "+str(filename)
         try:
             with open(filename, "wb") as output_file:

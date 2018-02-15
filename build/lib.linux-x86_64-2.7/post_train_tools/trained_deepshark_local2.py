@@ -24,7 +24,6 @@ from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 from matplotlib import cm
 
-
 start=time.time()
 
 
@@ -63,22 +62,26 @@ def genome_scan(filename):
         genome_seq_re_list=np.array_split(genome_seq_re, 100)
     return genome_seq_re_list, chromosome, chr_position #, window_id
     
+def run(args):
+    main()
 
 def main():
     try:
-        options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome='])
+        options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
     except getopt.GetoptError as err:
         print(str(err))
         sys.exit(2)
     if len(options)<4:
         print('too few argument')
         sys.exit(0)
+    TEST=True
     path_sep=os.path.sep
     chromosome_of_interest='chr2'
     output_dir='./'
     model_name=""
     bed_file=None
     max_to_keep=2
+    GPU=1
     for opt, arg in options:
         if opt in ('-i', '--input_dir'):
             input_dir=arg
@@ -115,7 +118,13 @@ def main():
                 print(genome_bed+' does not exist')
                 sys.exit(0)
         elif opt in ('-c','--chromosome'):
-            chromosome_of_interest=arg             
+            chromosome_of_interest=arg
+            if chromosome_of_interest=="all":
+                TEST=False
+                
+        elif opt in ('-G','--GPU'):
+            GPU=int(arg)
+    
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:
@@ -147,21 +156,7 @@ def main():
     if not labeled_file:
         #all_chromosome=False
         
-        if chromosome_of_interest=="all":
-            positive_region=set()
-            with open(bed_file, 'r') as fpos:
-                for line in fpos:
-                    if not "#" in line:
-                        positive_region.add(line)
-            label_list=[]
-            with open(genome_bed, "r") as fin:
-                for line in fin:
-    
-                    if line in positive_region:
-                        label_list.append(1)
-                    else:
-                        label_list.append(0)    
-        else:
+        if not chromosome_of_interest=="all":
             positive_region=set()
             with open(bed_file, 'r') as fpos:
                 for line in fpos:
@@ -176,17 +171,15 @@ def main():
                         else:
                             label_list.append(0)
     else:
-        label_list=[]
-        with open(bed_file, "r") as fin:
-            if not chromosome_of_interest=="all":
+        
+        
+        if not chromosome_of_interest=="all":
+            label_list=[]
+            with open(bed_file, "r") as fin:
                 for line in fin:
                     if line.startswith(str(chromosome_of_interest)+"\t"):
                         line=line.split()
                         label_list.append(line[3:])
-            else:
-                for line in fin:
-                    line=line.split()
-                    label_list.append(line[3:])
                 
     
 
@@ -198,7 +191,7 @@ def main():
     out_dir=output_dir+file_name[-1]
   
       
-    config = tf.ConfigProto(device_count = {'GPU': 1})
+    config = tf.ConfigProto(device_count = {'GPU': GPU})
     config.gpu_options.allow_growth=True
     sess = tf.Session(config=config)       
 
@@ -218,10 +211,10 @@ def main():
         sys.exit(1)
     if model_name=="":
         model_name=input_dir.split(path_sep)[-1].split("_")
-        model_name="_".join(model_name[:4])
+        model_name=model_name[0]
     print("runing "+str(model_name))
     try:
-        nc=il.import_module("network_constructors."+str(model_name))
+        nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
     except ImportError:
         print(str(model_name)+" does not exist")
         sys.exit(0)
@@ -266,18 +259,13 @@ def main():
         for i in range(loop):
             if i*1000>seq_length:
                 break
-            #print (i+1)*1000
             scanning=seq_list[i*1000:(i+1)*1000]
             if len(y_prediction2)==0:
                 y_prediction2, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
-                #neuron_monitor=active_neuron["h_fc1_drop"]
-                #print y_prediction2.shape
-                #print neuron_monitor.shape
                 
             else:
                 y_prediction1, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
                 y_prediction2=np.concatenate([y_prediction2,y_prediction1],axis=0)
-                #neuron_monitor=np.concatenate([neuron_monitor,active_neuron["h_fc1_drop"]],axis=0)
             if (i)%10==0:
                 if l+1==1:
                     th='st'
@@ -289,18 +277,10 @@ def main():
                     th='th'
                 print(str(float(i)/loop*100)+"% of "+str(l+1)+str(th)+" file has been scanned.", end="\r")
         l+=1
-    sess.close()            
-
-                             
-
-
-
-    print(len(label_list))
-    label_array=np.array(label_list, np.int16)
-    
+    sess.close()
     
     #saving the predictions as numpy array
-    np.savez_compressed(str(out_dir)+"_label_prediction", label_array=label_array, prediction=y_prediction2)
+    np.savez_compressed(str(out_dir)+"_prediction", prediction=y_prediction2)
     
     #writing the predictions in narrowPeak format
     
@@ -368,94 +348,97 @@ def main():
 
         print("F1 of "+str(i+1)+"th label = "+str(2*PPV*TPR/(PPV+TPR)))"""
 
-
-    fpr_list=[]
-    tpr_list=[]
-    roc_auc_list=[]
-    precision_list=[]
-    recall_list=[]
-    average_precision_list=[]
-    if yshape>1:
-        for i in range(yshape):
-            fpr, tpr, roc_auc=roc_space_calc(label_array[:,i], y_prediction2[:,i])
+    if TEST==True:
+        print(len(label_list))
+        label_array=np.array(label_list, np.int16)
+        fpr_list=[]
+        tpr_list=[]
+        roc_auc_list=[]
+        precision_list=[]
+        recall_list=[]
+        average_precision_list=[]
+        if yshape>1:
+            for i in range(yshape):
+                fpr, tpr, roc_auc=roc_space_calc(label_array[:,i], y_prediction2[:,i])
+                fpr_list.append(fpr)
+                tpr_list.append(tpr)
+                roc_auc_list.append(roc_auc)
+                precision, recall, _ = precision_recall_curve(label_array[:,i], y_prediction2[:,i])
+                precision_list.append(precision)
+                recall_list.append(recall)
+                average_precision = average_precision_score(label_array[:,i], y_prediction2[:,i])
+                average_precision_list.append(average_precision)
+        else:
+            fpr, tpr, roc_auc=roc_space_calc(label_array, y_prediction2)
             fpr_list.append(fpr)
             tpr_list.append(tpr)
             roc_auc_list.append(roc_auc)
-            precision, recall, _ = precision_recall_curve(label_array[:,i], y_prediction2[:,i])
+            precision, recall, _ = precision_recall_curve(label_array, y_prediction2)
             precision_list.append(precision)
             recall_list.append(recall)
-            average_precision = average_precision_score(label_array[:,i], y_prediction2[:,i])
+            average_precision = average_precision_score(label_array, y_prediction2)
             average_precision_list.append(average_precision)
-    else:
-        fpr, tpr, roc_auc=roc_space_calc(label_array, y_prediction2)
-        fpr_list.append(fpr)
-        tpr_list.append(tpr)
-        roc_auc_list.append(roc_auc)
-        precision, recall, _ = precision_recall_curve(label_array, y_prediction2)
-        precision_list.append(precision)
-        recall_list.append(recall)
-        average_precision = average_precision_score(label_array, y_prediction2)
-        average_precision_list.append(average_precision)
+            
+        sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list=\
+        zip(*sorted(zip(sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list)))
         
-    sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list=\
-    zip(*sorted(zip(sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list)))
+        mean_roc_auc=np.mean(roc_auc_list)
+        mean_pre_rec=np.mean(average_precision_list)
+        
+        with open(out_dir+"_metrics.txt", 'w') as fo:
+            fo.write("Mean roc auc: "+str(mean_roc_auc) +"\n"+
+                     "Mean precision auc: "+ str(mean_pre_rec)+"\n"+
+                     "Sample list: "+"\t".join(sample_list)+"\n"+
+                     "roc auc list: "+"\t".join(map(str, roc_auc_list))+"\n"+
+                     "precision auc list: "+"\t".join(map(str, average_precision_list)))
+        
+        
+        
+        plt.figure(1, figsize=(8,16))
+        ax1=plt.subplot(211)
+        cmap = plt.get_cmap('hot')
+        colors = [cmap(i) for i in np.linspace(0, 1, len(sample_list))]
+        
+        i=0
+        for i in range(yshape):
+            f,t,r=fpr_list[i],tpr_list[i],roc_auc_list[i]
+            plt.plot(f, t,color=colors[i],alpha=0.5,
+                label=str(sample_list[i])+' (area = %0.2f)' % r)
+            i+=1
+        plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+        plt.axis('equal')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.0])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        
+        plt.title('Receiver operating characteristic curve ('+str(model_name)+')')
+        plt.legend(loc="lower right")
+        
+        ax2=plt.subplot(212)
+        i=0
+        for i in range(yshape):
+            r,p,a =recall_list[i],precision_list[i], average_precision_list[i]
+            #print "F1: "+np.nanmean(2.0*r*p/(r+p))
+            plt.plot(r, p, lw=2,alpha=0.5, color=colors[i],label=str(sample_list[i])+' (area = %0.2f)' % a)
+            i+=1
+        plt.axis('equal')
+        plt.xlabel('Recall')
+        plt.ylabel('Precision')
+        plt.ylim([0.0, 1.00])
+        plt.xlim([0.0, 1.0])
+        
+        plt.title('Precision-Recall curve ('+str(model_name)+')')
+        plt.legend(loc="lower left")
+        
+        plt.savefig(out_dir+"ROC_space_curve.pdf", format='pdf')
     
-    mean_roc_auc=np.mean(roc_auc_list)
-    mean_pre_rec=np.mean(average_precision_list)
-    
-    with open(out_dir+"_metrics.txt", 'w') as fo:
-        fo.write("Mean roc auc: "+str(mean_roc_auc) +"\n"+
-                 "Mean precision auc: "+ str(mean_pre_rec)+"\n"+
-                 "Sample list: "+"\t".join(sample_list)+"\n"+
-                 "roc auc list: "+"\t".join(map(str, roc_auc_list))+"\n"+
-                 "precision auc list: "+"\t".join(map(str, average_precision_list)))
     
     
+        
+        plt.show()
     
-    plt.figure(1, figsize=(8,16))
-    ax1=plt.subplot(211)
-    cmap = plt.get_cmap('hot')
-    colors = [cmap(i) for i in np.linspace(0, 1, len(sample_list))]
-    
-    i=0
-    for i in range(yshape):
-        f,t,r=fpr_list[i],tpr_list[i],roc_auc_list[i]
-        plt.plot(f, t,color=colors[i],alpha=0.5,
-            label=str(sample_list[i])+' (area = %0.2f)' % r)
-        i+=1
-    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
-    plt.axis('equal')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.0])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    
-    plt.title('Receiver operating characteristic curve ('+str(model_name)+')')
-    plt.legend(loc="lower right")
-    
-    ax2=plt.subplot(212)
-    i=0
-    for i in range(yshape):
-        r,p,a =recall_list[i],precision_list[i], average_precision_list[i]
-        #print "F1: "+np.nanmean(2.0*r*p/(r+p))
-        plt.plot(r, p, lw=2,alpha=0.5, color=colors[i],label=str(sample_list[i])+' (area = %0.2f)' % a)
-        i+=1
-    plt.axis('equal')
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
-    plt.ylim([0.0, 1.00])
-    plt.xlim([0.0, 1.0])
-    
-    plt.title('Precision-Recall curve ('+str(model_name)+')')
-    plt.legend(loc="lower left")
-    
-    plt.savefig(out_dir+"ROC_space_curve.pdf", format='pdf')
-
-
-
     print(time.time()-start)
-    plt.show()
-
 
 if __name__== '__main__':
     main()
