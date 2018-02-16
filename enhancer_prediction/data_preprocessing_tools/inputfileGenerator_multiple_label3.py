@@ -12,7 +12,7 @@ import getopt
 import datetime
 
 #convert DNA sequences to a dictionary of onehot vector
-def seqtobinarydict(file_):
+def seqtobinarydict(file_, _chr_to_skip="chr2"):
     binaryDNAdict=[]
     position=[]
     seqdata=[]
@@ -24,8 +24,8 @@ def seqtobinarydict(file_):
         #print line
         if line[0]=='>':
             #print line[1:6]
-            if line[1:6]=="chr2:":
-                print "skipping chr2", "\r",
+            if line.startswith(_chr_to_skip+":"):
+                print("skipping "+_chr_to_skip)
                 skip=True
             else:
                 skip=False
