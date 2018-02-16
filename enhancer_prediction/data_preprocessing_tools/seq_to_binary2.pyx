@@ -1,16 +1,17 @@
 cimport cython
 import sys
 
-def label_reader(file_):
+def label_reader(file_, str chr_to_skip):
     cdef list label_position=[]
     cdef list label_list=[]
     cdef list line_=[]
     cdef int i=0
     cdef str line
+    cdef int _name_length=len(chr_to_skip)+1
     for line in file_:
         if "#" in line:
             continue
-        if not line[0:5]=='chr2\t':
+        if not line[0:_name_length]==chr_to_skip+'\t':
             line_=line.split()
             label_position.append(str(line_[0])+':'+str(line_[1])+'-'+str(line_[2]))
             label_list.append(tuple(map(int, line_[3:])))

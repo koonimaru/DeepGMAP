@@ -188,7 +188,7 @@ def add_predict_parser( subparsers ):
                                       help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
     argparser_predict.add_argument( "-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
                                       help = "Set a target chromosome or a contig for prediction. Default: chr2" )
-    argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = "True",
+    argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = True,
                                       help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
     return
 
@@ -230,23 +230,25 @@ def add_generate_input_parser( subparsers ):
       -p PREFIX, --prefix PREFIX\n\
                   The prefix of output files and folders. Default: ''\n"
     """
-    argparser_bdgpeakcall = subparsers.add_parser( "generate_input",
+    argparser_generate_input = subparsers.add_parser( "generate_input",
                                                    help = "Generate a train data set from narrowPeak files." )
-    argparser_bdgpeakcall.add_argument( "-b", "--bed", dest = "in_directory", type = str, required = True,
+    argparser_generate_input.add_argument( "-b", "--bed", dest = "in_directory", type = str, required = True,
                                         help = "A directory that contains narrowPeak or bed files. \
                                         These files, which indicate signal peak regions in a genome, can be created \
                                         by MACS2 peak caller or other softwares, or can be downloaded from ENCODE project. REQUIRED" )
-    argparser_bdgpeakcall.add_argument( "-g", "--genome" , dest = "genome_file_prefix", type = str, required = True,
+    argparser_generate_input.add_argument( "-g", "--genome" , dest = "genome_file_prefix", type = str, required = True,
                                         help = "The directory plus prefix of a bed file and a fasta file that are\
                                         binned with a particular window size. If you have path/to/mm10_1000.bed and\
                                          /path/to/mm10_1000.fa,the input would be '-g /path/to/mm10_1000'. REQUIRED." )
-    argparser_bdgpeakcall.add_argument( "-t", "--threads", dest = "thread_number", type = int,
+    argparser_generate_input.add_argument( "-t", "--threads", dest = "thread_number", type = int,
                                        help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
-    argparser_bdgpeakcall.add_argument( "-s", "--sample_number", dest = "int", type = int,
+    argparser_generate_input.add_argument( "-s", "--sample_number", dest = "sample_number", type = int,
                                        help = "The number of samples in a mini-batch. Default: 100", default = 100 )
-    argparser_bdgpeakcall.add_argument( "-r", "--reduse_genome", dest="genome_fraction", help="A fraction to ignore signal-negative genome sequences. Default: 0.75",default=0.75)
-    argparser_bdgpeakcall.add_argument("-p", "--prefix", dest="out_prefix",
+    argparser_generate_input.add_argument( "-r", "--reduse_genome", dest="genome_fraction", help="A fraction to ignore signal-negative genome sequences. Default: 0.75",default=0.75)
+    argparser_generate_input.add_argument("-p", "--prefix", dest="out_prefix",
                                         help = "The prefix of output files and folders. Default: ''", default = '' )
+    argparser_generate_input.add_argument("-C", "--chromosome", dest="chromosome_to_skip",
+                                        help = "A chromosome or contig name to skip for training. The name must be one of the chromosome/contig names in the input genome file. Default: chr2", default = 'chr2' )
     return
 
 def add_generate_test_parser( subparsers ):
