@@ -70,7 +70,7 @@ def softmax(w, t = 1.0):
     dist = e /np.stack((np.sum(e, axis=1),np.sum(e, axis=1)),axis=-1)
     return dist
 def test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length):
-    f = glob.glob(str(input_dir)+"*.npz")
+    f = glob.glob(str(input_dir))
     f_srt=natsorted(f, key=lambda y: y.lower())
     test_dir=output_dir.replace('output/', '')
     print len(f_srt), test_batch_num
@@ -194,7 +194,7 @@ def main(args=None):
         max_to_keep=args.max_to_keep
         input_dir=args.in_directory
         model_name=args.model
-        pretrained_dir=args.pretrained_model
+        pretrained_dir=args.ckpt_file
         output_dir=args.out_directory
         
         
@@ -215,13 +215,7 @@ def main(args=None):
                 mode=arg
             elif opt in ('-i', '--in_dir'):
                 input_dir=arg
-                if input_dir.endswith("/"):
-                    input_dir=str(input_dir)+"*"
-                elif input_dir.endswith("*"):
-                    pass
-                else:
-                    input_dir=str(input_dir)+"/*"
-                    
+                                    
             elif opt in ('-n', '--loop_num'):
                 loop_num_=int(arg)
             elif opt in ('-b', '--test_batch_num'):
@@ -232,6 +226,13 @@ def main(args=None):
                 model_name=arg
             elif opt in ('-p', '--pretrained_model'):
                 pretrained_dir=arg
+                
+    if input_dir.endswith("/"):
+        input_dir=str(input_dir)+"*.npz"
+    elif input_dir.endswith("*"):
+        pass
+    else:
+        input_dir=str(input_dir)+"/*.npz"
     f = glob.glob(input_dir)
     if len(f)==0:
         print("can't open input files, no such a directory")
@@ -417,12 +418,16 @@ def main(args=None):
     mean_ac=np.round(np.nanmean(f1_list),4) 
     running_time=time.time()-start
     import datetime
-    
+    if args is not None:
+        _args=args
+    else:
+        _args=sys.argv
     to_print=("dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
               +"input directory: "+str(input_dir)+"\n"
               +"The average of TPR+PPV: "+str(np.round(mean_ac,2))
               +"\nTotal time "+ str(datetime.timedelta(seconds=running_time))
-              +"\nThe model is "+str(model_name))
+              +"\nThe model is "+str(model_name)
+              +"\nArguments are "+str(_args))
        
     sess.close()
     print(to_print)
