@@ -63,9 +63,14 @@ def genome_scan(filename):
     return genome_seq_re_list, chromosome, chr_position #, window_id
     
 def run(args):
-    main()
+    main(args)
 
-def main():
+def main(args=None):
+    
+    if args is not None:
+        
+    
+    
     try:
         options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
     except getopt.GetoptError as err:

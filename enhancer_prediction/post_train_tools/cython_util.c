@@ -518,8 +518,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__enhancer_prediction__post_train_tools__cython_util
-#define __PYX_HAVE_API__enhancer_prediction__post_train_tools__cython_util
+#define __PYX_HAVE__post_train_tools__cython_util
+#define __PYX_HAVE_API__post_train_tools__cython_util
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1181,13 +1181,13 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cython' */
 
-/* Module declarations from 'enhancer_prediction.post_train_tools.cython_util' */
+/* Module declarations from 'post_train_tools.cython_util' */
 static int __Pyx_carray_from_py_int(PyObject *, int *, Py_ssize_t); /*proto*/
-#define __Pyx_MODULE_NAME "enhancer_prediction.post_train_tools.cython_util"
-extern int __pyx_module_is_main_enhancer_prediction__post_train_tools__cython_util;
-int __pyx_module_is_main_enhancer_prediction__post_train_tools__cython_util = 0;
+#define __Pyx_MODULE_NAME "post_train_tools.cython_util"
+extern int __pyx_module_is_main_post_train_tools__cython_util;
+int __pyx_module_is_main_post_train_tools__cython_util = 0;
 
-/* Implementation of 'enhancer_prediction.post_train_tools.cython_util' */
+/* Implementation of 'post_train_tools.cython_util' */
 static PyObject *__pyx_builtin_open;
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_TypeError;
@@ -1297,8 +1297,8 @@ static const char __pyx_k_scipy_spatial_distance[] = "scipy.spatial.distance";
 static const char __pyx_k_Motif_name_Start_End_JSD[] = "Motif name\tStart\tEnd\tJSD\n";
 static const char __pyx_k_motif_compare_locals_lambda[] = "motif_compare.<locals>.<lambda>";
 static const char __pyx_k_the_number_of_motif_matches[] = "the number of motif matches: ";
-static const char __pyx_k_enhancer_prediction_post_train_t[] = "enhancer_prediction.post_train_tools.cython_util";
-static const char __pyx_k_enhancer_prediction_post_train_t_2[] = "enhancer_prediction/post_train_tools/cython_util.pyx";
+static const char __pyx_k_post_train_tools_cython_util[] = "post_train_tools.cython_util";
+static const char __pyx_k_enhancer_prediction_post_train_t[] = "enhancer_prediction/post_train_tools/cython_util.pyx";
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_1_1_1;
 static PyObject *__pyx_n_s_DIST;
@@ -1334,8 +1334,7 @@ static PyObject *__pyx_n_s_comp_result2;
 static PyObject *__pyx_n_s_cpr;
 static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_end_2;
-static PyObject *__pyx_n_s_enhancer_prediction_post_train_t;
-static PyObject *__pyx_kp_s_enhancer_prediction_post_train_t_2;
+static PyObject *__pyx_kp_s_enhancer_prediction_post_train_t;
 static PyObject *__pyx_n_s_enter;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_exit;
@@ -1377,6 +1376,7 @@ static PyObject *__pyx_n_s_partial_motif;
 static PyObject *__pyx_n_s_partial_motif_2;
 static PyObject *__pyx_n_s_pm1;
 static PyObject *__pyx_n_s_position_list;
+static PyObject *__pyx_n_s_post_train_tools_cython_util;
 static PyObject *__pyx_kp_s_prediction_num;
 static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_rand;
@@ -1404,10 +1404,10 @@ static PyObject *__pyx_n_s_w;
 static PyObject *__pyx_n_s_write;
 static PyObject *__pyx_kp_s_writing;
 static PyObject *__pyx_n_s_y_prediction2;
-static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_narrowPeak_writer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_out_dir, PyObject *__pyx_v_y_prediction2, PyObject *__pyx_v_position_list); /* proto */
+static PyObject *__pyx_pf_16post_train_tools_11cython_util_narrowPeak_writer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_out_dir, PyObject *__pyx_v_y_prediction2, PyObject *__pyx_v_position_list); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x); /* proto */
-static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_2motif_compare(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_motif_data_dict, PyObject *__pyx_v_long_motif_dict, PyObject *__pyx_v_fout, PyObject *__pyx_v_THRESHOLD); /* proto */
+static PyObject *__pyx_pf_16post_train_tools_11cython_util_2motif_compare(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_motif_data_dict, PyObject *__pyx_v_long_motif_dict, PyObject *__pyx_v_fout, PyObject *__pyx_v_THRESHOLD); /* proto */
 static PyObject *__pyx_float_0_5;
 static PyObject *__pyx_float_0_00001;
 static PyObject *__pyx_float_0_000001;
@@ -1427,18 +1427,18 @@ static PyObject *__pyx_tuple__18;
 static PyObject *__pyx_codeobj__17;
 static PyObject *__pyx_codeobj__19;
 
-/* "enhancer_prediction/post_train_tools/cython_util.pyx":6
- * import numpy as np
+/* "post_train_tools/cython_util.pyx":6
  * from scipy.spatial.distance import cdist
+ * 
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):             # <<<<<<<<<<<<<<
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_1narrowPeak_writer(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_1narrowPeak_writer = {"narrowPeak_writer", (PyCFunction)__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_1narrowPeak_writer, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_1narrowPeak_writer(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_1narrowPeak_writer(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_16post_train_tools_11cython_util_1narrowPeak_writer = {"narrowPeak_writer", (PyCFunction)__pyx_pw_16post_train_tools_11cython_util_1narrowPeak_writer, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_1narrowPeak_writer(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_out_dir = 0;
   PyObject *__pyx_v_y_prediction2 = 0;
   PyObject *__pyx_v_position_list = 0;
@@ -1497,14 +1497,14 @@ static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("narrowPeak_writer", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.narrowPeak_writer", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.narrowPeak_writer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_out_dir), (&PyString_Type), 1, "out_dir", 1))) __PYX_ERR(0, 6, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y_prediction2), (&PyList_Type), 1, "y_prediction2", 1))) __PYX_ERR(0, 6, __pyx_L1_error)
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_position_list), (&PyList_Type), 1, "position_list", 1))) __PYX_ERR(0, 6, __pyx_L1_error)
-  __pyx_r = __pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_narrowPeak_writer(__pyx_self, __pyx_v_out_dir, __pyx_v_y_prediction2, __pyx_v_position_list);
+  __pyx_r = __pyx_pf_16post_train_tools_11cython_util_narrowPeak_writer(__pyx_self, __pyx_v_out_dir, __pyx_v_y_prediction2, __pyx_v_position_list);
 
   /* function exit code */
   goto __pyx_L0;
@@ -1515,7 +1515,7 @@ static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_narrowPeak_writer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_out_dir, PyObject *__pyx_v_y_prediction2, PyObject *__pyx_v_position_list) {
+static PyObject *__pyx_pf_16post_train_tools_11cython_util_narrowPeak_writer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_out_dir, PyObject *__pyx_v_y_prediction2, PyObject *__pyx_v_position_list) {
   PyObject *__pyx_v_filename_1 = 0;
   PyObject *__pyx_v_output_handle = NULL;
   int __pyx_v_k;
@@ -1538,7 +1538,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("narrowPeak_writer", 0);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":8
+  /* "post_train_tools/cython_util.pyx":8
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'             # <<<<<<<<<<<<<<
@@ -1550,7 +1550,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_v_filename_1 = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":9
+  /* "post_train_tools/cython_util.pyx":9
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'
  *     print('writing '+filename_1)             # <<<<<<<<<<<<<<
@@ -1562,7 +1562,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":10
+  /* "post_train_tools/cython_util.pyx":10
  *     filename_1=out_dir+'.narrowPeak'
  *     print('writing '+filename_1)
  *     output_handle=open(filename_1, 'w')             # <<<<<<<<<<<<<<
@@ -1583,7 +1583,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_v_output_handle = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":11
+  /* "post_train_tools/cython_util.pyx":11
  *     print('writing '+filename_1)
  *     output_handle=open(filename_1, 'w')
  *     cdef int k=0             # <<<<<<<<<<<<<<
@@ -1592,7 +1592,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
   __pyx_v_k = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":14
+  /* "post_train_tools/cython_util.pyx":14
  *     cdef float value
  *     cdef str chrom, start_, end_
  *     for i in range(len(y_prediction2)):             # <<<<<<<<<<<<<<
@@ -1607,7 +1607,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":16
+    /* "post_train_tools/cython_util.pyx":16
  *     for i in range(len(y_prediction2)):
  * 
  *         a=position_list[i].strip('>')             # <<<<<<<<<<<<<<
@@ -1629,7 +1629,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_XDECREF_SET(__pyx_v_a, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":18
+    /* "post_train_tools/cython_util.pyx":18
  *         a=position_list[i].strip('>')
  *         #print(str(a)+'\t'+str(y_prediction2[i]))
  *         k+=1             # <<<<<<<<<<<<<<
@@ -1638,7 +1638,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
     __pyx_v_k = (__pyx_v_k + 1);
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":19
+    /* "post_train_tools/cython_util.pyx":19
  *         #print(str(a)+'\t'+str(y_prediction2[i]))
  *         k+=1
  *         a=a.split(':')             # <<<<<<<<<<<<<<
@@ -1653,7 +1653,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_DECREF_SET(__pyx_v_a, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":20
+    /* "post_train_tools/cython_util.pyx":20
  *         k+=1
  *         a=a.split(':')
  *         chrom=a[0]             # <<<<<<<<<<<<<<
@@ -1666,7 +1666,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_XDECREF_SET(__pyx_v_chrom, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":21
+    /* "post_train_tools/cython_util.pyx":21
  *         a=a.split(':')
  *         chrom=a[0]
  *         b=a[1].split('-')             # <<<<<<<<<<<<<<
@@ -1684,7 +1684,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_XDECREF_SET(__pyx_v_b, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":22
+    /* "post_train_tools/cython_util.pyx":22
  *         chrom=a[0]
  *         b=a[1].split('-')
  *         start_=b[0]             # <<<<<<<<<<<<<<
@@ -1697,7 +1697,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_XDECREF_SET(__pyx_v_start_, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":23
+    /* "post_train_tools/cython_util.pyx":23
  *         b=a[1].split('-')
  *         start_=b[0]
  *         end_=b[1]             # <<<<<<<<<<<<<<
@@ -1710,7 +1710,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_XDECREF_SET(__pyx_v_end_, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":24
+    /* "post_train_tools/cython_util.pyx":24
  *         start_=b[0]
  *         end_=b[1]
  *         value=y_prediction2[i]             # <<<<<<<<<<<<<<
@@ -1727,7 +1727,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_value = __pyx_t_5;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":25
+    /* "post_train_tools/cython_util.pyx":25
  *         end_=b[1]
  *         value=y_prediction2[i]
  *         output_handle.write(str(chrom)+'\t'             # <<<<<<<<<<<<<<
@@ -1748,7 +1748,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":26
+    /* "post_train_tools/cython_util.pyx":26
  *         value=y_prediction2[i]
  *         output_handle.write(str(chrom)+'\t'
  *                             +str(start_)+'\t'             # <<<<<<<<<<<<<<
@@ -1771,7 +1771,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":27
+    /* "post_train_tools/cython_util.pyx":27
  *         output_handle.write(str(chrom)+'\t'
  *                             +str(start_)+'\t'
  *                             +str(end_)+'\t.\t'             # <<<<<<<<<<<<<<
@@ -1794,7 +1794,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":28
+    /* "post_train_tools/cython_util.pyx":28
  *                             +str(start_)+'\t'
  *                             +str(end_)+'\t.\t'
  *                             +str(value*1000).strip('[]')+'\t.\t'             # <<<<<<<<<<<<<<
@@ -1825,7 +1825,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-    /* "enhancer_prediction/post_train_tools/cython_util.pyx":29
+    /* "post_train_tools/cython_util.pyx":29
  *                             +str(end_)+'\t.\t'
  *                             +str(value*1000).strip('[]')+'\t.\t'
  *                             +str(value).strip('[]')+"\t-1\t-1\t-1\n")             # <<<<<<<<<<<<<<
@@ -1904,7 +1904,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":31
+  /* "post_train_tools/cython_util.pyx":31
  *                             +str(value).strip('[]')+"\t-1\t-1\t-1\n")
  * 
  *     print("prediction num: "+str(k))             # <<<<<<<<<<<<<<
@@ -1927,7 +1927,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":32
+  /* "post_train_tools/cython_util.pyx":32
  * 
  *     print("prediction num: "+str(k))
  *     output_handle.close()             # <<<<<<<<<<<<<<
@@ -1956,7 +1956,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":33
+  /* "post_train_tools/cython_util.pyx":33
  *     print("prediction num: "+str(k))
  *     output_handle.close()
  *     print('finished writing '+filename_1)             # <<<<<<<<<<<<<<
@@ -1968,9 +1968,9 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   if (__Pyx_PrintOne(0, __pyx_t_2) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":6
- * import numpy as np
+  /* "post_train_tools/cython_util.pyx":6
  * from scipy.spatial.distance import cdist
+ * 
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):             # <<<<<<<<<<<<<<
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'
@@ -1985,7 +1985,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.narrowPeak_writer", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.narrowPeak_writer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_filename_1);
@@ -2000,7 +2000,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   return __pyx_r;
 }
 
-/* "enhancer_prediction/post_train_tools/cython_util.pyx":36
+/* "post_train_tools/cython_util.pyx":36
  * 
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):             # <<<<<<<<<<<<<<
@@ -2009,9 +2009,9 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_3motif_compare(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_3motif_compare = {"motif_compare", (PyCFunction)__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_3motif_compare, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_3motif_compare(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_3motif_compare(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_16post_train_tools_11cython_util_3motif_compare = {"motif_compare", (PyCFunction)__pyx_pw_16post_train_tools_11cython_util_3motif_compare, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_3motif_compare(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_motif_data_dict = 0;
   PyObject *__pyx_v_long_motif_dict = 0;
   PyObject *__pyx_v_fout = 0;
@@ -2085,18 +2085,18 @@ static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("motif_compare", 0, 3, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 36, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_2motif_compare(__pyx_self, __pyx_v_motif_data_dict, __pyx_v_long_motif_dict, __pyx_v_fout, __pyx_v_THRESHOLD);
+  __pyx_r = __pyx_pf_16post_train_tools_11cython_util_2motif_compare(__pyx_self, __pyx_v_motif_data_dict, __pyx_v_long_motif_dict, __pyx_v_fout, __pyx_v_THRESHOLD);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "enhancer_prediction/post_train_tools/cython_util.pyx":120
+/* "post_train_tools/cython_util.pyx":120
  *                         #f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\n")
  *                 elif len(comp_result)>=3:
  *                     comp_result.sort(key = lambda x: x[3])             # <<<<<<<<<<<<<<
@@ -2105,9 +2105,9 @@ static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_lambda(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
-static PyMethodDef __pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_lambda = {"lambda", (PyCFunction)__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_lambda, METH_O, 0};
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_lambda(PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_13motif_compare_lambda(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
+static PyMethodDef __pyx_mdef_16post_train_tools_11cython_util_13motif_compare_lambda = {"lambda", (PyCFunction)__pyx_pw_16post_train_tools_11cython_util_13motif_compare_lambda, METH_O, 0};
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_13motif_compare_lambda(PyObject *__pyx_self, PyObject *__pyx_v_x) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("lambda (wrapper)", 0);
@@ -2133,7 +2133,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.motif_compare.lambda", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.motif_compare.lambda", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2141,7 +2141,7 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
   return __pyx_r;
 }
 
-/* "enhancer_prediction/post_train_tools/cython_util.pyx":124
+/* "post_train_tools/cython_util.pyx":124
  *                         comp_result2.append(cpr)
  * 
  *         comp_result2.sort(key = lambda x: x[1])             # <<<<<<<<<<<<<<
@@ -2150,9 +2150,9 @@ static PyObject *__pyx_lambda_funcdef_lambda(CYTHON_UNUSED PyObject *__pyx_self,
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_1lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
-static PyMethodDef __pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_1lambda1 = {"lambda1", (PyCFunction)__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_1lambda1, METH_O, 0};
-static PyObject *__pyx_pw_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_1lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_13motif_compare_1lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x); /*proto*/
+static PyMethodDef __pyx_mdef_16post_train_tools_11cython_util_13motif_compare_1lambda1 = {"lambda1", (PyCFunction)__pyx_pw_16post_train_tools_11cython_util_13motif_compare_1lambda1, METH_O, 0};
+static PyObject *__pyx_pw_16post_train_tools_11cython_util_13motif_compare_1lambda1(PyObject *__pyx_self, PyObject *__pyx_v_x) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("lambda1 (wrapper)", 0);
@@ -2178,7 +2178,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.motif_compare.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.motif_compare.lambda1", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2186,7 +2186,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "enhancer_prediction/post_train_tools/cython_util.pyx":36
+/* "post_train_tools/cython_util.pyx":36
  * 
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):             # <<<<<<<<<<<<<<
@@ -2194,7 +2194,7 @@ static PyObject *__pyx_lambda_funcdef_lambda1(CYTHON_UNUSED PyObject *__pyx_self
  *     cdef str k1, k2
  */
 
-static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util_2motif_compare(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_motif_data_dict, PyObject *__pyx_v_long_motif_dict, PyObject *__pyx_v_fout, PyObject *__pyx_v_THRESHOLD) {
+static PyObject *__pyx_pf_16post_train_tools_11cython_util_2motif_compare(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_motif_data_dict, PyObject *__pyx_v_long_motif_dict, PyObject *__pyx_v_fout, PyObject *__pyx_v_THRESHOLD) {
   int __pyx_v_i;
   int __pyx_v_k;
   int __pyx_v_j;
@@ -2262,7 +2262,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   PyObject *__pyx_t_32 = NULL;
   __Pyx_RefNannySetupContext("motif_compare", 0);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":37
+  /* "post_train_tools/cython_util.pyx":37
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
  *     cdef int i,k, j, l=0             # <<<<<<<<<<<<<<
@@ -2271,7 +2271,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
   __pyx_v_l = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":40
+  /* "post_train_tools/cython_util.pyx":40
  *     cdef str k1, k2
  *     cdef double RAND_MEAN, RAND_DEV,DIST,Z_SCORE, ic
  *     cdef list RAND_DIST, partial_motif, comp_result, comp_result2, cpr, Z_SCORE_list=[]             # <<<<<<<<<<<<<<
@@ -2283,7 +2283,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_v_Z_SCORE_list = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":43
+  /* "post_train_tools/cython_util.pyx":43
  *     cdef int[2] v2shape,v1shape
  *     #cdef double[4] pm1
  *     with open(fout, "w") as f:             # <<<<<<<<<<<<<<
@@ -2339,7 +2339,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           __pyx_v_f = __pyx_t_4;
           __pyx_t_4 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":44
+          /* "post_train_tools/cython_util.pyx":44
  *     #cdef double[4] pm1
  *     with open(fout, "w") as f:
  *         comp_result2=[]             # <<<<<<<<<<<<<<
@@ -2351,7 +2351,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           __pyx_v_comp_result2 = ((PyObject*)__pyx_t_4);
           __pyx_t_4 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":45
+          /* "post_train_tools/cython_util.pyx":45
  *     with open(fout, "w") as f:
  *         comp_result2=[]
  *         f.write("Motif name\tStart\tEnd\tJSD\n")             # <<<<<<<<<<<<<<
@@ -2365,7 +2365,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":46
+          /* "post_train_tools/cython_util.pyx":46
  *         comp_result2=[]
  *         f.write("Motif name\tStart\tEnd\tJSD\n")
  *         for k1, v1 in long_motif_dict.items():             # <<<<<<<<<<<<<<
@@ -2488,7 +2488,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
             __Pyx_XDECREF_SET(__pyx_v_v1, __pyx_t_5);
             __pyx_t_5 = 0;
 
-            /* "enhancer_prediction/post_train_tools/cython_util.pyx":48
+            /* "post_train_tools/cython_util.pyx":48
  *         for k1, v1 in long_motif_dict.items():
  * 
  *             v1shape=v1.shape             # <<<<<<<<<<<<<<
@@ -2501,7 +2501,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             memcpy(&(__pyx_v_v1shape[0]), __pyx_t_13, sizeof(__pyx_v_v1shape[0]) * (2));
 
-            /* "enhancer_prediction/post_train_tools/cython_util.pyx":50
+            /* "post_train_tools/cython_util.pyx":50
  *             v1shape=v1.shape
  *             #print v1shape
  *             for k2, v2 in motif_data_dict.items():             # <<<<<<<<<<<<<<
@@ -2624,7 +2624,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_XDECREF_SET(__pyx_v_v2, __pyx_t_11);
               __pyx_t_11 = 0;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":51
+              /* "post_train_tools/cython_util.pyx":51
  *             #print v1shape
  *             for k2, v2 in motif_data_dict.items():
  *                 ic1=0             # <<<<<<<<<<<<<<
@@ -2633,7 +2633,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
               __pyx_v_ic1 = 0;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":52
+              /* "post_train_tools/cython_util.pyx":52
  *             for k2, v2 in motif_data_dict.items():
  *                 ic1=0
  *                 if "secondary" in k2:             # <<<<<<<<<<<<<<
@@ -2644,7 +2644,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __pyx_t_18 = (__pyx_t_17 != 0);
               if (__pyx_t_18) {
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":53
+                /* "post_train_tools/cython_util.pyx":53
  *                 ic1=0
  *                 if "secondary" in k2:
  *                     continue             # <<<<<<<<<<<<<<
@@ -2653,7 +2653,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
                 goto __pyx_L17_continue;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":52
+                /* "post_train_tools/cython_util.pyx":52
  *             for k2, v2 in motif_data_dict.items():
  *                 ic1=0
  *                 if "secondary" in k2:             # <<<<<<<<<<<<<<
@@ -2662,7 +2662,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
               }
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":57
+              /* "post_train_tools/cython_util.pyx":57
  *                 #j+=1
  *                 #print j
  *                 v2shape=v2.shape             # <<<<<<<<<<<<<<
@@ -2675,7 +2675,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
               memcpy(&(__pyx_v_v2shape[0]), __pyx_t_13, sizeof(__pyx_v_v2shape[0]) * (2));
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":59
+              /* "post_train_tools/cython_util.pyx":59
  *                 v2shape=v2.shape
  *                 #print v2shape
  *                 for i in range(v2shape[0]):             # <<<<<<<<<<<<<<
@@ -2686,7 +2686,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_19; __pyx_t_20+=1) {
                 __pyx_v_i = __pyx_t_20;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":60
+                /* "post_train_tools/cython_util.pyx":60
  *                 #print v2shape
  *                 for i in range(v2shape[0]):
  *                     ic=np.nansum(v2[i]*np.log2(v2[i]*4+0.000001))             # <<<<<<<<<<<<<<
@@ -2813,7 +2813,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
                 __pyx_v_ic = __pyx_t_25;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":61
+                /* "post_train_tools/cython_util.pyx":61
  *                 for i in range(v2shape[0]):
  *                     ic=np.nansum(v2[i]*np.log2(v2[i]*4+0.000001))
  *                     v2[i]=v2[i]             # <<<<<<<<<<<<<<
@@ -2826,7 +2826,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
               }
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":63
+              /* "post_train_tools/cython_util.pyx":63
  *                     v2[i]=v2[i]
  * 
  *                 RAND_DIST=[]             # <<<<<<<<<<<<<<
@@ -2838,7 +2838,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_XDECREF_SET(__pyx_v_RAND_DIST, ((PyObject*)__pyx_t_2));
               __pyx_t_2 = 0;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":64
+              /* "post_train_tools/cython_util.pyx":64
  * 
  *                 RAND_DIST=[]
  *                 for i in range(100):             # <<<<<<<<<<<<<<
@@ -2848,7 +2848,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               for (__pyx_t_19 = 0; __pyx_t_19 < 0x64; __pyx_t_19+=1) {
                 __pyx_v_i = __pyx_t_19;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":65
+                /* "post_train_tools/cython_util.pyx":65
  *                 RAND_DIST=[]
  *                 for i in range(100):
  *                     rand=np.random.rand(v2shape[0],v2shape[1])             # <<<<<<<<<<<<<<
@@ -2919,7 +2919,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_rand, __pyx_t_2);
                 __pyx_t_2 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":66
+                /* "post_train_tools/cython_util.pyx":66
  *                 for i in range(100):
  *                     rand=np.random.rand(v2shape[0],v2shape[1])
  *                     for k in range(v2shape[0]):             # <<<<<<<<<<<<<<
@@ -2930,7 +2930,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 for (__pyx_t_26 = 0; __pyx_t_26 < __pyx_t_20; __pyx_t_26+=1) {
                   __pyx_v_k = __pyx_t_26;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":67
+                  /* "post_train_tools/cython_util.pyx":67
  *                     rand=np.random.rand(v2shape[0],v2shape[1])
  *                     for k in range(v2shape[0]):
  *                         pm1=rand[k]/np.sum(rand[k])             # <<<<<<<<<<<<<<
@@ -2999,7 +2999,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __Pyx_XDECREF_SET(__pyx_v_pm1, __pyx_t_22);
                   __pyx_t_22 = 0;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":69
+                  /* "post_train_tools/cython_util.pyx":69
  *                         pm1=rand[k]/np.sum(rand[k])
  *                         #rand[k]=pm1*(np.sum(pm1*np.log2(pm1*4+0.00001)))
  *                         rand[k]=pm1             # <<<<<<<<<<<<<<
@@ -3009,7 +3009,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   if (unlikely(__Pyx_SetItemInt(__pyx_v_rand, __pyx_v_k, __pyx_v_pm1, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 69, __pyx_L7_error)
                 }
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":71
+                /* "post_train_tools/cython_util.pyx":71
  *                         rand[k]=pm1
  *                     #RAND_DIST.append(np.mean(np.diagonal(cdist(v2, rand,metric='euclidean'))))
  *                     M=0.5*(rand+v2)+0.00001             # <<<<<<<<<<<<<<
@@ -3027,7 +3027,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_M, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":72
+                /* "post_train_tools/cython_util.pyx":72
  *                     #RAND_DIST.append(np.mean(np.diagonal(cdist(v2, rand,metric='euclidean'))))
  *                     M=0.5*(rand+v2)+0.00001
  *                     DIST=0.5*(np.sum(-v2*np.log(M/(v2+0.00001)))+np.sum(-rand*np.log(M/(rand+0.00001))))/float(v2shape[0])             # <<<<<<<<<<<<<<
@@ -3277,7 +3277,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
                 __pyx_v_DIST = __pyx_t_25;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":74
+                /* "post_train_tools/cython_util.pyx":74
  *                     DIST=0.5*(np.sum(-v2*np.log(M/(v2+0.00001)))+np.sum(-rand*np.log(M/(rand+0.00001))))/float(v2shape[0])
  *                     #DIST=-np.sum(v2*np.log(rand+0.00001)+(1.0-v2)*np.log(1.0-rand+0.00001))/float(v2shape[0])
  *                     RAND_DIST.append(DIST)             # <<<<<<<<<<<<<<
@@ -3290,7 +3290,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
               }
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":76
+              /* "post_train_tools/cython_util.pyx":76
  *                     RAND_DIST.append(DIST)
  * 
  *                 RAND_MEAN=np.mean(RAND_DIST)             # <<<<<<<<<<<<<<
@@ -3349,7 +3349,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
               __pyx_v_RAND_MEAN = __pyx_t_25;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":77
+              /* "post_train_tools/cython_util.pyx":77
  * 
  *                 RAND_MEAN=np.mean(RAND_DIST)
  *                 RAND_DEV=np.std(RAND_DIST)             # <<<<<<<<<<<<<<
@@ -3408,7 +3408,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
               __pyx_v_RAND_DEV = __pyx_t_25;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":80
+              /* "post_train_tools/cython_util.pyx":80
  *                 #print RAND_MEAN, RAND_DEV
  *                 #print("randome_dist: "+str(RAND_DIST))
  *                 comp_result=[]             # <<<<<<<<<<<<<<
@@ -3420,7 +3420,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __Pyx_XDECREF_SET(__pyx_v_comp_result, ((PyObject*)__pyx_t_22));
               __pyx_t_22 = 0;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":81
+              /* "post_train_tools/cython_util.pyx":81
  *                 #print("randome_dist: "+str(RAND_DIST))
  *                 comp_result=[]
  *                 for i in range(v1shape[0]-v2shape[0]):             # <<<<<<<<<<<<<<
@@ -3431,7 +3431,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_19; __pyx_t_20+=1) {
                 __pyx_v_i = __pyx_t_20;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":82
+                /* "post_train_tools/cython_util.pyx":82
  *                 comp_result=[]
  *                 for i in range(v1shape[0]-v2shape[0]):
  *                     partial_motif=[]             # <<<<<<<<<<<<<<
@@ -3443,7 +3443,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_partial_motif, ((PyObject*)__pyx_t_22));
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":83
+                /* "post_train_tools/cython_util.pyx":83
  *                 for i in range(v1shape[0]-v2shape[0]):
  *                     partial_motif=[]
  *                     for j in range(v2shape[0]):             # <<<<<<<<<<<<<<
@@ -3454,7 +3454,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 for (__pyx_t_29 = 0; __pyx_t_29 < __pyx_t_26; __pyx_t_29+=1) {
                   __pyx_v_j = __pyx_t_29;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":84
+                  /* "post_train_tools/cython_util.pyx":84
  *                     partial_motif=[]
  *                     for j in range(v2shape[0]):
  *                         pm1=v1[i+j]             # <<<<<<<<<<<<<<
@@ -3467,7 +3467,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __Pyx_XDECREF_SET(__pyx_v_pm1, __pyx_t_22);
                   __pyx_t_22 = 0;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":86
+                  /* "post_train_tools/cython_util.pyx":86
  *                         pm1=v1[i+j]
  *                         #ic=np.sum(pm1*np.log2(pm1*4+0.000001))
  *                         partial_motif.append(pm1)             # <<<<<<<<<<<<<<
@@ -3477,7 +3477,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __pyx_t_28 = __Pyx_PyList_Append(__pyx_v_partial_motif, __pyx_v_pm1); if (unlikely(__pyx_t_28 == ((int)-1))) __PYX_ERR(0, 86, __pyx_L7_error)
                 }
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":87
+                /* "post_train_tools/cython_util.pyx":87
  *                         #ic=np.sum(pm1*np.log2(pm1*4+0.000001))
  *                         partial_motif.append(pm1)
  *                     partial_motif_=np.array(partial_motif)             # <<<<<<<<<<<<<<
@@ -3535,7 +3535,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_partial_motif_, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":90
+                /* "post_train_tools/cython_util.pyx":90
  *                     #partial_motif=v1[i:(i+v2shape[0])]
  *                     #print v2shape, np.shape(partial_motif)
  *                     M=0.5*(partial_motif_+v2)+0.00001             # <<<<<<<<<<<<<<
@@ -3553,7 +3553,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_M, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":91
+                /* "post_train_tools/cython_util.pyx":91
  *                     #print v2shape, np.shape(partial_motif)
  *                     M=0.5*(partial_motif_+v2)+0.00001
  *                     DIST=0.5*(np.sum(-v2*np.log(M/(v2+0.00001)))+np.sum(-partial_motif_*np.log(M/(partial_motif_+0.00001))))/float(v2shape[0])             # <<<<<<<<<<<<<<
@@ -3803,7 +3803,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
                 __pyx_v_DIST = __pyx_t_25;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":93
+                /* "post_train_tools/cython_util.pyx":93
  *                     DIST=0.5*(np.sum(-v2*np.log(M/(v2+0.00001)))+np.sum(-partial_motif_*np.log(M/(partial_motif_+0.00001))))/float(v2shape[0])
  *                     #print JSD
  *                     v2_comp=np.flip(np.flip(v2,0),1)             # <<<<<<<<<<<<<<
@@ -3915,7 +3915,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_v2_comp, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":94
+                /* "post_train_tools/cython_util.pyx":94
  *                     #print JSD
  *                     v2_comp=np.flip(np.flip(v2,0),1)
  *                     M_comp=0.5*(partial_motif_+v2_comp)+0.00001             # <<<<<<<<<<<<<<
@@ -3933,7 +3933,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_M_comp, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":95
+                /* "post_train_tools/cython_util.pyx":95
  *                     v2_comp=np.flip(np.flip(v2,0),1)
  *                     M_comp=0.5*(partial_motif_+v2_comp)+0.00001
  *                     DIST_comp=0.5*(np.sum(-v2_comp*np.log(M_comp/(v2_comp+0.00001)))+np.sum(-partial_motif_*np.log(M_comp/(partial_motif_+0.00001))))/float(v2shape[0])             # <<<<<<<<<<<<<<
@@ -4182,7 +4182,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_XDECREF_SET(__pyx_v_DIST_comp, __pyx_t_22);
                 __pyx_t_22 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":102
+                /* "post_train_tools/cython_util.pyx":102
  *                     #DIST=-np.sum(v2*np.log(partial_motif_+0.00001)+(1.0-v2)*np.log(1.0-partial_motif_+0.00001))/float(v2shape[0])
  *                     #DIST_comp=-np.sum(v2_comp*np.log(partial_motif_+0.00001)+(1.0-v2_comp)*np.log(1.0-partial_motif_+0.00001))/float(v2shape[0])
  *                     ori="+"             # <<<<<<<<<<<<<<
@@ -4192,7 +4192,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_INCREF(__pyx_kp_s__13);
                 __Pyx_XDECREF_SET(__pyx_v_ori, __pyx_kp_s__13);
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":103
+                /* "post_train_tools/cython_util.pyx":103
  *                     #DIST_comp=-np.sum(v2_comp*np.log(partial_motif_+0.00001)+(1.0-v2_comp)*np.log(1.0-partial_motif_+0.00001))/float(v2shape[0])
  *                     ori="+"
  *                     if DIST_comp<DIST:             # <<<<<<<<<<<<<<
@@ -4207,7 +4207,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
                 if (__pyx_t_18) {
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":104
+                  /* "post_train_tools/cython_util.pyx":104
  *                     ori="+"
  *                     if DIST_comp<DIST:
  *                         DIST=DIST_comp             # <<<<<<<<<<<<<<
@@ -4217,7 +4217,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __pyx_t_25 = __pyx_PyFloat_AsDouble(__pyx_v_DIST_comp); if (unlikely((__pyx_t_25 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L7_error)
                   __pyx_v_DIST = __pyx_t_25;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":105
+                  /* "post_train_tools/cython_util.pyx":105
  *                     if DIST_comp<DIST:
  *                         DIST=DIST_comp
  *                         ori="-"             # <<<<<<<<<<<<<<
@@ -4227,7 +4227,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __Pyx_INCREF(__pyx_kp_s__5);
                   __Pyx_DECREF_SET(__pyx_v_ori, __pyx_kp_s__5);
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":103
+                  /* "post_train_tools/cython_util.pyx":103
  *                     #DIST_comp=-np.sum(v2_comp*np.log(partial_motif_+0.00001)+(1.0-v2_comp)*np.log(1.0-partial_motif_+0.00001))/float(v2shape[0])
  *                     ori="+"
  *                     if DIST_comp<DIST:             # <<<<<<<<<<<<<<
@@ -4236,7 +4236,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
                 }
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":106
+                /* "post_train_tools/cython_util.pyx":106
  *                         DIST=DIST_comp
  *                         ori="-"
  *                     Z_SCORE=(DIST-RAND_MEAN)/RAND_DEV             # <<<<<<<<<<<<<<
@@ -4250,7 +4250,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 }
                 __pyx_v_Z_SCORE = (__pyx_t_25 / __pyx_v_RAND_DEV);
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":107
+                /* "post_train_tools/cython_util.pyx":107
  *                         ori="-"
  *                     Z_SCORE=(DIST-RAND_MEAN)/RAND_DEV
  *                     print Z_SCORE             # <<<<<<<<<<<<<<
@@ -4262,7 +4262,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 if (__Pyx_PrintOne(0, __pyx_t_11) < 0) __PYX_ERR(0, 107, __pyx_L7_error)
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":108
+                /* "post_train_tools/cython_util.pyx":108
  *                     Z_SCORE=(DIST-RAND_MEAN)/RAND_DEV
  *                     print Z_SCORE
  *                     Z_SCORE_list.append(Z_SCORE)             # <<<<<<<<<<<<<<
@@ -4274,7 +4274,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __pyx_t_28 = __Pyx_PyList_Append(__pyx_v_Z_SCORE_list, __pyx_t_11); if (unlikely(__pyx_t_28 == ((int)-1))) __PYX_ERR(0, 108, __pyx_L7_error)
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":109
+                /* "post_train_tools/cython_util.pyx":109
  *                     print Z_SCORE
  *                     Z_SCORE_list.append(Z_SCORE)
  *                     if Z_SCORE<=THRESHOLD:             # <<<<<<<<<<<<<<
@@ -4289,7 +4289,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
                 if (__pyx_t_18) {
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":110
+                  /* "post_train_tools/cython_util.pyx":110
  *                     Z_SCORE_list.append(Z_SCORE)
  *                     if Z_SCORE<=THRESHOLD:
  *                         l+=1             # <<<<<<<<<<<<<<
@@ -4298,7 +4298,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
                   __pyx_v_l = (__pyx_v_l + 1);
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":112
+                  /* "post_train_tools/cython_util.pyx":112
  *                         l+=1
  *                         #f.write(str(k2)+"\t"+str(i)+"\t"+str(i+v2shape[0])+"\t"+str(Z_SCORE)+"\n")
  *                         comp_result.append([k2,i,i+v2shape[0],Z_SCORE,ori])             # <<<<<<<<<<<<<<
@@ -4331,7 +4331,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __pyx_t_28 = __Pyx_PyList_Append(__pyx_v_comp_result, __pyx_t_2); if (unlikely(__pyx_t_28 == ((int)-1))) __PYX_ERR(0, 112, __pyx_L7_error)
                   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":109
+                  /* "post_train_tools/cython_util.pyx":109
  *                     print Z_SCORE
  *                     Z_SCORE_list.append(Z_SCORE)
  *                     if Z_SCORE<=THRESHOLD:             # <<<<<<<<<<<<<<
@@ -4341,7 +4341,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 }
               }
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":115
+              /* "post_train_tools/cython_util.pyx":115
  *                 #print comp_result
  * 
  *                 if 0<len(comp_result)<3:             # <<<<<<<<<<<<<<
@@ -4356,7 +4356,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __pyx_t_17 = (__pyx_t_18 != 0);
               if (__pyx_t_17) {
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":116
+                /* "post_train_tools/cython_util.pyx":116
  * 
  *                 if 0<len(comp_result)<3:
  *                     for cpr in comp_result:             # <<<<<<<<<<<<<<
@@ -4376,7 +4376,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __Pyx_XDECREF_SET(__pyx_v_cpr, ((PyObject*)__pyx_t_1));
                   __pyx_t_1 = 0;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":117
+                  /* "post_train_tools/cython_util.pyx":117
  *                 if 0<len(comp_result)<3:
  *                     for cpr in comp_result:
  *                         comp_result2.append(cpr)             # <<<<<<<<<<<<<<
@@ -4385,7 +4385,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
                   __pyx_t_28 = __Pyx_PyList_Append(__pyx_v_comp_result2, __pyx_v_cpr); if (unlikely(__pyx_t_28 == ((int)-1))) __PYX_ERR(0, 117, __pyx_L7_error)
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":116
+                  /* "post_train_tools/cython_util.pyx":116
  * 
  *                 if 0<len(comp_result)<3:
  *                     for cpr in comp_result:             # <<<<<<<<<<<<<<
@@ -4395,7 +4395,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 }
                 __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":115
+                /* "post_train_tools/cython_util.pyx":115
  *                 #print comp_result
  * 
  *                 if 0<len(comp_result)<3:             # <<<<<<<<<<<<<<
@@ -4405,7 +4405,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 goto __pyx_L34;
               }
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":119
+              /* "post_train_tools/cython_util.pyx":119
  *                         comp_result2.append(cpr)
  *                         #f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\n")
  *                 elif len(comp_result)>=3:             # <<<<<<<<<<<<<<
@@ -4416,7 +4416,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               __pyx_t_17 = ((__pyx_t_31 >= 3) != 0);
               if (__pyx_t_17) {
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":120
+                /* "post_train_tools/cython_util.pyx":120
  *                         #f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\n")
  *                 elif len(comp_result)>=3:
  *                     comp_result.sort(key = lambda x: x[3])             # <<<<<<<<<<<<<<
@@ -4427,7 +4427,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_GOTREF(__pyx_t_2);
                 __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_1);
-                __pyx_t_11 = __Pyx_CyFunction_NewEx(&__pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_lambda, 0, __pyx_n_s_motif_compare_locals_lambda, NULL, __pyx_n_s_enhancer_prediction_post_train_t, __pyx_d, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 120, __pyx_L7_error)
+                __pyx_t_11 = __Pyx_CyFunction_NewEx(&__pyx_mdef_16post_train_tools_11cython_util_13motif_compare_lambda, 0, __pyx_n_s_motif_compare_locals_lambda, NULL, __pyx_n_s_post_train_tools_cython_util, __pyx_d, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 120, __pyx_L7_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_key, __pyx_t_11) < 0) __PYX_ERR(0, 120, __pyx_L7_error)
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -4437,7 +4437,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":121
+                /* "post_train_tools/cython_util.pyx":121
  *                 elif len(comp_result)>=3:
  *                     comp_result.sort(key = lambda x: x[3])
  *                     for cpr in comp_result[-3:]:             # <<<<<<<<<<<<<<
@@ -4460,7 +4460,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                   __Pyx_XDECREF_SET(__pyx_v_cpr, ((PyObject*)__pyx_t_11));
                   __pyx_t_11 = 0;
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":122
+                  /* "post_train_tools/cython_util.pyx":122
  *                     comp_result.sort(key = lambda x: x[3])
  *                     for cpr in comp_result[-3:]:
  *                         comp_result2.append(cpr)             # <<<<<<<<<<<<<<
@@ -4469,7 +4469,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
  */
                   __pyx_t_28 = __Pyx_PyList_Append(__pyx_v_comp_result2, __pyx_v_cpr); if (unlikely(__pyx_t_28 == ((int)-1))) __PYX_ERR(0, 122, __pyx_L7_error)
 
-                  /* "enhancer_prediction/post_train_tools/cython_util.pyx":121
+                  /* "post_train_tools/cython_util.pyx":121
  *                 elif len(comp_result)>=3:
  *                     comp_result.sort(key = lambda x: x[3])
  *                     for cpr in comp_result[-3:]:             # <<<<<<<<<<<<<<
@@ -4479,7 +4479,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
                 }
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-                /* "enhancer_prediction/post_train_tools/cython_util.pyx":119
+                /* "post_train_tools/cython_util.pyx":119
  *                         comp_result2.append(cpr)
  *                         #f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\n")
  *                 elif len(comp_result)>=3:             # <<<<<<<<<<<<<<
@@ -4489,7 +4489,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
               }
               __pyx_L34:;
 
-              /* "enhancer_prediction/post_train_tools/cython_util.pyx":50
+              /* "post_train_tools/cython_util.pyx":50
  *             v1shape=v1.shape
  *             #print v1shape
  *             for k2, v2 in motif_data_dict.items():             # <<<<<<<<<<<<<<
@@ -4500,7 +4500,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
             }
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "enhancer_prediction/post_train_tools/cython_util.pyx":46
+            /* "post_train_tools/cython_util.pyx":46
  *         comp_result2=[]
  *         f.write("Motif name\tStart\tEnd\tJSD\n")
  *         for k1, v1 in long_motif_dict.items():             # <<<<<<<<<<<<<<
@@ -4510,7 +4510,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           }
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":124
+          /* "post_train_tools/cython_util.pyx":124
  *                         comp_result2.append(cpr)
  * 
  *         comp_result2.sort(key = lambda x: x[1])             # <<<<<<<<<<<<<<
@@ -4521,7 +4521,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           __Pyx_GOTREF(__pyx_t_4);
           __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 124, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_13motif_compare_1lambda1, 0, __pyx_n_s_motif_compare_locals_lambda, NULL, __pyx_n_s_enhancer_prediction_post_train_t, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L7_error)
+          __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_16post_train_tools_11cython_util_13motif_compare_1lambda1, 0, __pyx_n_s_motif_compare_locals_lambda, NULL, __pyx_n_s_post_train_tools_cython_util, __pyx_d, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L7_error)
           __Pyx_GOTREF(__pyx_t_1);
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_key, __pyx_t_1) < 0) __PYX_ERR(0, 124, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4531,7 +4531,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":125
+          /* "post_train_tools/cython_util.pyx":125
  * 
  *         comp_result2.sort(key = lambda x: x[1])
  *         for cpr in comp_result2:             # <<<<<<<<<<<<<<
@@ -4551,7 +4551,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
             __Pyx_XDECREF_SET(__pyx_v_cpr, ((PyObject*)__pyx_t_5));
             __pyx_t_5 = 0;
 
-            /* "enhancer_prediction/post_train_tools/cython_util.pyx":126
+            /* "post_train_tools/cython_util.pyx":126
  *         comp_result2.sort(key = lambda x: x[1])
  *         for cpr in comp_result2:
  *             f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\t"+str(cpr[4])+"\n")             # <<<<<<<<<<<<<<
@@ -4709,7 +4709,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
             __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "enhancer_prediction/post_train_tools/cython_util.pyx":125
+            /* "post_train_tools/cython_util.pyx":125
  * 
  *         comp_result2.sort(key = lambda x: x[1])
  *         for cpr in comp_result2:             # <<<<<<<<<<<<<<
@@ -4719,7 +4719,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           }
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":129
+          /* "post_train_tools/cython_util.pyx":129
  * 
  * 
  *         print("the number of motif matches: "+str(l))             # <<<<<<<<<<<<<<
@@ -4742,7 +4742,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
           if (__Pyx_PrintOne(0, __pyx_t_5) < 0) __PYX_ERR(0, 129, __pyx_L7_error)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-          /* "enhancer_prediction/post_train_tools/cython_util.pyx":43
+          /* "post_train_tools/cython_util.pyx":43
  *     cdef int[2] v2shape,v1shape
  *     #cdef double[4] pm1
  *     with open(fout, "w") as f:             # <<<<<<<<<<<<<<
@@ -4767,7 +4767,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         /*except:*/ {
-          __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
+          __Pyx_AddTraceback("post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
           if (__Pyx_GetException(&__pyx_t_5, &__pyx_t_1, &__pyx_t_4) < 0) __PYX_ERR(0, 43, __pyx_L9_except_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GOTREF(__pyx_t_1);
@@ -4830,7 +4830,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
     __pyx_L44:;
   }
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":130
+  /* "post_train_tools/cython_util.pyx":130
  * 
  *         print("the number of motif matches: "+str(l))
  *     return Z_SCORE_list             # <<<<<<<<<<<<<<
@@ -4842,7 +4842,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __pyx_r = __pyx_v_Z_SCORE_list;
   goto __pyx_L0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":36
+  /* "post_train_tools/cython_util.pyx":36
  * 
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):             # <<<<<<<<<<<<<<
@@ -4863,7 +4863,7 @@ static PyObject *__pyx_pf_19enhancer_prediction_16post_train_tools_11cython_util
   __Pyx_XDECREF(__pyx_t_23);
   __Pyx_XDECREF(__pyx_t_24);
   __Pyx_XDECREF(__pyx_t_27);
-  __Pyx_AddTraceback("enhancer_prediction.post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("post_train_tools.cython_util.motif_compare", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_k1);
@@ -5287,8 +5287,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cpr, __pyx_k_cpr, sizeof(__pyx_k_cpr), 0, 0, 1, 1},
   {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_end_2, __pyx_k_end_2, sizeof(__pyx_k_end_2), 0, 0, 1, 1},
-  {&__pyx_n_s_enhancer_prediction_post_train_t, __pyx_k_enhancer_prediction_post_train_t, sizeof(__pyx_k_enhancer_prediction_post_train_t), 0, 0, 1, 1},
-  {&__pyx_kp_s_enhancer_prediction_post_train_t_2, __pyx_k_enhancer_prediction_post_train_t_2, sizeof(__pyx_k_enhancer_prediction_post_train_t_2), 0, 0, 1, 0},
+  {&__pyx_kp_s_enhancer_prediction_post_train_t, __pyx_k_enhancer_prediction_post_train_t, sizeof(__pyx_k_enhancer_prediction_post_train_t), 0, 0, 1, 0},
   {&__pyx_n_s_enter, __pyx_k_enter, sizeof(__pyx_k_enter), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
@@ -5330,6 +5329,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_partial_motif_2, __pyx_k_partial_motif_2, sizeof(__pyx_k_partial_motif_2), 0, 0, 1, 1},
   {&__pyx_n_s_pm1, __pyx_k_pm1, sizeof(__pyx_k_pm1), 0, 0, 1, 1},
   {&__pyx_n_s_position_list, __pyx_k_position_list, sizeof(__pyx_k_position_list), 0, 0, 1, 1},
+  {&__pyx_n_s_post_train_tools_cython_util, __pyx_k_post_train_tools_cython_util, sizeof(__pyx_k_post_train_tools_cython_util), 0, 0, 1, 1},
   {&__pyx_kp_s_prediction_num, __pyx_k_prediction_num, sizeof(__pyx_k_prediction_num), 0, 0, 1, 0},
   {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_rand, __pyx_k_rand, sizeof(__pyx_k_rand), 0, 0, 1, 1},
@@ -5375,7 +5375,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":16
+  /* "post_train_tools/cython_util.pyx":16
  *     for i in range(len(y_prediction2)):
  * 
  *         a=position_list[i].strip('>')             # <<<<<<<<<<<<<<
@@ -5386,7 +5386,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":19
+  /* "post_train_tools/cython_util.pyx":19
  *         #print(str(a)+'\t'+str(y_prediction2[i]))
  *         k+=1
  *         a=a.split(':')             # <<<<<<<<<<<<<<
@@ -5397,7 +5397,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":21
+  /* "post_train_tools/cython_util.pyx":21
  *         a=a.split(':')
  *         chrom=a[0]
  *         b=a[1].split('-')             # <<<<<<<<<<<<<<
@@ -5408,7 +5408,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":28
+  /* "post_train_tools/cython_util.pyx":28
  *                             +str(start_)+'\t'
  *                             +str(end_)+'\t.\t'
  *                             +str(value*1000).strip('[]')+'\t.\t'             # <<<<<<<<<<<<<<
@@ -5419,7 +5419,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":29
+  /* "post_train_tools/cython_util.pyx":29
  *                             +str(end_)+'\t.\t'
  *                             +str(value*1000).strip('[]')+'\t.\t'
  *                             +str(value).strip('[]')+"\t-1\t-1\t-1\n")             # <<<<<<<<<<<<<<
@@ -5430,7 +5430,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":45
+  /* "post_train_tools/cython_util.pyx":45
  *     with open(fout, "w") as f:
  *         comp_result2=[]
  *         f.write("Motif name\tStart\tEnd\tJSD\n")             # <<<<<<<<<<<<<<
@@ -5441,7 +5441,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":43
+  /* "post_train_tools/cython_util.pyx":43
  *     cdef int[2] v2shape,v1shape
  *     #cdef double[4] pm1
  *     with open(fout, "w") as f:             # <<<<<<<<<<<<<<
@@ -5452,9 +5452,9 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":6
- * import numpy as np
+  /* "post_train_tools/cython_util.pyx":6
  * from scipy.spatial.distance import cdist
+ * 
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):             # <<<<<<<<<<<<<<
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'
@@ -5462,9 +5462,9 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__16 = PyTuple_Pack(13, __pyx_n_s_out_dir, __pyx_n_s_y_prediction2, __pyx_n_s_position_list, __pyx_n_s_filename_1, __pyx_n_s_output_handle, __pyx_n_s_k, __pyx_n_s_value, __pyx_n_s_chrom, __pyx_n_s_start, __pyx_n_s_end, __pyx_n_s_i, __pyx_n_s_a, __pyx_n_s_b); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(3, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_enhancer_prediction_post_train_t_2, __pyx_n_s_narrowPeak_writer, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(3, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_enhancer_prediction_post_train_t, __pyx_n_s_narrowPeak_writer, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 6, __pyx_L1_error)
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":36
+  /* "post_train_tools/cython_util.pyx":36
  * 
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):             # <<<<<<<<<<<<<<
@@ -5474,7 +5474,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__18 = PyTuple_Pack(35, __pyx_n_s_motif_data_dict, __pyx_n_s_long_motif_dict, __pyx_n_s_fout, __pyx_n_s_THRESHOLD, __pyx_n_s_i, __pyx_n_s_k, __pyx_n_s_j, __pyx_n_s_l, __pyx_n_s_k1, __pyx_n_s_k2, __pyx_n_s_RAND_MEAN, __pyx_n_s_RAND_DEV, __pyx_n_s_DIST, __pyx_n_s_Z_SCORE, __pyx_n_s_ic, __pyx_n_s_RAND_DIST, __pyx_n_s_partial_motif, __pyx_n_s_comp_result, __pyx_n_s_comp_result2, __pyx_n_s_cpr, __pyx_n_s_Z_SCORE_list, __pyx_n_s_v2shape, __pyx_n_s_v1shape, __pyx_n_s_f, __pyx_n_s_v1, __pyx_n_s_v2, __pyx_n_s_ic1, __pyx_n_s_rand, __pyx_n_s_pm1, __pyx_n_s_M, __pyx_n_s_partial_motif_2, __pyx_n_s_v2_comp, __pyx_n_s_M_comp, __pyx_n_s_DIST_comp, __pyx_n_s_ori); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(4, 0, 35, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_enhancer_prediction_post_train_t_2, __pyx_n_s_motif_compare, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(4, 0, 35, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_enhancer_prediction_post_train_t, __pyx_n_s_motif_compare, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5483,14 +5483,14 @@ static int __Pyx_InitCachedConstants(void) {
 }
 
 static int __Pyx_InitGlobals(void) {
-  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 2, __pyx_L1_error);
-  __pyx_float_0_5 = PyFloat_FromDouble(0.5); if (unlikely(!__pyx_float_0_5)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_float_0_00001 = PyFloat_FromDouble(0.00001); if (unlikely(!__pyx_float_0_00001)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_float_0_000001 = PyFloat_FromDouble(0.000001); if (unlikely(!__pyx_float_0_000001)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_float_neg_5_0 = PyFloat_FromDouble(-5.0); if (unlikely(!__pyx_float_neg_5_0)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_int_4 = PyInt_FromLong(4); if (unlikely(!__pyx_int_4)) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  __pyx_float_0_5 = PyFloat_FromDouble(0.5); if (unlikely(!__pyx_float_0_5)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_float_0_00001 = PyFloat_FromDouble(0.00001); if (unlikely(!__pyx_float_0_00001)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_float_0_000001 = PyFloat_FromDouble(0.000001); if (unlikely(!__pyx_float_0_000001)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_float_neg_5_0 = PyFloat_FromDouble(-5.0); if (unlikely(!__pyx_float_neg_5_0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_4 = PyInt_FromLong(4); if (unlikely(!__pyx_int_4)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5561,27 +5561,27 @@ static int __pyx_pymod_exec_cython_util(PyObject *__pyx_pyinit_module)
   }
   #endif
   __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_cython_util(void)", 0);
-  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_empty_unicode = PyUnicode_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_unicode)) __PYX_ERR(0, 1, __pyx_L1_error)
   #ifdef __Pyx_CyFunction_USED
-  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_CyFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_FusedFunction_USED
-  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_FusedFunction_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Coroutine_USED
-  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_Coroutine_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_Generator_USED
-  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_Generator_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_AsyncGen_USED
-  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_AsyncGen_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   #ifdef __Pyx_StopAsyncIteration_USED
-  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_StopAsyncIteration_init() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
   /*--- Library function declarations ---*/
   /*--- Threads initialization code ---*/
@@ -5600,36 +5600,36 @@ static int __pyx_pymod_exec_cython_util(PyObject *__pyx_pyinit_module)
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
-  if (unlikely(!__pyx_m)) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (unlikely(!__pyx_m)) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_d = PyModule_GetDict(__pyx_m); if (unlikely(!__pyx_d)) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_INCREF(__pyx_d);
-  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_b = PyImport_AddModule(__Pyx_BUILTIN_MODULE_NAME); if (unlikely(!__pyx_b)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_cython_runtime = PyImport_AddModule((char *) "cython_runtime"); if (unlikely(!__pyx_cython_runtime)) __PYX_ERR(0, 1, __pyx_L1_error)
   #if CYTHON_COMPILING_IN_PYPY
   Py_INCREF(__pyx_b);
   #endif
-  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 2, __pyx_L1_error);
+  if (PyObject_SetAttrString(__pyx_m, "__builtins__", __pyx_b) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   /*--- Initialize various global constants etc. ---*/
-  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_InitGlobals() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
-  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_enhancer_prediction__post_train_tools__cython_util) {
-    if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__pyx_module_is_main_post_train_tools__cython_util) {
+    if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
-    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 2, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "enhancer_prediction.post_train_tools.cython_util")) {
-      if (unlikely(PyDict_SetItemString(modules, "enhancer_prediction.post_train_tools.cython_util", __pyx_m) < 0)) __PYX_ERR(0, 2, __pyx_L1_error)
+    PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "post_train_tools.cython_util")) {
+      if (unlikely(PyDict_SetItemString(modules, "post_train_tools.cython_util", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
   /*--- Builtin init code ---*/
-  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_InitCachedBuiltins() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Constants init code ---*/
-  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_InitCachedConstants() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Global init code ---*/
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
@@ -5639,87 +5639,85 @@ static int __pyx_pymod_exec_cython_util(PyObject *__pyx_pyinit_module)
   /*--- Function import code ---*/
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
-  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":3
- * 
+  /* "post_train_tools/cython_util.pyx":2
  * cimport cython
  * import sys             # <<<<<<<<<<<<<<
  * import numpy as np
  * from scipy.spatial.distance import cdist
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":4
+  /* "post_train_tools/cython_util.pyx":3
  * cimport cython
  * import sys
  * import numpy as np             # <<<<<<<<<<<<<<
  * from scipy.spatial.distance import cdist
- * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):
+ * 
  */
-  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":5
+  /* "post_train_tools/cython_util.pyx":4
  * import sys
  * import numpy as np
  * from scipy.spatial.distance import cdist             # <<<<<<<<<<<<<<
+ * 
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):
- *     cdef str filename_1
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_cdist);
   __Pyx_GIVEREF(__pyx_n_s_cdist);
   PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_cdist);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_scipy_spatial_distance, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_scipy_spatial_distance, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_cdist); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_cdist); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cdist, __pyx_t_1) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_cdist, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":6
- * import numpy as np
+  /* "post_train_tools/cython_util.pyx":6
  * from scipy.spatial.distance import cdist
+ * 
  * def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):             # <<<<<<<<<<<<<<
  *     cdef str filename_1
  *     filename_1=out_dir+'.narrowPeak'
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_1narrowPeak_writer, NULL, __pyx_n_s_enhancer_prediction_post_train_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16post_train_tools_11cython_util_1narrowPeak_writer, NULL, __pyx_n_s_post_train_tools_cython_util); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_narrowPeak_writer, __pyx_t_2) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":36
+  /* "post_train_tools/cython_util.pyx":36
  * 
  * 
  * def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):             # <<<<<<<<<<<<<<
  *     cdef int i,k, j, l=0
  *     cdef str k1, k2
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_19enhancer_prediction_16post_train_tools_11cython_util_3motif_compare, NULL, __pyx_n_s_enhancer_prediction_post_train_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_16post_train_tools_11cython_util_3motif_compare, NULL, __pyx_n_s_post_train_tools_cython_util); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_motif_compare, __pyx_t_2) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "enhancer_prediction/post_train_tools/cython_util.pyx":2
- * 
+  /* "post_train_tools/cython_util.pyx":1
  * cimport cython             # <<<<<<<<<<<<<<
  * import sys
  * import numpy as np
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "carray.from_py":77
@@ -5738,11 +5736,11 @@ static int __pyx_pymod_exec_cython_util(PyObject *__pyx_pyinit_module)
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init enhancer_prediction.post_train_tools.cython_util", 0, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init post_train_tools.cython_util", 0, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init enhancer_prediction.post_train_tools.cython_util");
+    PyErr_SetString(PyExc_ImportError, "init post_train_tools.cython_util");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

@@ -63,17 +63,9 @@ def genome_scan(filename):
     return genome_seq_re_list, chromosome, chr_position #, window_id
     
 def run(args):
-    main()
+    main(args)
 
-def main():
-    try:
-        options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
-    except getopt.GetoptError as err:
-        print(str(err))
-        sys.exit(2)
-    if len(options)<4:
-        print('too few argument')
-        sys.exit(0)
+def main(args=None):
     TEST=True
     path_sep=os.path.sep
     chromosome_of_interest='chr2'
@@ -82,49 +74,81 @@ def main():
     bed_file=None
     max_to_keep=2
     GPU=1
-    for opt, arg in options:
-        if opt in ('-i', '--input_dir'):
-            input_dir=arg
-            if not os.path.isfile(input_dir):
-                print(input_dir+' does not exist')
-                sys.exit(0)
-        elif opt in ('-o', '--output_dir'):
-            output_dir=arg
-            if not os.path.exists(output_dir):
-                try:
-                    os.makedirs(output_dir)
-                except OSError as exc:
-                    if exc.errno != exc.errno.EEXIST:
-                        raise
-
-        elif opt in ('-n', '--network_constructor'):
-            model_name=arg
-            #if not os.path.isfile(model_name):
-                #print(model_name+' does not exist')
-                #sys.exit(0)
-        elif opt in ('-b', '--bed'):
-            bed_file=arg
-            if not os.path.isfile(bed_file):
-                print(bed_file+' does not exist')
-                sys.exit(0)
-        elif opt in ('-t', '--test_genome'):
-            test_genome=arg
-            #if not os.path.isfile(test_genome):
-                #print(test_genome+' does not exist')
-                #sys.exit(0)
-        elif opt in ('-g','--genome_bed'):
-            genome_bed=arg
-            if not os.path.isfile(genome_bed):
-                print(genome_bed+' does not exist')
-                sys.exit(0)
-        elif opt in ('-c','--chromosome'):
-            chromosome_of_interest=arg
-            if chromosome_of_interest=="all":
-                TEST=False
-                
-        elif opt in ('-G','--GPU'):
-            GPU=int(arg)
-    
+    if args is not None:
+        """
+        argparser_predict = subparsers.add_parser( "predict",
+                                                     help = "Predict regulatory sequences" )
+        argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, required = True,
+                                          help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
+        argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                                          help = "an output directory for prediction results. REQUIRED.")
+        argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str,
+                                          help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
+        argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, required = True,
+                                          help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
+        argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
+                                          help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
+        argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
+                                          help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
+        argparser_predict.add_argument( "-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
+                                          help = "Set a target chromosome or a contig for prediction. Default: chr2" )
+        argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = True,
+                                          help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
+        """
+        
+        input_dir=args.input_ckpt
+        args.out_directory
+        model_name=args.model
+        bed_file=args.labeled_bed_file
+        test_genome=args.test_genome_files
+        GPU=args.GPU_number
+        chromosome_of_interest=args.chromosome
+        TEST=args.test_or_prediction
+    else:
+        try:
+            options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
+        except getopt.GetoptError as err:
+            print(str(err))
+            sys.exit(2)
+        if len(options)<4:
+            print('too few argument')
+            sys.exit(0)
+        
+        for opt, arg in options:
+            if opt in ('-i', '--input_dir'):
+                input_dir=arg                
+            elif opt in ('-o', '--output_dir'):
+                output_dir=arg
+            elif opt in ('-n', '--network_constructor'):
+                model_name=arg
+            elif opt in ('-b', '--bed'):
+                bed_file=arg                
+            elif opt in ('-t', '--test_genome'):
+                test_genome=arg
+            elif opt in ('-g','--genome_bed'):
+                genome_bed=arg
+                if not os.path.isfile(genome_bed):
+                    print(genome_bed+' does not exist')
+                    sys.exit(0)
+            elif opt in ('-c','--chromosome'):
+                chromosome_of_interest=arg
+            elif opt in ('-G','--GPU'):
+                GPU=int(arg)
+            
+    if not os.path.isfile(input_dir):
+        print(input_dir+' does not exist')
+        sys.exit(0)
+    if not os.path.isfile(bed_file):
+        print(bed_file+' does not exist')
+        sys.exit(0)
+    if chromosome_of_interest=="all":
+        TEST=False
+    if not os.path.exists(output_dir):
+        try:
+            os.makedirs(output_dir)
+        except OSError as exc:
+            if exc.errno != exc.errno.EEXIST:
+                raise
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:

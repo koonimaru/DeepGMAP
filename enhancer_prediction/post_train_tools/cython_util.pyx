@@ -1,8 +1,8 @@
-
 cimport cython
 import sys
 import numpy as np
 from scipy.spatial.distance import cdist
+
 def narrowPeak_writer(str out_dir,list y_prediction2,list position_list):
     cdef str filename_1
     filename_1=out_dir+'.narrowPeak'
