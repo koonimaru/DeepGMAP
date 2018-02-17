@@ -1,7 +1,5 @@
 from __future__ import print_function
 import sys
-import gzip
-import cPickle
 import tensorflow as tf
 import numpy as np
 import time
@@ -9,9 +7,7 @@ import math
 import os
 from natsort import natsorted, ns
 import subprocess as sp
-from itertools import cycle
 import matplotlib.pyplot as plt
-from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize
 from sklearn.multiclass import OneVsRestClassifier

@@ -98,7 +98,10 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
         dp=position[i]
         lp=label_position[i]
         r=random.random()
+        
+        #print r, sum(l), reduce_genome
         if sum(l)==0 and r<=reduce_genome:
+            #print k
             k+=1
             continue
         else:
@@ -110,7 +113,7 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
                 x+=1
             else:
                 y+=1
-        prog=float(i)/num_seq
+        prog=100*float(k+y+x)/num_seq
         if prog%10.0==0.0:
             print prog
     z=float(x)/float(y+x)
