@@ -39,7 +39,7 @@ def prepare_argparser ():
     
     # command for 'predict'
     add_predict_parser( subparsers )
-    
+    add_generate_test_parser(subparsers)
     # command for 'generate_input'
     add_generate_input_parser( subparsers )
     # command for 'genome_divide'
@@ -138,7 +138,8 @@ def add_generate_test_parser( subparsers ):
     argparser_generate_test.add_argument( "-i", "--in_file", dest = "input_genome" , type = str, required = True,
                                          help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
     argparser_generate_test.add_argument("-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
-                                      help = "Set a target chromosome or a contig for prediction. Default: chr2" )
+                                      help = "Set a target chromosome or a contig for prediction. If you want a whole genome to \
+                                      be converted, 'all' argument should be provided. Default: chr2" )
     argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
                                          help = "")
     argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
@@ -149,7 +150,7 @@ def add_generate_test_parser( subparsers ):
 def add_genome_divide_parser( subparsers ):
 
     argparser_genome_divider = subparsers.add_parser( "genome_divide",
-                                                    help = "Generate a non-labeled genome files with a specified window size. bedtools is required to run this command" )
+                                                    help = "A pipeline that generate a non-labeled genome files with a specified window size. bedtools is required to run this command" )
     argparser_genome_divider.add_argument( "-i", "--in_file", dest = "genome_fasta" , type = str, required = True,
                                          help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
     argparser_genome_divider.add_argument( "-w", "--windowsize", dest = "windowsize", type = int, required = True,
@@ -192,8 +193,7 @@ def main():
         run( args )
         
 if __name__ == '__main__':
-    print os.getcwd()
-    print(sys.path)
+
     try:
         main()
     except KeyboardInterrupt:

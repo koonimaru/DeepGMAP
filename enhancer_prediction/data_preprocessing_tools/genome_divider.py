@@ -10,7 +10,7 @@ def genome_divider(genome_fasta, genome_file, WINDOW_SIZE):
     #WINDOW_SIZE=1000
     #genome_file="/home/fast/onimaru/lamprey/LetJap1.0.1.genome"
     #with open(genome_file, 'r') as fin, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_altwindow.bed', 'w') as fout1, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_.bed', 'w') as fout2:
-    with open(genome_file, 'r') as fin, open('/home/fast/onimaru/lamprey/LetJap1_'+str(WINDOW_SIZE)+'.bed', 'w') as fout1:
+    with open(genome_file, 'r') as fin, open(outbed, 'w') as fout1:
         
         for line in fin:
             line=line.split()
@@ -35,10 +35,13 @@ def genome_divider(genome_fasta, genome_file, WINDOW_SIZE):
     except OSError as e:
         print e
         sys.exit(1)
+    
+    print(outbed+" and "+outfasta+' were successfully generated.')
+    
 def genome_file_maker(genome_fasta, genome_file):
 
     length_list=[]
-
+    
     with open(genome_fasta, 'r') as fin, open(genome_file, 'w') as fout:
         seq=0
         chrom_name=''
@@ -58,14 +61,16 @@ def genome_file_maker(genome_fasta, genome_file):
                 seq+=len(line1)
         #if len(chrom_name)==3 and not "M" in chrom_name:
         fout.write(str(chrom_name)+'\t'+str(seq)+'\n')
-
+        
 def run(args):
     genome_fasta=args.genome_fasta
     windowsize=args.windowsize
     genome_file=os.path.splitext(genome_fasta)[0]+'.genome'
     if not os.path.isfile(genome_file):
-        genome_file_maker(genome_fasta)
-    
+        print("creating genome file.")
+        genome_file_maker(genome_fasta,genome_file)
+    else:
+        print("using a pre-existing genome file: "+genome_file)
     genome_divider(genome_fasta, genome_file, windowsize)
 
 

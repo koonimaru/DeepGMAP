@@ -65,7 +65,7 @@ def main(args=None):
     TEST=True
     path_sep=os.path.sep
     chromosome_of_interest='chr2'
-    output_dir='./'
+    output_dir=None
     model_name=""
     bed_file=None
     max_to_keep=2
@@ -94,7 +94,7 @@ def main(args=None):
         
         input_dir=args.input_ckpt
         args.out_directory
-        model_name=args.model
+        output_dir=model_name=args.model
         bed_file=args.labeled_bed_file
         test_genome=args.test_genome_files
         GPU=args.GPU_number
@@ -139,7 +139,10 @@ def main(args=None):
         sys.exit(0)
     if chromosome_of_interest=="all":
         TEST=False
-    if not os.path.exists(output_dir):
+    if output_dir==None:
+        print("output directory should be specified.")
+        sys.exit(1)
+    elif not os.path.exists(output_dir):
         try:
             os.makedirs(output_dir)
         except OSError as exc:
