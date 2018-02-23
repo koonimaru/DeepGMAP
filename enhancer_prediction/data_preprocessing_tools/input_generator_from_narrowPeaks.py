@@ -21,7 +21,7 @@ def run(args):
 
 def main(args=None):
     start=time.time()
-    window_size=None
+    
     threads=1
     pref=''
     sample_num=100

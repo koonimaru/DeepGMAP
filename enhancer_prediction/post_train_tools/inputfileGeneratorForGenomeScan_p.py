@@ -12,7 +12,7 @@ import multiprocessing
 import sys
 import glob
 import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
-
+import time
 import psutil
 import getopt
 
@@ -20,8 +20,8 @@ import getopt
 def DNA_to_array_converter(input_file,target_chr):
     seq_list=[]
     position_list=[]
-    
-    
+    b1=0.0
+    i=0
     with open(input_file, 'r') as fin:
     
         SEQ=False
@@ -29,16 +29,23 @@ def DNA_to_array_converter(input_file,target_chr):
             for line in fin:
                 if line.startswith('>'):
                     if not "_" in line and not line.startswith('>chrM'):
-                        print line,
+                        #print line,
                         position_list.append(line.strip('\n'))
                         SEQ=True
                     else:
                         SEQ=False
+                    if i%100000==0:
+                        print line
                 elif SEQ:
                     line=line.strip('\n')
                     data_width=len(line)
-                    sequence=np.reshape(sb2.AGCTtoArray3(line,data_width), (1,data_width,4,1))
-                    seq_list.append(sequence)
+                    a1=time.time()
+                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                    b1+=time.time()-a1
+                i+=1
+                #if i%100000==0:
+                    #print line
+                    #sys.exit()
         else:
             for line in fin:
                 if line.startswith('>'):
@@ -52,9 +59,9 @@ def DNA_to_array_converter(input_file,target_chr):
                     line=line.strip('\n')
                     data_width=len(line)
                     #sequence=np.zeros([1,1000,4,1], np.int16)
-                    sequence=np.reshape(sb2.AGCTtoArray3(line,data_width), (1,data_width,4,1))
-                    seq_list.append(sequence)
-
+                                       
+                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                    
     return position_list, seq_list
         
 

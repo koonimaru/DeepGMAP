@@ -93,8 +93,8 @@ def main(args=None):
         """
         
         input_dir=args.input_ckpt
-        args.out_directory
-        output_dir=model_name=args.model
+        output_dir=args.out_directory
+        model_name=args.model
         bed_file=args.labeled_bed_file
         test_genome=args.test_genome_files
         GPU=args.GPU_number
@@ -146,8 +146,8 @@ def main(args=None):
         try:
             os.makedirs(output_dir)
         except OSError as exc:
-            if exc.errno != exc.errno.EEXIST:
-                raise
+            print(exc)
+            sys.exit(1)
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:
