@@ -65,7 +65,7 @@ class Model:
         self.keep_prob3=kwargs["keep_prob3"]
         self.start_at=kwargs["start_at"]
         self.output_dir=kwargs["output_dir"]
-        
+        self.max_to_keep=kwargs["max_to_keep"]
         self.fc1_param=int(math.ceil((int(math.ceil((
                         self.data_length-self.conv1_filter+1)/2.0
                                      ))-self.conv1_filter+1)/6.0))
@@ -76,7 +76,7 @@ class Model:
         self.error
         self.saver
         self.cost
-        print 'Running deapsea model'
+        #print 'Running deapsea model'
         if self.output_dir is not None:
             flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"
@@ -142,8 +142,8 @@ class Model:
             lstm_fw_cell = tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
             # Backward direction cell
             lstm_bw_cell = tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
-            lstm_fw_multicell = tf.nn.rnn_cell.MultiRNNCell([lstm_fw_cell]*320)
-            lstm_bw_multicell = tf.nn.rnn_cell.MultiRNNCell([lstm_bw_cell]*320)
+            #lstm_fw_multicell = tf.nn.rnn_cell.MultiRNNCell([lstm_fw_cell]*320)
+            #lstm_bw_multicell = tf.nn.rnn_cell.MultiRNNCell([lstm_bw_cell]*320)
             
             
             # Get lstm cell output
@@ -236,7 +236,7 @@ class Model:
     @define_scope
     def saver(self):
         #return tf.train.Saver(var_list=self.prediction[2])
-        return tf.train.Saver()
+        return tf.train.Saver(max_to_keep=self.max_to_keep)
     @define_scope
     def cost(self):
 

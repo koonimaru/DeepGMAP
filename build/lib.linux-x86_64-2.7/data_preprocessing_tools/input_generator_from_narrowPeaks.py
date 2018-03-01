@@ -13,6 +13,14 @@ import time
 import datetime
 
 
+def getDupes_a(l):
+    '''moooeeeep'''
+    seen = set()
+    seen_add = seen.add
+    # adds all elements it doesn't know yet to seen and all other to seen_twice
+    for x in l:
+        if x in seen or seen_add(x):
+            yield x
 
 def run(args):
     main(args)
@@ -21,7 +29,7 @@ def run(args):
 
 def main(args=None):
     start=time.time()
-    window_size=None
+    
     threads=1
     pref=''
     sample_num=100
@@ -135,30 +143,43 @@ def main(args=None):
         bed_file_dir_=bed_file_dir+"*.narrowPeak"
         bed_file_list=glb.glob(bed_file_dir_)
         out_dir=bed_file_dir
-    print("reading narrowPeak files of "+ str(bed_file_list))
-    if len(bed_file_list)==0:
-        print("No peak files in "+str(bed_file_dir))
-        print(howto)
-        sys.exit()
-    bed_file_list_2=[]
-    for b in bed_file_list:
-        b_=b.split(".")[0]+"_"+str(window_size)+".bed"
-        tmp_out=open(b_, 'w')
-        try:
-            sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
-        except OSError as e:
-            if e.errno == os.errno.ENOENT:
-                print str(b)+" not found"
-            else:
-                print "Something went wrong while trying to run bedtools"
-            raise
-        tmp_out.close()
-        bed_file_list_2.append(b_)
         
-    genome_label(bed_file_list_2, genome_1000,bed_file_dir,pref)
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
     output_dir=str(out_dir)+str(pref)+'_'+str(tail.split('.')[0])+"s"+str(sample_num)+"r"+str(reduce_genome)+'_train_data_set/'
+    
+    
+    #create labeled genome file (.bed.labeled), only if it does not exist 
+    if not os.path.isfile(labeled_genome):
+    
+        print("reading narrowPeak files of "+ str(bed_file_list))
+        if len(bed_file_list)==0:
+            print("No peak files in "+str(bed_file_dir))
+            print(howto)
+            sys.exit()
+        bed_file_list_2=[]
+        for b in bed_file_list:
+            
+            b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
+            tmp_out=open(b_, 'w')
+            try:
+                sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+            except OSError as e:
+                if e.errno == os.errno.ENOENT:
+                    print(str(b)+" not found")
+                else:
+                    print(e+"\nSomething went wrong while trying to run bedtools")
+                    sys.exit()
+            tmp_out.close()
+            bed_file_list_2.append(b_)
+        dups=list(getDupes_a(bed_file_list_2))
+        if len(dups) is not 0:
+            sys.exit(dups+" are duplicated")
+            
+        genome_label(bed_file_list_2, genome_1000,bed_file_dir,pref)
+    else:
+        print('As '+labeled_genome +' already exists, skipping creating this file. If you want to create a new one, you need change prefix.')
+
     print("outputting train data set to "+output_dir)
     if os.path.isfile(labeled_genome):
         

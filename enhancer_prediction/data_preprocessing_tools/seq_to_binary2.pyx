@@ -3,7 +3,8 @@ import sys
 
 
 
-
+@cython.boundscheck(False)
+@cython.wraparound(False)
 def label_reader(file_, str chr_to_skip):
     cdef list label_position=[]
     cdef list label_list=[]
@@ -27,6 +28,8 @@ def label_reader(file_, str chr_to_skip):
             sys.stdout.flush()
     return label_position, label_list
 
+@cython.boundscheck(False)
+@cython.wraparound(False)
 def AGCTtoArray3(char *Seq, int seqlen):
     cdef list onehot=[]
     cdef char Nuc
@@ -50,23 +53,42 @@ def AGCTtoArray3(char *Seq, int seqlen):
     
     return onehot
 
-def ACGTtoArray(char *Seq, int seqlen):
-    cdef list onehot=[]
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def AGCTtoArray4(char *Seq, int seqlen):
+    #cdef list onehot=[]
     cdef char Nuc
     cdef int i
+    cdef int[1000][4] onehot
+
     for i in range(seqlen):
         Nuc=Seq[i]
         #print Nuc
         if Nuc=='A' or Nuc=='a':
-            onehot.append((1, 0, 0, 0))
-        elif Nuc=='C' or Nuc=='c':
-            onehot.append((0, 1, 0, 0))
+            onehot[i][0]=1
+            onehot[i][1]=0
+            onehot[i][2]=0
+            onehot[i][3]=0
         elif Nuc=='G' or Nuc=='g':
-            onehot.append((0, 0, 1, 0))
+            onehot[i][0]=0
+            onehot[i][1]=1
+            onehot[i][2]=0
+            onehot[i][3]=0
+        elif Nuc=='C' or Nuc=='c':
+            onehot[i][0]=0
+            onehot[i][1]=0
+            onehot[i][2]=1
+            onehot[i][3]=0
         elif Nuc=='T' or Nuc=='t':
-            onehot.append((0, 0, 0, 1))
+            onehot[i][0]=0
+            onehot[i][1]=0
+            onehot[i][2]=0
+            onehot[i][3]=1
         elif Nuc=='N' or Nuc=='n':
-            onehot.append((0, 0, 0, 0))
+            onehot[i][0]=0
+            onehot[i][1]=0
+            onehot[i][2]=0
+            onehot[i][3]=0
         else:
             print("sequence contains unreadable characters: "+str(Nuc))
             sys.exit()

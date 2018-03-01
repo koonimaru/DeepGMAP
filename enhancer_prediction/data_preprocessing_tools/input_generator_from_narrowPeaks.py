@@ -13,40 +13,27 @@ import time
 import datetime
 
 
+def getDupes_a(l):
+    '''moooeeeep'''
+    seen = set()
+    seen_add = seen.add
+    # adds all elements it doesn't know yet to seen and all other to seen_twice
+    for x in l:
+        if x in seen or seen_add(x):
+            yield x
 
 def run(args):
     main(args)
 
-
-
 def main(args=None):
     start=time.time()
-    window_size=None
+    
     threads=1
     pref=''
     sample_num=100
     reduce_genome=0.75
     chr_to_skip="chr2"
     if args is not None:
-        """
-        argparser_bdgpeakcall = subparsers.add_parser( "generate_input",
-                                                       help = "Generate a train data set from narrowPeak files." )
-        argparser_bdgpeakcall.add_argument( "-b", "--bed", dest = "in_directory", type = str, required = True,
-                                            help = "A directory that contains narrowPeak or bed files. \
-                                            These files, which indicate signal peak regions in a genome, can be created \
-                                            by MACS2 peak caller or other softwares, or can be downloaded from ENCODE project. REQUIRED" )
-        argparser_bdgpeakcall.add_argument( "-g", "--genome" , dest = "genome_file_prefix", type = str, required = True,
-                                            help = "The directory plus prefix of a bed file and a fasta file that are\
-                                            binned with a particular window size. If you have path/to/mm10_1000.bed and\
-                                             /path/to/mm10_1000.fa,the input would be '-g /path/to/mm10_1000'. REQUIRED." )
-        argparser_bdgpeakcall.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                           help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
-        argparser_bdgpeakcall.add_argument( "-s", "--sample_number", dest = "sample_number", type = int,
-                                           help = "The number of samples in a mini-batch. Default: 100", default = 100 )
-        argparser_bdgpeakcall.add_argument( "-r", "--reduse_genome", dest="genome_fraction", help="A fraction to ignore signal-negative genome sequences. Default: 0.75",default=0.75)
-        argparser_bdgpeakcall.add_argument("-p", "--prefix", dest="out_prefix",
-                                            help = "The prefix of output files and folders. Default: ''", default = '' )
-        """    
         bed_file_dir=args.in_directory
         genome_pref=args.genome_file_prefix
         threads=args.thread_number
@@ -60,9 +47,7 @@ def main(args=None):
             options, args =getopt.getopt(sys.argv[1:], 'b:g:w:t:p:s:r:h:', ['bed=', 'genome=', 'window_size=' 'threads=', 'prefix=','sample_number=','reduce_genome=','help='])
         except getopt.GetoptError as err:
             print str(err)
-            sys.exit(2)
-    
-        
+            sys.exit(1)
         howto=\
         "usage: input_generator_from_narrowPeaks [-h] [-b FILE_DIR] [-g FILE_DIR] \n\
         [-t INT] [-s INT] [-r FLOAT] [-p PREFIX] \n\
@@ -118,47 +103,78 @@ def main(args=None):
         """ 
     genome_1000=genome_pref+".bed"
     genome_fasta=genome_pref+".fa"
-    if os.path.isfile(genome_1000)==False or os.path.isfile(genome_fasta)==False:
-        print "can't find genome files"
-        sys.exit()
+    if os.path.isfile(genome_1000)==False:
+        print(genome_1000+"is missing.")
+        sys.exit(1)
+    if os.path.isfile(genome_fasta)==False:
+        print(genome_fasta+" is missing.")
+        sys.exit(1)
+    
     with open(genome_1000, 'r') as fin:
         line=fin.readline()
         line=line.split()
         window_size=int(line[2])-int(line[1])
     bed_file_list=[]
-    if bed_file_dir.endswith('.narrowPeak'):
-        bed_file_list.append(bed_file_dir)
-        out_dir=bed_file_dir
+    if bed_file_dir.endswith('.narrowPeak') or bed_file_dir.endswith('.bed'):
+        
+        bed_file_list=glb.glob(bed_file_dir)
+        
+        
+        out_dir=os.path.split(bed_file_dir)[0]+"/"
+        
     else:
         if not bed_file_dir.endswith("/"):
             bed_file_dir+="/"
         bed_file_dir_=bed_file_dir+"*.narrowPeak"
-        bed_file_list=glb.glob(bed_file_dir_)
         out_dir=bed_file_dir
-    print("reading narrowPeak files of "+ str(bed_file_list))
+        bed_file_list=glb.glob(bed_file_dir_)
+        if len(bed_file_list)==0:
+            bed_file_dir_=bed_file_dir+"*.bed"
+            bed_file_list=glb.glob(bed_file_dir_)
+            
     if len(bed_file_list)==0:
-        print("No peak files in "+str(bed_file_dir))
-        print(howto)
-        sys.exit()
-    bed_file_list_2=[]
-    for b in bed_file_list:
-        b_=b.split(".")[0]+"_"+str(window_size)+".bed"
-        tmp_out=open(b_, 'w')
-        try:
-            sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
-        except OSError as e:
-            if e.errno == os.errno.ENOENT:
-                print str(b)+" not found"
-            else:
-                print "Something went wrong while trying to run bedtools"
-            raise
-        tmp_out.close()
-        bed_file_list_2.append(b_)
         
-    genome_label(bed_file_list_2, genome_1000,bed_file_dir,pref)
+        sys.exit('no bed files nor narrowPeak files in '+bed_file_dir)
+        
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
     output_dir=str(out_dir)+str(pref)+'_'+str(tail.split('.')[0])+"s"+str(sample_num)+"r"+str(reduce_genome)+'_train_data_set/'
+    
+    
+    #create labeled genome file (.bed.labeled), only if it does not exist
+    #sys.exit(labeled_genome)
+    if not os.path.isfile(labeled_genome):
+    
+        print("reading narrowPeak files named "+ str(bed_file_list))
+        if len(bed_file_list)==0:
+            print("No peak files in "+str(bed_file_dir))
+            print(howto)
+            sys.exit()
+        bed_file_list_2=[]
+        for b in bed_file_list:
+            
+            b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
+            if not os.path.isfile(b_):
+                tmp_out=open(b_, 'w')
+                try:
+                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+                except OSError as e:
+                    if e.errno == os.errno.ENOENT:
+                        print(str(b)+" not found")
+                    else:
+                        print(e+"\nSomething went wrong while trying to run bedtools")
+                        sys.exit(1)
+                tmp_out.close()
+            bed_file_list_2.append(b_)
+        dups=list(getDupes_a(bed_file_list_2))
+        if len(dups) is not 0:
+            sys.exit(dups+" are duplicated")
+            
+        genome_label(bed_file_list_2, genome_1000,labeled_genome,pref)
+    else:
+        print('As '+labeled_genome +' already exists, skipping creating this file.\
+        If you want to create a new one, you need change prefix or remove the old one.')
+
     print("outputting train data set to "+output_dir)
     if os.path.isfile(labeled_genome):
         
@@ -209,7 +225,7 @@ def main(args=None):
             raise
         
         running_time=time.time()-start
-        print "Done!"+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time))
+        print("Done! A train data set has been saved to "+str(output_dir)+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time)))
     else:
         print("label_file was not created for some reason")
         sys.exit()

@@ -12,7 +12,7 @@ import multiprocessing
 import sys
 import glob
 import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
-
+import time
 import psutil
 import getopt
 
@@ -20,8 +20,8 @@ import getopt
 def DNA_to_array_converter(input_file,target_chr):
     seq_list=[]
     position_list=[]
-    
-    
+    b1=0.0
+    i=0
     with open(input_file, 'r') as fin:
     
         SEQ=False
@@ -29,16 +29,23 @@ def DNA_to_array_converter(input_file,target_chr):
             for line in fin:
                 if line.startswith('>'):
                     if not "_" in line and not line.startswith('>chrM'):
-                        print line,
+                        #print line,
                         position_list.append(line.strip('\n'))
                         SEQ=True
                     else:
                         SEQ=False
+                    if i%100000==0:
+                        print line
                 elif SEQ:
                     line=line.strip('\n')
                     data_width=len(line)
-                    sequence=np.reshape(sb2.AGCTtoArray3(line,data_width), (1,data_width,4,1))
-                    seq_list.append(sequence)
+                    a1=time.time()
+                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                    b1+=time.time()-a1
+                i+=1
+                #if i%100000==0:
+                    #print line
+                    #sys.exit()
         else:
             for line in fin:
                 if line.startswith('>'):
@@ -52,9 +59,9 @@ def DNA_to_array_converter(input_file,target_chr):
                     line=line.strip('\n')
                     data_width=len(line)
                     #sequence=np.zeros([1,1000,4,1], np.int16)
-                    sequence=np.reshape(sb2.AGCTtoArray3(line,data_width), (1,data_width,4,1))
-                    seq_list.append(sequence)
-
+                                       
+                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                    
     return position_list, seq_list
         
 
@@ -64,32 +71,50 @@ def array_saver(outfile,positions,sequences):
         
 def run(args):
     
-    main()
+    main(args)
 
-def main():
-    
-    try:
-        options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
-    except getopt.GetoptError as err:
-        print str(err)
-        sys.exit(2)
-    if len(options)<3:
-        print('too few argument')
-        sys.exit(0)
+def main(args=None):
+    if args is not None:
+        """
+        argparser_generate_test = subparsers.add_parser( "generate_test",
+                                                    help = "Generate a data set for a test or an application of a trained model." )
+        argparser_generate_test.add_argument( "-i", "--in_file", dest = "input_genome" , type = str, required = True,
+                                         help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
+        argparser_generate_test.add_argument("-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
+                                      help = "Set a target chromosome or a contig for prediction. Default: chr2" )
+        argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                                         help = "")
+        argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
+                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+        """
+        input_file=args.input_genome
+        target_chr=args.chromosome
+        output_file=args.out_directory
+        threads=args.thread_number
+        print args
+    else:
+        try:
+            options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
+        except getopt.GetoptError as err:
+            print str(err)
+            sys.exit(2)
+        if len(options)<3:
+            print('too few argument')
+            sys.exit(0)
+            
+        threads=psutil.cpu_count()
         
-    threads=psutil.cpu_count()
+        for opt, arg in options:
+            if opt in ('-i', '--input_dir'):
+                input_file=arg
+            elif opt in ('-t', '--target_chr'):
+                target_chr=arg
+            elif opt in ('-o', '--output_dir'):
+                output_file=arg
+            elif opt in ('-p', '--process'):
+                threads=int(arg)
     
-    for opt, arg in options:
-        if opt in ('-i', '--input_dir'):
-            input_file=arg
-        elif opt in ('-t', '--target_chr'):
-            target_chr=arg
-        elif opt in ('-o', '--output_dir'):
-            output_file=arg
-        elif opt in ('-p', '--process'):
-            threads=int(arg)
-    
-    print options
+        print options
     
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)

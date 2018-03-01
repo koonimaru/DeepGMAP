@@ -15,13 +15,15 @@ ext_modules = [ ]
 if use_cython:
     ext_modules += [
         Extension("data_preprocessing_tools.seq_to_binary2", [ "enhancer_prediction/data_preprocessing_tools/seq_to_binary2.pyx" ]),
+        #Extension("data_preprocessing_tools.queue", [ "enhancer_prediction/data_preprocessing_tools/queue.pyx" ],libraries=["calg"]),
+        
         Extension("post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.pyx" ]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
-        Extension("enhancer_prediction.data_preprocessing_tools.seq_to_binary2", [ "enhancer_prediction/data_preprocessing_tools/seq_to_binary2.c" ]),
-        Extension("enhancer_prediction.post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.c" ]),
+        Extension("data_preprocessing_tools.seq_to_binary2", [ "enhancer_prediction/data_preprocessing_tools/seq_to_binary2.c" ]),
+        Extension("post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.c" ]),
     ]
 
 setup(
@@ -36,6 +38,9 @@ setup(
     packages=find_packages('enhancer_prediction'),
     
     package_dir={'':'enhancer_prediction'},
+    #package_data = {
+    #     '': ['enhancer_prediction/*', '*.pyx', '*.pxd', '*.c', '*.h'],
+    #},
     scripts=['bin/enhancer_prediction_run.py',
                    ],
     #packages=find_packages(),

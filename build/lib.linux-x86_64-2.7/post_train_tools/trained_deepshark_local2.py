@@ -1,7 +1,5 @@
 from __future__ import print_function
 import sys
-import gzip
-import cPickle
 import tensorflow as tf
 import numpy as np
 import time
@@ -9,9 +7,7 @@ import math
 import os
 from natsort import natsorted, ns
 import subprocess as sp
-from itertools import cycle
 import matplotlib.pyplot as plt
-from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize
 from sklearn.multiclass import OneVsRestClassifier
@@ -32,9 +28,6 @@ start=time.time()
 def roc_space_calc(label,pred):
     
     # Compute ROC curve and ROC area for each class
-    fpr = dict()
-    tpr = dict()
-    roc_auc = dict()
     fpr, tpr, _ = roc_curve(label, pred)
     roc_auc = auc(fpr, tpr)
     
@@ -66,70 +59,88 @@ def run(args):
     main(args)
 
 def main(args=None):
-    
-    if args is not None:
-        
-    
-    
-    try:
-        options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
-    except getopt.GetoptError as err:
-        print(str(err))
-        sys.exit(2)
-    if len(options)<4:
-        print('too few argument')
-        sys.exit(0)
     TEST=True
     path_sep=os.path.sep
     chromosome_of_interest='chr2'
-    output_dir='./'
+    output_dir=None
     model_name=""
     bed_file=None
     max_to_keep=2
     GPU=1
-    for opt, arg in options:
-        if opt in ('-i', '--input_dir'):
-            input_dir=arg
-            if not os.path.isfile(input_dir):
-                print(input_dir+' does not exist')
-                sys.exit(0)
-        elif opt in ('-o', '--output_dir'):
-            output_dir=arg
-            if not os.path.exists(output_dir):
-                try:
-                    os.makedirs(output_dir)
-                except OSError as exc:
-                    if exc.errno != exc.errno.EEXIST:
-                        raise
-
-        elif opt in ('-n', '--network_constructor'):
-            model_name=arg
-            #if not os.path.isfile(model_name):
-                #print(model_name+' does not exist')
-                #sys.exit(0)
-        elif opt in ('-b', '--bed'):
-            bed_file=arg
-            if not os.path.isfile(bed_file):
-                print(bed_file+' does not exist')
-                sys.exit(0)
-        elif opt in ('-t', '--test_genome'):
-            test_genome=arg
-            #if not os.path.isfile(test_genome):
-                #print(test_genome+' does not exist')
-                #sys.exit(0)
-        elif opt in ('-g','--genome_bed'):
-            genome_bed=arg
-            if not os.path.isfile(genome_bed):
-                print(genome_bed+' does not exist')
-                sys.exit(0)
-        elif opt in ('-c','--chromosome'):
-            chromosome_of_interest=arg
-            if chromosome_of_interest=="all":
-                TEST=False
-                
-        elif opt in ('-G','--GPU'):
-            GPU=int(arg)
-    
+    if args is not None:
+        """
+        argparser_predict = subparsers.add_parser( "predict",
+                                                     help = "Predict regulatory sequences" )
+        argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, required = True,
+                                          help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
+        argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                                          help = "an output directory for prediction results. REQUIRED.")
+        argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str,
+                                          help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
+        argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, required = True,
+                                          help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
+        argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
+                                          help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
+        argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
+                                          help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
+        argparser_predict.add_argument( "-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
+                                          help = "Set a target chromosome or a contig for prediction. Default: chr2" )
+        argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = True,
+                                          help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
+        """
+        
+        input_dir=args.input_ckpt
+        output_dir=args.out_directory
+        model_name=args.model
+        bed_file=args.labeled_bed_file
+        test_genome=args.test_genome_files
+        GPU=args.GPU_number
+        chromosome_of_interest=args.chromosome
+        TEST=args.test_or_prediction
+    else:
+        try:
+            options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
+        except getopt.GetoptError as err:
+            print(str(err))
+            sys.exit(2)
+        if len(options)<4:
+            print('too few argument')
+            sys.exit(0)
+        
+        for opt, arg in options:
+            if opt in ('-i', '--input_dir'):
+                input_dir=arg                
+            elif opt in ('-o', '--output_dir'):
+                output_dir=arg
+            elif opt in ('-n', '--network_constructor'):
+                model_name=arg
+            elif opt in ('-b', '--bed'):
+                bed_file=arg                
+            elif opt in ('-t', '--test_genome'):
+                test_genome=arg
+            elif opt in ('-g','--genome_bed'):
+                genome_bed=arg
+                if not os.path.isfile(genome_bed):
+                    print(genome_bed+' does not exist')
+                    sys.exit(0)
+            elif opt in ('-c','--chromosome'):
+                chromosome_of_interest=arg
+            elif opt in ('-G','--GPU'):
+                GPU=int(arg)
+            
+    if not os.path.isfile(input_dir):
+        sys.exit(input_dir+' does not exist')
+    if not os.path.isfile(bed_file):
+        sys.exit(bed_file+' does not exist')
+    if chromosome_of_interest=="all":
+        TEST=False
+    if output_dir==None:
+        sys.exit("output directory should be specified.")
+    elif not os.path.exists(output_dir):
+        try:
+            os.makedirs(output_dir)
+        except OSError as exc:
+            sys.exit(exc)
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:
@@ -327,32 +338,6 @@ def main(args=None):
     for i in output_handle:
         i.close()
     print('finished writing '+filename_1)
-
-    """
-    for i in range(yshape) :
-        if yshape==1:
-            pred= y_prediction2[:]
-            label=csr_matrix(label_array[:])
-        else:
-            pred= y_prediction2[:,i]
-            label=label_array[:,i]
-        pred_ = np.where(pred > 0.500000, np.ones_like(pred), np.zeros_like(pred))
-        pred_1=csr_matrix(pred_)
-        label1=csr_matrix(label)
-        label2=csr_matrix(1*np.logical_not(label))
-        pred_2=csr_matrix(1*np.logical_not(pred_))
-        #print pred_
-        tp = pred_1.dot(label1)
-        fp = pred_1.dot(label2)
-        fn = pred_2.dot(label1)
-        tn = pred_2.dot(label2)
-        PPV = np.true_divide(np.nansum(tp),
-                         np.nansum(np.nansum(tp),np.nansum(fp)))
-        TPR = np.true_divide(np.nansum(tp),
-                         np.nansum(np.nansum(tp),np.nansum(fn)))
-
-        print("F1 of "+str(i+1)+"th label = "+str(2*PPV*TPR/(PPV+TPR)))"""
-
     if TEST==True:
         print(len(label_list))
         label_array=np.array(label_list, np.int16)
@@ -365,6 +350,7 @@ def main(args=None):
         if yshape>1:
             for i in range(yshape):
                 fpr, tpr, roc_auc=roc_space_calc(label_array[:,i], y_prediction2[:,i])
+                print(fpr)
                 fpr_list.append(fpr)
                 tpr_list.append(tpr)
                 roc_auc_list.append(roc_auc)
@@ -383,9 +369,23 @@ def main(args=None):
             recall_list.append(recall)
             average_precision = average_precision_score(label_array, y_prediction2)
             average_precision_list.append(average_precision)
-            
+        
+        print(np.shape(sample_list), np.shape(fpr_list), np.shape(tpr_list), np.shape(roc_auc_list), np.shape(recall_list),np.shape(precision_list),np.shape(average_precision_list))
+        index_=range(len(sample_list))
+        
+        sample_list, index_=zip(*sorted(zip(sample_list, index_)))
+        
+        
+        fpr_list[:] = [fpr_list[i] for i in index_]
+        tpr_list[:] = [tpr_list[i] for i in index_]
+        roc_auc_list[:] = [roc_auc_list[i] for i in index_]
+        recall_list[:] = [recall_list[i] for i in index_]
+        precision_list[:] = [precision_list[i] for i in index_]
+        average_precision_list[:] = [average_precision_list[i] for i in index_]
+        
+        """
         sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list=\
-        zip(*sorted(zip(sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list)))
+        zip(*sorted(zip(sample_list, fpr_list, tpr_list, roc_auc_list, recall_list, precision_list, average_precision_list)))"""
         
         mean_roc_auc=np.mean(roc_auc_list)
         mean_pre_rec=np.mean(average_precision_list)
