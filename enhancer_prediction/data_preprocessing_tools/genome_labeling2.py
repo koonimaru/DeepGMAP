@@ -28,15 +28,8 @@ def genome_label(bed_file_list, genome_1000,out_dir, pref):
         peak_set_list.append(peak_set)
                 
         i+=1
-    
-    #print len(peak_set_list)
-    
-    head, tail = os.path.split(genome_1000)
 
-    
-    #with open(str(out_dir)+str(pref)+'_'+str(tail)+'.labelenames','w') as fout:
-        
-    fo_name=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
+    fo_name=out_dir
     label_array_list=[]
     with open(genome_1000,'r') as fin:
         with open(fo_name,'w') as fout:
@@ -50,20 +43,17 @@ def genome_label(bed_file_list, genome_1000,out_dir, pref):
                     if i==0:
                         _,a,b=line.split()
                         assert check_length==int(b)-int(a), "mismatches in sequence lengths"
-                    
-                    
-                    
                     if line in s:
                         label_array[k]=1
                     k+=1 
                 fout.write(line.strip('\n')+'\t'+' '.join(map(str, list(label_array)))+'\n')
                 if sum(label_array)>0:
-                    #print sum(label_array)
                     label_array_list.append(label_array)
                 i+=1
                 if i%200000==0:
-                    print("writing labeled file "+ line.strip("\n"))
-    print(fo_name+" is saved")
+                    sys.stdout.write("\rwriting labeled file "+ line.strip("\n"))
+                    sys.stdout.flush()
+    print("\n"+fo_name+" has been saved. This file is going to be used when testing a trained model too.")
     return label_array_list
 
 def main():

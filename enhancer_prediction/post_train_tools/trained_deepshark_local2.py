@@ -28,9 +28,6 @@ start=time.time()
 def roc_space_calc(label,pred):
     
     # Compute ROC curve and ROC area for each class
-    fpr = dict()
-    tpr = dict()
-    roc_auc = dict()
     fpr, tpr, _ = roc_curve(label, pred)
     roc_auc = auc(fpr, tpr)
     
@@ -71,27 +68,7 @@ def main(args=None):
     max_to_keep=2
     GPU=1
     if args is not None:
-        """
-        argparser_predict = subparsers.add_parser( "predict",
-                                                     help = "Predict regulatory sequences" )
-        argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, required = True,
-                                          help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
-        argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                                          help = "an output directory for prediction results. REQUIRED.")
-        argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str,
-                                          help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
-        argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, required = True,
-                                          help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
-        argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
-                                          help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
-        argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
-                                          help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
-        argparser_predict.add_argument( "-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
-                                          help = "Set a target chromosome or a contig for prediction. Default: chr2" )
-        argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = True,
-                                          help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
-        """
-        
+        #takes arguments when the code is run through enhancer_prediction_run         
         input_dir=args.input_ckpt
         output_dir=args.out_directory
         model_name=args.model
@@ -132,22 +109,24 @@ def main(args=None):
                 GPU=int(arg)
             
     if not os.path.isfile(input_dir):
-        print(input_dir+' does not exist')
-        sys.exit(0)
+        sys.exit(input_dir+' does not exist')
     if not os.path.isfile(bed_file):
-        print(bed_file+' does not exist')
-        sys.exit(0)
+        sys.exit(bed_file+' does not exist')
     if chromosome_of_interest=="all":
         TEST=False
     if output_dir==None:
-        print("output directory should be specified.")
-        sys.exit(1)
+        sys.exit("output directory should be specified.")
     elif not os.path.exists(output_dir):
         try:
             os.makedirs(output_dir)
         except OSError as exc:
-            print(exc)
-            sys.exit(1)
+            sys.exit(exc)
+            
+    test_genome_list=natsorted(glob(test_genome))
+    if len(test_genome_list)==0:
+        sys.exit(test_genome+" does not exist.")
+        
+        
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:
@@ -212,7 +191,8 @@ def main(args=None):
     b=a.replace(':', '')
     start_at=b.replace(' ', '_')
     out_dir=output_dir+file_name[-1]
-  
+    
+    
       
     config = tf.ConfigProto(device_count = {'GPU': GPU})
     config.gpu_options.allow_growth=True
@@ -258,8 +238,7 @@ def main(args=None):
     except:
         print("can't open "+str(input_dir))
         sys.exit(0)
-    test_genome_list=natsorted(glob(test_genome))
-    print(test_genome_list)
+    
     l=0
     position_list=[]
     y_prediction2=[]
@@ -289,6 +268,7 @@ def main(args=None):
             else:
                 y_prediction1, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
                 y_prediction2=np.concatenate([y_prediction2,y_prediction1],axis=0)
+                                             
             if (i)%10==0:
                 if l+1==1:
                     th='st'
@@ -298,7 +278,7 @@ def main(args=None):
                     th='rd'
                 else:
                     th='th'
-                print(str(float(i)/loop*100)+"% of "+str(l+1)+str(th)+" file has been scanned.", end="\r")
+                print(str(round(float(i)/loop*100, 0))+"% of "+str(l+1)+str(th)+" file has been scanned.", end="\r")
         l+=1
     sess.close()
     
@@ -345,34 +325,8 @@ def main(args=None):
     for i in output_handle:
         i.close()
     print('finished writing '+filename_1)
-
-    """
-    for i in range(yshape) :
-        if yshape==1:
-            pred= y_prediction2[:]
-            label=csr_matrix(label_array[:])
-        else:
-            pred= y_prediction2[:,i]
-            label=label_array[:,i]
-        pred_ = np.where(pred > 0.500000, np.ones_like(pred), np.zeros_like(pred))
-        pred_1=csr_matrix(pred_)
-        label1=csr_matrix(label)
-        label2=csr_matrix(1*np.logical_not(label))
-        pred_2=csr_matrix(1*np.logical_not(pred_))
-        #print pred_
-        tp = pred_1.dot(label1)
-        fp = pred_1.dot(label2)
-        fn = pred_2.dot(label1)
-        tn = pred_2.dot(label2)
-        PPV = np.true_divide(np.nansum(tp),
-                         np.nansum(np.nansum(tp),np.nansum(fp)))
-        TPR = np.true_divide(np.nansum(tp),
-                         np.nansum(np.nansum(tp),np.nansum(fn)))
-
-        print("F1 of "+str(i+1)+"th label = "+str(2*PPV*TPR/(PPV+TPR)))"""
-
     if TEST==True:
-        print(len(label_list))
+        #print(len(label_list))
         label_array=np.array(label_list, np.int16)
         fpr_list=[]
         tpr_list=[]
@@ -383,6 +337,7 @@ def main(args=None):
         if yshape>1:
             for i in range(yshape):
                 fpr, tpr, roc_auc=roc_space_calc(label_array[:,i], y_prediction2[:,i])
+                #print(fpr)
                 fpr_list.append(fpr)
                 tpr_list.append(tpr)
                 roc_auc_list.append(roc_auc)
@@ -401,25 +356,37 @@ def main(args=None):
             recall_list.append(recall)
             average_precision = average_precision_score(label_array, y_prediction2)
             average_precision_list.append(average_precision)
-            
-        sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list=\
-        zip(*sorted(zip(sample_list, fpr_list, tpr_list, roc_auc_list, recall_list,precision_list,average_precision_list)))
         
-        mean_roc_auc=np.mean(roc_auc_list)
-        mean_pre_rec=np.mean(average_precision_list)
+        #print(np.shape(sample_list), np.shape(fpr_list), np.shape(tpr_list), np.shape(roc_auc_list), np.shape(recall_list),np.shape(precision_list),np.shape(average_precision_list))
+        index_=range(len(sample_list))
         
-        with open(out_dir+"_metrics.txt", 'w') as fo:
-            fo.write("Mean roc auc: "+str(mean_roc_auc) +"\n"+
-                     "Mean precision auc: "+ str(mean_pre_rec)+"\n"+
-                     "Sample list: "+"\t".join(sample_list)+"\n"+
-                     "roc auc list: "+"\t".join(map(str, roc_auc_list))+"\n"+
-                     "precision auc list: "+"\t".join(map(str, average_precision_list)))
+        sample_list, index_=zip(*sorted(zip(sample_list, index_)))
         
         
+        fpr_list[:] = [fpr_list[i] for i in index_]
+        tpr_list[:] = [tpr_list[i] for i in index_]
+        roc_auc_list[:] = [roc_auc_list[i] for i in index_]
+        recall_list[:] = [recall_list[i] for i in index_]
+        precision_list[:] = [precision_list[i] for i in index_]
+        average_precision_list[:] = [average_precision_list[i] for i in index_]
+    
+        mean_roc_auc=round(np.mean(roc_auc_list), 4)
+        std_roc_auc=round(np.std(roc_auc_list), 4)
+        max_roc_auc=round(np.amax(roc_auc_list), 4)
+        min_roc_auc=round(np.amin(roc_auc_list), 4)
+        mean_pre_rec=round(np.mean(average_precision_list), 4)
+        std_pre_rec=round(np.std(average_precision_list), 4)
+        max_pre_rec=round(np.amax(average_precision_list), 4)
+        min_pre_rec=round(np.amin(average_precision_list), 4)
+    
         
-        plt.figure(1, figsize=(8,16))
+        
+        
+        
+        
+        plt.figure(1, figsize=(14,14))
         ax1=plt.subplot(211)
-        cmap = plt.get_cmap('hot')
+        cmap = plt.get_cmap('gnuplot')
         colors = [cmap(i) for i in np.linspace(0, 1, len(sample_list))]
         
         i=0
@@ -434,9 +401,11 @@ def main(args=None):
         plt.ylim([0.0, 1.0])
         plt.xlabel('False Positive Rate')
         plt.ylabel('True Positive Rate')
-        
+        # Shrink current axis by 20%
+        box = ax1.get_position()
+        ax1.set_position([box.x0, box.y0, box.width * 0.6, box.height])
         plt.title('Receiver operating characteristic curve ('+str(model_name)+')')
-        plt.legend(loc="lower right")
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         
         ax2=plt.subplot(212)
         i=0
@@ -450,18 +419,28 @@ def main(args=None):
         plt.ylabel('Precision')
         plt.ylim([0.0, 1.00])
         plt.xlim([0.0, 1.0])
-        
+        box2 = ax2.get_position()
+        ax2.set_position([box2.x0, box2.y0, box2.width * 0.6, box2.height])
         plt.title('Precision-Recall curve ('+str(model_name)+')')
-        plt.legend(loc="lower left")
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         
         plt.savefig(out_dir+"ROC_space_curve.pdf", format='pdf')
-    
+        print(time.time()-start)
+        
+        with open(out_dir+"_prediction.log", 'w') as fo:
+            fo.write("total time: "+str(time.time()-start)+"\ncommand: "+str(" ".join(sys.argv))+"\n"+
+                     "roc auc (mean+-std): "+str(mean_roc_auc)+"+-"+str(std_roc_auc)+" with max "+str(max_roc_auc)+ " and min "+str(min_roc_auc) +"\n"+
+                     "precision auc (mean+-std): "+ str(mean_pre_rec)+"+-"+str(std_pre_rec)+" with max "+str(max_pre_rec)+ " and min "+str(min_pre_rec)+"\n"+
+                     "sample\troc_auc\tprecision_auc\n")
+            for s, r, p in zip(sample_list,roc_auc_list, average_precision_list):
+                fo.write(str(s)+"\t"+str(r)+"\t"+str(p)+"\n")
+        
     
     
         
         plt.show()
     
-    print(time.time()-start)
+   
 
 if __name__== '__main__':
     main()

@@ -13,30 +13,6 @@ import importlib as il
 import getopt
 
 
-def Three_label_ROCspace_calculator(a, b):
-    True_positive=(2, 0)
-    True_negative=(0, 2)
-    False_postive=(-1, 1)
-    False_negative=(1, -1)
-    total_false=(1,1)
-    ROC_counter=np.array([0,0,0,0], np.int32)
-    for i in range(len(a)):
-        b1=[0,0]
-        index=np.argmax(b[i])
-        b1[index]+=1  
-        c=a[i]+b1
-        d=a[i]-b1
-        if (c==True_positive).all():
-            ROC_counter+=[1,0,0,0]
-        elif (c==True_negative).all():
-            ROC_counter+=[0,0,1,0]
-        elif (d==False_postive).all():
-            ROC_counter+=[0,1,0,0]
-        elif (d==False_negative).all():
-            ROC_counter+=[0,0,0,1]    
-    FPR=float(ROC_counter[1])/(float(ROC_counter[2])+float(ROC_counter[1])+0.001)
-    FNR=float(ROC_counter[3])/(float(ROC_counter[0])+float(ROC_counter[3])+0.001)  
-    return FPR, FNR 
 def test_batch(test_batch_file):
     with np.load(test_batch_file) as f:
         dnase_data_labels1=f['labels'], f['data_array']

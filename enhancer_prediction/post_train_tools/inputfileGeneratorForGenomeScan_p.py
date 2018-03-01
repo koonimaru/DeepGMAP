@@ -43,9 +43,9 @@ def DNA_to_array_converter(input_file,target_chr):
                     seq_list.append(sb2.AGCTtoArray3(line,data_width))
                     b1+=time.time()-a1
                 i+=1
-                #if i%100000==0:
-                    #print line
-                    #sys.exit()
+                if i%100000==0:
+                    print b1
+                    sys.exit()
         else:
             for line in fin:
                 if line.startswith('>'):

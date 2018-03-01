@@ -1,10 +1,9 @@
-#!/usr/bin/python
-# Time-stamp: <2018-0-0 0:0:0 Koh Onimaru>
+#!/usr/bin/python2
 
 """Description: enhancer_prediction main executable.
 Copyright (c) 20XX Koh Onimaru <koh.onimaru@gmail.com>
 This code is free software; you can redistribute it and/or modify it
-under the terms of the BSD License (see the file COPYING included with
+under the terms of the XXX License (see the file COPYING included with
 the distribution).
 @status: release candidate
 @version: $Id$
@@ -19,7 +18,7 @@ the distribution).
 import os
 import sys
 import argparse as ap
-import tempfile
+
 
 VERSION=""
 
@@ -136,10 +135,11 @@ def add_generate_test_parser( subparsers ):
     argparser_generate_test = subparsers.add_parser( "generate_test",
                                                     help = "Generate a data set for a test or an application of a trained model." )
     argparser_generate_test.add_argument( "-i", "--in_file", dest = "input_genome" , type = str, required = True,
-                                         help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
+                                         help = "A multiple fasta file containing genome DNA sequences that are divided into \
+                                        a particular window size. REQUIRED" )
     argparser_generate_test.add_argument("-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
                                       help = "Set a target chromosome or a contig for prediction. If you want a whole genome to \
-                                      be converted, 'all' argument should be provided. Default: chr2" )
+                                        be converted, 'all' argument should be provided. Default: chr2" )
     argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
                                          help = "")
     argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
@@ -150,7 +150,8 @@ def add_generate_test_parser( subparsers ):
 def add_genome_divide_parser( subparsers ):
 
     argparser_genome_divider = subparsers.add_parser( "genome_divide",
-                                                    help = "A pipeline that generate a non-labeled genome files with a specified window size. bedtools is required to run this command" )
+                                                    help = "A pipeline that generates a non-labeled genome files with a specified \
+                                                    window size. bedtools is required to run this command" )
     argparser_genome_divider.add_argument( "-i", "--in_file", dest = "genome_fasta" , type = str, required = True,
                                          help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
     argparser_genome_divider.add_argument( "-w", "--windowsize", dest = "windowsize", type = int, required = True,
@@ -197,5 +198,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        sys.stderr.write("User interrupted me! ;-) Bye!\n")
+        sys.stderr.write("\(O x O)// \n")
         sys.exit(0)

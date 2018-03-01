@@ -79,6 +79,7 @@ class Model:
         self.keep_prob3=kwargs["keep_prob3"]
         self.start_at=kwargs["start_at"]
         self.output_dir=kwargs["output_dir"]
+        self.max_to_keep=kwargs["max_to_keep"]
         self.fc1_param=int(math.ceil((math.ceil((math.ceil((
             self.data_length-self.conv1_filter+1)/4.0)
                         -self.conv2_filter+1)/4.0)
@@ -200,7 +201,7 @@ class Model:
         return y_conv,tf.nn.sigmoid(y_conv), variable_dict, neurons_dict, l2norm_list
     @define_scope
     def saver(self):
-        return tf.train.Saver(var_list=self.prediction[2])
+        return tf.train.Saver(max_to_keep=self.max_to_keep)
     
     @define_scope
     def cost(self):
