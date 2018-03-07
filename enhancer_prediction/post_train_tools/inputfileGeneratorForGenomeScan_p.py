@@ -149,8 +149,8 @@ def main(args=None):
                 break
             jobs.append(multiprocessing.Process(target=array_saver, 
                                 args=(str(output_file)+str(i+l*threads), 
-                                      position_list[i*chunk_num+l*threads:(i+1)*chunk_num+l*threads], 
-                                      seq_list[i*chunk_num+l*threads:(i+1)*chunk_num+l*threads])))
+                                      position_list[i*chunk_num+l*threads*chunk_num:(i+1)*chunk_num+l*threads*chunk_num], 
+                                      seq_list[i*chunk_num+l*threads*chunk_num:(i+1)*chunk_num+l*threads*chunk_num])))
         for j in jobs:
             j.start()
             

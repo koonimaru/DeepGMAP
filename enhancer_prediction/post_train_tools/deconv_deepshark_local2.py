@@ -107,7 +107,7 @@ if deconv=="transpose":
     positive_image=[]
     for y in batch[1]:
         #print y[0]
-        if y[0]==1:
+        if np.sum(y)>0:
             positive_image.append(index_of_image)
         index_of_image+=1
     print len(positive_image)
