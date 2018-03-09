@@ -67,7 +67,7 @@ def run(args):
     windowsize=args.windowsize
     genome_file=os.path.splitext(genome_fasta)[0]+'.genome'
     if not os.path.isfile(genome_file):
-        print("creating genome file.")
+        print("generating genome file.")
         genome_file_maker(genome_fasta,genome_file)
     else:
         print("using a pre-existing genome file: "+genome_file)

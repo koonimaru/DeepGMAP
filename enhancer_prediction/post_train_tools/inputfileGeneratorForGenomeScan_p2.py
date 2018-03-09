@@ -17,7 +17,9 @@ def div_roundup(x, y):
 
 def DNA_to_array_converter(input_file_read,seq_num,target_chr):
     seq_list=[]
+    seq_list_append=seq_list.append
     position_list=[]
+    position_list_append=position_list.append
     b1=0.0
     i=0
     
@@ -31,7 +33,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
                 #if not "_" in line and not line.startswith('>chrM'):
                 if not line.startswith('>chrM'):
                     #print line,
-                    position_list.append(line.strip('\n'))
+                    position_list_append(line.strip('\n'))
                     SEQ=True
                 else:
                     SEQ=False
@@ -41,7 +43,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
                 line=line.strip('\n')
                 
                 #a1=time.time()
-                seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                seq_list_append(sb2.AGCTtoArray3(line,data_width))
                 #b1+=time.time()-a1
             i+=1
             #if i%100000==0:
@@ -52,7 +54,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
             if line.startswith('>'):
                 if line.startswith('>'+str(target_chr)+':'):
                     print line
-                    position_list.append(line.strip('\n'))
+                    seq_list_append(line.strip('\n'))
                     SEQ=True
                 else:
                     SEQ=False
@@ -60,7 +62,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
                 line=line.strip('\n')
                 #sequence=np.zeros([1,1000,4,1], np.int16)
                                    
-                seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                seq_list_append(sb2.AGCTtoArray3(line,data_width))
                     
     return position_list, seq_list
         
@@ -107,9 +109,12 @@ def main(args=None):
     print file_size
     
     loop_to_reduce_ram=div_roundup(2000000000, file_size)
-    
-    with open(input_file, "r") as fin:
-        input_file_read=fin.readlines()
+    try:
+        with open(input_file, "r") as fin:
+            input_file_read=fin.readlines()
+    except IOError:
+        print 'cannot open', input_file
+        
     line_num=len(input_file_read)
     #print line_num
     seq_num=line_num/2
@@ -150,7 +155,7 @@ def main(args=None):
             for j in jobs:
                 j.join()
         
-
+        
     
 if __name__== '__main__':
     main()

@@ -15,13 +15,17 @@ import datetime
 #convert DNA sequences to a dictionary of onehot vector
 def seqtobinarydict(file_, _chr_to_skip="chr2"):
     binaryDNAdict=[]
+    binaryDNAdict_append=binaryDNAdict.append
     position=[]
+    position_append=position.append
     seqdata=[]
     s=0
     skip=False
     seqlen=0
+    #duration=0.0
     #start=time.time()
     for line in file_:
+        #start=time.time()
         #print line
         if line[0]=='>':
             #print line[1:6]
@@ -32,14 +36,15 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
             else:
                 skip=False
                 a=line.strip('>\n')
-                position.append(a)
-                
+                #position.append(a)
+                position_append(a)
                 if s%100000==0:
                     sys.stdout.write("\rconverting "+str(a))
                     sys.stdout.flush()
                     
             if not s==0 and not len(seqdata)==0:
-                binaryDNAdict.append(seqdata)
+                #binaryDNAdict.append(seqdata)
+                binaryDNAdict_append(seqdata)
             seqdata=[]
             s+=1
             i=0
@@ -52,8 +57,11 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
             
             #print seqdata
             i+=1
-        
-    binaryDNAdict.append(seqdata)
+        #duration+=time.time()-start
+        #if s%100000==0:
+            #print("\n"+str(duration))
+            #duration=0
+    binaryDNAdict_append(seqdata)
     
     
     return binaryDNAdict, position

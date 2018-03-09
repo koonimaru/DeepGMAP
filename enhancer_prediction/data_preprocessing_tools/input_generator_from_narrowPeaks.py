@@ -177,11 +177,11 @@ def main(args=None):
 
     print("outputting train data set to "+output_dir)
     if os.path.isfile(labeled_genome):
-        
-        with open(labeled_genome, 'r') as f2:
-            label_position, label_list=sb2.label_reader(f2, chr_to_skip)
         with open(genome_fasta, 'r') as f1:
             binaryDNAdict, position=seqtobinarydict(f1, chr_to_skip)
+        with open(labeled_genome, 'r') as f2:
+            label_position, label_list=sb2.label_reader(f2, chr_to_skip)
+       
 
                 
         try:        
