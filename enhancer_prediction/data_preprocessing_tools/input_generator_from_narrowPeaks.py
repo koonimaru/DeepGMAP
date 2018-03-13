@@ -170,7 +170,7 @@ def main(args=None):
         if len(dups) is not 0:
             sys.exit(dups+" are duplicated")
             
-        genome_label(bed_file_list_2, genome_1000,labeled_genome,pref)
+        genome_label(bed_file_list_2, genome_1000,labeled_genome)
     else:
         print('As '+labeled_genome +' already exists, skipping creating this file.\
         If you want to create a new one, you need change prefix or remove the old one.')

@@ -9,28 +9,31 @@ from scipy.spatial.distance import pdist
 import scipy.cluster.hierarchy as sch
 
 
-def genome_label(bed_file_list, genome_1000,out_dir, pref):
+def genome_label(bed_file_list, genome_1000,out_dir):
     
     file_num=len(bed_file_list)
 
     #print file_num
     peak_set_list=[]
+    peak_set_list_append=peak_set_list.append
     i=0
     for f in bed_file_list:
         peak_set=set()
+        peak_set_add=peak_set.add
         with open(f, 'r') as fin:
             for line in fin:
                 if i==0:
                     _,a,b=line.split()
                     check_length=int(b)-int(a)
                     
-                peak_set.add(line)
-        peak_set_list.append(peak_set)
+                peak_set_add(line)
+        peak_set_list_append(peak_set)
                 
         i+=1
 
     fo_name=out_dir
     label_array_list=[]
+    label_array_list_append=label_array_list.append
     with open(genome_1000,'r') as fin:
         with open(fo_name,'w') as fout:
             fout.write("#sample_list: "+"\t".join(bed_file_list)+"\n")
@@ -48,7 +51,7 @@ def genome_label(bed_file_list, genome_1000,out_dir, pref):
                     k+=1 
                 fout.write(line.strip('\n')+'\t'+' '.join(map(str, list(label_array)))+'\n')
                 if sum(label_array)>0:
-                    label_array_list.append(label_array)
+                    label_array_list_append(label_array)
                 i+=1
                 if i%200000==0:
                     sys.stdout.write("\rwriting labeled file "+ line.strip("\n"))
@@ -57,7 +60,7 @@ def genome_label(bed_file_list, genome_1000,out_dir, pref):
     return label_array_list
 
 def main():
-    bed_file_dir, genome_1000, out_dir, pref=sys.argv[1:]
+    bed_file_dir, genome_1000, out_dir=sys.argv[1:]
     bed_file_list=[]
     if not "*" in bed_file_dir and bed_file_dir.endswith('.bed'):
         bed_file_list.append(bed_file_dir)
@@ -69,7 +72,7 @@ def main():
     if len(bed_file_list)==0:
         print("no files in "+str(bed_file_dir))
         sys.exit()
-    label_array_list=genome_label(bed_file_list, genome_1000,out_dir,pref)
+    label_array_list=genome_label(bed_file_list, genome_1000,out_dir)
     print label_array_list[0]
     label_array_list_=np.transpose(label_array_list)
     print sum(label_array_list_[0])

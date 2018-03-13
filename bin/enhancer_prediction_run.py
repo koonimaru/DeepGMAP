@@ -156,7 +156,8 @@ def add_genome_divide_parser( subparsers ):
                                          help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
     argparser_genome_divider.add_argument( "-w", "--windowsize", dest = "windowsize", type = int, required = True,
                                          help = "Specify a window size to divide genome into. ")
-  
+    argparser_genome_divider.add_argument( "-o", "--outname", dest = "outname", type = str,
+                                         help = "the prefix of output files. ", default=None)
     return
     
 

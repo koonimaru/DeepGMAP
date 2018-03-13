@@ -26,9 +26,8 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
     #start=time.time()
     for line in file_:
         #start=time.time()
-        #print line
         if line[0]=='>':
-            #print line[1:6]
+            
             if line.startswith(">"+_chr_to_skip+":"):
                 sys.stdout.write("\r" +"skipping "+_chr_to_skip)
                 sys.stdout.flush()
@@ -36,14 +35,14 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
             else:
                 skip=False
                 a=line.strip('>\n')
-                #position.append(a)
+                
                 position_append(a)
                 if s%100000==0:
                     sys.stdout.write("\rconverting "+str(a))
                     sys.stdout.flush()
                     
             if not s==0 and not len(seqdata)==0:
-                #binaryDNAdict.append(seqdata)
+                
                 binaryDNAdict_append(seqdata)
             seqdata=[]
             s+=1
@@ -100,7 +99,9 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
 
     random.shuffle(shuf)   
     binaryDNAdict_shuf=[]
+    binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
     label_list_shuf=[]
+    label_list_shuf_append=label_list_shuf.append
     k=0
     for i in shuf:
         
@@ -118,13 +119,13 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
         else:
             #print dp, lp
             assert dp==lp
-            binaryDNAdict_shuf.append(d)
-            label_list_shuf.append(l)
+            binaryDNAdict_shuf_append(d)
+            label_list_shuf_append(l)
             if sum(l)==0:
                 x+=1
             else:
                 y+=1
-        prog=100*float(k+y+x)/num_seq
+        prog=100.0*float(k+y+x)/num_seq
         if prog%10.0==0.0:
             print prog
     z=float(x)/float(y+x)
@@ -163,7 +164,7 @@ def main():
             
      
     with open(labeled_genome, 'r') as f2:
-        label_position, label_list=sb2.label_reader(f2)
+        label_position, label_list=sb2.label_reader(f2, "chr2")
     with open(input_dir, 'r') as f1:
         binaryDNAdict, position=seqtobinarydict(f1)
     """
