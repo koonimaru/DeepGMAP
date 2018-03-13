@@ -156,21 +156,20 @@ def add_genome_divide_parser( subparsers ):
                                          help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
     argparser_genome_divider.add_argument( "-w", "--windowsize", dest = "windowsize", type = int, required = True,
                                          help = "Specify a window size to divide genome into. ")
-  
+    argparser_genome_divider.add_argument( "-o", "--outname", dest = "outname", type = str,
+                                         help = "the prefix of output files. ", default=None)
     return
     
 
 # ------------------------------------
 # Main function
 # ------------------------------------
+
 def main():
-    """
-    The Main function/pipeline for enhancer_prediction.
-    """
-    # Parse options...
+
+    # Parse options
     argparser = prepare_argparser()
     args = argparser.parse_args()
-
 
     subcommand  = args.subcommand_name
 
@@ -187,7 +186,7 @@ def main():
         from enhancer_prediction.data_preprocessing_tools.input_generator_from_narrowPeaks import run
         run( args )
     elif subcommand == "generate_test":
-        from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p import run
+        from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p2 import run
         run( args )
     elif subcommand == "genome_divide":
         from enhancer_prediction.data_preprocessing_tools.genome_divider import run
@@ -197,6 +196,9 @@ if __name__ == '__main__':
 
     try:
         main()
-    except KeyboardInterrupt:
-        sys.stderr.write("\(O x O)// \n")
-        sys.exit(0)
+    except:
+        sys.exit("\(x m x)/ \n")
+        
+        
+        
+        

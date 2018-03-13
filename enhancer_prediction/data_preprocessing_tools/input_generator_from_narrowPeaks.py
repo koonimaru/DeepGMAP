@@ -170,18 +170,18 @@ def main(args=None):
         if len(dups) is not 0:
             sys.exit(dups+" are duplicated")
             
-        genome_label(bed_file_list_2, genome_1000,labeled_genome,pref)
+        genome_label(bed_file_list_2, genome_1000,labeled_genome)
     else:
         print('As '+labeled_genome +' already exists, skipping creating this file.\
         If you want to create a new one, you need change prefix or remove the old one.')
 
     print("outputting train data set to "+output_dir)
     if os.path.isfile(labeled_genome):
-        
-        with open(labeled_genome, 'r') as f2:
-            label_position, label_list=sb2.label_reader(f2, chr_to_skip)
         with open(genome_fasta, 'r') as f1:
             binaryDNAdict, position=seqtobinarydict(f1, chr_to_skip)
+        with open(labeled_genome, 'r') as f2:
+            label_position, label_list=sb2.label_reader(f2, chr_to_skip)
+       
 
                 
         try:        

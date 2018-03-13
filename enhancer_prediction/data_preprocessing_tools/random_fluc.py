@@ -10,7 +10,7 @@ with open(genome_file, 'r') as fin:
         size_dict[line[0]]=int(line[1])
 
 import random
-with open(bedfile, 'r') as fin, open('/home/fast/onimaru/data/genome_fasta/hg38_500_rand_250_3times.bed', 'w') as fout:
+with open(bedfile, 'r') as fin, open('/home/fast/onimaru/data/genome_fasta/hg38_500_rand_250_3times_13mar.bed', 'w') as fout:
     for line in fin:
         line=line.split()
         assert len(line)==3
