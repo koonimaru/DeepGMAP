@@ -67,7 +67,7 @@ def main():
     elif not '*' in bed_file_dir:
         bed_file_dir=bed_file_dir+"*.bed"
     
-    bed_file_list=glb.glob(bed_file_dir)
+    bed_file_list=sorted(glb.glob(bed_file_dir))
     print bed_file_list
     if len(bed_file_list)==0:
         print("no files in "+str(bed_file_dir))

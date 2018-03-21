@@ -47,7 +47,7 @@ class Model:
     dimension20=480 #the number of the convolution filters in the 2nd layer
     dimension21=480
     dimension22=480
-    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
+    dimension4=1850 #the number of the neurons in each layer of the fully-connected neural network
     conv1_filter=6
     #conv1_filter2=49
     conv2_filter=12
@@ -79,7 +79,7 @@ class Model:
         self.error
         self.saver
         self.cost
-        print 'Running deap shark model'
+        #print 'Running deap shark model'
         if self.output_dir is not None:
             flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"

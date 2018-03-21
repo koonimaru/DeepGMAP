@@ -88,6 +88,12 @@ def test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length):
 
     return data_list[0], labels_list[0], data_list[1], labels_list[1], data_list[2], labels_list[2]
 
+def div_roundup(x, y):
+    if y%x==0:
+        return y/x
+    else:
+        return y/x+1
+
 def Two_label_ROCspace_calculator(a, b):
     True_positive=2
     True_negative=0
@@ -160,34 +166,6 @@ def main(args=None):
     
     
     if args!=None:
-        """
-            argparser_train = subparsers.add_parser("train", help="Train a network with genomic sequences.")
-    
-            # group for input files
-            group_input = argparser_train.add_argument_group( "Input arguments" )
-            group_input.add_argument( "-i", "--in_dir", dest = "in_directory", type = str, required = True,
-                                      help = "The directory of a traing data set. Labeled and shuffled genomic seuqences in a format of numpy array, produced by 'input_generate' command. REQUIRED." )
-            group_input.add_argument( "-c", "--network_constructor", dest = "model",required = True, type = str,
-                                            help = "The name of a model to train (without .py extention). Model files should be in network_constructors directory. REQUIRED.")
-            group_input.add_argument( "-m", "--mode", dest = "mode", type = str,
-                                      choices = ("train", "pretrain"),
-                                      help = "Training mode. \"train\", \"pretrain\". If users want to retrain a model, select pretrain mode. But, pretrain is still in prep, Default: train",
-                                      default = "train" )
-            group_input.add_argument( "-n", "--loop_num", dest = "loop_number", type = int, default = None,
-                                      help = "The number of mini-batches to train. If not provided, the program will go through all mini-batches (i.e. all npz files) except test batches." )
-            group_input.add_argument( "--test_batch_num", dest = "test_batch_number", type = int, default = None,
-                                      help = "A file number for test batches. If not provided, the program automatically select the last three batches in a series of npz files." )
-            group_input.add_argument( "-p", "--pretrained_model", dest = "ckpt_file", type = str,
-                                      help = "the ckpt file of pretrained model. If \"pretrain\" mode is selected, this option is recquired." )
-            group_input.add_argument( "-G", "--GPU", dest = "GPU_number", type = int,default = 1,
-                                      help = "The number of GPU on your machine. Default: 1" )
-            # group for output files
-            group_output = argparser_train.add_argument_group( "Output arguments" )
-            #add_outdir_option( group_output )
-            group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                                       help = "An output directory. REQUIRED.")
-        """
-
         mode=args.mode
         loop_num_=args.loop_number
         test_batch_num=args.test_batch_number
@@ -195,12 +173,7 @@ def main(args=None):
         input_dir=args.in_directory
         model_name=args.model
         pretrained_dir=args.ckpt_file
-        output_dir=args.out_directory
-        
-        
-        
-        
-        
+        output_dir=args.out_directory       
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
@@ -247,7 +220,7 @@ def main(args=None):
     if test_batch_num==None:
         test_batch_num=loop_num_+1
         
-    loop_num=len(f_srt)/1000+1
+    
     
     with np.load(str(f_srt[0])) as f:
         labels=f['labels']
@@ -295,7 +268,8 @@ def main(args=None):
     train_accuracy_record=[]
     loss_val_record=[]
     total_learing=[]
-    queue_len=1000
+    queue_len=5000
+    loop_num=div_roundup(queue_len, len(f_srt))
     BREAK=False
     prev_ac=None
     test_step=[]
@@ -330,12 +304,12 @@ def main(args=None):
                                                                                                                    phase: False})
             FPR_list, TPR_list, PPV_list=train_accuracy_
             #print np.nansum(PPV_list)
-            curr_accu=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(np.array(PPV_list)+np.array(TPR_list))),4))
-            print("step "+str(i*queue_len+k)
+            curr_accu=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))
+            sys.stdout.write("\r"+"step "+str(i*queue_len+k)
                   +", cost: "+str(loss_val)
                   +", train_accuracy: "
                   +str(list([curr_accu]))+", "+str(time.time()-start_tmp))            
-            
+            sys.stdout.flush()
             
             #train_accuracy_record.append(TPR_list[0]-FPR_list[0])
             train_accuracy_record.append(curr_accu)
@@ -354,7 +328,7 @@ def main(args=None):
                         e, f=test_step[-1],test_step[-10]
                         if e-f<=40:
                             TEST_THRESHHOLD+=0.10
-                            print TEST_THRESHHOLD
+                            print("\n"+TEST_THRESHHOLD)
                             if TEST_THRESHHOLD>0.9800:
                                 TEST_THRESHHOLD=0.9800
                                 
@@ -369,12 +343,12 @@ def main(args=None):
                         ta=sess.run(model.error, feed_dict={x_image: t_batch[o*2], y_: t_batch[o*2+1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
                         FPR_list, TPR_list, PPV_list=ta
                         
-                        f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(np.array(PPV_list)+np.array(TPR_list))),4))
+                        f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))
                         f1_list.append(f1)                    
 
 
                     mean_ac=np.round(np.nanmean(f1_list),4)
-                    to_print=("This is tests for the model at the train step: "+str(i*queue_len+k)+"\n"
+                    to_print=("\nThis is tests for the model at the train step: "+str(i*queue_len+k)+"\n"
                               +"mean accuracy : "+str(mean_ac)
                               +"\n Total time "+ str(time.time()-start))
                     print(to_print)
@@ -410,7 +384,8 @@ def main(args=None):
         ta=sess.run(model.error, feed_dict={x_image: t_batch[o*2], y_: t_batch[o*2+1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
         FPR_list, TPR_list, PPV_list=ta
         
-        f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(np.array(PPV_list)+np.array(TPR_list))),4))
+        f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))
+        print(f1)
         f1_list.append(f1)                    
 
     
