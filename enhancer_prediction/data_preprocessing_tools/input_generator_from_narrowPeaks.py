@@ -149,7 +149,7 @@ def main(args=None):
             if not os.path.isfile(b_):
                 tmp_out=open(b_, 'w')
                 try:
-                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.6", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
                 except OSError as e:
                     if e.errno == os.errno.ENOENT:
                         print(str(b)+" not found")

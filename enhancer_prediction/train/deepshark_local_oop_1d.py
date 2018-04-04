@@ -29,7 +29,7 @@ def process(f,half_batch,data_length):
             dnase_data_labels=f1['labels'], f1['data_array']
             
         except EOFError:
-            print "annot load: "+str(f)
+            print "cannot load: "+str(f)
     
     shape=dnase_data_labels[1].shape
     images=np.reshape(dnase_data_labels[1], (shape[0], data_length, 4, 1))
@@ -94,61 +94,6 @@ def div_roundup(x, y):
     else:
         return y/x+1
 
-def Two_label_ROCspace_calculator(a, b):
-    True_positive=2
-    True_negative=0
-    False_postive=-1
-    False_negative=1
-
-    ROC_counter=np.array([0,0,0,0], np.int32)
-
-    for i in range(len(a)):
-        b1=0
-        if b[i]>0.50:
-            b1+=1
-
-        c=a+b1
-        d=a-b1
-        if (c==True_positive).all():
-            ROC_counter+=[1,0,0,0]
-        elif (c==True_negative).all():
-            ROC_counter+=[0,0,1,0]
-        elif (d==False_postive).all():
-            ROC_counter+=[0,1,0,0]
-        elif (d==False_negative).all():
-            ROC_counter+=[0,0,0,1]    
-    FPR=float(ROC_counter[1])/(float(ROC_counter[2]+ROC_counter[1])+0.00001)
-    TPR=float(ROC_counter[0])/(float(ROC_counter[0]+ROC_counter[3])+0.00001)  
-    return FPR, TPR
-
-def Three_label_ROCspace_calculator(a, b):
-    True_positive=(0, 2, 0)
-    True_negative1=(2, 0, 0)
-    True_negative2=(0, 0, 2)
-    
-    False_negative1=(-1, 1, 0)
-    False_negative2=(0, 1, -1)
-    False_positive1=(1, -1, 0)
-    False_positive2=(0,-1, 1)
-    total_false=(1,0, 1)
-    ROC_counter=np.array([0,0,0,0], np.int32)
-    for i in range(len(a)):
-        b1=[0,0,0]
-        index=np.argmax(b[i])
-        b1[index]+=1  
-        c=a[i]+b1
-        d=a[i]-b1
-        if (c==True_positive).all():
-            ROC_counter+=[1,0,0,0]
-        elif (c==True_negative1).all() or (c==True_negative2).all():
-            ROC_counter+=[0,0,1,0]
-        elif (d==False_positive1).all() or (d==False_positive2).all():
-            ROC_counter+=[0,1,0,0]
-        elif (d==False_negative1).all() or (d==False_negative2).all():
-            ROC_counter+=[0,0,0,1]    
-    FPR=float(ROC_counter[1])/(float(ROC_counter[2])+float(ROC_counter[1])+0.0001)
-    FNR=float(ROC_counter[3])/(float(ROC_counter[0])+float(ROC_counter[3])+0.0001)  
-    return FPR, FNR
     
 def run(args):
     main(args)
@@ -202,7 +147,7 @@ def main(args=None):
                 
     if input_dir.endswith("/"):
         input_dir=str(input_dir)+"*.npz"
-    elif input_dir.endswith("*"):
+    elif input_dir.endswith("*") or input_dir.endswith(".npz"):
         pass
     else:
         input_dir=str(input_dir)+"/*.npz"
@@ -386,9 +331,7 @@ def main(args=None):
         
         f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))
         print(f1)
-        f1_list.append(f1)                    
-
-    
+        f1_list.append(f1)                      
     
     mean_ac=np.round(np.nanmean(f1_list),4) 
     running_time=time.time()-start

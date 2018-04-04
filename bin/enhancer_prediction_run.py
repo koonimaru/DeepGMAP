@@ -16,7 +16,7 @@ the distribution).
 # ------------------------------------
 
 import os
-import sys
+import sys, traceback
 import argparse as ap
 
 
@@ -197,6 +197,9 @@ if __name__ == '__main__':
     try:
         main()
     except:
+        print '-'*60
+        traceback.print_exc(file=sys.stdout)
+        print '-'*60
         sys.exit("\(x m x)/ \n")
         
         

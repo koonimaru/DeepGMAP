@@ -6,7 +6,7 @@ import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
 import psutil
 import getopt
 import time
-from chainer.functions.math.basic_math import div
+
 
 def div_roundup(x, y):
     if y%x==0:

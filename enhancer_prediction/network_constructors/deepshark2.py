@@ -38,7 +38,7 @@ def define_scope(function, scope=None, *args, **kwargs):
     return decorator
 
 
-class Model:
+class Model(object):
     # parameter lists
     initial_variation=0.005 #standard deviation of initial variables in the convolution filters
     #mini batch size

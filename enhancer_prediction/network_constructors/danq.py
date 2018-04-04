@@ -41,7 +41,7 @@ def define_scope(function, scope=None, *args, **kwargs):
         return getattr(self, attribute)
     return decorator
 
-class Model:
+class Model(object):
     # parameter lists
     initial_variation=0.001 #standard deviation of initial variables in the convolution filters
     #mini batch size
@@ -131,19 +131,21 @@ class Model:
             # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
             # Define lstm cells with tensorflow
             # Forward direction cell
-            lstm_fw_cell = tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0, use_peepholes=True)
+            lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
             
             # Backward direction cell
-            lstm_bw_cell = tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0, use_peepholes=True)
+            lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
         
             # Get lstm cell output
+            """
             try:
                 outputs, _, _ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell, x,
                                                       dtype=tf.float32)
             except Exception: # Old TensorFlow version only returns outputs not states
                 outputs,_ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell,x,
+                                                dtype=tf.float32)"""
+            outputs,_ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell,x,
                                                 dtype=tf.float32)
-        
             # Linear activation, using rnn inner loop last output
             #return tf.matmul(outputs[-1], weights['out']) + biases['out']
             return tf.concat(outputs,2)
@@ -155,14 +157,12 @@ class Model:
             return outputs"""
         
         
-        #fc1_param=int(math.ceil((math.ceil((data_length-conv1_filter+1)/4.0)-conv2_filter+1)/2.0))
-        #fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((data_length-conv1_filter+1)/1.0)-conv2_filter+1)/2.0)-conv22_filter+1)/2.0)-conv3_filter+1)/2.0))
         l2norm_list=[]
         W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
         cond=tf.constant(0.9)
         wconv1_l2=tf.reduce_sum(tf.square(W_conv1))
         l2norm_list.append(wconv1_l2)
-        #W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
+        W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
         
         h_conv1 = tf.nn.relu(conv2d_1(x_image, W_conv1))
         h_pool1 = tf.nn.dropout(max_pool_13x1(h_conv1), self.keep_prob2)
@@ -170,17 +170,17 @@ class Model:
         h_pool1_=tf.reshape(h_pool1, [-1, tf.cast(h_pool1.shape[1], tf.int32),tf.cast(h_pool1.shape[3], tf.int32)])
 
         
-        pred = tf.nn.dropout(BiRNN(h_pool1_), self.keep_prob3)
+        pred = BiRNN(h_pool1_)
         
         
         W_fc1 = weight_variable([2*n_hidden*self.fc1_param, self.dimension4], 'W_fc1')
         wfc1_l2=tf.reduce_sum(tf.square(W_fc1))
         l2norm_list.append(wfc1_l2)
-        #W_fc1.assign(tf.cond(wfc1_l2>cond, lambda: tf.multiply(W_fc1, cond/wfc1_l2),lambda: W_fc1 ))
+        W_fc1.assign(tf.cond(wfc1_l2>cond, lambda: tf.multiply(W_fc1, cond/wfc1_l2),lambda: W_fc1 ))
         b_fc1 = bias_variable([self.dimension4], 'b_fc1')
         bfc1_l2=tf.reduce_sum(tf.square(b_fc1))
         l2norm_list.append(bfc1_l2)
-        #b_fc1.assign(tf.cond(bfc1_l2>cond, lambda: tf.multiply(b_fc1, cond/bfc1_l2),lambda: b_fc1 ))
+        b_fc1.assign(tf.cond(bfc1_l2>cond, lambda: tf.multiply(b_fc1, cond/bfc1_l2),lambda: b_fc1 ))
         h_pool3_flat = tf.reshape(pred, [-1, 2*n_hidden*self.fc1_param])
         h_fc1 = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat, W_fc1), b_fc1))
         h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob)
@@ -188,11 +188,11 @@ class Model:
         W_fc4 = weight_variable([self.dimension4, tf.cast(label_shape, tf.int32)], 'W_fc4')
         wfc4_l2=tf.reduce_sum(tf.square(W_fc4))
         l2norm_list.append(wfc4_l2)
-        #W_fc4.assign(tf.cond(wfc4_l2>cond, lambda: tf.multiply(W_fc4, cond/wfc4_l2),lambda: W_fc4 ))        
+        W_fc4.assign(tf.cond(wfc4_l2>cond, lambda: tf.multiply(W_fc4, cond/wfc4_l2),lambda: W_fc4 ))        
         b_fc4 = bias_variable([label_shape], 'b_fc4')
         bfc4_l2=tf.reduce_sum(tf.square(b_fc4))
         l2norm_list.append(bfc4_l2)
-        #b_fc4.assign(tf.cond(bfc4_l2>cond, lambda: tf.multiply(b_fc4, cond/bfc4_l2),lambda: b_fc4 ))
+        b_fc4.assign(tf.cond(bfc4_l2>cond, lambda: tf.multiply(b_fc4, cond/bfc4_l2),lambda: b_fc4 ))
         
         
         y_conv=tf.add(tf.matmul(h_fc1_drop, W_fc4), b_fc4)
@@ -219,7 +219,7 @@ class Model:
                     tf.clip_by_value(tf.multiply(tf.subtract(1.00,self.label), tf.subtract(1.00,self.prediction[1])),1e-10,1.0))
                    ), 
                                           reduction_indices=[1]))"""
-        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=2.0))
+        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=1.0))
         return nll
         #l2_norm=tf.reduce_sum(self.prediction[4])
         

@@ -53,7 +53,7 @@ def _auc_pr(true, prob, threshold):
                      tf.reduce_sum(tf.cast(tf.logical_or(tp, fp), tf.int32)))
     return FPR, TPR, PPV
 
-class Model:
+class Model(object):
     # parameter lists
     initial_variation=0.001 #standard deviation of initial variables in the convolution filters
     #mini batch size

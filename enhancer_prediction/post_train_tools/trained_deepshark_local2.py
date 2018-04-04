@@ -22,9 +22,6 @@ from matplotlib import cm
 
 start=time.time()
 
-
-
-
 def roc_space_calc(label,pred):
     
     # Compute ROC curve and ROC area for each class
@@ -38,6 +35,7 @@ def softmax(w, t = 1.0):
     e = np.exp(npa / t,dtype=np.float128)
     dist = e /np.stack((np.sum(e, axis=1,dtype=np.float128),np.sum(e, axis=1,dtype=np.float128)),axis=-1)
     return dist
+
 def genome_scan(filename):
     with open(filename, 'r') as f1:
         file_name=f1.name
@@ -79,7 +77,9 @@ def main(args=None):
         TEST=args.test_or_prediction
     else:
         try:
-            options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
+            options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
+                                         ['input_dir=','output_dir=','network_constructor=','bed=',
+                                          'test_genome=','genome_bed=','chromosome=','GPU='])
         except getopt.GetoptError as err:
             print(str(err))
             sys.exit(2)
@@ -125,8 +125,7 @@ def main(args=None):
     test_genome_list=natsorted(glob(test_genome))
     if len(test_genome_list)==0:
         sys.exit(test_genome+" does not exist.")
-        
-        
+                
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
     with open(bed_file, 'r') as fin:
@@ -156,8 +155,6 @@ def main(args=None):
     print(yshape)    
     
     if not labeled_file:
-        #all_chromosome=False
-        
         if not chromosome_of_interest=="all":
             positive_region=set()
             with open(bed_file, 'r') as fpos:
@@ -173,8 +170,6 @@ def main(args=None):
                         else:
                             label_list.append(0)
     else:
-        
-        
         if not chromosome_of_interest=="all":
             label_list=[]
             with open(bed_file, "r") as fin:
@@ -182,8 +177,6 @@ def main(args=None):
                     if line.startswith(str(chromosome_of_interest)+"\t"):
                         line=line.split()
                         label_list.append(line[3:])
-                
-    
 
     path_sep=os.sep
     file_name=input_dir_.split(path_sep)
@@ -192,8 +185,6 @@ def main(args=None):
     start_at=b.replace(' ', '_')
     out_dir=output_dir+file_name[-1]
     
-    
-      
     config = tf.ConfigProto(device_count = {'GPU': GPU})
     config.gpu_options.allow_growth=True
     sess = tf.Session(config=config)       
@@ -286,9 +277,7 @@ def main(args=None):
     np.savez_compressed(str(out_dir)+"_prediction", prediction=y_prediction2)
     
     #writing the predictions in narrowPeak format
-    
     out_dir_np=out_dir+"_narrowPeaks/"
-    
     if not os.path.exists(out_dir_np):
             try:
                 os.makedirs(out_dir_np)
@@ -297,17 +286,10 @@ def main(args=None):
                     raise
     output_handle=[]
     for s in sample_list:
-        
         filename_1=out_dir_np+str(s)+'.narrowPeak'
-        #print('writing '+filename_1)
         output_handle.append(open(filename_1, 'w'))
-    
-    #k=0
     for i in range(len(y_prediction2)):
-
         a=position_list[i].strip('>')
-        #print(str(a)+'\t'+str(y_prediction2[i]))
-        #k+=1
         a=a.split(':')
         chrom=a[0]
         b=a[1].split('-')
@@ -321,12 +303,11 @@ def main(args=None):
                         +str(value[k]*1000).strip('[]')+'\t.\t'
                         +str(value[k]).strip('[]')+"\t-1\t-1\t-1\n")
             
-    #print("prediction num: "+str(k))
     for i in output_handle:
         i.close()
-    print('finished writing '+filename_1)
+    print('finished writing the prodictions in narrowPeak format to '+out_dir_np)
+    
     if TEST==True:
-        #print(len(label_list))
         label_array=np.array(label_list, np.int16)
         fpr_list=[]
         tpr_list=[]
@@ -337,7 +318,6 @@ def main(args=None):
         if yshape>1:
             for i in range(yshape):
                 fpr, tpr, roc_auc=roc_space_calc(label_array[:,i], y_prediction2[:,i])
-                #print(fpr)
                 fpr_list.append(fpr)
                 tpr_list.append(tpr)
                 roc_auc_list.append(roc_auc)
@@ -357,11 +337,9 @@ def main(args=None):
             average_precision = average_precision_score(label_array, y_prediction2)
             average_precision_list.append(average_precision)
         
-        #print(np.shape(sample_list), np.shape(fpr_list), np.shape(tpr_list), np.shape(roc_auc_list), np.shape(recall_list),np.shape(precision_list),np.shape(average_precision_list))
         index_=range(len(sample_list))
         
         sample_list, index_=zip(*sorted(zip(sample_list, index_)))
-        
         
         fpr_list[:] = [fpr_list[i] for i in index_]
         tpr_list[:] = [tpr_list[i] for i in index_]
@@ -377,12 +355,7 @@ def main(args=None):
         mean_pre_rec=round(np.mean(average_precision_list), 4)
         std_pre_rec=round(np.std(average_precision_list), 4)
         max_pre_rec=round(np.amax(average_precision_list), 4)
-        min_pre_rec=round(np.amin(average_precision_list), 4)
-    
-        
-        
-        
-        
+        min_pre_rec=round(np.amin(average_precision_list), 4)       
         
         plt.figure(1, figsize=(14,14))
         ax1=plt.subplot(211)
@@ -435,15 +408,7 @@ def main(args=None):
             for s, r, p in zip(sample_list,roc_auc_list, average_precision_list):
                 fo.write(str(s)+"\t"+str(r)+"\t"+str(p)+"\n")
         
-    
-    
-        
         plt.show()
-    
-   
 
 if __name__== '__main__':
     main()
-
-
-
