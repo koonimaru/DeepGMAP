@@ -129,7 +129,7 @@ class Model:
         #n_classes = 10 # MNIST total classes (0-9 digits)
 
         seq_len = tf.placeholder(tf.int32, [None])
-        def BiRNN(x, weights, biases):
+        def BiRNN(x):
         
             # Prepare data shape to match `bidirectional_rnn` function requirements
             # Current data input shape: (batch_size, n_steps, n_input)
@@ -157,8 +157,6 @@ class Model:
             # Linear activation, using rnn inner loop last output
             #return tf.matmul(outputs[-1], weights['out']) + biases['out']
             return tf.concat(outputs,2)
-        #fc1_param=int(math.ceil((math.ceil((data_length-conv1_filter+1)/4.0)-conv2_filter+1)/2.0))
-        #fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((data_length-conv1_filter+1)/1.0)-conv2_filter+1)/2.0)-conv22_filter+1)/2.0)-conv3_filter+1)/2.0))
 
         l2norm_list=[]
         W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
@@ -167,33 +165,28 @@ class Model:
         l2norm_list.append(wconv1_l2)
         W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
         h_conv11=conv2d_1(x_image, W_conv1)
-        h_conv12=conv2d_1(x_image, tf.reverse(W_conv1, [0,1]))
+        W_conv1_rc=tf.reverse(W_conv1, [0,1])
+        h_conv12=conv2d_1(x_image, W_conv1_rc)
         h_conv11_ = tf.nn.dropout(tf.nn.relu(h_conv11), self.keep_prob)
         h_conv12_ = tf.nn.dropout(tf.nn.relu(h_conv12), self.keep_prob)
-        #h_conv1 = tf.nn.relu(conv2d_1(x_image, W_conv1))
-        h_pool1 = max_pool_2x2(h_conv11_)
+        h_pool1 = max_pool_2x1(h_conv11_)
         
-        h_pool1_rc = max_pool_2x2(h_conv12_)
+        h_pool1_rc = max_pool_2x1(h_conv12_)
         
         W_conv2 = weight_variable([self.conv1_filter, 1, self.dimension1, self.dimension1], 'W_conv2')
         wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
         l2norm_list.append(wconv2_l2)
         W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
-        #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
         h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, tf.reverse(W_conv2, [0,1])))), self.keep_prob2)
         h_pool2 = max_pool_6x1(h_conv2)
         print h_pool2.shape
-        #h_conv1 = tf.nn.relu(conv2d_1(x_image, W_conv1))
-        #h_pool1 = tf.nn.dropout(max_pool_13x1(h_conv1), self.keep_prob)
         h_pool1_=tf.reshape(h_pool2, [-1, tf.cast(h_pool2.shape[1], tf.int32),tf.cast(h_pool2.shape[3], tf.int32)])
 
-        # Define weights
-        weights = {
-            # Hidden layer weights => 2*n_hidden because of forward + backward cells
-            'out': tf.Variable(tf.random_normal([n_hidden, 925]),name="W_rnn")}
-        biases = {'out': tf.Variable(tf.random_normal([925]),name="b_rnn")}
+        #weights = {
+        #    'out': tf.Variable(tf.random_normal([n_hidden, 925]),name="W_rnn")}
+        #biases = {'out': tf.Variable(tf.random_normal([925]),name="b_rnn")}
         
-        pred = tf.nn.dropout(BiRNN(h_pool1_, weights, biases), self.keep_prob2)
+        pred = tf.nn.dropout(BiRNN(h_pool1_), self.keep_prob2)
         print pred.shape
         
 
@@ -235,30 +228,16 @@ class Model:
         return y_conv,tf.nn.sigmoid(y_conv), variable_dict, neurons_dict, l2norm_list
     @define_scope
     def saver(self):
-        #return tf.train.Saver(var_list=self.prediction[2])
         return tf.train.Saver(max_to_keep=self.max_to_keep)
     @define_scope
     def cost(self):
-
-        """nll=tf.reduce_mean(-tf.reduce_sum(
-            tf.log(
-                tf.add(
-                    tf.clip_by_value(tf.multiply(self.label, self.prediction[1]),1e-10,1.0),
-                    tf.clip_by_value(tf.multiply(tf.subtract(1.00,self.label), tf.subtract(1.00,self.prediction[1])),1e-10,1.0))
-                   ), 
-                                          reduction_indices=[1]))"""
-        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=2.5))
+        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=1))
         l2_norm=tf.reduce_sum(self.prediction[4])
         
         l1_norm=tf.reduce_sum(tf.abs(self.prediction[1]))
         return tf.add_n([nll,tf.multiply((5*10**-7), l2_norm),tf.multiply((1*10**-8),l1_norm)])
-        #return tf.reduce_mean(-tf.reduce_sum(self.label * tf.log(tf.clip_by_value(self.prediction[0],1e-10,1.0))+(1-self.label)*tf.log(tf.clip_by_value(1-self.prediction[0],1e-10,1.0)), reduction_indices=[1]))
     @define_scope
     def optimize(self):
-
-        #cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y_conv, y_))
-        #cost = tf.reduce_mean(tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))), reduction_indices=[1]))
-        #cost = tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))))
         optimizer = tf.train.AdamOptimizer(self.train_speed)
 
         return optimizer.minimize(self.cost)

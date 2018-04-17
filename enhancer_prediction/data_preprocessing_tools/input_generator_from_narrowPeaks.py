@@ -116,10 +116,7 @@ def main(args=None):
         window_size=int(line[2])-int(line[1])
     bed_file_list=[]
     if bed_file_dir.endswith('.narrowPeak') or bed_file_dir.endswith('.bed'):
-        
-        bed_file_list=glb.glob(bed_file_dir)
-        
-        
+        bed_file_list=sorted(glb.glob(bed_file_dir))       
         out_dir=os.path.split(bed_file_dir)[0]+"/"
         
     else:
@@ -130,34 +127,29 @@ def main(args=None):
         bed_file_list=glb.glob(bed_file_dir_)
         if len(bed_file_list)==0:
             bed_file_dir_=bed_file_dir+"*.bed"
-            bed_file_list=glb.glob(bed_file_dir_)
+            bed_file_list=sorted(glb.glob(bed_file_dir_))
             
     if len(bed_file_list)==0:
-        
         sys.exit('no bed files nor narrowPeak files in '+bed_file_dir)
         
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
     output_dir=str(out_dir)+str(pref)+'_'+str(tail.split('.')[0])+"s"+str(sample_num)+"r"+str(reduce_genome)+'_train_data_set/'
-    
-    
+
     #create labeled genome file (.bed.labeled), only if it does not exist
-    #sys.exit(labeled_genome)
     if not os.path.isfile(labeled_genome):
-    
         print("reading narrowPeak files named "+ str(bed_file_list))
         if len(bed_file_list)==0:
             print("No peak files in "+str(bed_file_dir))
-            print(howto)
+            #print(howto)
             sys.exit()
         bed_file_list_2=[]
         for b in bed_file_list:
-            
             b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
             if not os.path.isfile(b_):
                 tmp_out=open(b_, 'w')
                 try:
-                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.9", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.6", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
                 except OSError as e:
                     if e.errno == os.errno.ENOENT:
                         print(str(b)+" not found")
@@ -169,7 +161,6 @@ def main(args=None):
         dups=list(getDupes_a(bed_file_list_2))
         if len(dups) is not 0:
             sys.exit(dups+" are duplicated")
-            
         genome_label(bed_file_list_2, genome_1000,labeled_genome)
     else:
         print('As '+labeled_genome +' already exists, skipping creating this file.\
@@ -179,7 +170,8 @@ def main(args=None):
     if os.path.isfile(labeled_genome):
         with open(genome_fasta, 'r') as f1:
             binaryDNAdict, position=seqtobinarydict(f1, chr_to_skip)
-        with open(labeled_genome, 'r') as f2:
+        with open(labeled_genome, 'r') as f1:
+            f2=f1.readlines()
             label_position, label_list=sb2.label_reader(f2, chr_to_skip)
        
 

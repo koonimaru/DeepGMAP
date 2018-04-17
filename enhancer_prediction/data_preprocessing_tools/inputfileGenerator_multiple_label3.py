@@ -22,9 +22,10 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
     s=0
     skip=False
     seqlen=0
-    #duration=0.0
-    #start=time.time()
+    duration=0.0
+    i=0
     for line in file_:
+        i+=1
         #start=time.time()
         if line[0]=='>':
             
@@ -46,20 +47,21 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
                 binaryDNAdict_append(seqdata)
             seqdata=[]
             s+=1
-            i=0
+    
 
         elif not line == '\n' and not line=='' and skip==False: 
             line=line.strip("\n")
             #seqdata=AGCTtoArray2(line)
-            
+            #start=time.time()
             seqdata=sb2.AGCTtoArray3(line,len(line))
+            #duration+=time.time()-start
             
             #print seqdata
-            i+=1
-        #duration+=time.time()-start
-        #if s%100000==0:
+        
+        #if i%100000==0:
             #print("\n"+str(duration))
             #duration=0
+        
     binaryDNAdict_append(seqdata)
     
     

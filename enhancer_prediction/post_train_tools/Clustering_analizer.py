@@ -9,19 +9,20 @@ import pylab
 import scipy.cluster.hierarchy as sch
 import scipy.spatial.distance as spd
 from sklearn.decomposition import PCA, IncrementalPCA
+from MulticoreTSNE import MulticoreTSNE as TSNE
 
-with gzip.open('/media/koh/HD-PCFU3/mouse/variables_4999_Sun_Jan_22_181643_2017.cpickle.gz', 'r') as f1:
-    learned_variables=cPickle.load(f1)
-    filter1=learned_variables['W_conv1']
-    filter1_shape=filter1.shape
-    filter1_flattened_array=scipy.zeros((filter1_shape[3], filter1_shape[0]*filter1_shape[1]), np.float32)    
-    for i in range(filter1_shape[3]):            
-        for k in range(filter1_shape[0]):
-            for l in range(filter1_shape[1]):
-                a=filter1[k][l][0][i]
-                filter1_flattened_array[i][l+k*4]+=a
-    
-X = filter1_flattened_array
+variables=np.load('/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_14_124508_2018.npz')
+filter1=variables['prediction/W_conv1:0']
+filter1_shape=filter1.shape
+filter1_flattened_array=[]  
+for i in range(filter1_shape[3]):            
+    tmp_filter=filter1[:,:,:,i]
+    tmp_filter=tmp_filter.reshape(filter1_shape[0], filter1_shape[1])
+    tmp_filter=tmp_filter.flatten()
+    #filter1_flattened_array.append(tmp_filter/np.amax([np.amax(tmp_filter), np.absolute(np.amin(tmp_filter))]))
+    #filter1_flattened_array.append(np.exp(tmp_filter)/np.sum(np.exp(tmp_filter)))
+    filter1_flattened_array.append(tmp_filter)
+X = np.array(filter1_flattened_array, np.float64)
 D = spd.pdist(X, 'cosine')
 # Compute and plot first dendrogram.
 fig = pylab.figure(figsize=(8,8))
@@ -43,8 +44,18 @@ axmatrix.set_yticks([])
 # Plot colorbar.
 axcolor = fig.add_axes([0.91,0.1,0.02,0.6])
 pylab.colorbar(im, cax=axcolor)
-fig.savefig('/media/koh/HD-PCFU3/mouse/filter_1_clustering.png')
-pylab.show()
+#fig.savefig('/media/koh/HD-PCFU3/mouse/filter_1_clustering.png')
+
+tsne = TSNE(n_jobs=18,perplexity = 50.000000,  n_iter=5000)
+#X_pca2=np.array(X_pca2, np.float64)
+X_tsne = tsne.fit_transform(X)
+
+fig2 = pylab.figure(figsize=(8,8))
+plt.scatter(X_tsne[:, 0], X_tsne[:, 1],
+             lw=2,s=0.5)
+
+
+plt.show()
 
 """
 import matplotlib.pyplot as mplt
