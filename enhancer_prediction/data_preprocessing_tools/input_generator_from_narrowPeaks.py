@@ -170,7 +170,8 @@ def main(args=None):
     if os.path.isfile(labeled_genome):
         with open(genome_fasta, 'r') as f1:
             binaryDNAdict, position=seqtobinarydict(f1, chr_to_skip)
-        with open(labeled_genome, 'r') as f2:
+        with open(labeled_genome, 'r') as f1:
+            f2=f1.readlines()
             label_position, label_list=sb2.label_reader(f2, chr_to_skip)
        
 

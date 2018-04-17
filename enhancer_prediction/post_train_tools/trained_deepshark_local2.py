@@ -134,7 +134,9 @@ def main(args=None):
             line=line.split(": ")
             
             for i in line[1].split():
-                s=i.split(path_sep)[-1].split(".")[0]
+                #s=i.split(path_sep)[-1].split(".")[0]
+                s=os.path.basename(os.path.splitext(i)[0])
+                
                 sample_list.append(s)
             print(sample_list)
             line=fin.readline()
@@ -150,7 +152,7 @@ def main(args=None):
         data_length=int(line[2])-int(line[1])
     
     if len(sample_list)==0:
-        sample_list.append(bed_file.split(path_sep)[-1].split(".")[0])
+        sample_list.append(os.path.basename(os.path.splitext(bed_file)[0]))
     
     print(yshape)    
     

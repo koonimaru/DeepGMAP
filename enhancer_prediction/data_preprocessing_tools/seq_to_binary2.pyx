@@ -5,7 +5,7 @@ import sys
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def label_reader(file_, str chr_to_skip):
+def label_reader(list file_, str chr_to_skip):
     cdef list label_position=[]
     label_position_append=label_position.append
     cdef list label_list=[]

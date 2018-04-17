@@ -64,23 +64,38 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname):
                     fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE)+'\n')
                 else:
                     break
-                if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4<=chrom_size:
-                    fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/4)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4)+'\n')
-                else:
-                    break
+                #if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4<=chrom_size:
+                    #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/4)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4)+'\n')
+                #else:
+                    #break
                 if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/2<=chrom_size:
                     fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/2)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/2)+'\n')
                 else:
                     break
-                if i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3<=chrom_size:
-                    fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\n')
-                else:
-                    break
+                #if i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3<=chrom_size:
+                    #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\n')
+                #else:
+                    #break
+    
     try:
-        sp.call(["bedtools", "getfasta","-fi",genome_fasta,"-bed",outbed, "-fo", outfasta])
-    except OSError as e:
-        print e
-        sys.exit(1)
+        stdout_file=open(outbed+"_tmp", "w")
+        sp.check_call(["bedtools", "sort", "-i",outbed], stdout=stdout_file)
+        stdout_file.close()
+        
+    except sp.CalledProcessError as e:
+        print("something wrong with bedtools")
+        sys.exit(e)
+    if os.path.exists(outbed) and os.path.exists(outbed+"_tmp"):
+        os.remove(outbed)
+        os.rename(outbed+"_tmp", outbed)
+    else:
+        sys.exit("bed file was not created.")
+        
+    try:
+        sp.check_call(["bedtools", "getfasta","-fi",genome_fasta,"-bed",outbed, "-fo", outfasta])
+    except sp.CalledProcessError as e:
+        print("something wrong with bedtools")
+        sys.exit(e)
     
     print(outbed+" and "+outfasta+' were successfully generated.')
 

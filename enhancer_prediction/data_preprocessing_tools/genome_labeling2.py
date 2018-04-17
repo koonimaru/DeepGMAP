@@ -21,14 +21,16 @@ def genome_label(bed_file_list, genome_1000,out_dir):
         peak_set=set()
         peak_set_add=peak_set.add
         with open(f, 'r') as fin:
+        
+        
             for line in fin:
                 if i==0:
                     _,a,b=line.split()
                     check_length=int(b)-int(a)
                     
                 peak_set_add(line)
-        peak_set_list_append(peak_set)
-                
+            peak_set_list_append(peak_set)
+                    
         i+=1
 
     fo_name=out_dir
@@ -41,7 +43,7 @@ def genome_label(bed_file_list, genome_1000,out_dir):
             for line in fin:
                 k=0
                 label_array=[0 for h in range(file_num)]
-
+    
                 for s in peak_set_list:
                     if i==0:
                         _,a,b=line.split()
