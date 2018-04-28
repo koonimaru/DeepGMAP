@@ -43,7 +43,7 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
                     sys.stdout.flush()
                     
             if not s==0 and not len(seqdata)==0:
-                
+                #print(seqdata)
                 binaryDNAdict_append(seqdata)
             seqdata=[]
             s+=1
@@ -53,7 +53,11 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
             line=line.strip("\n")
             #seqdata=AGCTtoArray2(line)
             #start=time.time()
+            
             seqdata=sb2.AGCTtoArray3(line,len(line))
+            #seqdata=sb2.ATGCtoArray(line,len(line))
+            #print(line)
+            #seqdata=sb2.ACGTto3dArray(line,len(line))
             #duration+=time.time()-start
             
             #print seqdata

@@ -2,7 +2,7 @@ import functools
 import tensorflow as tf
 import math
 import sys
-import numpy as np
+#import numpy as np
 from auc_calc import auc_pr as ac
 
 #the code design came from https://gist.github.com/danijar/8663d3bbfd586bffecf6a0094cd116f2
@@ -118,7 +118,9 @@ class Model(object):
         def conv2d_1(x, W):
             return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
         def conv2d(x, W):
-            return tf.nn.conv2d(x, W, strides=[1, 2, 1, 1], padding='VALID')
+            return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+        def conv2d_tp(x, W, output_shape):
+                return tf.nn.conv2d_transpose(x, W, output_shape, strides=[1, 2, 1, 1], padding='VALID') 
         def conv2d_depth(x, W):
             return tf.nn.depthwise_conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
         def max_pool_2x2(x):
@@ -135,8 +137,8 @@ class Model(object):
         l2norm_list.append(wconv1_l2)
         W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
         h_conv11=conv2d_1(x_image, W_conv1)
-        W_conv1_rc=tf.reverse(W_conv1, [0, 1])
-        h_conv12=conv2d_1(x_image, W_conv1_rc)
+        #W_conv1_rc=tf.reverse(W_conv1, [0, 1])
+        h_conv12=conv2d_tp(x_image, W_conv1, h_conv11.shape)
         h_conv11_ = tf.nn.dropout(tf.nn.relu(h_conv11), self.keep_prob)
         h_conv12_ = tf.nn.dropout(tf.nn.relu(h_conv12), self.keep_prob)
         h_pool1 = max_pool_2x2(h_conv11_)
@@ -146,8 +148,9 @@ class Model(object):
         wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
         l2norm_list.append(wconv2_l2)
         W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
-        W_conv2_rc=tf.reverse(W_conv2, [0,1])
-        h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
+        #W_conv2_rc=tf.reverse(W_conv2, [0,1])
+        h_conv2_=tf.nn.relu(conv2d_1(h_pool1, W_conv2))
+        h_conv2 = tf.nn.dropout(tf.add(h_conv2_, tf.nn.relu(conv2d_tp(h_pool1_rc, W_conv2, h_conv2_.shape))), self.keep_prob2)
         h_pool2 = max_pool_2x2(h_conv2)
                          
         W_conv21 = weight_variable([self.conv21_filter, 1, self.dimension2, self.dimension21], 'W_conv21')
@@ -229,7 +232,7 @@ class Model(object):
     @define_scope
     def optimize(self):
 
-        optimizer = tf.train.AdamOptimizer(self.train_speed)
+        optimizer = tf.train.AdamOptimizer(learning_rate=self.train_speed, epsilon=0.1)
         return optimizer.minimize(self.cost)
 
     @define_scope
@@ -242,7 +245,13 @@ class Model(object):
             
             true=self.label[:,i]
             prob=self.prediction[1][:,i]
-            FPR, TPR, PPV=ac(true,prob,0.5)
+            
+            FPR, TPR, PPV=ac(true,prob,0.5000)
+            #FPR, _ = tf.metrics.false_positives_at_thresholds(true, prob, [0.5000])
+            #TPR, _ = tf.metrics.true_negatives_at_thresholds(true, prob, [0.5000])
+            #PPV, _ = tf.metrics.precision_at_thresholds(true, prob, [0.5000])
+            
+            
             FPR_list.append(FPR)
             TPR_list.append(TPR)
             PPV_list.append(PPV)

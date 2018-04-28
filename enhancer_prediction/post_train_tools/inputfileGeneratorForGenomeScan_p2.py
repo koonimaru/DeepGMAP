@@ -44,6 +44,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
                 
                 #a1=time.time()
                 seq_list_append(sb2.AGCTtoArray3(line,data_width))
+                
                 #b1+=time.time()-a1
             i+=1
             #if i%100000==0:
@@ -114,7 +115,7 @@ def main(args=None):
             input_file_read=fin.readlines()
     except IOError:
         print 'cannot open', input_file
-        
+    
     line_num=len(input_file_read)
     #print line_num
     seq_num=line_num/2

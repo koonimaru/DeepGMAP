@@ -275,6 +275,10 @@ def main(args=None):
                                                                                                                    y_: np.concatenate((batch[3],batch[1])), 
                                                                                                                    keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0, 
                                                                                                                    phase: False})
+                """train_accuracy_,loss_val= sess.run([model.error, model.cost], feed_dict={x_image:batch[2], 
+                                                                                         y_: batch[3], 
+                                                                                        keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0, 
+                                                                                        phase: False})"""
             FPR_list, TPR_list, PPV_list=train_accuracy_
             #print np.nansum(PPV_list)
             curr_accu=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))

@@ -15,3 +15,11 @@ def auc_pr(true, prob, threshold):
                      tf.reduce_sum(tf.cast(tf.logical_or(tp, fp), tf.int32)))
 
     return FPR, TPR, PPV
+
+
+def auc_pr2(true, prob, threshold):
+    FPR, _ = tf.metrics.false_positives_at_thresholds(true, prob, [threshold])
+    TPR, _ = tf.metrics.true_negatives_at_thresholds(true, prob, [threshold])
+    PPV, _ = tf.metrics.precision_at_thresholds(true, prob, [threshold])
+
+    return FPR, TPR, PPV

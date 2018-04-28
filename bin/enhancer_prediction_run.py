@@ -68,16 +68,21 @@ def add_train_parser( subparsers ):
                               help = "A file number for test batches. If not provided, the program automatically select the last three batches in a series of npz files." )
     group_input.add_argument( "-p", "--pretrained_model", dest = "ckpt_file", type = str, default = None,
                               help = "the ckpt file of pretrained model. If \"pretrain\" mode is selected, this option is recquired." )
-    group_input.add_argument( "-G", "--GPU", dest = "GPU_number", type = int,default = 1,
-                              help = "The number of GPU on your machine. Default: 1" )
+    group_input.add_argument( "-G", "--GPUID", dest = "gpuid", type = int,default = 0,
+                              help = "Specify which GPUs to use. Default: 0" )
     group_input.add_argument( "-k", "--max_to_keep", dest = "max_to_keep", type = int,default = 2,
                               help = "The number of trained variables to keep. During training, the program saves a set of \
                               variables when the test accuracy is good enough. Default: 2" )
+    group_input.add_argument( "-f", "--test_frequency", dest = "test_frequency", type = int,default = 1,
+                              help = "The frequency to test train accuracy during training. Testing train accuracy is useful to see the \
+                                      progress of training. But, it slows computing particularly when the label number is large. Default: 1" )
+    group_input.add_argument( "-e", "--epochs", dest = "epochs", type = int,default = 1,
+                              help = "The number of epochs to train a model. Default: 1" )
     # group for output files
     group_output = argparser_train.add_argument_group( "Output arguments" )
     #add_outdir_option( group_output )
-    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                               help = "An output directory. REQUIRED.")
+    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default = "../data/output/",
+                               help = "An output directory. Default: '../data/output/'.")
 
     
     return
@@ -97,12 +102,14 @@ def add_predict_parser( subparsers ):
                                       help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
     argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
                                       help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
-    argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
-                                      help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
+    #argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
+                                      #help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
     argparser_predict.add_argument( "-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
                                       help = "Set a target chromosome or a contig for prediction. Default: chr2" )
     argparser_predict.add_argument( "-T", "--TEST", dest = "test_or_prediction", type = str, default = True,
                                       help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
+    argparser_predict.add_argument( "-G", "--GPUID", dest = "gpuid", type = int,default = 0,
+                              help = "Specify which GPUs to use. Default: 0" )
     return
 
 def add_generate_input_parser( subparsers ):
@@ -175,7 +182,7 @@ def main():
 
     if subcommand == "train":
         # train a model
-        from enhancer_prediction.train.deepshark_local_oop_1d import run
+        from enhancer_prediction.train.deepshark_local_oop_1d2 import run
         run( args )
     elif subcommand == "predict":
         # predict regulatory sequences or test a trained model
@@ -183,10 +190,14 @@ def main():
         run( args )
     elif subcommand == "generate_input":
         # generate a train data set
+        
         from enhancer_prediction.data_preprocessing_tools.input_generator_from_narrowPeaks import run
         run( args )
     elif subcommand == "generate_test":
-        from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p2 import run
+        if args.chromosome=="all":
+            from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p2 import run
+        else:
+            from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p import run
         run( args )
     elif subcommand == "genome_divide":
         from enhancer_prediction.data_preprocessing_tools.genome_divider import run
@@ -197,9 +208,9 @@ if __name__ == '__main__':
     try:
         main()
     except:
-        print '-'*60
+        print('-'*60)
         traceback.print_exc(file=sys.stdout)
-        print '-'*60
+        print('-'*60)
         sys.exit("\(x m x)/ \n")
         
         

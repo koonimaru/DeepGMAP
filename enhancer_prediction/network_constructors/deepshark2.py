@@ -47,7 +47,7 @@ class Model(object):
     dimension20=480 #the number of the convolution filters in the 2nd layer
     dimension21=480
     dimension22=480
-    dimension4=1850 #the number of the neurons in each layer of the fully-connected neural network
+    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
     conv1_filter=6
     #conv1_filter2=49
     conv2_filter=12
@@ -154,8 +154,9 @@ class Model(object):
         wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
         l2norm_list.append(wconv2_l2)
         W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
+        W_conv2_rc=tf.reverse(W_conv2, [0,1])
         #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
-        h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, tf.reverse(W_conv2, [0,1])))), self.keep_prob2)
+        h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
         #h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2))), self.keep_prob2)
         h_pool2 = max_pool_2x2(h_conv2)
                          
