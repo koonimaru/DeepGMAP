@@ -5,20 +5,20 @@ import numpy as np
 import time
 import math
 import os
-from natsort import natsorted, ns
-import subprocess as sp
+#from natsort import natsorted, ns
+#import subprocess as sp
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
-from sklearn.preprocessing import label_binarize
-from sklearn.multiclass import OneVsRestClassifier
-from scipy import interp
+#from sklearn.preprocessing import label_binarize
+#from sklearn.multiclass import OneVsRestClassifier
+#from scipy import interp
 import getopt
 import importlib as il
 from glob import glob
 from natsort import natsorted
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
-from matplotlib import cm
+#from matplotlib import cm
 
 start=time.time()
 
@@ -72,9 +72,10 @@ def main(args=None):
         model_name=args.model
         bed_file=args.labeled_bed_file
         test_genome=args.test_genome_files
-        GPU=args.GPU_number
+        #GPU=args.GPU_number
         chromosome_of_interest=args.chromosome
         TEST=args.test_or_prediction
+        GPUID=str(args.gpuid)
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
@@ -187,7 +188,7 @@ def main(args=None):
     start_at=b.replace(' ', '_')
     out_dir=output_dir+file_name[-1]
     
-    config = tf.ConfigProto(device_count = {'GPU': GPU})
+    config = tf.ConfigProto(device_count = {'GPU': 1})
     config.gpu_options.allow_growth=True
     sess = tf.Session(config=config)       
 
@@ -223,7 +224,8 @@ def main(args=None):
                  keep_prob2=keep_prob2, 
                  keep_prob3=keep_prob3, 
                  data_length=data_length,
-                 max_to_keep=max_to_keep)
+                 max_to_keep=max_to_keep,
+                 GPUID=GPUID)
     sess.run(tf.global_variables_initializer())
     saver=model.saver
     try:
@@ -299,11 +301,8 @@ def main(args=None):
         end_=b[1]
         value=y_prediction2[i]
         for k in range(len(value)):
-            output_handle[k].write(str(chrom)+'\t'
-                        +str(start_)+'\t'
-                        +str(end_)+'\t.\t'
-                        +str(value[k]*1000).strip('[]')+'\t.\t'
-                        +str(value[k]).strip('[]')+"\t-1\t-1\t-1\n")
+            output_handle[k].write("\t".join([str(chrom),str(start_),str(end_),'.',str(value[k]*1000).strip('[]'),'.',
+                                              str(value[k]).strip('[]'),"-1\t-1\t-1\n"]))
             
     for i in output_handle:
         i.close()
@@ -380,7 +379,8 @@ def main(args=None):
         box = ax1.get_position()
         ax1.set_position([box.x0, box.y0, box.width * 0.6, box.height])
         plt.title('Receiver operating characteristic curve ('+str(model_name)+')')
-        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        if len(sample_list)<20:
+            plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         
         ax2=plt.subplot(212)
         i=0
@@ -397,7 +397,9 @@ def main(args=None):
         box2 = ax2.get_position()
         ax2.set_position([box2.x0, box2.y0, box2.width * 0.6, box2.height])
         plt.title('Precision-Recall curve ('+str(model_name)+')')
-        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        if len(sample_list)<20:
+        
+            plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         
         plt.savefig(out_dir+"ROC_space_curve.pdf", format='pdf')
         print(time.time()-start)

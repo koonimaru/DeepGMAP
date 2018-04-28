@@ -1,5 +1,5 @@
 
-infile="/home/fast/onimaru/data/CTCF/hiPS_CTCF_m_peaks.narrowPeak"
+infile="/home/fast/onimaru/encode/mm10_dnase-seq_subset/*_summits.bed"
 outfile="/home/fast/onimaru/data/CTCF/hiPS_CTCF_peaks.narrowPeak_600.bed"
 with open(infile, 'r') as fin, open(outfile, 'w') as fout:
     

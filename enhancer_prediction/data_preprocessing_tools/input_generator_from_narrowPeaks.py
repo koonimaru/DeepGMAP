@@ -115,7 +115,7 @@ def main(args=None):
         line=line.split()
         window_size=int(line[2])-int(line[1])
     bed_file_list=[]
-    if bed_file_dir.endswith('.narrowPeak') or bed_file_dir.endswith('.bed'):
+    if bed_file_dir.endswith('narrowPeak') or bed_file_dir.endswith('bed'):
         bed_file_list=sorted(glb.glob(bed_file_dir))       
         out_dir=os.path.split(bed_file_dir)[0]+"/"
         
@@ -145,11 +145,17 @@ def main(args=None):
             sys.exit()
         bed_file_list_2=[]
         for b in bed_file_list:
-            b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
+            h, t=os.path.split(b)
+            bed_dir=h+"/"+str(pref)+"_bed_"+str(window_size)
+            if not os.path.isdir(bed_dir):
+                os.makedirs(bed_dir)
+            b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
+            #b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
             if not os.path.isfile(b_):
                 tmp_out=open(b_, 'w')
                 try:
                     sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.6", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+                    #sp.check_call(["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
                 except OSError as e:
                     if e.errno == os.errno.ENOENT:
                         print(str(b)+" not found")

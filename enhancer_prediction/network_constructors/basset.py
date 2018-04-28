@@ -80,6 +80,7 @@ class Model(object):
         self.start_at=kwargs["start_at"]
         self.output_dir=kwargs["output_dir"]
         self.max_to_keep=kwargs["max_to_keep"]
+        self.GPUID=kwargs["GPUID"]
         self.fc1_param=int(math.ceil((math.ceil((math.ceil((
             self.data_length-self.conv1_filter+1)/3.0)
                         -self.conv2_filter+1)/4.0)
@@ -107,103 +108,104 @@ class Model(object):
 
     @define_scope
     def prediction(self):
-        x_image = self.image
-        phase=self.phase
-        
-        def weight_variable(shape, variable_name):
-            initial = tf.truncated_normal(shape, mean=0, stddev=self.initial_variation)
-            return tf.Variable(initial, name=variable_name)
-          
-        def bias_variable(shape, variable_name):
-            initial = tf.constant(0.1, shape=shape)
-            return tf.Variable(initial, name=variable_name)
-        
-        def bias_variable_high(shape, variable_name, carry_bias=-0.1):
-            initial = tf.constant(carry_bias, shape=shape)
-            return tf.Variable(initial, name=variable_name)
-        
-        def conv2d_1(x, W):
-            return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
-        def conv2d(x, W):
-            return tf.nn.conv2d(x, W, strides=[1, 2, 1, 1], padding='VALID')
-        def conv2d_depth(x, W):
-            return tf.nn.depthwise_conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
-        def max_pool_2x2(x):
-            return tf.nn.max_pool(x, ksize=[1, 2, 1, 1], strides=[1, 2, 1, 1], padding='SAME')
-        def max_pool_3x1(x):
-            return tf.nn.max_pool(x, ksize=[1, 3, 1, 1], strides=[1, 3, 1, 1], padding='SAME')
-        def max_pool_4x1(x):
-            return tf.nn.max_pool(x, ksize=[1, 4, 1, 1], strides=[1, 4, 1, 1], padding='SAME')
-        def max_pool_8x1(x):
-            return tf.nn.max_pool(x, ksize=[1, 17, 1, 1], strides=[1, 17, 1, 1], padding='SAME')
-        def batch_norm(x,beta,gamma, n_out, phase_train):
-            batch_mean, batch_var = tf.nn.moments(x, [0,1,2], name='moments')
-            normed = tf.nn.batch_normalization(x, batch_mean, batch_var, beta, gamma, 1e-3)
-            return normed 
-
-
-        #fc1_param=int(math.ceil((math.ceil((data_length-conv1_filter+1)/4.0)-conv2_filter+1)/2.0))
-        #fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((data_length-conv1_filter+1)/1.0)-conv2_filter+1)/2.0)-conv22_filter+1)/2.0)-conv3_filter+1)/2.0))   
-        
-        W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
-        b_conv1 = bias_variable([self.dimension1], 'b_conv1')
-        h_conv1_=conv2d_1(x_image, W_conv1)
-        
-        #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
-        #h_conv1 = tf.nn.dropout(tf.nn.relu(batch_norm(h_conv1_,beta1,gamma1, self.dimension2,phase)), self.keep_prob)
-        h_conv1 = tf.nn.dropout(tf.nn.relu(h_conv1_), self.keep_prob)       
-        h_pool1 = max_pool_3x1(h_conv1)
-
-        #beta2 = tf.Variable(tf.constant(0.0, shape=[self.dimension2]),name='beta2', trainable=True)
-        #gamma2 = tf.Variable(tf.constant(1.0, shape=[self.dimension2]), name='gamma2', trainable=True)          
-        W_conv2 = weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2')
-        b_conv2 = bias_variable([self.dimension2], 'b_conv2')
-        h_conv2_=conv2d_1(h_pool1, W_conv2)
-        #h_conv2 = tf.nn.dropout(tf.nn.relu(batch_norm(h_conv2_,beta2,gamma2, self.dimension2,phase)), self.keep_prob2)
-        h_conv2 = tf.nn.dropout(tf.nn.relu(h_conv2_), self.keep_prob2)
-        h_pool2 = max_pool_4x1(h_conv2)
-     
-        W_conv21 = weight_variable([self.conv21_filter, 1, self.dimension2, self.dimension21], 'W_conv21')
-        b_conv21 = bias_variable([self.dimension21], 'b_conv21')
-        #h_conv22 = tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv2, W_conv22), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001))
-        h_conv21_=conv2d_1(h_pool2, W_conv21)
-        h_conv21 = tf.nn.dropout(tf.nn.relu(h_conv21_), self.keep_prob2)
-        
-        h_pool21 = max_pool_4x1(h_conv21)
-        
-        W_fc1 = weight_variable([1 * self.fc1_param * self.dimension21, self.dimension4], 'W_fc1')
-        b_fc1 = bias_variable([self.dimension4], 'b_fc1')
-        h_pool3_flat = tf.reshape(h_pool21, [-1, 1*self.fc1_param*self.dimension21])
-        h_fc1 = tf.nn.relu(tf.matmul(h_pool3_flat, W_fc1) + b_fc1)
-        h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob3)
-        
-        W_fc3 = weight_variable([self.dimension4, self.dimension4], 'W_fc3')
-        b_fc3 = bias_variable([self.dimension4], 'b_fc3')
-        #W_fc3_t = weight_variable([dimension4, dimension4], 'W_fc3_t')
-        #b_fc3_t = bias_variable_high([dimension4], 'b_fc3_t')
-        #T3 = tf.sigmoid(tf.matmul(h_fc2_2_drop, W_fc3_t) + b_fc3_t)
-        #C3 = tf.sub(1.0, T3)
-        h_fc3 = tf.nn.relu(tf.matmul(h_fc1_drop, W_fc3) + b_fc3)
-        #h_high3=tf.add(tf.mul(h_fc3, T3), tf.mul(h_fc2_2_drop, C3))
-        h_fc3_drop =tf.nn.dropout(h_fc3, self.keep_prob3)
-        
-        label_shape=self.label.shape[1]
-        
-        
-        W_fc4 = weight_variable([self.dimension4, tf.cast(label_shape, tf.int32)], 'W_fc4')
-        b_fc4 = bias_variable([label_shape], 'b_fc4')
-        y_conv=tf.add(tf.matmul(h_fc3_drop, W_fc4), b_fc4)
-        
-        variable_dict={"W_conv1": W_conv1, "W_conv2": W_conv2,"W_conv21": W_conv21,
-                        "b_conv1": b_conv1, "b_conv2": b_conv2, "b_conv21": b_conv21, 
-                        #"beta2": beta1, "gamma":gamma1,
-                        #"beta2": beta2, "gamma":gamma2,
-                        #"beta21": beta21, "gamma":gamma21,
-                        "W_fc1": W_fc1,"W_fc3": W_fc3, "W_fc4": W_fc4, 
-                        "b_fc1": b_fc1, "b_fc3": b_fc3,"b_fc4": b_fc4}
-        neurons_dict={"h_conv21":h_conv21, "h_conv2":h_conv2, "h_conv1":h_conv1,"h_fc1_drop": h_fc1_drop, "h_fc3_drop": h_fc3_drop}
-        
-        return y_conv,tf.nn.sigmoid(y_conv), variable_dict, neurons_dict,
+        with tf.device('/device:GPU:'+self.GPUID):
+            x_image = self.image
+            phase=self.phase
+            
+            def weight_variable(shape, variable_name):
+                initial = tf.truncated_normal(shape, mean=0, stddev=self.initial_variation)
+                return tf.Variable(initial, name=variable_name)
+              
+            def bias_variable(shape, variable_name):
+                initial = tf.constant(0.1, shape=shape)
+                return tf.Variable(initial, name=variable_name)
+            
+            def bias_variable_high(shape, variable_name, carry_bias=-0.1):
+                initial = tf.constant(carry_bias, shape=shape)
+                return tf.Variable(initial, name=variable_name)
+            
+            def conv2d_1(x, W):
+                return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+            def conv2d(x, W):
+                return tf.nn.conv2d(x, W, strides=[1, 2, 1, 1], padding='VALID')
+            def conv2d_depth(x, W):
+                return tf.nn.depthwise_conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+            def max_pool_2x2(x):
+                return tf.nn.max_pool(x, ksize=[1, 2, 1, 1], strides=[1, 2, 1, 1], padding='SAME')
+            def max_pool_3x1(x):
+                return tf.nn.max_pool(x, ksize=[1, 3, 1, 1], strides=[1, 3, 1, 1], padding='SAME')
+            def max_pool_4x1(x):
+                return tf.nn.max_pool(x, ksize=[1, 4, 1, 1], strides=[1, 4, 1, 1], padding='SAME')
+            def max_pool_8x1(x):
+                return tf.nn.max_pool(x, ksize=[1, 17, 1, 1], strides=[1, 17, 1, 1], padding='SAME')
+            def batch_norm(x,beta,gamma):
+                batch_mean, batch_var = tf.nn.moments(x, [0,1,2], name='moments')
+                normed = tf.nn.batch_normalization(x, batch_mean, batch_var, beta, gamma, 1e-3)
+                return normed 
+    
+    
+            #fc1_param=int(math.ceil((math.ceil((data_length-conv1_filter+1)/4.0)-conv2_filter+1)/2.0))
+            #fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((data_length-conv1_filter+1)/1.0)-conv2_filter+1)/2.0)-conv22_filter+1)/2.0)-conv3_filter+1)/2.0))   
+            
+            W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
+            b_conv1 = bias_variable([self.dimension1], 'b_conv1')
+            h_conv1_=conv2d_1(x_image, W_conv1)
+            
+            #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
+            #h_conv1 = tf.nn.dropout(tf.nn.relu(batch_norm(h_conv1_,beta1,gamma1, self.dimension2,phase)), self.keep_prob)
+            h_conv1 = tf.nn.dropout(tf.nn.relu(h_conv1_), self.keep_prob)       
+            h_pool1 = max_pool_3x1(h_conv1)
+    
+            #beta2 = tf.Variable(tf.constant(0.0, shape=[self.dimension2]),name='beta2', trainable=True)
+            #gamma2 = tf.Variable(tf.constant(1.0, shape=[self.dimension2]), name='gamma2', trainable=True)          
+            W_conv2 = weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2')
+            b_conv2 = bias_variable([self.dimension2], 'b_conv2')
+            h_conv2_=conv2d_1(h_pool1, W_conv2)
+            #h_conv2 = tf.nn.dropout(tf.nn.relu(batch_norm(h_conv2_,beta2,gamma2, self.dimension2,phase)), self.keep_prob2)
+            h_conv2 = tf.nn.dropout(tf.nn.relu(h_conv2_), self.keep_prob2)
+            h_pool2 = max_pool_4x1(h_conv2)
+         
+            W_conv21 = weight_variable([self.conv21_filter, 1, self.dimension2, self.dimension21], 'W_conv21')
+            b_conv21 = bias_variable([self.dimension21], 'b_conv21')
+            #h_conv22 = tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv2, W_conv22), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001))
+            h_conv21_=conv2d_1(h_pool2, W_conv21)
+            h_conv21 = tf.nn.dropout(tf.nn.relu(h_conv21_), self.keep_prob2)
+            
+            h_pool21 = max_pool_4x1(h_conv21)
+            
+            W_fc1 = weight_variable([1 * self.fc1_param * self.dimension21, self.dimension4], 'W_fc1')
+            b_fc1 = bias_variable([self.dimension4], 'b_fc1')
+            h_pool3_flat = tf.reshape(h_pool21, [-1, 1*self.fc1_param*self.dimension21])
+            h_fc1 = tf.nn.relu(tf.matmul(h_pool3_flat, W_fc1) + b_fc1)
+            h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob3)
+            
+            W_fc3 = weight_variable([self.dimension4, self.dimension4], 'W_fc3')
+            b_fc3 = bias_variable([self.dimension4], 'b_fc3')
+            #W_fc3_t = weight_variable([dimension4, dimension4], 'W_fc3_t')
+            #b_fc3_t = bias_variable_high([dimension4], 'b_fc3_t')
+            #T3 = tf.sigmoid(tf.matmul(h_fc2_2_drop, W_fc3_t) + b_fc3_t)
+            #C3 = tf.sub(1.0, T3)
+            h_fc3 = tf.nn.relu(tf.matmul(h_fc1_drop, W_fc3) + b_fc3)
+            #h_high3=tf.add(tf.mul(h_fc3, T3), tf.mul(h_fc2_2_drop, C3))
+            h_fc3_drop =tf.nn.dropout(h_fc3, self.keep_prob3)
+            
+            label_shape=self.label.shape[1]
+            
+            
+            W_fc4 = weight_variable([self.dimension4, tf.cast(label_shape, tf.int32)], 'W_fc4')
+            b_fc4 = bias_variable([label_shape], 'b_fc4')
+            y_conv=tf.add(tf.matmul(h_fc3_drop, W_fc4), b_fc4)
+            
+            variable_dict={"W_conv1": W_conv1, "W_conv2": W_conv2,"W_conv21": W_conv21,
+                            "b_conv1": b_conv1, "b_conv2": b_conv2, "b_conv21": b_conv21, 
+                            #"beta2": beta1, "gamma":gamma1,
+                            #"beta2": beta2, "gamma":gamma2,
+                            #"beta21": beta21, "gamma":gamma21,
+                            "W_fc1": W_fc1,"W_fc3": W_fc3, "W_fc4": W_fc4, 
+                            "b_fc1": b_fc1, "b_fc3": b_fc3,"b_fc4": b_fc4}
+            neurons_dict={"h_conv21":h_conv21, "h_conv2":h_conv2, "h_conv1":h_conv1,"h_fc1_drop": h_fc1_drop, "h_fc3_drop": h_fc3_drop}
+            
+            return y_conv,tf.nn.sigmoid(y_conv), variable_dict, neurons_dict,
     
     @define_scope
     def saver(self):
@@ -211,46 +213,47 @@ class Model(object):
     
     @define_scope
     def cost(self):
-
-        """nll=tf.reduce_mean(-tf.reduce_sum(
-            tf.log(
-                tf.add(
-                    tf.clip_by_value(tf.multiply(self.label, self.prediction[1]),1e-10,1.0),
-                    tf.clip_by_value(tf.multiply(tf.subtract(1.00,self.label), tf.subtract(1.00,self.prediction[1])),1e-10,1.0))
-                   ), 
-                                          reduction_indices=[1]))"""
-        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=1.0))
-        return nll
-        #l2_norm=tf.reduce_sum(self.prediction[4])
-        
-        #l1_norm=tf.reduce_sum(tf.abs(self.prediction[1]))
-        #return tf.add_n([nll,tf.multiply((5*10**-7), l2_norm),tf.multiply((1*10**-8),l1_norm)])
-        #return tf.reduce_mean(-tf.reduce_sum(self.label * tf.log(tf.clip_by_value(self.prediction[0],1e-10,1.0))+(1-self.label)*tf.log(tf.clip_by_value(1-self.prediction[0],1e-10,1.0)), reduction_indices=[1]))
+        with tf.device('/device:GPU:'+self.GPUID):
+            """nll=tf.reduce_mean(-tf.reduce_sum(
+                tf.log(
+                    tf.add(
+                        tf.clip_by_value(tf.multiply(self.label, self.prediction[1]),1e-10,1.0),
+                        tf.clip_by_value(tf.multiply(tf.subtract(1.00,self.label), tf.subtract(1.00,self.prediction[1])),1e-10,1.0))
+                       ), 
+                                              reduction_indices=[1]))"""
+            nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=1.0))
+            return nll
+            #l2_norm=tf.reduce_sum(self.prediction[4])
+            
+            #l1_norm=tf.reduce_sum(tf.abs(self.prediction[1]))
+            #return tf.add_n([nll,tf.multiply((5*10**-7), l2_norm),tf.multiply((1*10**-8),l1_norm)])
+            #return tf.reduce_mean(-tf.reduce_sum(self.label * tf.log(tf.clip_by_value(self.prediction[0],1e-10,1.0))+(1-self.label)*tf.log(tf.clip_by_value(1-self.prediction[0],1e-10,1.0)), reduction_indices=[1]))
     @define_scope
     def optimize(self):
-
-        #cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y_conv, y_))
-        #cost = tf.reduce_mean(tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))), reduction_indices=[1]))
-        #cost = tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))))
-        optimizer = tf.train.AdamOptimizer(self.train_speed)
-
-        return optimizer.minimize(self.cost)
+        with tf.device('/device:GPU:'+self.GPUID):
+            #cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y_conv, y_))
+            #cost = tf.reduce_mean(tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))), reduction_indices=[1]))
+            #cost = tf.reduce_sum(tf.square(y_conv*tf.log(tf.clip_by_value(2*y_conv,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))+y_*tf.log(2*tf.clip_by_value(y_,1e-10,1.0)/(tf.clip_by_value(y_conv,1e-10,1.0)+tf.clip_by_value(y_,1e-10,1.0)))))
+            optimizer = tf.train.AdamOptimizer(self.train_speed)
+    
+            return optimizer.minimize(self.cost)
     @define_scope
     def error(self):
-        class_n=self.label.shape[1]
-        FPR_list=[]
-        TPR_list=[]
-        PPV_list=[]
-        for i in range(class_n):
+        with tf.device('/device:GPU:'+self.GPUID):
+            class_n=self.label.shape[1]
+            FPR_list=[]
+            TPR_list=[]
+            PPV_list=[]
+            for i in range(class_n):
+                
+                true=self.label[:,i]
+                prob=self.prediction[1][:,i]
+                FPR, TPR, PPV=_auc_pr(true,prob,0.5)
+                FPR_list.append(FPR)
+                TPR_list.append(TPR)
+                PPV_list.append(PPV)
             
-            true=self.label[:,i]
-            prob=self.prediction[1][:,i]
-            FPR, TPR, PPV=_auc_pr(true,prob,0.5)
-            FPR_list.append(FPR)
-            TPR_list.append(TPR)
-            PPV_list.append(PPV)
-        
-        return FPR_list, TPR_list, PPV_list
+            return FPR_list, TPR_list, PPV_list
     
     
     

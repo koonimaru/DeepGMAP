@@ -55,7 +55,7 @@ setup(
         'Topic :: Biology/Machine learning',
     
     ],
-    install_requires=['tensorflow-gpu'],
+    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib'],
     long_description=open('README.md').read(),
 )
 

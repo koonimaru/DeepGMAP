@@ -44,10 +44,10 @@ class Model(object):
     #mini batch size
     dimension1=320 #the number of the convolution filters in the 1st layer
     dimension2=560
-    dimension20=480 #the number of the convolution filters in the 2nd layer
-    dimension21=480
-    dimension22=480
-    dimension4=1850 #the number of the neurons in each layer of the fully-connected neural network
+    dimension20=560 #the number of the convolution filters in the 2nd layer
+    dimension21=560
+    dimension22=560
+    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
     conv1_filter=6
     #conv1_filter2=49
     conv2_filter=12
@@ -154,10 +154,20 @@ class Model(object):
         wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
         l2norm_list.append(wconv2_l2)
         W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
+        W_conv2_rc=tf.reverse(W_conv2, [0,1])
         #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
-        h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, tf.reverse(W_conv2, [0,1])))), self.keep_prob2)
+        h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
         #h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2))), self.keep_prob2)
         h_pool2 = max_pool_2x2(h_conv2)
+                         
+ 
+ 
+        """W_conv20 = weight_variable([self.conv20_filter, 1, self.dimension2, self.dimension20], 'W_conv20')
+        l2norm_list.append(tf.reduce_sum(tf.square(W_conv20)))
+        W_conv20.assign(tf.cond(l2norm_list[2]>cond, lambda: tf.multiply(W_conv20, cond/l2norm_list[1]),lambda: W_conv20 ))
+        #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
+        h_conv20 = tf.nn.relu(conv2d_1(h_pool2, W_conv20))
+        h_pool20 = tf.nn.dropout(max_pool_2x2(h_conv20), self.keep_prob)"""
  
         k+=1
         W_conv21 = weight_variable([self.conv21_filter, 1, self.dimension2, self.dimension21], 'W_conv21')
@@ -192,10 +202,6 @@ class Model(object):
         h_fc1 = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat, W_fc1), b_fc1))
         h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob3)
         
-        W_fc3 = weight_variable([self.dimension4, self.dimension4], 'W_fc3')
-        b_fc3 = bias_variable([self.dimension4], 'b_fc3')
-        h_fc3 = tf.nn.relu(tf.add(tf.matmul(h_fc1_drop, W_fc3), b_fc3))
-        h_fc3_drop =tf.nn.dropout(h_fc3, self.keep_prob3)
         
         
         label_shape=self.label.shape[1]
@@ -211,7 +217,7 @@ class Model(object):
         b_fc4.assign(tf.cond(bfc4_l2>cond, lambda: tf.multiply(b_fc4, cond/bfc4_l2),lambda: b_fc4 ))
         
         
-        y_conv=tf.add(tf.matmul(h_fc3_drop, W_fc4), b_fc4)
+        y_conv=tf.add(tf.matmul(h_fc1_drop, W_fc4), b_fc4)
         
         variable_dict={"W_conv1": W_conv1, 
                        "W_conv2": W_conv2,
@@ -250,7 +256,7 @@ class Model(object):
                     tf.clip_by_value(tf.multiply(tf.subtract(1.00,self.label), tf.subtract(1.00,self.prediction[1])),1e-10,1.0))
                    ),
                                           reduction_indices=[1]))"""
-        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=2.0))
+        nll=tf.reduce_mean(tf.nn.weighted_cross_entropy_with_logits(targets=self.label, logits=self.prediction[0],pos_weight=1.0))
         #nll=tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=self.label, logits=self.prediction[0]))
         l2_norm=tf.reduce_sum(self.prediction[4])
         

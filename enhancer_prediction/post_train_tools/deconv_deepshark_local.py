@@ -8,7 +8,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pylab
-import network_constructor as nc
+import enhancer_prediction.network_constructors.deepshark as nc
 
 
 
