@@ -64,7 +64,7 @@ def main(args=None):
     model_name=""
     bed_file=None
     max_to_keep=2
-    GPU=1
+    #GPU=1
     if args is not None:
         #takes arguments when the code is run through enhancer_prediction_run         
         input_dir=args.input_ckpt
@@ -188,7 +188,7 @@ def main(args=None):
     start_at=b.replace(' ', '_')
     out_dir=output_dir+file_name[-1]
     
-    config = tf.ConfigProto(device_count = {'GPU': 1})
+    config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
     sess = tf.Session(config=config)       
 

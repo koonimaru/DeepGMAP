@@ -11,8 +11,8 @@ from inputfileGenerator_multiple_label3 import array_saver
 import multiprocessing
 import time 
 import datetime
-
-
+import numpy as np
+import random
 def getDupes_a(l):
     '''moooeeeep'''
     seen = set()
@@ -172,15 +172,21 @@ def main(args=None):
         print('As '+labeled_genome +' already exists, skipping creating this file.\
         If you want to create a new one, you need change prefix or remove the old one.')
 
-    print("outputting train data set to "+output_dir)
+    
     if os.path.isfile(labeled_genome):
-        with open(genome_fasta, 'r') as f1:
-            binaryDNAdict, position=seqtobinarydict(f1, chr_to_skip)
         with open(labeled_genome, 'r') as f1:
             f2=f1.readlines()
-            label_position, label_list=sb2.label_reader(f2, chr_to_skip)
-       
-
+            label_position, label_list, skipped=sb2.label_reader(f2, chr_to_skip, reduce_genome)
+            #label_list=np.array(label_list, np.int8)
+        with open(genome_fasta, 'r') as f1:
+            binaryDNAdict, position=seqtobinarydict(f1,skipped, chr_to_skip)
+        #print(len(label_position), len(position))
+        neg_skipped=len(skipped)
+        lnum=len(label_position)
+        
+        print(str(neg_skipped)+" negative sequences are skipped.")
+        
+        #print("\t".join(label_position[:2])+"\n"+ "\t".join(label_position[:-2])+"\n"+"\t".join(position[:2])+"\n"+"\t".join(position[:-2]))
                 
         try:        
             if not os.path.exists(output_dir):
@@ -189,10 +195,22 @@ def main(args=None):
                 except OSError as exc:
                     if exc.errno != exc.errno.EEXIST:
                         raise
-            binaryDNAdict_shuf, label_list_shuf=dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
-    
-            dna_dict_length=len(binaryDNAdict_shuf)
-    
+            #binaryDNAdict, label_list=dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
+            num_seq=len(binaryDNAdict)
+            shuf=range(num_seq)
+        
+            random.shuffle(shuf)
+            #binaryDNAdict=np.array(binaryDNAdict, np.int8)[shuf]
+            #label_list=np.array(label_list, np.int8)[shuf]
+            """binaryDNAdict_shuf=[]
+            binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
+            label_list_shuf=[]
+            label_list_shuf_append=label_list_shuf.append
+            for i in shuf:
+                binaryDNAdict_shuf_append(binaryDNAdict[i])
+                label_list_shuf_append(label_list[i])"""
+            dna_dict_length=len(binaryDNAdict)
+            print(dna_dict_length, len(label_list))
             if dna_dict_length%threads==0:
                 batch=dna_dict_length/threads
             else:
@@ -208,10 +226,10 @@ def main(args=None):
                 #print str(len(binaryDNAdict_shuf[i*batch:(i+1)*batch]))+" are passed"
                 jobs.append(multiprocessing.Process(target=array_saver, 
                                         args=(range(i*total_num,(i+1)*total_num), 
-                                              binaryDNAdict_shuf[i*batch:(i+1)*batch],
-                                              label_list_shuf[i*batch:(i+1)*batch], 
+                                              [binaryDNAdict[j] for j in shuf[i*batch:(i+1)*batch]],
+                                              [label_list[k] for k in shuf[i*batch:(i+1)*batch]], 
                                               sample_num, output_dir,)))
-            print("saving data set with "+str(threads)+" threads")
+            print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
             for j in jobs:
                 j.start()
                 

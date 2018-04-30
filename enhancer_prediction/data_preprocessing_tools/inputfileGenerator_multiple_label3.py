@@ -13,7 +13,8 @@ import datetime
 
 
 #convert DNA sequences to a dictionary of onehot vector
-def seqtobinarydict(file_, _chr_to_skip="chr2"):
+def seqtobinarydict(file_, skipped, _chr_to_skip="chr2"):
+    skipped=set(skipped)
     binaryDNAdict=[]
     binaryDNAdict_append=binaryDNAdict.append
     position=[]
@@ -24,23 +25,34 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
     seqlen=0
     duration=0.0
     i=0
+    skipped_chr=''
     for line in file_:
         i+=1
         #start=time.time()
         if line[0]=='>':
             
             if line.startswith(">"+_chr_to_skip+":"):
-                sys.stdout.write("\r" +"skipping "+_chr_to_skip)
-                sys.stdout.flush()
+                if skipped_chr=='':
+                    sys.stdout.write("\r" +"skipping "+_chr_to_skip)
+                    sys.stdout.flush()
+                    skipped_chr=_chr_to_skip
                 skip=True
             else:
-                skip=False
-                a=line.strip('>\n')
                 
-                position_append(a)
-                if s%100000==0:
-                    sys.stdout.write("\rconverting "+str(a))
-                    sys.stdout.flush()
+                a=line.strip('>\n')
+                if a in skipped:
+                    skip=True
+                    if not len(seqdata)==0:
+                        binaryDNAdict_append(seqdata)
+                        #position_append(a)
+                    seqdata=[]
+                    continue
+                else:
+                    skip=False
+                    position_append(a)
+                    if s%100000==0:
+                        sys.stdout.write("\rconverting "+str(a))
+                        sys.stdout.flush()
                     
             if not s==0 and not len(seqdata)==0:
                 #print(seqdata)
@@ -65,8 +77,8 @@ def seqtobinarydict(file_, _chr_to_skip="chr2"):
         #if i%100000==0:
             #print("\n"+str(duration))
             #duration=0
-        
-    binaryDNAdict_append(seqdata)
+    if not len(seqdata)==0:
+        binaryDNAdict_append(seqdata)
     
     
     return binaryDNAdict, position
@@ -77,9 +89,10 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
     #print "binaryDNAdict_shuf length under array_saver: "+str(len(binaryDNAdict_shuf))
     
     for i in range(len(index_list)):
-        data_array=np.array(binaryDNAdict_shuf[i*sample_num:(i*sample_num+sample_num)], np.int32)
+        #print i*sample_num, (i*sample_num+sample_num), index_list[i]
+        data_array=np.array(binaryDNAdict_shuf[i*sample_num:(i*sample_num+sample_num)], np.int8)
         #print np.sum(data_array)
-        labels=np.array(label_list_shuf[i*sample_num:(i*sample_num+sample_num)], np.int32)
+        labels=np.array(label_list_shuf[i*sample_num:(i*sample_num+sample_num)], np.int8)
         #print np.shape(labels)
                 
         filename = out_dir+"batch_"+str(index_list[i])+".npz"
@@ -103,7 +116,8 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
 
     shuf=range(num_seq)
 
-    random.shuffle(shuf)   
+    random.shuffle(shuf)
+    
     binaryDNAdict_shuf=[]
     binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
     label_list_shuf=[]
@@ -124,7 +138,7 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
             continue
         else:
             #print dp, lp
-            assert dp==lp
+            assert dp==lp, "position does not match: %r" %[dp, lp]
             binaryDNAdict_shuf_append(d)
             label_list_shuf_append(l)
             if sum(l)==0:
@@ -170,7 +184,8 @@ def main():
             
      
     with open(labeled_genome, 'r') as f2:
-        label_position, label_list=sb2.label_reader(f2, "chr2")
+        lines=f2.readlines()
+        label_position, label_list=sb2.label_reader(lines, "chr2")
     with open(input_dir, 'r') as f1:
         binaryDNAdict, position=seqtobinarydict(f1)
     """
@@ -199,9 +214,9 @@ def main():
         
         
         binaryDNAdict_shuf, label_list_shuf=dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
-
+        
         dna_dict_length=len(binaryDNAdict_shuf)
-
+        print len(label_list_shuf), dna_dict_length
         if dna_dict_length%threads==0:
             batch=dna_dict_length/threads
         else:
