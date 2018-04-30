@@ -38,13 +38,22 @@ def genome_divider(genome_fasta, genome_file, WINDOW_SIZE, outname):
     
     print(outbed+" and "+outfasta+' were successfully generated.')
 
-def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname):
+def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None):
+    
+    
     if outname is not None:
         outbed=outname+'.bed'
         outfasta=outname+'.fa'
+    elif stride is not None:
+        outbed=os.path.splitext(genome_file)[0]+'_window'+str(WINDOW_SIZE)+'_stride'+str(stride)+'.bed'
+        outfasta=os.path.splitext(genome_file)[0]+'_window'+str(WINDOW_SIZE)+'_stride'+str(stride)+'.fa'
     else:
         outbed=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.bed'
         outfasta=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.fa'
+    if stride==None:
+        stride=WINDOW_SIZE/2
+    adding=WINDOW_SIZE/stride
+    
     #WINDOW_SIZE=1000
     #genome_file="/home/fast/onimaru/lamprey/LetJap1.0.1.genome"
     #with open(genome_file, 'r') as fin, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_altwindow.bed', 'w') as fout1, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_.bed', 'w') as fout2:
@@ -55,16 +64,17 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname):
             chrom=line[0]
             chrom_size=int(line[1])
             divide_num=chrom_size/WINDOW_SIZE
+            
             #divide_num=chrom_size/WINDOW_SIZE-4
             for i in range(divide_num):
                 
                 #if i>=2:
-                
-                if i*WINDOW_SIZE+WINDOW_SIZE<=chrom_size:
-                    fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE)+'\n')
-                else:
-                    break
-                #if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4<=chrom_size:
+                for j in range(adding):
+                    if i*WINDOW_SIZE+stride*j<=chrom_size and i*WINDOW_SIZE+stride*j+WINDOW_SIZE<=chrom_size:
+                        fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+stride*j)+'\t'+str(i*WINDOW_SIZE+stride*j+WINDOW_SIZE)+'\n')
+                    else:
+                        break
+                """ #if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4<=chrom_size:
                     #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/4)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4)+'\n')
                 #else:
                     #break
@@ -75,7 +85,7 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname):
                 #if i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3<=chrom_size:
                     #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\n')
                 #else:
-                    #break
+                    #break"""
     
     try:
         stdout_file=open(outbed+"_tmp", "w")
@@ -128,19 +138,10 @@ def run(args):
     windowsize=args.windowsize
     genome_file=os.path.splitext(genome_fasta)[0]+'.genome'
     outname=args.outname
+    stride=args.stride
     if not os.path.isfile(genome_file):
         print("generating genome file.")
         genome_file_maker(genome_fasta,genome_file)
     else:
         print("using a pre-existing genome file: "+genome_file)
-    genome_divider2(genome_fasta, genome_file, windowsize, outname)
-
-
-
-
-
-
-
-
-
-
+    genome_divider2(genome_fasta, genome_file, windowsize, outname, stride=stride)

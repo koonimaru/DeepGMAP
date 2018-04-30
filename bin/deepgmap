@@ -5,15 +5,10 @@ Copyright (c) 20XX Koh Onimaru <koh.onimaru@gmail.com>
 This code is free software; you can redistribute it and/or modify it
 under the terms of the XXX License (see the file COPYING included with
 the distribution).
-@status: release candidate
-@version: $Id$
 @author:  Koh Onimaru
 @contact: koh.onimaru@gmail.com
 """
 
-# ------------------------------------
-# python modules
-# ------------------------------------
 
 import os
 import sys, traceback
@@ -165,6 +160,8 @@ def add_genome_divide_parser( subparsers ):
                                          help = "Specify a window size to divide genome into. ")
     argparser_genome_divider.add_argument( "-o", "--outname", dest = "outname", type = str,
                                          help = "the prefix of output files. ", default=None)
+    argparser_genome_divider.add_argument( "-s", "--stride", dest = "stride", type = int,
+                                         help = "the size of the stride of windows. Default: half window size", default=None)
     return
     
 

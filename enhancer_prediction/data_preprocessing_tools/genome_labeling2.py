@@ -62,7 +62,10 @@ def genome_label(bed_file_list, genome_1000,out_dir):
     return label_array_list
 
 def main():
-    bed_file_dir, genome_1000, out_dir=sys.argv[1:]
+    #bed_file_dir, genome_1000, out_dir=sys.argv[1:]
+    bed_file_dir="/home/fast/onimaru/encode/mm10_dnase-seq_subset/*s200.bed"
+    genome_1000="/home/fast/onimaru/data/genome_fasta/mm10_200_single_200.bed"
+    out_dir="/home/fast/onimaru/encode/mm10_dnase-seq_subset/deepsea_type_wondow_mm10_s200.bed.labeled"
     bed_file_list=[]
     if not "*" in bed_file_dir and bed_file_dir.endswith('.bed'):
         bed_file_list.append(bed_file_dir)
