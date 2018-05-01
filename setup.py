@@ -14,16 +14,16 @@ ext_modules = [ ]
 
 if use_cython:
     ext_modules += [
-        Extension("data_preprocessing_tools.seq_to_binary2", [ "enhancer_prediction/data_preprocessing_tools/seq_to_binary2.pyx" ]),
-        #Extension("data_preprocessing_tools.queue", [ "enhancer_prediction/data_preprocessing_tools/queue.pyx" ],libraries=["calg"]),
+        Extension("data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.pyx" ]),
+        #Extension("data_preprocessing_tools.queue", [ "deepgmap/data_preprocessing_tools/queue.pyx" ],libraries=["calg"]),
         
-        Extension("post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.pyx" ]),
+        Extension("post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.pyx" ]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
-        Extension("data_preprocessing_tools.seq_to_binary2", [ "enhancer_prediction/data_preprocessing_tools/seq_to_binary2.c" ]),
-        Extension("post_train_tools.cython_util", [ "enhancer_prediction/post_train_tools/cython_util.c" ]),
+        Extension("data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.c" ]),
+        Extension("post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.c" ]),
     ]
 
 setup(
@@ -35,13 +35,13 @@ setup(
     url='',
     #package_dir={'enhancer_prediction' : 'enhancer_prediction'},
     #packages=['enhancer_prediction','enhancer_prediction.train','enhancer_prediction.network_constructors','enhancer_prediction.post_train_tools','enhancer_prediction.data_preprocessing_tools','enhancer_prediction.misc'],
-    packages=find_packages('enhancer_prediction'),
+    packages=find_packages('deepgmap'),
     
-    package_dir={'':'enhancer_prediction'},
+    package_dir={'':'deepgmap'},
     #package_data = {
     #     '': ['enhancer_prediction/*', '*.pyx', '*.pxd', '*.c', '*.h'],
     #},
-    scripts=['bin/enhancer_prediction_run.py',
+    scripts=['bin/deepgmap',
                    ],
     #packages=find_packages(),
     cmdclass = cmdclass,

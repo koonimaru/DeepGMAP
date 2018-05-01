@@ -7,7 +7,7 @@ import time
 import math
 import os
 from natsort import natsorted, ns
-from enhancer_prediction.network_constructors import deepshark
+from deepgmap.network_constructors import deepshark
 import subprocess as sp
 from itertools import cycle
 import matplotlib.pyplot as plt
@@ -170,7 +170,7 @@ def main():
     else:
         print "the input file should be a ckpt file"
         sys.exit(1)
-    nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
+    nc=il.import_module("deepgmap.network_constructors."+str(model_name))
     print("runing "+str(model_name))
     model = nc.Model(image=x_image, label=y_, 
                  output_dir=None,

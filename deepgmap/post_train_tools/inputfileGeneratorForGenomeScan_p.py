@@ -11,7 +11,7 @@ import os.path
 import multiprocessing
 import sys
 import glob
-import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
+import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
 import time
 import psutil
 import getopt
@@ -67,7 +67,7 @@ def DNA_to_array_converter(input_file,target_chr):
 
 def array_saver(outfile,positions,sequences):
     print('saving '+outfile)
-    np.savez_compressed(outfile,positions=positions,sequences=sequences)
+    np.savez(outfile,positions=positions,sequences=sequences)
         
 def run(args):
     

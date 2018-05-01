@@ -13,8 +13,8 @@ import datetime
 
 
 #convert DNA sequences to a dictionary of onehot vector
-def seqtobinarydict(file_, skipped, _chr_to_skip="chr2"):
-    skipped=set(skipped)
+def seqtobinarydict(file_, lpos, _chr_to_skip="chr2"):
+    lpos=set(lpos)
     binaryDNAdict=[]
     binaryDNAdict_append=binaryDNAdict.append
     position=[]
@@ -40,7 +40,7 @@ def seqtobinarydict(file_, skipped, _chr_to_skip="chr2"):
             else:
                 
                 a=line.strip('>\n')
-                if a in skipped:
+                if a not in lpos:
                     skip=True
                     if not len(seqdata)==0:
                         binaryDNAdict_append(seqdata)
@@ -99,7 +99,7 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
         #print "saving "+str(filename)
         try:
             with open(filename, "wb") as output_file:
-                np.savez_compressed(output_file,labels=labels, data_array=data_array)
+                np.savez(output_file,labels=labels, data_array=data_array)
         except IOError as e:    
             print "I/O error({0}): {1}".format(e.errno, e.strerror)
         except ValueError:

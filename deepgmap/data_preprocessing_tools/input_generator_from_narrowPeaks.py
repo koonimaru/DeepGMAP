@@ -4,7 +4,7 @@ import glob as glb
 from genome_labeling2 import genome_label
 import os
 import subprocess as sp
-import enhancer_prediction.data_preprocessing_tools.seq_to_binary2 as sb2
+import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
 from inputfileGenerator_multiple_label3 import seqtobinarydict
 from inputfileGenerator_multiple_label3 import dicttoarray
 from inputfileGenerator_multiple_label3 import array_saver
@@ -13,6 +13,8 @@ import time
 import datetime
 import numpy as np
 import random
+
+
 def getDupes_a(l):
     '''moooeeeep'''
     seen = set()
@@ -41,6 +43,7 @@ def main(args=None):
         reduce_genome=args.genome_fraction
         pref=args.out_prefix
         chr_to_skip=args.chromosome_to_skip
+        data_type=args.data_type
     else:
             
         try:
@@ -150,12 +153,15 @@ def main(args=None):
             if not os.path.isdir(bed_dir):
                 os.makedirs(bed_dir)
             b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
+            if data_type=="dnase-seq":
+                cmd=["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)]
+            else:
+                cmd=["bedtools", "intersect","-F", "0.4", "-f", "0.6", "-e", "-u", "-a", str(genome_1000), "-b", str(b)]
             #b_=os.path.splitext(b)[0]+"_"+str(window_size)+".bed"
             if not os.path.isfile(b_):
                 tmp_out=open(b_, 'w')
                 try:
-                    sp.check_call(["bedtools", "intersect","-F", "0.4", "-f", "0.6", "-e", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
-                    #sp.check_call(["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)], stdout=tmp_out)
+                    sp.check_call(cmd, stdout=tmp_out)
                 except OSError as e:
                     if e.errno == os.errno.ENOENT:
                         print(str(b)+" not found")
@@ -179,12 +185,12 @@ def main(args=None):
             label_position, label_list, skipped=sb2.label_reader(f2, chr_to_skip, reduce_genome)
             #label_list=np.array(label_list, np.int8)
         with open(genome_fasta, 'r') as f1:
-            binaryDNAdict, position=seqtobinarydict(f1,skipped, chr_to_skip)
+            binaryDNAdict, _ =seqtobinarydict(f1,label_position, chr_to_skip)
         #print(len(label_position), len(position))
-        neg_skipped=len(skipped)
+        neg_skipped=skipped
         lnum=len(label_position)
         
-        print(str(neg_skipped)+" negative sequences are skipped.")
+        print("\n"+str(neg_skipped)+" negative sequences are skipped.")
         
         #print("\t".join(label_position[:2])+"\n"+ "\t".join(label_position[:-2])+"\n"+"\t".join(position[:2])+"\n"+"\t".join(position[:-2]))
                 

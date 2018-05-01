@@ -11,13 +11,13 @@ def label_reader(list file_, str chr_to_skip, float reduce):
     cdef list label_list=[]
     label_list_append=label_list.append
     cdef list line_=[]
-    cdef int i=0, value_sum, skipped_chr=0
+    cdef int i=0, value_sum, skipped_chr=0, skipped=0
     cdef str line, p
     cdef int _name_length=len(chr_to_skip)+1
     cdef list value
     cdef float r
-    cdef list skipped=[]
-    skipped_append=skipped.append
+    #cdef list skipped=[]
+    #skipped_append=skipped.append
     for line in file_:
         #print(line)
         if line[0]=="#":
@@ -30,7 +30,7 @@ def label_reader(list file_, str chr_to_skip, float reduce):
             r=random.random()
             p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
             if value_sum==0 and r<reduce:
-                skipped_append(p)
+                skipped+=1
             else:
                 label_position_append(p)
                 label_list_append(value)
