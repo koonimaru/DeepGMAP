@@ -8,7 +8,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pylab
-from enhancer_prediction.post_train_tools import unpooling
+from deepgmap.post_train_tools import unpooling
 import importlib as il
 import getopt
 

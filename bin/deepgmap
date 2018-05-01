@@ -13,9 +13,9 @@ the distribution).
 import os
 import sys, traceback
 import argparse as ap
+from deepgmap.misc.Constants import DeepGMAP_VERSION
 
-
-VERSION=""
+VERSION=DeepGMAP_VERSION
 
 def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
@@ -130,6 +130,9 @@ def add_generate_input_parser( subparsers ):
     argparser_generate_input.add_argument("-C", "--chromosome", dest="chromosome_to_skip", type = str,
                                         help = "A chromosome or contig name to skip for training. The name must be one of \
                                         the chromosome/contig names in the input genome file. Default: chr2", default = 'chr2' )
+    argparser_generate_input.add_argument("-d", "--data_type", dest="data_type", type = str,
+                                        help = "Choose 'chip-seq' or 'dnase-seq'. The rule to label genome sequences is slightly different, but . \
+                                        Default: chip-seq", default = 'chip-seq' )
     return
 
 def add_generate_test_parser( subparsers ):
@@ -179,25 +182,25 @@ def main():
 
     if subcommand == "train":
         # train a model
-        from enhancer_prediction.train.deepshark_local_oop_1d2 import run
+        from deepgmap.train.deepshark_local_oop_1d2 import run
         run( args )
     elif subcommand == "predict":
         # predict regulatory sequences or test a trained model
-        from enhancer_prediction.post_train_tools.trained_deepshark_local2 import run
+        from deepgmap.post_train_tools.trained_deepshark_local2 import run
         run( args )
     elif subcommand == "generate_input":
         # generate a train data set
         
-        from enhancer_prediction.data_preprocessing_tools.input_generator_from_narrowPeaks import run
+        from deepgmap.data_preprocessing_tools.input_generator_from_narrowPeaks import run
         run( args )
     elif subcommand == "generate_test":
         if args.chromosome=="all":
-            from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p2 import run
+            from deepgmap.post_train_tools.inputfileGeneratorForGenomeScan_p2 import run
         else:
-            from enhancer_prediction.post_train_tools.inputfileGeneratorForGenomeScan_p import run
+            from deepgmap.post_train_tools.inputfileGeneratorForGenomeScan_p import run
         run( args )
     elif subcommand == "genome_divide":
-        from enhancer_prediction.data_preprocessing_tools.genome_divider import run
+        from deepgmap.data_preprocessing_tools.genome_divider import run
         run( args )
         
 if __name__ == '__main__':

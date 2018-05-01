@@ -220,7 +220,7 @@ def main(args=None):
     keep_prob = tf.placeholder(tf.float32)
     keep_prob2 = tf.placeholder(tf.float32)
     keep_prob3 = tf.placeholder(tf.float32)
-    nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
+    nc=il.import_module("deepgmap.network_constructors."+str(model_name))
     print("running "+str(model_name))
 
     model = nc.Model(image=x_image, label=y_, 

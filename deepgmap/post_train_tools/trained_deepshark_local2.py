@@ -211,7 +211,7 @@ def main(args=None):
         model_name=model_name[0]
     print("runing "+str(model_name))
     try:
-        nc=il.import_module("enhancer_prediction.network_constructors."+str(model_name))
+        nc=il.import_module("deepgmap.network_constructors."+str(model_name))
     except ImportError:
         print(str(model_name)+" does not exist")
         sys.exit(0)
