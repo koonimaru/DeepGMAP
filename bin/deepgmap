@@ -191,7 +191,7 @@ def main():
     elif subcommand == "generate_input":
         # generate a train data set
         
-        from deepgmap.data_preprocessing_tools.input_generator_from_narrowPeaks import run
+        from deepgmap.data_preprocessing_tools.input_generator_from_narrowPeaks2 import run
         run( args )
     elif subcommand == "generate_test":
         if args.chromosome=="all":

@@ -11,7 +11,7 @@ def label_reader(list file_, str chr_to_skip, float reduce):
     cdef list label_list=[]
     label_list_append=label_list.append
     cdef list line_=[]
-    cdef int i=0, value_sum, skipped_chr=0, skipped=0
+    cdef int i=0, value_sum, skipped_chr=0, skipped=0, pos_no=0
     cdef str line, p
     cdef int _name_length=len(chr_to_skip)+1
     cdef list value
@@ -32,6 +32,8 @@ def label_reader(list file_, str chr_to_skip, float reduce):
             if value_sum==0 and r<reduce:
                 skipped+=1
             else:
+                if value_sum>0:
+                    pos_no+=1
                 label_position_append(p)
                 label_list_append(value)
         else:
@@ -43,7 +45,7 @@ def label_reader(list file_, str chr_to_skip, float reduce):
         if i%100000==0:
             sys.stdout.write('reading labels %i \r' % (i))
             sys.stdout.flush()
-    return label_position, label_list, skipped
+    return label_position, label_list, skipped, pos_no
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
