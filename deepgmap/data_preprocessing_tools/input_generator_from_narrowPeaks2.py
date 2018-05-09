@@ -5,8 +5,8 @@ from genome_labeling2 import genome_label
 import os
 import subprocess as sp
 import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
-from inputfileGenerator_multiple_label3 import seqtobinarydict
-from inputfileGenerator_multiple_label3 import dicttoarray
+from inputfileGenerator_multiple_label3 import seqtobinarydict2 as seqtobinary
+#from inputfileGenerator_multiple_label3 import dicttoarray
 from inputfileGenerator_multiple_label3 import array_saver
 import multiprocessing
 import time 
@@ -14,6 +14,7 @@ import datetime
 import numpy as np
 import random
 import math
+from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
 
 def bedtools(cmd, tmpout):
     try:
@@ -51,6 +52,7 @@ def main(args=None):
         pref=args.out_prefix
         chr_to_skip=args.chromosome_to_skip
         data_type=args.data_type
+        chunck_data=args.chunck_data
     else:
             
         try:
@@ -183,48 +185,63 @@ def main(args=None):
                     jobs[thread+threads*jloop].join()
         genome_label(bed_file_list_2, genome_1000,labeled_genome)
     else:
-        print('As '+labeled_genome +' already exists, skipping creating this file.\
-        If you want to create a new one, you need change prefix or remove the old one.')
+        print('As '+labeled_genome +' already exists, skipping generating this file. \nIf you want to generate a new one, you need change the prefix or remove the old one.')
 
     
     if os.path.isfile(labeled_genome):
         with open(labeled_genome, 'r') as f1:
             f2=f1.readlines()
-            label_position, label_list, skipped, pos_no=sb2.label_reader(f2, chr_to_skip, reduce_genome)
-            #label_list=np.array(label_list, np.int8)
-        with open(genome_fasta, 'r') as f1:
-            binaryDNAdict, _ =seqtobinarydict(f1,label_position, chr_to_skip)
-        #print(len(label_position), len(position))
-        #neg_skipped=skipped
-        lnum=len(label_position)
-        pos_rate=np.round(pos_no/float(lnum), 3)*100
-        neg_rate=100-pos_rate
-        print("\n"+str(skipped)+" negative sequences are skipped.\nThe rate of positives vs negatives is " + str(pos_rate)+":"+str(neg_rate))
         
-        #print("\t".join(label_position[:2])+"\n"+ "\t".join(label_position[:-2])+"\n"+"\t".join(position[:2])+"\n"+"\t".join(position[:-2]))
-                
-        try:        
+        
+        label_genome_length=len(f2)
+        print label_genome_length
+        shuf=range(label_genome_length)
+        random.shuffle(shuf)
+        read_len=int(math.ceil(label_genome_length/float(chunck_data)))
+        print(read_len)
+        for ooloop in range(chunck_data):
+            sub_shuf=sorted(shuf[ooloop*read_len:(ooloop+1)*read_len])
+            print sub_shuf[0:10]
+            f2_=[f2[f2s] for f2s in sub_shuf]
+            label_position, label_list, skipped, pos_no=sb2.label_reader(f2_, chr_to_skip, reduce_genome)
+                #label_list=np.array(label_list, np.int8)
+            with open(genome_fasta, 'r') as f1:
+                binaryDNAdict, _ =seqtobinary(f1,label_position)
+            #print(len(label_position), len(position))
+            #neg_skipped=skipped
+            dna_dict_length=len(binaryDNAdict)
+            lnum=len(label_position)
+            #if lnum==0:
+                #print lnum, dna_dict_length
+            
+            pos_rate=np.round(pos_no/float(lnum), 3)*100
+            neg_rate=100-pos_rate
+            print("\n"+str(skipped)+" negative sequences are skipped.\nThe rate of positives vs negatives is " + str(pos_rate)+":"+str(neg_rate))
+            del label_position
+            #print("\t".join(label_position[:2])+"\n"+ "\t".join(label_position[:-2])+"\n"+"\t".join(position[:2])+"\n"+"\t".join(position[:-2]))
+                    
+               
             if not os.path.exists(output_dir):
                 try:
                     os.makedirs(output_dir)
                 except OSError as exc:
                     if exc.errno != exc.errno.EEXIST:
                         raise
+            
             #binaryDNAdict, label_list=dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
-            num_seq=len(binaryDNAdict)
-            shuf=range(num_seq)
-        
-            random.shuffle(shuf)
+            
             #binaryDNAdict=np.array(binaryDNAdict, np.int8)[shuf]
             #label_list=np.array(label_list, np.int8)[shuf]
-            """binaryDNAdict_shuf=[]
-            binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
-            label_list_shuf=[]
-            label_list_shuf_append=label_list_shuf.append
-            for i in shuf:
-                binaryDNAdict_shuf_append(binaryDNAdict[i])
-                label_list_shuf_append(label_list[i])"""
-            dna_dict_length=len(binaryDNAdict)
+            #binaryDNAdict_shuf=[]
+            #binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
+            #label_list_shuf=[]
+            #label_list_shuf_append=label_list_shuf.append
+            shuf2=range(dna_dict_length)
+            random.shuffle(shuf2)
+           
+            print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
+            
+            
             print(dna_dict_length, len(label_list))
             if dna_dict_length%threads==0:
                 batch=dna_dict_length/threads
@@ -240,20 +257,20 @@ def main(args=None):
             for i in range(threads):
                 #print str(len(binaryDNAdict_shuf[i*batch:(i+1)*batch]))+" are passed"
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                        args=(range(i*total_num,(i+1)*total_num), 
-                                              [binaryDNAdict[j] for j in shuf[i*batch:(i+1)*batch]],
-                                              [label_list[k] for k in shuf[i*batch:(i+1)*batch]], 
+                                        args=(ooloop, range(i*total_num,(i+1)*total_num), 
+                                              [binaryDNAdict[j] for j in shuf2[i*batch:(i+1)*batch]],
+                                              [label_list[k] for k in shuf2[i*batch:(i+1)*batch]], 
                                               sample_num, output_dir,)))
-            print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
+            #print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
             for j in jobs:
                 j.start()
                 
             for j in jobs:
                 j.join()
-            print("still working on something...")
-        except:
-            print("Unexpected error: "+str(sys.exc_info()[0]))
-            raise
+                
+            del binaryDNAdict, label_list, jobs
+        print("still working on something...")
+        
         
         running_time=time.time()-start
         print("Done! A train data set has been saved to "+str(output_dir)+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time)))

@@ -42,23 +42,20 @@ concept is the same across platforms.
 PYTHONPATH
 ~~~~~~~~~~
 
-On Linux, using bash, I include the new value in my ``PYTHONPATH`` by
-adding this line to my ``~/.bashrc``::
+You need to include the new value in your ``PYTHONPATH`` by
+adding this line to your ``~/.bashrc``::
 
- $ export PYTHONPATH=/home/taoliu/lib/python2.7/site-packages:$PYTHONPATH
+ $ export PYTHONPATH=$HOME/DeepGMAP/:$PYTHONPATH
 
 
 PATH
 ~~~~
 
-Just like your ``PYTHONPATH``, you'll also need to add a new value to your
-PATH environment variable so that you can use the MACS command line
-directly. Unlike the ``PYTHONPATH`` value, however, this time you'll need
-to add ``PREFIX/bin`` to your PATH environment variable. The process for
-updating this is the same as described above for the ``PYTHONPATH``
-variable::
+You'll also like to add a new value to your
+PATH environment variable so that you can use the deepgmap command line
+directly::
 
- $ export PATH=/home/taoliu/bin:$PATH
+ $ export PATH=$HOME/DeepGMAP/bin/:$PATH
 
 --
 Koh Onimaru <koh.oinmaru@gmail.com>
