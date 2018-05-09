@@ -1,12 +1,17 @@
-========================
-README for enhancer_prediction (0.0.0)
-========================
+===========================
+README for DeepGMAP (0.0.0)
+===========================
 Time-stamp: <2018-02-15 13:55:42 Koh>
 
 Introduction
 ============
+One of the fundamental problems in biology is the genotype-phenotype mapping, or to predict a phenotype from a genotype. Genotype originally means \
+a set of protein-coding genes that affect phenotypes, but here I extend the definition of genotype to genome sequences that determine phenotypes, \
+which includes non-coding regions such as gene regulatory sequences. Currently, predicting gene regulatory regions from genome sequences is a \
+challenging task. DeepGMAP is a Deep learning-based Genotype MAPping platform to predict them. It can train different architectures of neural \
+networks with epigenomic data, and "map" potential gene regulatory regions on a genome.
 
-
+A related paper has been published in XX.
 
 Install
 =======
@@ -14,34 +19,40 @@ Install
 Please check the file 'INSTALL' in the distribution.
 
 Usage of deepgmap
-==============
+=================
 
 ::
 
   deepgmap [-h] [--version]
              {pridict,train,generate_input,genome_divide}
 
-:Example for enhancer prediction: "deepgmap predict -i deepsea_Fri_Apr_27_152328_2018.ckpt-30400.meta -o quick_benchmark/ -b deepsea_type_wondow_mm10_200_pm400.bed.labeled -t /home/fast/onimaru/data/test_genome/mm10_200_pm400_chr2_*.npz"
+:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/XXXX.meta -o ./data/predictions/ -b ./data/inputs/mm10_dnase_subset/XXXX.bed.labeled -t /home/fast/onimaru/data/test_genome/mm10_window1000_stride200_chr2_*.npz"
 
-:Example for training a model: "deepgmap train -i data/train_data_set/ -c deepsea -o data/output/ -G 1``
+:Example for training a model: "deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 1"
 
 There are five functions currently available.
 
 :train:				Train a model with your data set. The model can be chosen by the option '-c'. deepsea, basset, danq, frss4, frss3 are available choices, but you can also create a new model.
-:predict:			Call peaks from bedGraph output.
-:generate_input:	Call broad peaks from bedGraph output.
+:predict:			Predict regulatory sequences in a genome or test a newly trained model.
+:generate_input:	Generate a training data set that is randomly shuffled and distributed into mini-batches.
 :generate_test:		Generate a test data set, or convert a genome sequence that you want to annotate its regulatory regions into input data set 
 :genome_divide:		This function creates input files for "generate_input" and "generate_test" function. The genomic data of humans and mice is already included in this package under XX directory. If you have a de novo genome sequence or want to try other species to train a model.  
 
-1. Generating training data set
-~~~~~~~~~~
+1. To annotate regulatory regions in a genome with a trained model. 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you have a de novo genome sequence and want to annotate their regulatory sequences with an already trained model, You need to convert AGCT sequences to onehot vectors.
+If you have a de novo genome sequence and want to annotate their regulatory sequences with an already trained model, you need to convert AGCT sequences to onehot vectors.
 Firstly, the multiple fasta file of your genome should be divided into a particular window size and stride by the following command:
 
 deepgmap genome_divide -i ./data/genomes/mm10.fa -w 1000 -s 200
 
-, which produces mm10_window
+, which produces mm10_window1000_stride200.bed and mm10_window1000_stride200.fa (you need to change mm10.fa to your multiple fasta file).
+The next step is to convert AGCT symbols to matrices of onehot arrays by the following command:
+
+deepgmap generate_test -i ./data/genomes/mm10_window1000_stride200.fa -o /home/fast/onimaru/data/test_genome/mm10_window500_stride200_chr2_ -t 16
+
+
+
 Options
 --------------
 
@@ -488,6 +499,22 @@ Output files
    UCSC genome browser or be converted into even smaller bigWig
    files. There are two kinds of bdg files: treat_pileup, and
    control_lambda.
+
+
+
+
+1. To train a model with epigenomic data. 
+~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
 
 Other useful links
 ==================

@@ -83,9 +83,36 @@ def seqtobinarydict(file_, lpos, _chr_to_skip="chr2"):
     
     return binaryDNAdict, position
 
+def seqtobinarydict2(file_, lpos):
+    lpos=set(lpos)
+    binaryDNAdict=[]
+    binaryDNAdict_append=binaryDNAdict.append
+    position=[]
+    position_append=position.append
+    s=0
+    skip=False
+    for line in file_:
+        if line[0]=='>':
+            a=line.strip('>\n')
+            if a not in lpos:
+                skip=True
+            else:
+                skip=False
+                position_append(a)
+                if s%100000==0:
+                    sys.stdout.write("\rconverting "+str(a))
+                    sys.stdout.flush()
+                s+=1
 
+        elif not line == '\n' and not line=='' and skip==False: 
+            line=line.strip("\n")
+           
+            binaryDNAdict_append(sb2.AGCTtoArray3(line,len(line)))
+    
+    
+    return binaryDNAdict, position
 
-def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_dir):
+def array_saver(ooloop, index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_dir):
     #print "binaryDNAdict_shuf length under array_saver: "+str(len(binaryDNAdict_shuf))
     
     for i in range(len(index_list)):
@@ -95,11 +122,11 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
         labels=np.array(label_list_shuf[i*sample_num:(i*sample_num+sample_num)], np.int8)
         #print np.shape(labels)
                 
-        filename = out_dir+"batch_"+str(index_list[i])+".npz"
+        filename = out_dir+"batch_"+str(ooloop)+"_"+str(index_list[i])+".npz"
         #print "saving "+str(filename)
         try:
             with open(filename, "wb") as output_file:
-                np.savez(output_file,labels=labels, data_array=data_array)
+                np.savez_compressed(output_file,labels=labels, data_array=data_array)
         except IOError as e:    
             print "I/O error({0}): {1}".format(e.errno, e.strerror)
         except ValueError:
@@ -107,6 +134,22 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
         except:
             print "Unexpected error:", sys.exc_info()[0]
             raise
+
+def array_saver_one_by_one(index, binaryDNAdict_shuf,label_list_shuf,out_dir):
+
+    filename = out_dir+"batch_"+str(index)+".npz"
+    try:
+        with open(filename, "wb") as output_file:
+            np.savez_compressed(output_file,labels=label_list_shuf, data_array=binaryDNAdict_shuf)
+    except IOError as e:    
+        print "I/O error({0}): {1}".format(e.errno, e.strerror)
+    except ValueError:
+        print "Could not convert data"
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
+
+
 
 def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome):           
 
