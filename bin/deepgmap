@@ -105,6 +105,8 @@ def add_predict_parser( subparsers ):
                                       help = "True or False. If True, the program will create ROC plots by comparing with labeled_bed_file. Default: True" )
     argparser_predict.add_argument( "-G", "--GPUID", dest = "gpuid", type = int,default = 0,
                               help = "Specify which GPUs to use. Default: 0" )
+    argparser_predict.add_argument( "-s", "--batch_size", dest = "batchsize", type = int,default = 1000,
+                              help = "The number of sequences that are going to be scanned at once. If you get memmory error, reducing this number may solve it. Default: 1000" )
     return
 
 def add_generate_input_parser( subparsers ):

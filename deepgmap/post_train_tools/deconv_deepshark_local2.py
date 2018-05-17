@@ -56,7 +56,7 @@ keep_prob3 = tf.placeholder(tf.float32)
 
 
 x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-y_ = tf.placeholder(tf.float32, shape=[None, 20])
+y_ = tf.placeholder(tf.float32, shape=[None, 3])
 phase=tf.placeholder(tf.bool)
 dropout_1=0.95
 dropout_2=0.9
@@ -64,7 +64,7 @@ dropout_3=0.85
 batch_size=100
 data_length=1000 
 input_dir=trained_model
-nc=il.import_module("network_constructors."+str(network_constructor))   
+nc=il.import_module("deepgmap.network_constructors."+str(network_constructor))   
 train_speed=0.00005
 a=time.asctime()
 b=a.replace(':', '')
@@ -77,19 +77,21 @@ model = nc.Model(image=x_image, label=y_,
                  keep_prob=keep_prob, 
                  keep_prob2=keep_prob2, 
                  keep_prob3=keep_prob3, 
-                 data_length=data_length)
+                 data_length=data_length,
+                 max_to_keep=2,
+                 GPUID="1")
 
 
 sess.run(tf.global_variables_initializer())
 saver=model.saver
 saver.restore(sess, input_dir)
 
-
+"""
 batch = test_batch(test_batch_file)
 test_accuracy1, y_label1, y_prediction1 =sess.run([model.error, y_, model.prediction[1]], feed_dict={x_image: batch[0], y_: batch[1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0}) 
-print "test accuracy (true:false=5:5): "+str(test_accuracy1)
+print "test accuracy (true:false=5:5): "+str(test_accuracy1)"""
 print deconv
-
+"""
 if deconv=="transpose":
     
     def conv2d_tp(x, W, output_shape):
@@ -251,10 +253,10 @@ if deconv=="transpose":
         fig.savefig(str(output_dir)+str(trained_model.split('/')[-1])+'_reconstruction_'+str(k)+'.png')
         #plt.show()
         sess2.close()
-    sess.close()
-elif deconv=="train":
+    sess.close()"""
+if deconv=="train":
     def recon_variable(shape, variable_name):
-        initial = tf.truncated_normal(shape, mean=0.50, stddev=0.5)
+        initial = tf.truncated_normal(shape, mean=0.02, stddev=0.02)
         return tf.Variable(initial, name=variable_name, trainable=True)
     def conv2d_1(x, W):
             return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
@@ -281,8 +283,12 @@ elif deconv=="train":
         index_of_image+=1"""
         
     #print positive_image[0]
-        
-    _1, _2, variavl_dict, neurons_dict,_3=sess.run(model.prediction, feed_dict={x_image: batch[0], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0})
+    current_variable={}
+    all_tv=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
+    for v in all_tv:
+        value=sess.run(v)
+        scope=v.name
+        current_variable[scope]=value
     fc1_param=model.fc1_param
     dimension22=model.dimension22
 
@@ -292,29 +298,33 @@ elif deconv=="train":
         
     x_image_recon = recon_variable([1, 1000, 4, 1], 'x_image_recon')
     
-    h_conv11_re=conv2d_1(x_image_recon, variavl_dict["W_conv1"])
-    h_conv12_re=conv2d_1(x_image_recon, tf.reverse(variavl_dict["W_conv1"], [0,1]))
+    h_conv11_re=conv2d_1(x_image_recon, current_variable["prediction/W_conv1:0"])
+    h_conv12_re=conv2d_1(x_image_recon, tf.reverse(current_variable["prediction/W_conv1:0"], [0,1]))
     h_conv11_re_ = tf.nn.relu(h_conv11_re)
     h_conv12_re_ = tf.nn.relu(h_conv12_re)
     h_pool1_re = max_pool_2x2(h_conv11_re_)
     h_pool1_rc_re = max_pool_2x2(h_conv12_re_)
-    h_conv2_re = tf.add(tf.nn.relu(conv2d_1(h_pool1_re, variavl_dict["W_conv2"])), tf.nn.relu(conv2d_1(h_pool1_rc_re, tf.reverse(variavl_dict["W_conv2"], [0,1]))))
+    h_conv2_re = tf.add(tf.nn.relu(conv2d_1(h_pool1_re, current_variable["prediction/W_conv2:0"])), tf.nn.relu(conv2d_1(h_pool1_rc_re, tf.reverse(current_variable["prediction/W_conv2:0"], [0,1]))))
     h_pool2_re = max_pool_2x2(h_conv2_re)
-    h_conv21_re = tf.nn.relu(conv2d_1(h_pool2_re, variavl_dict["W_conv21"]))
+    h_conv21_re = tf.nn.relu(conv2d_1(h_pool2_re, current_variable["prediction/W_conv21:0"]))
     h_pool21_re = max_pool_2x2(h_conv21_re)
-    h_conv22_re = tf.nn.relu(conv2d_1(h_pool21_re, variavl_dict["W_conv22"]))
+    h_conv22_re = tf.nn.relu(conv2d_1(h_pool21_re, current_variable["prediction/W_conv22:0"]))
     h_pool22_re = max_pool_4x1(h_conv22_re)
     
     h_pool3_flat_re = tf.reshape(h_pool22_re, [-1, 1*fc1_param*dimension22])
 
-    h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, variavl_dict["W_fc1"]), variavl_dict["b_fc1"]))
-    y_conv_re=tf.add(tf.matmul(h_fc1_re,variavl_dict["W_fc4"]), variavl_dict["b_fc4"])
+    h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, current_variable["prediction/W_fc1:0"]), current_variable["prediction/b_fc1:0"]))
+    y_conv_re=tf.add(tf.matmul(h_fc1_re,current_variable["prediction/W_fc4:0"]), current_variable["prediction/b_fc4:0"])
     print y_conv_re.shape
     #cost =-tf.reshape(y_conv_re,[1])+tf.reduce_sum(tf.square(x_image_recon))/500.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])*tf.log(tf.nn.sigmoid(y_conv_re[0][1]+0.000001)/(tf.nn.sigmoid(y_conv_re[0][0])+0.000001))+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])*tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
-    cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])/(tf.nn.sigmoid(y_conv_re[0][0])+0.00001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])/(tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    
+    cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    
+    
     #cost =-y_conv_re+tf.reduce_sum(tf.square(x_image_recon))/500.0
     #cost =-(y_conv_re[0][1]-y_conv_re[0][0])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     
@@ -339,10 +349,12 @@ elif deconv=="train":
  
         
             #print a
+            
+    output_dir=output_dir+"/"+os.path.split(trained_model)[1]+str(start_at)+"_all_sum"
     final_recon=x_image_recon.eval(session=sess2)
     final_recon_res=np.reshape(final_recon, (data_length, 4))
     inputdir=input_dir.split('/')[-1]
-    np.savez_compressed(str(trained_model)+str(start_at), recon=final_recon_res)
+    np.savez_compressed(output_dir, recon=final_recon_res)
     
     fig = plt.figure(figsize=(8,8))
         # Plot distance matrix.
@@ -352,9 +364,9 @@ elif deconv=="train":
     axmatrix.set_yticks([])
     axcolor = fig.add_axes([0.8,0.05,0.02,0.9])
     pylab.colorbar(im, cax=axcolor)
-    fig.savefig(str(trained_model)+'_max_act_'+str(start_at)+'.png')
+    fig.savefig(output_dir+'.png')
     import sequence_visualizer2 as sq
-    sq.seuquence_visualizer2(final_recon_res, str(trained_model)+'_max_act_seq_'+str(start_at)+'.pdf')
+    sq.seuquence_visualizer2(final_recon_res, output_dir+'.pdf')
     plt.show()
     sess2.close()
 else:

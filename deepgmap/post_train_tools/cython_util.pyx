@@ -37,12 +37,12 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
     cdef int i,k, j, l=0
     cdef str k1, k2
     cdef double RAND_MEAN, RAND_DEV,DIST,Z_SCORE, ic
-    cdef list RAND_DIST, partial_motif, comp_result, comp_result2, cpr, Z_SCORE_list=[]
+    cdef list comp_result, comp_result2, cpr, Z_SCORE_list=[]
     cdef int[2] v2shape,v1shape
     #cdef double[4] pm1
     with open(fout, "w") as f:
         comp_result2=[]
-        f.write("Motif name\tStart\tEnd\tJSD\n")
+        f.write("Motif name\tStart\tEnd\tDistance\n")
         for k1, v1 in long_motif_dict.items():
             
             v1shape=v1.shape
@@ -56,22 +56,21 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
                 #print j
                 v2shape=v2.shape
                 #print v2shape
-                for i in range(v2shape[0]):
+                """for i in range(v2shape[0]):
                     ic=np.nansum(v2[i]*np.log2(v2[i]*4+0.000001))
-                    v2[i]=v2[i]
+                    v2[i]=v2[i]"""
  
-                RAND_DIST=[]
-                for i in range(100):
+                RAND_DIST=np.zeros([500], np.float32)
+                for i in range(500):
                     rand=np.random.rand(v2shape[0],v2shape[1])
                     for k in range(v2shape[0]):
-                        pm1=rand[k]/np.sum(rand[k])
+                        rand[k]=rand[k]/np.sum(rand[k])
                         #rand[k]=pm1*(np.sum(pm1*np.log2(pm1*4+0.00001)))
-                        rand[k]=pm1
                     #RAND_DIST.append(np.mean(np.diagonal(cdist(v2, rand,metric='euclidean'))))
                     M=0.5*(rand+v2)+0.00001
                     DIST=0.5*(np.sum(-v2*np.log(M/(v2+0.00001)))+np.sum(-rand*np.log(M/(rand+0.00001))))/float(v2shape[0])
                     #DIST=-np.sum(v2*np.log(rand+0.00001)+(1.0-v2)*np.log(1.0-rand+0.00001))/float(v2shape[0])
-                    RAND_DIST.append(DIST)
+                    RAND_DIST[i]+=DIST
                     
                 RAND_MEAN=np.mean(RAND_DIST)
                 RAND_DEV=np.std(RAND_DIST)
@@ -79,12 +78,12 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
                 #print("randome_dist: "+str(RAND_DIST))
                 comp_result=[]
                 for i in range(v1shape[0]-v2shape[0]):
-                    partial_motif=[]
-                    for j in range(v2shape[0]):
-                        pm1=v1[i+j]
+                    #partial_motif=[]
+                    #for j in range(v2shape[0]):
+                    #    pm1=v1[i+j]
                         #ic=np.sum(pm1*np.log2(pm1*4+0.000001))
-                        partial_motif.append(pm1)
-                    partial_motif_=np.array(partial_motif)
+                    partial_motif_=v1[i:i+v2shape[0]]
+                    #partial_motif_=np.array(partial_motif)
                     #partial_motif=v1[i:(i+v2shape[0])]
                     #print v2shape, np.shape(partial_motif)
                     M=0.5*(partial_motif_+v2)+0.00001
@@ -112,18 +111,18 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
                         comp_result.append([k2,i,i+v2shape[0],Z_SCORE,ori])
                 #print comp_result
                     
-                if 0<len(comp_result)<3:
+                if 0<len(comp_result)<10:
                     for cpr in comp_result:
                         comp_result2.append(cpr)
                         #f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\n")
-                elif len(comp_result)>=3:
+                elif len(comp_result)>=10:
                     comp_result.sort(key = lambda x: x[3])
-                    for cpr in comp_result[-3:]:
+                    for cpr in comp_result[-10:]:
                         comp_result2.append(cpr)
                         
         comp_result2.sort(key = lambda x: x[1])
         for cpr in comp_result2:
-            f.write(str(cpr[0])+"\t"+str(cpr[1])+"\t"+str(cpr[2])+"\t"+str(cpr[3])+"\t"+str(cpr[4])+"\n")
+            f.write("\t".join([str(cpr[0]),str(cpr[1]),str(cpr[2]),str(cpr[3]),str(cpr[4])])+"\n")
                     
                         
         print("the number of motif matches: "+str(l))

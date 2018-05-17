@@ -76,6 +76,7 @@ def main(args=None):
         chromosome_of_interest=args.chromosome
         TEST=args.test_or_prediction
         GPUID=str(args.gpuid)
+        BATCH_SIZE=args.batchsize
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
@@ -122,7 +123,12 @@ def main(args=None):
             os.makedirs(output_dir)
         except OSError as exc:
             sys.exit(exc)
-            
+    
+    
+    
+    
+    
+    
     test_genome_list=natsorted(glob(test_genome))
     if len(test_genome_list)==0:
         sys.exit(test_genome+" does not exist.")
@@ -251,12 +257,12 @@ def main(args=None):
         print(seq_length)
         
         
-        loop=int(math.ceil(float(seq_length)/1000))
+        loop=int(math.ceil(float(seq_length)/BATCH_SIZE))
         
         for i in range(loop):
-            if i*1000>seq_length:
+            if i*BATCH_SIZE>seq_length:
                 break
-            scanning=seq_list[i*1000:(i+1)*1000]
+            scanning=seq_list[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
             if len(y_prediction2)==0:
                 y_prediction2, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
                 

@@ -61,7 +61,7 @@ def seuquence_visualizer2(npz_file, output_file):
     cr.set_line_width(2)
     cr.stroke()
     
-    meme_fileout=open(npz_file+'_test.meme','w')
+    meme_fileout=open(output_file+'.meme','w')
     meme_fileout.write("MEME version 4\n\nALPHABET= ACGT\n\nstrands: + -\n\n\
 Background letter frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.2500 T 0.2500\n\nMOTIF LONG_MOTIF\n\nletter-probability matrix: alength= 4 w= 1000 nsites= 20 E= 0\n")
         

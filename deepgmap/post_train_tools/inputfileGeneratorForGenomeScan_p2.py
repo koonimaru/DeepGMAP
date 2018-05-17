@@ -70,7 +70,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
 
 def array_saver(outfile,positions,sequences):
     print('saving '+outfile)
-    np.savez(outfile,positions=positions,sequences=sequences)
+    np.savez_compressed(outfile,positions=positions,sequences=sequences)
         
 def run(args):
     
