@@ -213,7 +213,9 @@ def main(args=None):
         batch_size, label_dim=labels.shape
         _, data_length, dna_dim=_data.shape
         print(batch_size, label_dim)    
-
+    
+    
+    saving_dir_prefix=str(output_dir)+str(model_name)+"_"+start_at
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
     #config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
@@ -228,7 +230,7 @@ def main(args=None):
     print("running "+str(model_name))
     
     model = nc.Model(image=x_image, label=y_, 
-                     output_dir=output_dir,
+                     output_dir=saving_dir_prefix,
                      phase=phase, 
                      start_at=start_at, 
                      keep_prob=keep_prob, 
@@ -325,11 +327,11 @@ def main(args=None):
                             if len(test_step)>10:
                                 e, f=test_step[-1],test_step[-10]
                                 if e-f<=40:
-                                    TEST_THRESHHOLD+=0.10
+                                    TEST_THRESHHOLD+=0.02
+                                    
+                                    if TEST_THRESHHOLD>0.9900:
+                                        TEST_THRESHHOLD=0.9900
                                     print("\n"+str(TEST_THRESHHOLD))
-                                    if TEST_THRESHHOLD>0.9800:
-                                        TEST_THRESHHOLD=0.9800
-                                        
                             if CHECK_TEST_FR:
                                 TEST_THRESHHOLD-=0.02
                             #TEST_THRESHHOLD=temporal_accuracy-0.005
@@ -352,7 +354,7 @@ def main(args=None):
                             print(to_print)
                             if (prev_ac==None and mean_ac>=SAVE_THRESHHOLD) or (prev_ac!=None and mean_ac>=prev_ac):
                                 
-                                flog=open(str(output_dir)+str(start_at)+'.log', 'a')
+                                flog=open(saving_dir_prefix+'.log', 'a')
                                 flog.write("This is tests for the model at the train step: "+str(h)+"\nThe average of TPR+PPV: "+str(mean_ac)+'\n')
                                 flog.close()
                                 saver.save(sess, str(output_dir)+str(model_name)+"_"+str(start_at)+'_step'+str(h)+'.ckpt', global_step=h)
@@ -384,7 +386,7 @@ def main(args=None):
                 if h>=loop_num_*EPOCHS_TO_TRAIN: # or (i*queue_len+k) >= max_train:
                     BREAK=True
                     break
-    saver.save(sess, str(output_dir)+str(model_name)+"_"+str(start_at)+".ckpt", global_step=h)
+    saver.save(sess, saving_dir_prefix+".ckpt", global_step=h)
              
     t_batch = test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length)   
     f1_list=[]
@@ -403,23 +405,19 @@ def main(args=None):
         value=sess.run(v)
         scope=v.name
         current_variable[scope]=value
-    all_lv=tf.get_collection(tf.GraphKeys.LOCAL_VARIABLES)
+    """all_lv=tf.get_collection(tf.GraphKeys.LOCAL_VARIABLES)
     local_variable={}
     for v in all_lv:
         value=sess.run(v)
         scope=v.name
         print(scope)
-        local_variable[scope]=value
+        local_variable[scope]=value"""
     all_=tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
-    np.savez(str(output_dir)+str(model_name)+'_trained_variables_'+str(start_at)+'.npz', **current_variable)
-    np.savez(str(output_dir)+str(model_name)+'_local_variables_'+str(start_at)+'.npz', **local_variable)
+    np.savez(saving_dir_prefix+'_trained_variables.npz', **current_variable)
+    #np.savez(str(output_dir)+str(model_name)+'_local_variables_'+str(start_at)+'.npz', **local_variable)
     mean_ac=np.round(np.nanmean(f1_list),4) 
     running_time=time.time()-start
     import datetime
-    if args is not None:
-        _args=args
-    else:
-        _args=sys.argv
     to_print=("dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
               +"input directory: "+str(input_dir)+"\n"
               +"The average of TPR+PPV: "+str(np.round(mean_ac,2))
@@ -431,7 +429,7 @@ def main(args=None):
        
     sess.close()
     print(to_print)
-    flog=open(str(output_dir)+str(start_at)+'.log', 'a')
+    flog=open(saving_dir_prefix+'.log', 'a')
     flog.write(to_print+'\n')
     flog.close()
     
@@ -455,8 +453,8 @@ def main(args=None):
     
     x1,x2,y1,y2 = plt.axis()
     plt.axis((x1,x2,0,1.0))
-    plt.savefig(str(output_dir)+'plot_'+str(start_at)+'.pdf', format='pdf')
-    np.savez_compressed(str(output_dir)+str(model_name)+"_"+str(start_at)+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
+    plt.savefig(saving_dir_prefix+'_plot.pdf', format='pdf')
+    np.savez_compressed(saving_dir_prefix+"_"+str(start_at)+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
     import send_email
     send_email.send_email(to_print)
     

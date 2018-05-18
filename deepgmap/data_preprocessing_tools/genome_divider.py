@@ -50,9 +50,9 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None
     else:
         outbed=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.bed'
         outfasta=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.fa'
-    if stride==None:
-        stride=WINDOW_SIZE/2
-    adding=WINDOW_SIZE/stride
+    #if stride==None:
+        #stride=WINDOW_SIZE/2
+    #adding=WINDOW_SIZE/stride
     
     #WINDOW_SIZE=1000
     #genome_file="/home/fast/onimaru/lamprey/LetJap1.0.1.genome"
@@ -63,29 +63,14 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None
             line=line.split()
             chrom=line[0]
             chrom_size=int(line[1])
-            divide_num=chrom_size/WINDOW_SIZE
+            #divide_num=chrom_size/WINDOW_SIZE
             
             #divide_num=chrom_size/WINDOW_SIZE-4
-            for i in range(divide_num):
-                
-                #if i>=2:
-                for j in range(adding):
-                    if i*WINDOW_SIZE+stride*j<=chrom_size and i*WINDOW_SIZE+stride*j+WINDOW_SIZE<=chrom_size:
-                        fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+stride*j)+'\t'+str(i*WINDOW_SIZE+stride*j+WINDOW_SIZE)+'\n')
-                    else:
-                        break
-                """ #if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4<=chrom_size:
-                    #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/4)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/4)+'\n')
-                #else:
-                    #break
-                if i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/2<=chrom_size:
-                    fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE/2)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+WINDOW_SIZE/2)+'\n')
-                else:
-                    break
-                #if i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3<=chrom_size:
-                    #fout1.write(str(chrom)+'\t'+str(i*WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\t'+str(i*WINDOW_SIZE+WINDOW_SIZE+(WINDOW_SIZE/4)*3)+'\n')
-                #else:
-                    #break"""
+            i=0
+            while WINDOW_SIZE+stride*i<=chrom_size:
+                fout1.write(str(chrom)+'\t'+str(stride*i)+'\t'+str(WINDOW_SIZE+stride*i)+'\n')
+                i+=1
+            
     
     try:
         stdout_file=open(outbed+"_tmp", "w")

@@ -4,7 +4,7 @@ import sys
 from scipy.spatial.distance import cdist
 from cython_util import motif_compare as mc
 from matplotlib import pyplot as plt 
-
+import os
 def _is_number(s):
     try:
         complex(s) # for int, long, float and complex
@@ -60,7 +60,7 @@ def motif_reader(motif_data_dir):
 
 def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
     with open(fout, "w") as f:
-        f.write("Motif name\tStart\tEnd\tJSD\n")
+        f.write("Motif name\tStart\tEnd\tdistance\n")
         for k1, v1 in long_motif_dict.items():
             
             v1shape=v1.shape
@@ -100,8 +100,10 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
 
 def main():
     motif_data_dir="/home/fast/onimaru/data/meme/merged.meme"
-    long_motif_dir="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz_test.meme"
-    fout="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz.meme_JSD.matches"
+    #long_motif_dir="/home/fast/onimaru/deepgmap/data/reconstructions/conv4frss_Fri_May_11_075425_2018.ckpt-16747Tue_May_15_112518_2018_all_.pdf.meme"
+    long_motif_dir="/home/fast/onimaru/deepgmap/data/reconstructions/conv4frss_Fri_May_11_075425_2018.ckpt-16747Tue_May_15_104419_2018_es_e14_.pdf.meme"
+    fout=os.path.splitext(long_motif_dir)[0]+".matches"
+    #fout="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz.matches"
     motif_data_dict=motif_reader(motif_data_dir)
     print len(motif_data_dict)
     long_motif_dict=motif_reader(long_motif_dir)

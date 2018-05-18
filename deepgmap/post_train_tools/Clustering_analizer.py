@@ -1,17 +1,18 @@
 import numpy as np
-import cPickle
-import gzip
-from sklearn.cluster import DBSCAN
-from sklearn import metrics
+#import cPickle
+#import gzip
+#from sklearn.cluster import DBSCAN
+#from sklearn import metrics
 import matplotlib.pyplot as plt
-import scipy
+#import scipy
 import pylab
 import scipy.cluster.hierarchy as sch
 import scipy.spatial.distance as spd
-from sklearn.decomposition import PCA, IncrementalPCA
+#from sklearn.decomposition import PCA, IncrementalPCA
 from MulticoreTSNE import MulticoreTSNE as TSNE
-
-variables=np.load('/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_14_124508_2018.npz')
+import os
+fname='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
+variables=np.load(fname)
 filter1=variables['prediction/W_conv1:0']
 filter1_shape=filter1.shape
 filter1_flattened_array=[]  
@@ -46,6 +47,9 @@ axcolor = fig.add_axes([0.91,0.1,0.02,0.6])
 pylab.colorbar(im, cax=axcolor)
 #fig.savefig('/media/koh/HD-PCFU3/mouse/filter_1_clustering.png')
 
+saving_dir_prefix=os.path.splitext(fname)[0]
+plt.savefig(saving_dir_prefix+'_heat_map.pdf', format='pdf')
+
 tsne = TSNE(n_jobs=18,perplexity = 50.000000,  n_iter=5000)
 #X_pca2=np.array(X_pca2, np.float64)
 X_tsne = tsne.fit_transform(X)
@@ -53,6 +57,7 @@ X_tsne = tsne.fit_transform(X)
 fig2 = pylab.figure(figsize=(8,8))
 plt.scatter(X_tsne[:, 0], X_tsne[:, 1],
              lw=2,s=0.5)
+plt.savefig(saving_dir_prefix+'_tSNE.pdf', format='pdf')
 
 
 plt.show()
