@@ -5,7 +5,7 @@ INSTALL Guide For DeepGMAP
 Prerequisites
 =============
 
-DeepGMAP is verified to work only in Linux (Ubunru 16.10). 
+DeepGMAP is verified to work only on Linux (Ubunru 16.10). 
 
 Python version 2.7.
 
@@ -15,6 +15,8 @@ Cython_ (>=0.18) is an optional requirement to recompile ``.pyx`` files.
 
 Tensorflow_ (>=1.8)
 
+Scikit learn_ (>=0.19.1)
+
 matplotlib_
 
 bedtools_ (>=2.25)
@@ -22,22 +24,15 @@ bedtools_ (>=2.25)
 .. _Numpy: http://www.scipy.org/Download
 .. _Cython: http://cython.org/
 
-Install from source
-===================
+Download source
+===============
 
-To install a source distribution of DeepGMAP, go to the directory of
-DeepGMAP, and run the install script::
-
- $ python setup.py install --prefix $HOME
-
+ $ git clone https://github.com/koonimaru/DeepGMAP.git
 
 Configure enviroment variables
 ==============================
 
-After running the setup script, you might need to add the install
-location to your ``PYTHONPATH`` and ``PATH`` environment variables. The
-process for doing this varies on each platform, but the general
-concept is the same across platforms.
+You need to add the downloaded location (in this example home directory; $HOME) to your ``PYTHONPATH`` and ``PATH`` environment variables.
 
 PYTHONPATH
 ~~~~~~~~~~
@@ -47,6 +42,11 @@ adding this line to your ``~/.bashrc``::
 
  $ export PYTHONPATH=$HOME/DeepGMAP/:$PYTHONPATH
 
+Then, type::
+
+ $ source .bashrc
+
+Or, re-login to your account.
 
 PATH
 ~~~~

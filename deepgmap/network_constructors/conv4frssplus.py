@@ -48,12 +48,12 @@ class Model(object):
     dimension21=560
     dimension22=560
     dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
-    conv1_filter=6
+    conv1_filter=7
     #conv1_filter2=49
     conv2_filter=12
     #conv20_filter=8
-    conv21_filter=7
-    conv22_filter=8
+    conv21_filter=8
+    conv22_filter=7
     max_to_keep=2
     train_speed=0.0001
 
@@ -81,7 +81,7 @@ class Model(object):
         self.cost
         #print 'Running deap shark model'
         if self.output_dir is not None:
-            flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
+            flog=open(str(self.output_dir)+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"
                     +"the filer number of conv1:"+ str(self.dimension1)+"\n"
                       +"the filer size of conv1:"+ str(self.conv1_filter)+"\n"

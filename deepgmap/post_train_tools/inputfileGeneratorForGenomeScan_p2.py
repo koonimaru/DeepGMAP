@@ -27,43 +27,28 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
     print data_width
     SEQ=False
     #print seq_list
-    if target_chr=="all":
-        for l, line in enumerate(input_file_read):
-            if line.startswith('>'):
-                #if not "_" in line and not line.startswith('>chrM'):
-                if not line.startswith('>chrM'):
-                    #print line,
-                    position_list_append(line.strip('\n'))
-                    SEQ=True
-                else:
-                    SEQ=False
-                if i%100000==0:
-                    print line
-            elif SEQ:
-                line=line.strip('\n')
-                
-                #a1=time.time()
-                seq_list_append(sb2.AGCTtoArray3(line,data_width))
-                
-                #b1+=time.time()-a1
-            i+=1
-            #if i%100000==0:
-                #print b1
-                #sys.exit()
-    else:
-        for line in input_file_read:
-            if line.startswith('>'):
-                if line.startswith('>'+str(target_chr)+':'):
-                    print line
-                    seq_list_append(line.strip('\n'))
-                    SEQ=True
-                else:
-                    SEQ=False
-            elif SEQ:
-                line=line.strip('\n')
-                #sequence=np.zeros([1,1000,4,1], np.int16)
-                                   
-                seq_list_append(sb2.AGCTtoArray3(line,data_width))
+    for l, line in enumerate(input_file_read):
+        if line.startswith('>'):
+            #if not "_" in line and not line.startswith('>chrM'):
+            if not line.startswith('>chrM'):
+                #print line,
+                position_list_append(line.strip('\n'))
+                SEQ=True
+            else:
+                SEQ=False
+            if i%100000==0:
+                print line
+        elif SEQ:
+            line=line.strip('\n')
+            
+            #a1=time.time()
+            seq_list_append(sb2.AGCTtoArray3(line,data_width))
+            
+            #b1+=time.time()-a1
+        i+=1
+        #if i%100000==0:
+            #print b1
+            #sys.exit()
                     
     return position_list, seq_list
         

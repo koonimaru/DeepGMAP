@@ -18,6 +18,12 @@ import getopt
 
 
 def DNA_to_array_converter(input_file,target_chr):
+    
+    
+    if "," in target_chr:
+        target_chr=set(target_chr.split(','))
+    else:
+        target_chr=set(target_chr)
     seq_list=[]
     position_list=[]
     b1=0.0
@@ -25,43 +31,23 @@ def DNA_to_array_converter(input_file,target_chr):
     with open(input_file, 'r') as fin:
     
         SEQ=False
-        if target_chr=="all":
-            for line in fin:
-                if line.startswith('>'):
-                    if not "_" in line and not line.startswith('>chrM'):
-                        #print line,
-                        position_list.append(line.strip('\n'))
-                        SEQ=True
-                    else:
-                        SEQ=False
-                    if i%100000==0:
-                        print line
-                elif SEQ:
-                    line=line.strip('\n')
-                    data_width=len(line)
-                    a1=time.time()
-                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
-                    b1+=time.time()-a1
-                i+=1
-                if i%100000==0:
-                    print b1
-                    sys.exit()
-        else:
-            for line in fin:
-                if line.startswith('>'):
-                    if line.startswith('>'+str(target_chr)+':'):
-                        print line
-                        position_list.append(line.strip('\n'))
-                        SEQ=True
-                    else:
-                        SEQ=False
-                elif SEQ:
-                    line=line.strip('\n')
-                    data_width=len(line)
-                    #sequence=np.zeros([1,1000,4,1], np.int16)
-                                       
-                    seq_list.append(sb2.AGCTtoArray3(line,data_width))
-                    #seq_list.append(sb2.ACGTtoaltArray(line,data_width))
+        for line in fin:
+            if line.startswith('>'):
+                _line=line.strip('>').split(':')[0]
+                if _line in target_chr:
+                    print line
+                    position_list.append(line.strip('\n'))
+                    SEQ=True
+                    
+                else:
+                    SEQ=False
+            elif SEQ:
+                line=line.strip('\n')
+                data_width=len(line)
+                #sequence=np.zeros([1,1000,4,1], np.int16)
+                                   
+                seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                #seq_list.append(sb2.ACGTtoaltArray(line,data_width))
     return position_list, seq_list
         
 

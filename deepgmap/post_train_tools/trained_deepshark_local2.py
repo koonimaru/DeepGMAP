@@ -161,10 +161,16 @@ def main(args=None):
     if len(sample_list)==0:
         sample_list.append(os.path.basename(os.path.splitext(bed_file)[0]))
     
-    print(yshape)    
+    print(yshape)
+    if "," in chromosome_of_interest:
+        chromosome_of_interest=set(chromosome_of_interest.split(','))
+    else:
+        chromosome_of_interest=set([chromosome_of_interest])
+        
+        
     
-    if not labeled_file:
-        if not chromosome_of_interest=="all":
+    """"if not labeled_file:
+        if not "all" in chromosome_of_interest:
             positive_region=set()
             with open(bed_file, 'r') as fpos:
                 for line in fpos:
@@ -178,14 +184,17 @@ def main(args=None):
                             label_list.append(1)
                         else:
                             label_list.append(0)
-    else:
-        if not chromosome_of_interest=="all":
-            label_list=[]
-            with open(bed_file, "r") as fin:
-                for line in fin:
-                    if line.startswith(str(chromosome_of_interest)+"\t"):
-                        line=line.split()
-                        label_list.append(line[3:])
+    else:"""
+    print(chromosome_of_interest)
+    if not "all" in chromosome_of_interest:
+        label_list=[]
+        with open(bed_file, "r") as fin:
+            for line in fin:
+                line=line.split()
+                #print(line[0])
+                if line[0] in chromosome_of_interest:
+                    #print(line[0], chromosome_of_interest)
+                    label_list.append(line[3:])
 
     path_sep=os.sep
     file_name=input_dir_.split(path_sep)
@@ -216,11 +225,9 @@ def main(args=None):
         model_name=input_dir.split(path_sep)[-1].split("_")
         model_name=model_name[0]
     print("runing "+str(model_name))
-    try:
-        nc=il.import_module("deepgmap.network_constructors."+str(model_name))
-    except ImportError:
-        print(str(model_name)+" does not exist")
-        sys.exit(0)
+    
+    nc=il.import_module("deepgmap.network_constructors."+str(model_name))
+
     
     model = nc.Model(image=x_image, label=y_, 
                  output_dir=None,
@@ -234,11 +241,11 @@ def main(args=None):
                  GPUID=GPUID)
     sess.run(tf.global_variables_initializer())
     saver=model.saver
-    try:
-        saver.restore(sess, input_dir)
-    except:
-        print("can't open "+str(input_dir))
-        sys.exit(0)
+    #try:
+    saver.restore(sess, input_dir)
+    #except:
+        #print("can't open "+str(input_dir))
+
     
     l=0
     position_list=[]
@@ -288,6 +295,8 @@ def main(args=None):
     
     #writing the predictions in narrowPeak format
     out_dir_np=out_dir+"_narrowPeaks/"
+    print('Writing the prodictions in narrowPeak format to '+out_dir_np)
+    
     if not os.path.exists(out_dir_np):
             try:
                 os.makedirs(out_dir_np)
@@ -312,9 +321,10 @@ def main(args=None):
             
     for i in output_handle:
         i.close()
-    print('finished writing the prodictions in narrowPeak format to '+out_dir_np)
+    print('finished writing the prodictions.')
     
     if TEST==True:
+        print("Now, calculating AUROC and AUPRC scores...")
         label_array=np.array(label_list, np.int16)
         fpr_list=[]
         tpr_list=[]
@@ -364,6 +374,7 @@ def main(args=None):
         max_pre_rec=round(np.amax(average_precision_list), 4)
         min_pre_rec=round(np.amin(average_precision_list), 4)       
         
+        print("Drawing the curves...")
         plt.figure(1, figsize=(14,14))
         ax1=plt.subplot(211)
         cmap = plt.get_cmap('gnuplot')

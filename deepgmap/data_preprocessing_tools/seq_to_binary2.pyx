@@ -5,42 +5,52 @@ import random
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-def label_reader(list file_, str chr_to_skip, float reduce):
+def label_reader(list file_, list chr_to_skip, float reduce):
     cdef list label_position=[]
     label_position_append=label_position.append
     cdef list label_list=[]
     label_list_append=label_list.append
     cdef list line_=[]
-    cdef int i=0, value_sum, skipped_chr=0, skipped=0, pos_no=0
-    cdef str line, p
-    cdef int _name_length=len(chr_to_skip)+1
+    cdef int i=0, value_sum, skipped=0, pos_no=0
+    cdef str line, p, skipped_chr=""
+    cdef int _name_length
     cdef list value
     cdef float r
+    cdef int skipping=0
     #cdef list skipped=[]
     #skipped_append=skipped.append
     for line in file_:
         #print(line)
         if line[0]=="#":
-            
             continue
-        if not line[0:_name_length]==chr_to_skip+'\t':
-            line_=line.split()
-            value=map(int, line_[3:])
-            value_sum=sum(value)
-            r=random.random()
-            p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
-            if value_sum==0 and r<reduce:
-                skipped+=1
+        
+        line_=line.split()
+        for _chr in chr_to_skip:
+            if line_[0]==_chr:
+                if not skipped_chr==line_[0]:
+                    sys.stdout.write('skipping '+line_[0]+'\r')
+                    sys.stdout.flush()
+                    skipped_chr=line_[0]
+                    skipping=1
+                break
             else:
-                if value_sum>0:
-                    pos_no+=1
-                label_position_append(p)
-                label_list_append(value)
+                skipping=0
+        if skipping==1:
+            continue
+        
+        value=map(int, line_[3:])
+        value_sum=sum(value)
+        r=random.random()
+        p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
+        if value_sum==0 and r<reduce:
+            skipped+=1
         else:
-            if skipped_chr==0:
-                sys.stdout.write('skipping '+line[0:5]+'\r')
-                sys.stdout.flush()
-                skipped_chr+=1
+            if value_sum>0:
+                pos_no+=1
+            label_position_append(p)
+            label_list_append(value)
+        
+        
         i+=1
         if i%100000==0:
             sys.stdout.write('reading labels %i \r' % (i))

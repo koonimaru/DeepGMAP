@@ -320,9 +320,9 @@ if deconv=="train":
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])*tf.log(tf.nn.sigmoid(y_conv_re[0][1]+0.000001)/(tf.nn.sigmoid(y_conv_re[0][0])+0.000001))+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])*tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
-    #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])/(tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     
-    cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     
     
     #cost =-y_conv_re+tf.reduce_sum(tf.square(x_image_recon))/500.0
@@ -350,7 +350,7 @@ if deconv=="train":
         
             #print a
             
-    output_dir=output_dir+"/"+os.path.split(trained_model)[1]+str(start_at)+"_all_sum"
+    output_dir=output_dir+"/"+os.path.split(trained_model)[1]+str(start_at)+"_ese14_re"
     final_recon=x_image_recon.eval(session=sess2)
     final_recon_res=np.reshape(final_recon, (data_length, 4))
     inputdir=input_dir.split('/')[-1]

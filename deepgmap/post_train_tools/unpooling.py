@@ -49,7 +49,7 @@ def unpool(updates, mask, ksize=[1, 2, 1, 1], output_shape=None, name=''):
         return ret
     
     
-def unpool2(pool, ind, ksize=[1, 2, 1, 1], scope='unpool2'):
+def unpool2(pool, ind, ksize=[1, 2, 1, 1], scope='unpool'):
     """
        Unpooling layer after max_pool_with_argmax.
        Args:

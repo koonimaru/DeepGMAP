@@ -42,18 +42,20 @@ class Model(object):
     # parameter lists
     initial_variation=0.005 #standard deviation of initial variables in the convolution filters
     #mini batch size
-    dimension1=320 #the number of the convolution filters in the 1st layer
+    dimension1=480 #the number of the convolution filters in the 1st layer
     dimension2=800
     dimension20=560 #the number of the convolution filters in the 2nd layer
     dimension21=560
     dimension22=560
-    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
-    conv1_filter=6
+    dimension23=560
+    dimension4=925*2 #the number of the neurons in each layer of the fully-connected neural network
+    conv1_filter=7
     #conv1_filter2=49
     conv2_filter=12
     #conv20_filter=8
-    conv21_filter=7
-    conv22_filter=8
+    conv21_filter=8
+    conv22_filter=7
+    conv23_filter=5
     max_to_keep=2
     train_speed=0.0001
 
@@ -68,12 +70,13 @@ class Model(object):
         self.start_at=kwargs["start_at"]
         self.output_dir=kwargs["output_dir"]
         self.max_to_keep=kwargs["max_to_keep"]
-        self.fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((#math.ceil((
+        self.fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((math.ceil((
             self.data_length-self.conv1_filter+1)/2.0)
                         -self.conv2_filter+1)/2.0)
                         #-self.conv20_filter+1)/2.0)
                         -self.conv21_filter+1)/2.0)
-                        -self.conv22_filter+1)/4.0))
+                        -self.conv22_filter+1)/2.0)
+                        -self.conv23_filter+1)/2.0))
         self.prediction
         self.optimize
         self.error
@@ -81,7 +84,7 @@ class Model(object):
         self.cost
         #print 'Running deap shark model'
         if self.output_dir is not None:
-            flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
+            flog=open(str(self.output_dir)+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"
                     +"the filer number of conv1:"+ str(self.dimension1)+"\n"
                       +"the filer size of conv1:"+ str(self.conv1_filter)+"\n"
@@ -185,10 +188,19 @@ class Model(object):
         W_conv22.assign(tf.cond(wconv22_l2>cond, lambda: tf.multiply(W_conv22, cond/wconv22_l2),lambda: W_conv22 ))
         #h_conv22 = tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv2, W_conv22), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001))
         h_conv22 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_pool21, W_conv22)), self.keep_prob2)
-        h_pool22 = max_pool_4x1(h_conv22)
-    
+        h_pool22 = max_pool_2x2(h_conv22)
         
-        W_fc1 = weight_variable([1 * self.fc1_param * self.dimension22, self.dimension4], 'W_fc1')
+        W_conv23 = weight_variable([self.conv23_filter, 1, self.dimension22, self.dimension23], 'W_conv23')
+        wconv23_l2=tf.reduce_sum(tf.square(W_conv23))
+        l2norm_list.append(wconv23_l2)
+        W_conv23.assign(tf.cond(wconv23_l2>cond, lambda: tf.multiply(W_conv23, cond/wconv23_l2),lambda: W_conv23 ))
+        #h_conv22 = tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv2, W_conv22), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001))
+        h_conv23 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_pool22, W_conv23)), self.keep_prob2)
+        h_pool23 = max_pool_2x2(h_conv23)
+        
+        
+        flatten_dim=1 * self.fc1_param * self.dimension23
+        W_fc1 = weight_variable([flatten_dim, self.dimension4], 'W_fc1')
         wfc1_l2=tf.reduce_sum(tf.square(W_fc1))
         l2norm_list.append(wfc1_l2)
         W_fc1.assign(tf.cond(wfc1_l2>cond, lambda: tf.multiply(W_fc1, cond/wfc1_l2),lambda: W_fc1 ))
@@ -198,7 +210,7 @@ class Model(object):
         l2norm_list.append(bfc1_2)
         b_fc1.assign(tf.cond(bfc1_2>cond, lambda: tf.multiply(b_fc1, cond/bfc1_2),lambda: b_fc1 ))
         
-        h_pool3_flat = tf.reshape(h_pool22, [-1, 1*self.fc1_param*self.dimension22])
+        h_pool3_flat = tf.reshape(h_pool23, [-1, flatten_dim])
         h_fc1 = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat, W_fc1), b_fc1))
         h_fc1_drop = tf.nn.dropout(h_fc1, self.keep_prob3)
         

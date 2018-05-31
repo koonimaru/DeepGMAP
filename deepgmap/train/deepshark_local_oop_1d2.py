@@ -308,7 +308,7 @@ def main(args=None):
                     sys.stdout.write("\r"+"step "+str(h)
                           +", cost: "+str(loss_val)
                           +", train_accuracy: "
-                          +str(list([curr_accu])))            
+                          +str(curr_accu))            
                     sys.stdout.flush()
                     
                     #train_accuracy_record.append(TPR_list[0]-FPR_list[0])
@@ -454,7 +454,7 @@ def main(args=None):
     x1,x2,y1,y2 = plt.axis()
     plt.axis((x1,x2,0,1.0))
     plt.savefig(saving_dir_prefix+'_plot.pdf', format='pdf')
-    np.savez_compressed(saving_dir_prefix+"_"+str(start_at)+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
+    np.savez_compressed(saving_dir_prefix+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
     import send_email
     send_email.send_email(to_print)
     
