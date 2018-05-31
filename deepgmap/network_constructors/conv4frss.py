@@ -45,7 +45,7 @@ class Model(object):
     initial_variation=0.005 #standard deviation of initial variables in the convolution filters
     dimension1=320 #the number of the convolution filters in the 1st layer
     dimension2=480
-    dimension20=480 #the number of the convolution filters in the 2nd layer
+    #dimension20=480 #the number of the convolution filters in the 2nd layer
     dimension21=480
     dimension22=480
     dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
@@ -81,7 +81,7 @@ class Model(object):
         self.cost
         #print 'Running deap shark model'
         if self.output_dir is not None:
-            flog=open(str(self.output_dir)+self.start_at+'.log', 'w')
+            flog=open(str(self.output_dir)+'.log', 'w')
             flog.write(str(sys.argv[0])+"\n"
                     +"the filer number of conv1:"+ str(self.dimension1)+"\n"
                       +"the filer size of conv1:"+ str(self.conv1_filter)+"\n"

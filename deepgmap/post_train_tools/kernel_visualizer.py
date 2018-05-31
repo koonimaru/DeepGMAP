@@ -188,8 +188,10 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
         #print i_shape
         i_reshape=i.reshape([i_shape[0],i_shape[2],i_shape[3]])
         conv_kernels_sum.append(np.clip(np.sum(i_reshape, axis=0), 0.0, None))
-    
-    
+    #print fc_kernels[0].shape, conv_kernels[-1].shape
+    last_seq_length=fc_kernels[0].shape[0]/conv_kernels[-1].shape[-1]
+    #print last_seq_length
+    #sys.exit()
     pt_per_mm = 72 / 25.4
     width, height = 210 * pt_per_mm, 297 * pt_per_mm*2
     upper_lim=height*0.05
@@ -265,11 +267,11 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
             
             #cr.arc(x, y, 0.001*height, 0, 2*math.pi)
             cr.set_source_rgba(0.5,0.5,0.5,0.5)
-            cr.rectangle(x, y,width*0.015, fc_shape[0]*last_conv_y/(28.0*last_conv_shape))
+            cr.rectangle(x, y,width*0.015, fc_shape[0]*last_conv_y/(float(last_seq_length)*last_conv_shape))
             coordinates["fc"+str(i+1)].append([x,y])
             cr.fill()
     
-        fc2_hight=fc_shape[0]*last_conv_y/(28.0*last_conv_shape)
+        fc2_hight=fc_shape[0]*last_conv_y/(float(last_seq_length)*last_conv_shape)
         """drawing nodes in the last prediction layer"""
         x+=x_interval
         cr.move_to(x, upper_lim-0.0018*height)
@@ -298,7 +300,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
         x2, y2=coordinates["fc2"][0]
         new_fc2_coord=[]
         for k in range(w_fc2_shape[0]):
-            y2_=y2+(last_conv_y/(28.0*last_conv_shape))*k
+            y2_=y2+(last_conv_y/(float(last_seq_length)*last_conv_shape))*k
             new_fc2_coord.append([x2, y2_])
         
         nodes_interest=_y_num
@@ -341,13 +343,13 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
             
             for k in range(len(j)):
                 if k in linked:
-                    unfilterd_links.append([j[k],i/28, k])
+                    unfilterd_links.append([j[k],i/last_seq_length, k])
         rev_sort=sorted(unfilterd_links, reverse=True)
         print rev_sort[:5]
-        if len(rev_sort)<48:
+        if len(rev_sort)<conv_kernels[-1].shape[-1]/10:
             _limit=len(rev_sort)
         else:
-            _limit=48
+            _limit=conv_kernels[-1].shape[-1]/10
         for m, i, k in rev_sort[:_limit]:
             x1, y1=coordinates["hidden4"][i]
             
@@ -438,7 +440,7 @@ def main():
     if len(sys.argv)>1:
         npz_file=sys.argv[1]
     else:
-        npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
+        npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_Wed_May_30_174635_2018_trained_variables_26000_.npz'
     #output_file='/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_28_170548_2018.npz'
     png_list, kernel_shape_ic_list=seuquence_visualizer(npz_file)
     kernel_connector(npz_file, png_list, kernel_shape_ic_list)

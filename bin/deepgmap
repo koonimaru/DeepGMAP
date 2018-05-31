@@ -131,7 +131,7 @@ def add_generate_input_parser( subparsers ):
                                         help = "The prefix of output files and folders. Default: ''", default = '' )
     argparser_generate_input.add_argument("-C", "--chromosome", dest="chromosome_to_skip", type = str,
                                         help = "A chromosome or contig name to skip for training. The name must be one of \
-                                        the chromosome/contig names in the input genome file. Default: chr2", default = 'chr2' )
+                                        the chromosome/contig names in the input genome file. Multiple chromosomes can be specified by commas, e.g. chr8,chr9. Default: chr2", default = 'chr2' )
     argparser_generate_input.add_argument("-d", "--data_type", dest="data_type", type = str,
                                         help = "Choose 'chip-seq' or 'dnase-seq'. The rule to label genome sequences is slightly different, but . \
                                         Default: chip-seq", default = 'chip-seq' )

@@ -158,7 +158,7 @@ def main(args=None):
         jobs=[]
         for b in bed_file_list:
             h, t=os.path.split(b)
-            bed_dir=h+"/"+str(pref)+"_bed_"+str(window_size)
+            bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
             if not os.path.isdir(bed_dir):
                 os.makedirs(bed_dir)
             b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
@@ -198,6 +198,12 @@ def main(args=None):
         shuf=range(label_genome_length)
         random.shuffle(shuf)
         read_len=int(math.ceil(label_genome_length/float(chunck_data)))
+        
+        if "," in chr_to_skip:
+            chr_to_skip=chr_to_skip.split(',')
+        else:
+            chr_to_skip=[chr_to_skip]
+        
         print(read_len)
         for ooloop in range(chunck_data):
             sub_shuf=sorted(shuf[ooloop*read_len:(ooloop+1)*read_len])
