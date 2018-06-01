@@ -27,14 +27,13 @@ else:
     ]
 
 setup(
-    name='DeepShark',
+    name='DeepGMAP',
     version=VERSION,
     description='Learning and predicting gene regulatory sequences in genomes',
     author='Koh Onimaru',
     author_email='koh.onimaru@gmail.com',
     url='',
-    #package_dir={'enhancer_prediction' : 'enhancer_prediction'},
-    #packages=['enhancer_prediction','enhancer_prediction.train','enhancer_prediction.network_constructors','enhancer_prediction.post_train_tools','enhancer_prediction.data_preprocessing_tools','enhancer_prediction.misc'],
+    #packages=['deepgmap','deepgmap.train','deepgmap.network_constructors','deepgmap.post_train_tools','deepgmap.data_preprocessing_tools','deepgmap.misc'],
     packages=find_packages('deepgmap'),
     
     package_dir={'':'deepgmap'},
