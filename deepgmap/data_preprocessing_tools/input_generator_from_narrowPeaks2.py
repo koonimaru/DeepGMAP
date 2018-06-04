@@ -1,7 +1,7 @@
 import sys
 import getopt
 import glob as glb
-from genome_labeling2 import genome_label
+from genome_labeling2 import genome_label2 as genome_label
 import os
 import subprocess as sp
 import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
@@ -209,7 +209,7 @@ def main(args=None):
             sub_shuf=sorted(shuf[ooloop*read_len:(ooloop+1)*read_len])
             print sub_shuf[0:10]
             f2_=[f2[f2s] for f2s in sub_shuf]
-            label_position, label_list, skipped, pos_no=sb2.label_reader(f2_, chr_to_skip, reduce_genome)
+            label_position, label_list, skipped, pos_no=sb2.label_reader2(f2_, chr_to_skip, reduce_genome)
                 #label_list=np.array(label_list, np.int8)
             with open(genome_fasta, 'r') as f1:
                 binaryDNAdict, _ =seqtobinary(f1,label_position)

@@ -8,7 +8,7 @@ import math
 import os
 import matplotlib.pyplot as plt
 import pylab
-import deepgmap.network_constructors.deepshark as nc
+import deepgmap.network_constructors.conv4frss as nc
 
 
 
