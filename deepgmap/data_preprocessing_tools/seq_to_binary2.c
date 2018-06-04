@@ -1148,9 +1148,11 @@ static PyObject *__pyx_builtin_map;
 static PyObject *__pyx_builtin_sum;
 static PyObject *__pyx_builtin_range;
 static const char __pyx_k_[] = "";
+static const char __pyx_k_1[] = "1";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_p[] = "p";
 static const char __pyx_k_r[] = "r";
+static const char __pyx_k_v[] = "v";
 static const char __pyx_k__2[] = "#";
 static const char __pyx_k__3[] = "\r";
 static const char __pyx_k__4[] = ":";
@@ -1168,6 +1170,7 @@ static const char __pyx_k_join[] = "join";
 static const char __pyx_k_line[] = "line_";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_time[] = "time";
 static const char __pyx_k_flush[] = "flush";
 static const char __pyx_k_print[] = "print";
 static const char __pyx_k_range[] = "range";
@@ -1200,6 +1203,7 @@ static const char __pyx_k_AGCTtoArray4[] = "AGCTtoArray4";
 static const char __pyx_k_AGCTtoArray5[] = "AGCTtoArray5";
 static const char __pyx_k_label_reader[] = "label_reader";
 static const char __pyx_k_ACGTto3dArray[] = "ACGTto3dArray";
+static const char __pyx_k_label_reader2[] = "label_reader2";
 static const char __pyx_k_onehot_append[] = "onehot_append";
 static const char __pyx_k_ACGTtoaltArray[] = "ACGTtoaltArray";
 static const char __pyx_k_label_position[] = "label_position";
@@ -1211,6 +1215,7 @@ static const char __pyx_k_data_preprocessing_tools_seq_to[] = "data_preprocessin
 static const char __pyx_k_deepgmap_data_preprocessing_tool[] = "deepgmap/data_preprocessing_tools/seq_to_binary2.pyx";
 static const char __pyx_k_sequence_contains_unreadable_cha[] = "sequence contains unreadable characters: ";
 static PyObject *__pyx_kp_s_;
+static PyObject *__pyx_kp_s_1;
 static PyObject *__pyx_n_s_ACGTto3dArray;
 static PyObject *__pyx_n_s_ACGTtoArray;
 static PyObject *__pyx_n_s_ACGTtoaltArray;
@@ -1244,6 +1249,7 @@ static PyObject *__pyx_n_s_label_list_append;
 static PyObject *__pyx_n_s_label_position;
 static PyObject *__pyx_n_s_label_position_append;
 static PyObject *__pyx_n_s_label_reader;
+static PyObject *__pyx_n_s_label_reader2;
 static PyObject *__pyx_n_s_line;
 static PyObject *__pyx_n_s_line_2;
 static PyObject *__pyx_n_s_main;
@@ -1270,18 +1276,21 @@ static PyObject *__pyx_n_s_stdout;
 static PyObject *__pyx_n_s_sum;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_s_time;
+static PyObject *__pyx_n_s_v;
 static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_s_value_sum;
 static PyObject *__pyx_n_s_write;
 static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_reader(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_, PyObject *__pyx_v_chr_to_skip, float __pyx_v_reduce); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray2(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray5(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray4(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoaltArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3dArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2label_reader2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_, PyObject *__pyx_v_chr_to_skip, float __pyx_v_reduce); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray2(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray5(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10AGCTtoArray4(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ATGCtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTtoaltArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_18ACGTto3dArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen); /* proto */
 static __Pyx_CachedCFunction __pyx_umethod_PyString_Type_split = {0, &__pyx_n_s_split, 0, 0, 0};
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
@@ -1329,6 +1338,7 @@ static PyObject *__pyx_tuple__51;
 static PyObject *__pyx_tuple__53;
 static PyObject *__pyx_tuple__55;
 static PyObject *__pyx_tuple__57;
+static PyObject *__pyx_tuple__59;
 static PyObject *__pyx_codeobj__42;
 static PyObject *__pyx_codeobj__44;
 static PyObject *__pyx_codeobj__46;
@@ -1338,6 +1348,7 @@ static PyObject *__pyx_codeobj__52;
 static PyObject *__pyx_codeobj__54;
 static PyObject *__pyx_codeobj__56;
 static PyObject *__pyx_codeobj__58;
+static PyObject *__pyx_codeobj__60;
 /* Late includes */
 
 /* "data_preprocessing_tools/seq_to_binary2.pyx":8
@@ -2099,7 +2110,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
  * 
  *         i+=1             # <<<<<<<<<<<<<<
  *         if i%100000==0:
- *             sys.stdout.write('reading labels %i \r' % (i))
+ * 
  */
     __pyx_v_i = (__pyx_v_i + 1);
 
@@ -2107,30 +2118,30 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
  * 
  *         i+=1
  *         if i%100000==0:             # <<<<<<<<<<<<<<
- *             sys.stdout.write('reading labels %i \r' % (i))
- *             sys.stdout.flush()
+ * 
+ *             #sys.exit()
  */
     __pyx_t_7 = ((__Pyx_mod_long(__pyx_v_i, 0x186A0) == 0) != 0);
     if (__pyx_t_7) {
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":56
- *         i+=1
- *         if i%100000==0:
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":58
+ * 
+ *             #sys.exit()
  *             sys.stdout.write('reading labels %i \r' % (i))             # <<<<<<<<<<<<<<
  *             sys.stdout.flush()
  *     return label_position, label_list, skipped, pos_no
  */
-      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 56, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 56, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 58, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_write); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 56, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_write); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 56, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 58, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_reading_labels_i, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_reading_labels_i, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_8 = NULL;
@@ -2144,14 +2155,14 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
         }
       }
       if (!__pyx_t_8) {
-        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 56, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_GOTREF(__pyx_t_6);
       } else {
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_11)) {
           PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_3};
-          __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 56, __pyx_L1_error)
+          __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2160,20 +2171,20 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
           PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_3};
-          __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 56, __pyx_L1_error)
+          __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 56, __pyx_L1_error)
+          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 58, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __pyx_t_8 = NULL;
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 56, __pyx_L1_error)
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
@@ -2181,19 +2192,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":57
- *         if i%100000==0:
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":59
+ *             #sys.exit()
  *             sys.stdout.write('reading labels %i \r' % (i))
  *             sys.stdout.flush()             # <<<<<<<<<<<<<<
  *     return label_position, label_list, skipped, pos_no
  * 
  */
-      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 57, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 57, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 59, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_flush); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 57, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_flush); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = NULL;
@@ -2207,10 +2218,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
         }
       }
       if (__pyx_t_10) {
-        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 57, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       } else {
-        __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 57, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 59, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -2220,8 +2231,8 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
  * 
  *         i+=1
  *         if i%100000==0:             # <<<<<<<<<<<<<<
- *             sys.stdout.write('reading labels %i \r' % (i))
- *             sys.stdout.flush()
+ * 
+ *             #sys.exit()
  */
     }
 
@@ -2236,19 +2247,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":58
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":60
  *             sys.stdout.write('reading labels %i \r' % (i))
  *             sys.stdout.flush()
  *     return label_position, label_list, skipped, pos_no             # <<<<<<<<<<<<<<
  * 
- * @cython.boundscheck(False)
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_skipped); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_skipped); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_pos_no); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_pos_no); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_label_position);
   __Pyx_GIVEREF(__pyx_v_label_position);
@@ -2301,7 +2312,1020 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":62
+/* "data_preprocessing_tools/seq_to_binary2.pyx":67
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
+ * def label_reader2(list file_, list chr_to_skip, float reduce):             # <<<<<<<<<<<<<<
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3label_reader2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3label_reader2 = {"label_reader2", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3label_reader2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3label_reader2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_file_ = 0;
+  PyObject *__pyx_v_chr_to_skip = 0;
+  float __pyx_v_reduce;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("label_reader2 (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_file,&__pyx_n_s_chr_to_skip,&__pyx_n_s_reduce,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_file)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_chr_to_skip)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("label_reader2", 1, 3, 3, 1); __PYX_ERR(0, 67, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_reduce)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("label_reader2", 1, 3, 3, 2); __PYX_ERR(0, 67, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "label_reader2") < 0)) __PYX_ERR(0, 67, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_file_ = ((PyObject*)values[0]);
+    __pyx_v_chr_to_skip = ((PyObject*)values[1]);
+    __pyx_v_reduce = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_reduce == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 67, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("label_reader2", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 67, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.label_reader2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_file_), (&PyList_Type), 1, "file_", 1))) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_chr_to_skip), (&PyList_Type), 1, "chr_to_skip", 1))) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2label_reader2(__pyx_self, __pyx_v_file_, __pyx_v_chr_to_skip, __pyx_v_reduce);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2label_reader2(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_file_, PyObject *__pyx_v_chr_to_skip, float __pyx_v_reduce) {
+  PyObject *__pyx_v_label_position = 0;
+  PyObject *__pyx_v_label_position_append = NULL;
+  PyObject *__pyx_v_label_list = 0;
+  PyObject *__pyx_v_label_list_append = NULL;
+  PyObject *__pyx_v_line_ = 0;
+  int __pyx_v_i;
+  int __pyx_v_value_sum;
+  int __pyx_v_skipped;
+  int __pyx_v_pos_no;
+  PyObject *__pyx_v_line = 0;
+  PyObject *__pyx_v_p = 0;
+  PyObject *__pyx_v_skipped_chr = 0;
+  PyObject *__pyx_v_value = 0;
+  float __pyx_v_r;
+  int __pyx_v_skipping;
+  PyObject *__pyx_v__chr = NULL;
+  PyObject *__pyx_v_v = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  Py_ssize_t __pyx_t_2;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  Py_ssize_t __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
+  int __pyx_t_7;
+  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_9 = NULL;
+  PyObject *__pyx_t_10 = NULL;
+  PyObject *__pyx_t_11 = NULL;
+  float __pyx_t_12;
+  int __pyx_t_13;
+  __Pyx_RefNannySetupContext("label_reader2", 0);
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":68
+ * @cython.wraparound(False)
+ * def label_reader2(list file_, list chr_to_skip, float reduce):
+ *     cdef list label_position=[]             # <<<<<<<<<<<<<<
+ *     label_position_append=label_position.append
+ *     cdef list label_list=[]
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_label_position = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":69
+ * def label_reader2(list file_, list chr_to_skip, float reduce):
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append             # <<<<<<<<<<<<<<
+ *     cdef list label_list=[]
+ *     label_list_append=label_list.append
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_label_position, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_label_position_append = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":70
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append
+ *     cdef list label_list=[]             # <<<<<<<<<<<<<<
+ *     label_list_append=label_list.append
+ *     cdef list line_=[]
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_label_list = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":71
+ *     label_position_append=label_position.append
+ *     cdef list label_list=[]
+ *     label_list_append=label_list.append             # <<<<<<<<<<<<<<
+ *     cdef list line_=[]
+ *     cdef int i=0, value_sum, skipped=0, pos_no=0
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_label_list, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_label_list_append = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":72
+ *     cdef list label_list=[]
+ *     label_list_append=label_list.append
+ *     cdef list line_=[]             # <<<<<<<<<<<<<<
+ *     cdef int i=0, value_sum, skipped=0, pos_no=0
+ *     cdef str line, p, skipped_chr=""
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_line_ = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":73
+ *     label_list_append=label_list.append
+ *     cdef list line_=[]
+ *     cdef int i=0, value_sum, skipped=0, pos_no=0             # <<<<<<<<<<<<<<
+ *     cdef str line, p, skipped_chr=""
+ *     cdef int _name_length
+ */
+  __pyx_v_i = 0;
+  __pyx_v_skipped = 0;
+  __pyx_v_pos_no = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":74
+ *     cdef list line_=[]
+ *     cdef int i=0, value_sum, skipped=0, pos_no=0
+ *     cdef str line, p, skipped_chr=""             # <<<<<<<<<<<<<<
+ *     cdef int _name_length
+ *     cdef list value
+ */
+  __Pyx_INCREF(__pyx_kp_s_);
+  __pyx_v_skipped_chr = __pyx_kp_s_;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":78
+ *     cdef list value
+ *     cdef float r
+ *     cdef int skipping=0             # <<<<<<<<<<<<<<
+ *     #cdef list skipped=[]
+ *     #skipped_append=skipped.append
+ */
+  __pyx_v_skipping = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":82
+ *     #skipped_append=skipped.append
+ *     #start=time.time()
+ *     for line in file_:             # <<<<<<<<<<<<<<
+ *         #print(line)
+ *         if line[0]=="#":
+ */
+  if (unlikely(__pyx_v_file_ == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 82, __pyx_L1_error)
+  }
+  __pyx_t_1 = __pyx_v_file_; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
+  for (;;) {
+    if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_3); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+    #else
+    __pyx_t_3 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    #endif
+    if (!(likely(PyString_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 82, __pyx_L1_error)
+    __Pyx_XDECREF_SET(__pyx_v_line, ((PyObject*)__pyx_t_3));
+    __pyx_t_3 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":84
+ *     for line in file_:
+ *         #print(line)
+ *         if line[0]=="#":             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+ */
+    __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_line, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_kp_s__2, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (__pyx_t_4) {
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":85
+ *         #print(line)
+ *         if line[0]=="#":
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         line_=line.split()
+ */
+      goto __pyx_L3_continue;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":84
+ *     for line in file_:
+ *         #print(line)
+ *         if line[0]=="#":             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+ */
+    }
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":87
+ *             continue
+ * 
+ *         line_=line.split()             # <<<<<<<<<<<<<<
+ *         for _chr in chr_to_skip:
+ *             if line_[0]==_chr:
+ */
+    __pyx_t_3 = __Pyx_CallUnboundCMethod0(&__pyx_umethod_PyString_Type_split, __pyx_v_line); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (!(likely(PyList_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_DECREF_SET(__pyx_v_line_, ((PyObject*)__pyx_t_3));
+    __pyx_t_3 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":88
+ * 
+ *         line_=line.split()
+ *         for _chr in chr_to_skip:             # <<<<<<<<<<<<<<
+ *             if line_[0]==_chr:
+ *                 if not skipped_chr==line_[0]:
+ */
+    if (unlikely(__pyx_v_chr_to_skip == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+      __PYX_ERR(0, 88, __pyx_L1_error)
+    }
+    __pyx_t_3 = __pyx_v_chr_to_skip; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+    for (;;) {
+      if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
+      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 88, __pyx_L1_error)
+      #else
+      __pyx_t_6 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 88, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      #endif
+      __Pyx_XDECREF_SET(__pyx_v__chr, __pyx_t_6);
+      __pyx_t_6 = 0;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":89
+ *         line_=line.split()
+ *         for _chr in chr_to_skip:
+ *             if line_[0]==_chr:             # <<<<<<<<<<<<<<
+ *                 if not skipped_chr==line_[0]:
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ */
+      if (unlikely(__pyx_v_line_ == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 89, __pyx_L1_error)
+      }
+      __pyx_t_6 = PyObject_RichCompare(PyList_GET_ITEM(__pyx_v_line_, 0), __pyx_v__chr, Py_EQ); __Pyx_XGOTREF(__pyx_t_6); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 89, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      if (__pyx_t_4) {
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":90
+ *         for _chr in chr_to_skip:
+ *             if line_[0]==_chr:
+ *                 if not skipped_chr==line_[0]:             # <<<<<<<<<<<<<<
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ *                     sys.stdout.flush()
+ */
+        if (unlikely(__pyx_v_line_ == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 90, __pyx_L1_error)
+        }
+        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_skipped_chr, PyList_GET_ITEM(__pyx_v_line_, 0), Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_7 = ((!__pyx_t_4) != 0);
+        if (__pyx_t_7) {
+
+          /* "data_preprocessing_tools/seq_to_binary2.pyx":91
+ *             if line_[0]==_chr:
+ *                 if not skipped_chr==line_[0]:
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')             # <<<<<<<<<<<<<<
+ *                     sys.stdout.flush()
+ *                     skipped_chr=line_[0]
+ */
+          __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 91, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_stdout); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 91, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_9);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_write); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 91, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+          if (unlikely(__pyx_v_line_ == Py_None)) {
+            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+            __PYX_ERR(0, 91, __pyx_L1_error)
+          }
+          __pyx_t_9 = PyNumber_Add(__pyx_kp_s_skipping, PyList_GET_ITEM(__pyx_v_line_, 0)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 91, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_9);
+          __pyx_t_10 = PyNumber_Add(__pyx_t_9, __pyx_kp_s__3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 91, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_10);
+          __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+          __pyx_t_9 = NULL;
+          if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+            __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_8);
+            if (likely(__pyx_t_9)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+              __Pyx_INCREF(__pyx_t_9);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_8, function);
+            }
+          }
+          if (!__pyx_t_9) {
+            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+            __Pyx_GOTREF(__pyx_t_6);
+          } else {
+            #if CYTHON_FAST_PYCALL
+            if (PyFunction_Check(__pyx_t_8)) {
+              PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_10};
+              __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+              __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+              __Pyx_GOTREF(__pyx_t_6);
+              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+            } else
+            #endif
+            #if CYTHON_FAST_PYCCALL
+            if (__Pyx_PyFastCFunction_Check(__pyx_t_8)) {
+              PyObject *__pyx_temp[2] = {__pyx_t_9, __pyx_t_10};
+              __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_8, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+              __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+              __Pyx_GOTREF(__pyx_t_6);
+              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+            } else
+            #endif
+            {
+              __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 91, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __pyx_t_9 = NULL;
+              __Pyx_GIVEREF(__pyx_t_10);
+              PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_10);
+              __pyx_t_10 = 0;
+              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_11, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 91, __pyx_L1_error)
+              __Pyx_GOTREF(__pyx_t_6);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            }
+          }
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+          /* "data_preprocessing_tools/seq_to_binary2.pyx":92
+ *                 if not skipped_chr==line_[0]:
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ *                     sys.stdout.flush()             # <<<<<<<<<<<<<<
+ *                     skipped_chr=line_[0]
+ *                     skipping=1
+ */
+          __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_stdout); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 92, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_11);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_flush); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_8);
+          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+          __pyx_t_11 = NULL;
+          if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_8))) {
+            __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_8);
+            if (likely(__pyx_t_11)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+              __Pyx_INCREF(__pyx_t_11);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_8, function);
+            }
+          }
+          if (__pyx_t_11) {
+            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L1_error)
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+          } else {
+            __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 92, __pyx_L1_error)
+          }
+          __Pyx_GOTREF(__pyx_t_6);
+          __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+          /* "data_preprocessing_tools/seq_to_binary2.pyx":93
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ *                     sys.stdout.flush()
+ *                     skipped_chr=line_[0]             # <<<<<<<<<<<<<<
+ *                     skipping=1
+ *                 break
+ */
+          if (unlikely(__pyx_v_line_ == Py_None)) {
+            PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+            __PYX_ERR(0, 93, __pyx_L1_error)
+          }
+          if (!(likely(PyString_CheckExact(PyList_GET_ITEM(__pyx_v_line_, 0)))||((PyList_GET_ITEM(__pyx_v_line_, 0)) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(PyList_GET_ITEM(__pyx_v_line_, 0))->tp_name), 0))) __PYX_ERR(0, 93, __pyx_L1_error)
+          __pyx_t_6 = PyList_GET_ITEM(__pyx_v_line_, 0);
+          __Pyx_INCREF(__pyx_t_6);
+          __Pyx_DECREF_SET(__pyx_v_skipped_chr, ((PyObject*)__pyx_t_6));
+          __pyx_t_6 = 0;
+
+          /* "data_preprocessing_tools/seq_to_binary2.pyx":94
+ *                     sys.stdout.flush()
+ *                     skipped_chr=line_[0]
+ *                     skipping=1             # <<<<<<<<<<<<<<
+ *                 break
+ *             else:
+ */
+          __pyx_v_skipping = 1;
+
+          /* "data_preprocessing_tools/seq_to_binary2.pyx":90
+ *         for _chr in chr_to_skip:
+ *             if line_[0]==_chr:
+ *                 if not skipped_chr==line_[0]:             # <<<<<<<<<<<<<<
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ *                     sys.stdout.flush()
+ */
+        }
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":95
+ *                     skipped_chr=line_[0]
+ *                     skipping=1
+ *                 break             # <<<<<<<<<<<<<<
+ *             else:
+ *                 skipping=0
+ */
+        goto __pyx_L7_break;
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":89
+ *         line_=line.split()
+ *         for _chr in chr_to_skip:
+ *             if line_[0]==_chr:             # <<<<<<<<<<<<<<
+ *                 if not skipped_chr==line_[0]:
+ *                     sys.stdout.write('skipping '+line_[0]+'\r')
+ */
+      }
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":97
+ *                 break
+ *             else:
+ *                 skipping=0             # <<<<<<<<<<<<<<
+ *         if skipping==1:
+ *             continue
+ */
+      /*else*/ {
+        __pyx_v_skipping = 0;
+      }
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":88
+ * 
+ *         line_=line.split()
+ *         for _chr in chr_to_skip:             # <<<<<<<<<<<<<<
+ *             if line_[0]==_chr:
+ *                 if not skipped_chr==line_[0]:
+ */
+    }
+    __pyx_L7_break:;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":98
+ *             else:
+ *                 skipping=0
+ *         if skipping==1:             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+ */
+    __pyx_t_7 = ((__pyx_v_skipping == 1) != 0);
+    if (__pyx_t_7) {
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":99
+ *                 skipping=0
+ *         if skipping==1:
+ *             continue             # <<<<<<<<<<<<<<
+ * 
+ *         value=line_[3:]
+ */
+      goto __pyx_L3_continue;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":98
+ *             else:
+ *                 skipping=0
+ *         if skipping==1:             # <<<<<<<<<<<<<<
+ *             continue
+ * 
+ */
+    }
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":101
+ *             continue
+ * 
+ *         value=line_[3:]             # <<<<<<<<<<<<<<
+ *         value_sum=0
+ *         for v in value:
+ */
+    if (unlikely(__pyx_v_line_ == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 101, __pyx_L1_error)
+    }
+    __pyx_t_3 = __Pyx_PyList_GetSlice(__pyx_v_line_, 3, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_XDECREF_SET(__pyx_v_value, ((PyObject*)__pyx_t_3));
+    __pyx_t_3 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":102
+ * 
+ *         value=line_[3:]
+ *         value_sum=0             # <<<<<<<<<<<<<<
+ *         for v in value:
+ *             if v=="1":
+ */
+    __pyx_v_value_sum = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":103
+ *         value=line_[3:]
+ *         value_sum=0
+ *         for v in value:             # <<<<<<<<<<<<<<
+ *             if v=="1":
+ *                 value_sum=1
+ */
+    __pyx_t_3 = __pyx_v_value; __Pyx_INCREF(__pyx_t_3); __pyx_t_5 = 0;
+    for (;;) {
+      if (__pyx_t_5 >= PyList_GET_SIZE(__pyx_t_3)) break;
+      #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+      __pyx_t_6 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_5); __Pyx_INCREF(__pyx_t_6); __pyx_t_5++; if (unlikely(0 < 0)) __PYX_ERR(0, 103, __pyx_L1_error)
+      #else
+      __pyx_t_6 = PySequence_ITEM(__pyx_t_3, __pyx_t_5); __pyx_t_5++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 103, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      #endif
+      __Pyx_XDECREF_SET(__pyx_v_v, __pyx_t_6);
+      __pyx_t_6 = 0;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":104
+ *         value_sum=0
+ *         for v in value:
+ *             if v=="1":             # <<<<<<<<<<<<<<
+ *                 value_sum=1
+ *                 break
+ */
+      __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_v, __pyx_kp_s_1, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+      if (__pyx_t_7) {
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":105
+ *         for v in value:
+ *             if v=="1":
+ *                 value_sum=1             # <<<<<<<<<<<<<<
+ *                 break
+ * 
+ */
+        __pyx_v_value_sum = 1;
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":106
+ *             if v=="1":
+ *                 value_sum=1
+ *                 break             # <<<<<<<<<<<<<<
+ * 
+ *         #value_sum=sum(value)
+ */
+        goto __pyx_L12_break;
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":104
+ *         value_sum=0
+ *         for v in value:
+ *             if v=="1":             # <<<<<<<<<<<<<<
+ *                 value_sum=1
+ *                 break
+ */
+      }
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":103
+ *         value=line_[3:]
+ *         value_sum=0
+ *         for v in value:             # <<<<<<<<<<<<<<
+ *             if v=="1":
+ *                 value_sum=1
+ */
+    }
+    __pyx_L12_break:;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":109
+ * 
+ *         #value_sum=sum(value)
+ *         r=random.random()             # <<<<<<<<<<<<<<
+ *         p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
+ *         if value_sum==0 and r<reduce:
+ */
+    __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_random); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_random); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
+      __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_8);
+      if (likely(__pyx_t_6)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
+        __Pyx_INCREF(__pyx_t_6);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_8, function);
+      }
+    }
+    if (__pyx_t_6) {
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    } else {
+      __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
+    }
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __pyx_t_12 = __pyx_PyFloat_AsFloat(__pyx_t_3); if (unlikely((__pyx_t_12 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_v_r = __pyx_t_12;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":110
+ *         #value_sum=sum(value)
+ *         r=random.random()
+ *         p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])             # <<<<<<<<<<<<<<
+ *         if value_sum==0 and r<reduce:
+ *             skipped+=1
+ */
+    if (unlikely(__pyx_v_line_ == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 110, __pyx_L1_error)
+    }
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), PyList_GET_ITEM(__pyx_v_line_, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (unlikely(__pyx_v_line_ == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 110, __pyx_L1_error)
+    }
+    __pyx_t_8 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), PyList_GET_ITEM(__pyx_v_line_, 1)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
+    if (unlikely(__pyx_v_line_ == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 110, __pyx_L1_error)
+    }
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), PyList_GET_ITEM(__pyx_v_line_, 2)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_11 = PyList_New(5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyList_SET_ITEM(__pyx_t_11, 0, __pyx_t_3);
+    __Pyx_INCREF(__pyx_kp_s__4);
+    __Pyx_GIVEREF(__pyx_kp_s__4);
+    PyList_SET_ITEM(__pyx_t_11, 1, __pyx_kp_s__4);
+    __Pyx_GIVEREF(__pyx_t_8);
+    PyList_SET_ITEM(__pyx_t_11, 2, __pyx_t_8);
+    __Pyx_INCREF(__pyx_kp_s__5);
+    __Pyx_GIVEREF(__pyx_kp_s__5);
+    PyList_SET_ITEM(__pyx_t_11, 3, __pyx_kp_s__5);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyList_SET_ITEM(__pyx_t_11, 4, __pyx_t_6);
+    __pyx_t_3 = 0;
+    __pyx_t_8 = 0;
+    __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyString_Join(__pyx_kp_s_, __pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    if (!(likely(PyString_CheckExact(__pyx_t_6))||((__pyx_t_6) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_t_6)->tp_name), 0))) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_XDECREF_SET(__pyx_v_p, ((PyObject*)__pyx_t_6));
+    __pyx_t_6 = 0;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":111
+ *         r=random.random()
+ *         p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
+ *         if value_sum==0 and r<reduce:             # <<<<<<<<<<<<<<
+ *             skipped+=1
+ *         else:
+ */
+    __pyx_t_4 = ((__pyx_v_value_sum == 0) != 0);
+    if (__pyx_t_4) {
+    } else {
+      __pyx_t_7 = __pyx_t_4;
+      goto __pyx_L15_bool_binop_done;
+    }
+    __pyx_t_4 = ((__pyx_v_r < __pyx_v_reduce) != 0);
+    __pyx_t_7 = __pyx_t_4;
+    __pyx_L15_bool_binop_done:;
+    if (__pyx_t_7) {
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":112
+ *         p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
+ *         if value_sum==0 and r<reduce:
+ *             skipped+=1             # <<<<<<<<<<<<<<
+ *         else:
+ *             if value_sum>0:
+ */
+      __pyx_v_skipped = (__pyx_v_skipped + 1);
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":111
+ *         r=random.random()
+ *         p="".join([str(line_[0]),':',str(line_[1]),'-',str(line_[2])])
+ *         if value_sum==0 and r<reduce:             # <<<<<<<<<<<<<<
+ *             skipped+=1
+ *         else:
+ */
+      goto __pyx_L14;
+    }
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":114
+ *             skipped+=1
+ *         else:
+ *             if value_sum>0:             # <<<<<<<<<<<<<<
+ *                 pos_no+=1
+ *             label_position_append(p)
+ */
+    /*else*/ {
+      __pyx_t_7 = ((__pyx_v_value_sum > 0) != 0);
+      if (__pyx_t_7) {
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":115
+ *         else:
+ *             if value_sum>0:
+ *                 pos_no+=1             # <<<<<<<<<<<<<<
+ *             label_position_append(p)
+ *             label_list_append(value)
+ */
+        __pyx_v_pos_no = (__pyx_v_pos_no + 1);
+
+        /* "data_preprocessing_tools/seq_to_binary2.pyx":114
+ *             skipped+=1
+ *         else:
+ *             if value_sum>0:             # <<<<<<<<<<<<<<
+ *                 pos_no+=1
+ *             label_position_append(p)
+ */
+      }
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":116
+ *             if value_sum>0:
+ *                 pos_no+=1
+ *             label_position_append(p)             # <<<<<<<<<<<<<<
+ *             label_list_append(value)
+ * 
+ */
+      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_label_position, __pyx_v_p); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 116, __pyx_L1_error)
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":117
+ *                 pos_no+=1
+ *             label_position_append(p)
+ *             label_list_append(value)             # <<<<<<<<<<<<<<
+ * 
+ *         i+=1
+ */
+      __pyx_t_13 = __Pyx_PyList_Append(__pyx_v_label_list, __pyx_v_value); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 117, __pyx_L1_error)
+    }
+    __pyx_L14:;
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":119
+ *             label_list_append(value)
+ * 
+ *         i+=1             # <<<<<<<<<<<<<<
+ *         if i%100000==0:
+ *             #print time.time()-start
+ */
+    __pyx_v_i = (__pyx_v_i + 1);
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":120
+ * 
+ *         i+=1
+ *         if i%100000==0:             # <<<<<<<<<<<<<<
+ *             #print time.time()-start
+ *             #sys.exit()
+ */
+    __pyx_t_7 = ((__Pyx_mod_long(__pyx_v_i, 0x186A0) == 0) != 0);
+    if (__pyx_t_7) {
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":123
+ *             #print time.time()-start
+ *             #sys.exit()
+ *             sys.stdout.write('reading labels %i \r' % (i))             # <<<<<<<<<<<<<<
+ *             sys.stdout.flush()
+ *     return label_position, label_list, skipped, pos_no
+ */
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_write); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_reading_labels_i, __pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+      __pyx_t_8 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_11))) {
+        __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_11);
+        if (likely(__pyx_t_8)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+          __Pyx_INCREF(__pyx_t_8);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_11, function);
+        }
+      }
+      if (!__pyx_t_8) {
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_GOTREF(__pyx_t_6);
+      } else {
+        #if CYTHON_FAST_PYCALL
+        if (PyFunction_Check(__pyx_t_11)) {
+          PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_3};
+          __pyx_t_6 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __Pyx_GOTREF(__pyx_t_6);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        } else
+        #endif
+        #if CYTHON_FAST_PYCCALL
+        if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
+          PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_3};
+          __pyx_t_6 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L1_error)
+          __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+          __Pyx_GOTREF(__pyx_t_6);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        } else
+        #endif
+        {
+          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 123, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_10);
+          __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_8); __pyx_t_8 = NULL;
+          __Pyx_GIVEREF(__pyx_t_3);
+          PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_3);
+          __pyx_t_3 = 0;
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 123, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_6);
+          __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        }
+      }
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":124
+ *             #sys.exit()
+ *             sys.stdout.write('reading labels %i \r' % (i))
+ *             sys.stdout.flush()             # <<<<<<<<<<<<<<
+ *     return label_position, label_list, skipped, pos_no
+ * 
+ */
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 124, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_stdout); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 124, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_10);
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_flush); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 124, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __pyx_t_10 = NULL;
+      if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_11))) {
+        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_11);
+        if (likely(__pyx_t_10)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+          __Pyx_INCREF(__pyx_t_10);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_11, function);
+        }
+      }
+      if (__pyx_t_10) {
+        __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L1_error)
+        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      } else {
+        __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 124, __pyx_L1_error)
+      }
+      __Pyx_GOTREF(__pyx_t_6);
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":120
+ * 
+ *         i+=1
+ *         if i%100000==0:             # <<<<<<<<<<<<<<
+ *             #print time.time()-start
+ *             #sys.exit()
+ */
+    }
+
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":82
+ *     #skipped_append=skipped.append
+ *     #start=time.time()
+ *     for line in file_:             # <<<<<<<<<<<<<<
+ *         #print(line)
+ *         if line[0]=="#":
+ */
+    __pyx_L3_continue:;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":125
+ *             sys.stdout.write('reading labels %i \r' % (i))
+ *             sys.stdout.flush()
+ *     return label_position, label_list, skipped, pos_no             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_skipped); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_pos_no); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_11 = PyTuple_New(4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_INCREF(__pyx_v_label_position);
+  __Pyx_GIVEREF(__pyx_v_label_position);
+  PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_label_position);
+  __Pyx_INCREF(__pyx_v_label_list);
+  __Pyx_GIVEREF(__pyx_v_label_list);
+  PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_v_label_list);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_6);
+  PyTuple_SET_ITEM(__pyx_t_11, 3, __pyx_t_6);
+  __pyx_t_1 = 0;
+  __pyx_t_6 = 0;
+  __pyx_r = __pyx_t_11;
+  __pyx_t_11 = 0;
+  goto __pyx_L0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":67
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
+ * def label_reader2(list file_, list chr_to_skip, float reduce):             # <<<<<<<<<<<<<<
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.label_reader2", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_label_position);
+  __Pyx_XDECREF(__pyx_v_label_position_append);
+  __Pyx_XDECREF(__pyx_v_label_list);
+  __Pyx_XDECREF(__pyx_v_label_list_append);
+  __Pyx_XDECREF(__pyx_v_line_);
+  __Pyx_XDECREF(__pyx_v_line);
+  __Pyx_XDECREF(__pyx_v_p);
+  __Pyx_XDECREF(__pyx_v_skipped_chr);
+  __Pyx_XDECREF(__pyx_v_value);
+  __Pyx_XDECREF(__pyx_v__chr);
+  __Pyx_XDECREF(__pyx_v_v);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "data_preprocessing_tools/seq_to_binary2.pyx":132
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray2(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -2310,9 +3334,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_label_read
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray2 = {"AGCTtoArray2", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray2, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray2 = {"AGCTtoArray2", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray2, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray2(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -2341,11 +3365,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("AGCTtoArray2", 1, 2, 2, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("AGCTtoArray2", 1, 2, 2, 1); __PYX_ERR(0, 132, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray2") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray2") < 0)) __PYX_ERR(0, 132, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2353,25 +3377,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 132, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 132, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("AGCTtoArray2", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("AGCTtoArray2", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 132, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.AGCTtoArray2", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray2(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray2(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArray2(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray2(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -2386,19 +3410,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("AGCTtoArray2", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":63
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":133
  * @cython.wraparound(False)
  * def AGCTtoArray2(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     #onehot_append=onehot.append
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":67
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":137
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -2410,7 +3434,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":68
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":138
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -2419,7 +3443,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":70
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":140
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -2430,16 +3454,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":71
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":141
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__6); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__6); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 141, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":70
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":140
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -2448,7 +3472,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":72
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":142
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -2458,16 +3482,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":73
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":143
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__7); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__7); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 143, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":72
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":142
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -2476,7 +3500,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":74
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":144
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -2486,16 +3510,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":75
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":145
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__8); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 75, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__8); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 145, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":74
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":144
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -2504,7 +3528,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":76
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":146
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -2514,16 +3538,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":77
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":147
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__9); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__9); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":76
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":146
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -2532,7 +3556,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":78
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":148
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -2542,16 +3566,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":79
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":149
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__10); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 79, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__10); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 149, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":78
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":148
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -2561,34 +3585,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":81
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":151
  *             onehot.append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":82
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":152
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 152, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 152, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -2602,10 +3626,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -2614,7 +3638,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":84
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":154
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -2626,7 +3650,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":62
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":132
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray2(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -2648,7 +3672,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":89
+/* "data_preprocessing_tools/seq_to_binary2.pyx":159
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray3(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -2657,9 +3681,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_2AGCTtoArr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray3 = {"AGCTtoArray3", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray3, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray3 = {"AGCTtoArray3", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray3, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray3(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -2688,11 +3712,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("AGCTtoArray3", 1, 2, 2, 1); __PYX_ERR(0, 89, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("AGCTtoArray3", 1, 2, 2, 1); __PYX_ERR(0, 159, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray3") < 0)) __PYX_ERR(0, 89, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray3") < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2700,25 +3724,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 89, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("AGCTtoArray3", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 89, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("AGCTtoArray3", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 159, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.AGCTtoArray3", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray3(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray3(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray3(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   PyObject *__pyx_v_onehot_append = NULL;
   char __pyx_v_Nuc;
@@ -2734,31 +3758,31 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("AGCTtoArray3", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":90
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":160
  * @cython.wraparound(False)
  * def AGCTtoArray3(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     onehot_append=onehot.append
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":91
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":161
  * def AGCTtoArray3(char *Seq, int seqlen):
  *     cdef list onehot=[]
  *     onehot_append=onehot.append             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_onehot, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_onehot, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot_append = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":94
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":164
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -2770,7 +3794,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":95
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":165
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -2779,7 +3803,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":97
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":167
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -2790,16 +3814,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":98
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":168
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__11); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 98, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__11); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 168, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":97
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":167
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -2808,7 +3832,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":99
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":169
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -2818,16 +3842,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":100
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":170
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__12); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 100, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__12); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 170, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":99
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":169
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -2836,7 +3860,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":101
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":171
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -2846,16 +3870,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":102
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":172
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__13); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 102, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__13); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 172, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":101
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":171
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -2864,7 +3888,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":103
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":173
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -2874,16 +3898,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":104
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":174
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__14); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__14); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 174, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":103
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":173
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -2892,7 +3916,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":105
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":175
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -2902,16 +3926,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":106
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":176
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__15); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__15); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 176, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":105
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":175
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -2921,34 +3945,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":108
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":178
  *             onehot_append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":109
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":179
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 179, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -2962,10 +3986,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -2974,7 +3998,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":111
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":181
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -2986,7 +4010,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":89
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":159
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray3(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3009,7 +4033,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":113
+/* "data_preprocessing_tools/seq_to_binary2.pyx":183
  *     return onehot
  * 
  * def AGCTtoArray5(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3018,9 +4042,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_4AGCTtoArr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray5(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray5 = {"AGCTtoArray5", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray5, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray5(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray5(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray5 = {"AGCTtoArray5", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray5, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray5(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -3049,11 +4073,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("AGCTtoArray5", 1, 2, 2, 1); __PYX_ERR(0, 113, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("AGCTtoArray5", 1, 2, 2, 1); __PYX_ERR(0, 183, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray5") < 0)) __PYX_ERR(0, 113, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray5") < 0)) __PYX_ERR(0, 183, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3061,25 +4085,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 113, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 183, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 183, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("AGCTtoArray5", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 113, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("AGCTtoArray5", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 183, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.AGCTtoArray5", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray5(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray5(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArray5(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray5(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   PyObject *__pyx_v_onehot_append = NULL;
   char __pyx_v_Nuc;
@@ -3095,31 +4119,31 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("AGCTtoArray5", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":114
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":184
  * 
  * def AGCTtoArray5(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     onehot_append=onehot.append
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":115
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":185
  * def AGCTtoArray5(char *Seq, int seqlen):
  *     cdef list onehot=[]
  *     onehot_append=onehot.append             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_onehot, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_onehot, __pyx_n_s_append); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot_append = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":118
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":188
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -3131,7 +4155,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":119
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":189
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -3140,7 +4164,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":121
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":191
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3151,16 +4175,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":122
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":192
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__16); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__16); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 192, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":121
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":191
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3169,7 +4193,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":123
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":193
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -3179,16 +4203,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":124
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":194
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__17); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 124, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__17); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 194, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":123
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":193
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -3197,7 +4221,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":125
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":195
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -3207,16 +4231,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":126
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":196
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__18); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__18); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 196, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":125
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":195
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -3225,7 +4249,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":127
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":197
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -3235,16 +4259,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":128
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":198
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__19); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__19); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 198, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":127
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":197
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -3253,7 +4277,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":129
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":199
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -3263,16 +4287,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":130
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":200
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__20); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__20); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 200, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":129
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":199
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -3282,34 +4306,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":132
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":202
  *             onehot_append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 132, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":133
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":203
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 133, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 203, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 203, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -3323,10 +4347,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3335,7 +4359,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":135
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":205
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -3347,7 +4371,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":113
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":183
  *     return onehot
  * 
  * def AGCTtoArray5(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3370,7 +4394,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":139
+/* "data_preprocessing_tools/seq_to_binary2.pyx":209
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray4(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3379,9 +4403,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_6AGCTtoArr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray4(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray4 = {"AGCTtoArray4", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray4, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray4(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11AGCTtoArray4(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_11AGCTtoArray4 = {"AGCTtoArray4", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11AGCTtoArray4, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11AGCTtoArray4(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -3410,11 +4434,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("AGCTtoArray4", 1, 2, 2, 1); __PYX_ERR(0, 139, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("AGCTtoArray4", 1, 2, 2, 1); __PYX_ERR(0, 209, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray4") < 0)) __PYX_ERR(0, 139, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "AGCTtoArray4") < 0)) __PYX_ERR(0, 209, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3422,25 +4446,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 139, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("AGCTtoArray4", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 139, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("AGCTtoArray4", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 209, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.AGCTtoArray4", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray4(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10AGCTtoArray4(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArray4(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10AGCTtoArray4(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   char __pyx_v_Nuc;
   int __pyx_v_i;
   int __pyx_v_onehot[0x3E8][4];
@@ -3454,7 +4478,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("AGCTtoArray4", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":145
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":215
  *     cdef int[1000][4] onehot
  * 
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -3466,7 +4490,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":146
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":216
  * 
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -3475,7 +4499,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":148
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":218
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3486,7 +4510,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":149
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":219
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot[i][0]=1             # <<<<<<<<<<<<<<
@@ -3495,7 +4519,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[0]) = 1;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":150
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":220
  *         if Nuc=='A' or Nuc=='a':
  *             onehot[i][0]=1
  *             onehot[i][1]=0             # <<<<<<<<<<<<<<
@@ -3504,7 +4528,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[1]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":151
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":221
  *             onehot[i][0]=1
  *             onehot[i][1]=0
  *             onehot[i][2]=0             # <<<<<<<<<<<<<<
@@ -3513,7 +4537,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[2]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":152
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":222
  *             onehot[i][1]=0
  *             onehot[i][2]=0
  *             onehot[i][3]=0             # <<<<<<<<<<<<<<
@@ -3522,7 +4546,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[3]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":148
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":218
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3531,7 +4555,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":153
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":223
  *             onehot[i][2]=0
  *             onehot[i][3]=0
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -3541,7 +4565,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":154
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":224
  *             onehot[i][3]=0
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot[i][0]=0             # <<<<<<<<<<<<<<
@@ -3550,7 +4574,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[0]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":155
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":225
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot[i][0]=0
  *             onehot[i][1]=1             # <<<<<<<<<<<<<<
@@ -3559,7 +4583,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[1]) = 1;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":156
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":226
  *             onehot[i][0]=0
  *             onehot[i][1]=1
  *             onehot[i][2]=0             # <<<<<<<<<<<<<<
@@ -3568,7 +4592,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[2]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":157
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":227
  *             onehot[i][1]=1
  *             onehot[i][2]=0
  *             onehot[i][3]=0             # <<<<<<<<<<<<<<
@@ -3577,7 +4601,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[3]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":153
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":223
  *             onehot[i][2]=0
  *             onehot[i][3]=0
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -3586,7 +4610,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":158
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":228
  *             onehot[i][2]=0
  *             onehot[i][3]=0
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -3596,7 +4620,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":159
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":229
  *             onehot[i][3]=0
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot[i][0]=0             # <<<<<<<<<<<<<<
@@ -3605,7 +4629,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[0]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":160
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":230
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot[i][0]=0
  *             onehot[i][1]=0             # <<<<<<<<<<<<<<
@@ -3614,7 +4638,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[1]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":161
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":231
  *             onehot[i][0]=0
  *             onehot[i][1]=0
  *             onehot[i][2]=1             # <<<<<<<<<<<<<<
@@ -3623,7 +4647,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[2]) = 1;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":162
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":232
  *             onehot[i][1]=0
  *             onehot[i][2]=1
  *             onehot[i][3]=0             # <<<<<<<<<<<<<<
@@ -3632,7 +4656,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[3]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":158
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":228
  *             onehot[i][2]=0
  *             onehot[i][3]=0
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -3641,7 +4665,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":163
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":233
  *             onehot[i][2]=1
  *             onehot[i][3]=0
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -3651,7 +4675,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":164
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":234
  *             onehot[i][3]=0
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot[i][0]=0             # <<<<<<<<<<<<<<
@@ -3660,7 +4684,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[0]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":165
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":235
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot[i][0]=0
  *             onehot[i][1]=0             # <<<<<<<<<<<<<<
@@ -3669,7 +4693,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[1]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":166
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":236
  *             onehot[i][0]=0
  *             onehot[i][1]=0
  *             onehot[i][2]=0             # <<<<<<<<<<<<<<
@@ -3678,7 +4702,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[2]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":167
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":237
  *             onehot[i][1]=0
  *             onehot[i][2]=0
  *             onehot[i][3]=1             # <<<<<<<<<<<<<<
@@ -3687,7 +4711,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[3]) = 1;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":163
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":233
  *             onehot[i][2]=1
  *             onehot[i][3]=0
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -3696,7 +4720,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":168
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":238
  *             onehot[i][2]=0
  *             onehot[i][3]=1
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -3706,7 +4730,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":169
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":239
  *             onehot[i][3]=1
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot[i][0]=0             # <<<<<<<<<<<<<<
@@ -3715,7 +4739,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[0]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":170
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":240
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot[i][0]=0
  *             onehot[i][1]=0             # <<<<<<<<<<<<<<
@@ -3724,7 +4748,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[1]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":171
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":241
  *             onehot[i][0]=0
  *             onehot[i][1]=0
  *             onehot[i][2]=0             # <<<<<<<<<<<<<<
@@ -3733,7 +4757,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[2]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":172
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":242
  *             onehot[i][1]=0
  *             onehot[i][2]=0
  *             onehot[i][3]=0             # <<<<<<<<<<<<<<
@@ -3742,7 +4766,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
       ((__pyx_v_onehot[__pyx_v_i])[3]) = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":168
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":238
  *             onehot[i][2]=0
  *             onehot[i][3]=1
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -3752,34 +4776,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":174
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":244
  *             onehot[i][3]=0
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_4 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 244, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 244, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 174, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 244, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_4) < 0) __PYX_ERR(0, 174, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_4) < 0) __PYX_ERR(0, 244, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":175
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":245
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 245, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 175, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 245, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -3793,10 +4817,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
         }
       }
       if (__pyx_t_5) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 245, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       } else {
-        __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 175, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 245, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -3805,7 +4829,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":177
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":247
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -3813,13 +4837,13 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  * def ATGCtoArray(char *Seq, int seqlen):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_carray_to_py_int___5b_4_5d_(__pyx_v_onehot, 0x3E8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_carray_to_py_int___5b_4_5d_(__pyx_v_onehot, 0x3E8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":139
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":209
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray4(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3840,7 +4864,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":179
+/* "data_preprocessing_tools/seq_to_binary2.pyx":249
  *     return onehot
  * 
  * def ATGCtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -3849,9 +4873,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_8AGCTtoArr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoArray = {"ATGCtoArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoArray, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ATGCtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_13ATGCtoArray = {"ATGCtoArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ATGCtoArray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ATGCtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -3880,11 +4904,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoAr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ATGCtoArray", 1, 2, 2, 1); __PYX_ERR(0, 179, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ATGCtoArray", 1, 2, 2, 1); __PYX_ERR(0, 249, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ATGCtoArray") < 0)) __PYX_ERR(0, 179, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ATGCtoArray") < 0)) __PYX_ERR(0, 249, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3892,25 +4916,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoAr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 249, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 249, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ATGCtoArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 179, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ATGCtoArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 249, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.ATGCtoArray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ATGCtoArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ATGCtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -3925,19 +4949,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("ATGCtoArray", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":180
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":250
  * 
  * def ATGCtoArray(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":183
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":253
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -3949,7 +4973,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":184
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":254
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -3958,7 +4982,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":186
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":256
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3969,16 +4993,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":187
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":257
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__21); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 187, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__21); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 257, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":186
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":256
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -3987,7 +5011,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":188
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":258
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -3997,16 +5021,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":189
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":259
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__22); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 189, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__22); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 259, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":188
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":258
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -4015,7 +5039,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":190
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":260
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4025,16 +5049,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":191
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":261
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__23); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 191, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__23); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 261, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":190
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":260
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4043,7 +5067,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":192
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":262
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4053,16 +5077,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":193
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":263
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__24); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 193, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__24); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 263, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":192
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":262
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4071,7 +5095,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":194
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":264
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4081,16 +5105,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":195
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":265
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__25); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 195, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__25); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 265, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":194
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":264
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4100,34 +5124,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":197
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":267
  *             onehot.append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 267, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 267, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":198
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":268
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 198, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 268, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -4141,10 +5165,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 198, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -4153,7 +5177,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":200
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":270
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -4165,7 +5189,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":179
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":249
  *     return onehot
  * 
  * def ATGCtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4187,7 +5211,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":202
+/* "data_preprocessing_tools/seq_to_binary2.pyx":272
  *     return onehot
  * 
  * def ACGTtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4196,9 +5220,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_10ATGCtoAr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoArray = {"ACGTtoArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoArray, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoArray = {"ACGTtoArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoArray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -4227,11 +5251,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoAr
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ACGTtoArray", 1, 2, 2, 1); __PYX_ERR(0, 202, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ACGTtoArray", 1, 2, 2, 1); __PYX_ERR(0, 272, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTtoArray") < 0)) __PYX_ERR(0, 202, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTtoArray") < 0)) __PYX_ERR(0, 272, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4239,25 +5263,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoAr
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 202, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 272, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ACGTtoArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 202, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ACGTtoArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 272, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.ACGTtoArray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -4272,19 +5296,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("ACGTtoArray", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":203
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":273
  * 
  * def ACGTtoArray(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 273, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":206
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":276
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -4296,7 +5320,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":207
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":277
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -4305,7 +5329,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":209
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":279
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -4316,16 +5340,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":210
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":280
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__26); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 210, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__26); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 280, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":209
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":279
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -4334,7 +5358,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":211
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":281
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4344,16 +5368,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":212
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":282
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__27); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 212, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__27); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 282, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":211
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":281
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4362,7 +5386,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":213
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":283
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4372,16 +5396,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":214
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":284
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__28); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 214, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__28); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 284, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":213
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":283
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4390,7 +5414,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":215
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":285
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -4400,16 +5424,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":216
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":286
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__29); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 216, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__29); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 286, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":215
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":285
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -4418,7 +5442,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":217
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":287
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4428,16 +5452,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":218
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":288
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__30); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 218, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__30); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 288, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":217
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":287
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4447,34 +5471,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":220
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":290
  *             onehot.append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 220, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":221
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":291
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 221, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 291, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -4488,10 +5512,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -4500,7 +5524,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":223
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":293
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -4512,7 +5536,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":202
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":272
  *     return onehot
  * 
  * def ACGTtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4534,7 +5558,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":225
+/* "data_preprocessing_tools/seq_to_binary2.pyx":295
  *     return onehot
  * 
  * def ACGTtoaltArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4543,9 +5567,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_12ACGTtoAr
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoaltArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoaltArray = {"ACGTtoaltArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoaltArray, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoaltArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTtoaltArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_17ACGTtoaltArray = {"ACGTtoaltArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTtoaltArray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTtoaltArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -4574,11 +5598,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoal
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ACGTtoaltArray", 1, 2, 2, 1); __PYX_ERR(0, 225, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ACGTtoaltArray", 1, 2, 2, 1); __PYX_ERR(0, 295, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTtoaltArray") < 0)) __PYX_ERR(0, 225, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTtoaltArray") < 0)) __PYX_ERR(0, 295, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4586,25 +5610,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoal
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 295, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 295, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ACGTtoaltArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 225, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ACGTtoaltArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 295, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.ACGTtoaltArray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoaltArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTtoaltArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoaltArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTtoaltArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -4619,19 +5643,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("ACGTtoaltArray", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":226
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":296
  * 
  * def ACGTtoaltArray(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":229
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":299
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -4643,7 +5667,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":230
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":300
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -4652,7 +5676,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":232
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":302
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -4663,16 +5687,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":233
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":303
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__31); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 233, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__31); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 303, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":232
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":302
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -4681,7 +5705,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":234
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":304
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4691,16 +5715,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":235
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":305
  *             onehot.append((1, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__32); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 235, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__32); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 305, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":234
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":304
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -4709,7 +5733,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":236
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":306
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4719,16 +5743,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":237
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":307
  *             onehot.append((0, 1, 0, 1))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__33); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 237, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__33); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 307, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":236
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":306
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -4737,7 +5761,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":238
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":308
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -4747,16 +5771,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":239
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":309
  *             onehot.append((1, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__34); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 239, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__34); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 309, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":238
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":308
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -4765,7 +5789,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":240
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":310
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4775,16 +5799,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":241
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":311
  *             onehot.append((0, 0, 1, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__35); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 241, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__35); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 311, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":240
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":310
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -4794,34 +5818,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":243
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":313
  *             onehot.append((0, 0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 313, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 243, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":244
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":314
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 244, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 314, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 244, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 314, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -4835,10 +5859,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 244, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 314, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -4847,7 +5871,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":246
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":316
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -4859,7 +5883,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":225
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":295
  *     return onehot
  * 
  * def ACGTtoaltArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4881,7 +5905,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
   return __pyx_r;
 }
 
-/* "data_preprocessing_tools/seq_to_binary2.pyx":248
+/* "data_preprocessing_tools/seq_to_binary2.pyx":318
  *     return onehot
  * 
  * def ACGTto3dArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -4890,9 +5914,9 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_14ACGTtoal
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3dArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3dArray = {"ACGTto3dArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3dArray, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3dArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_19ACGTto3dArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_19ACGTto3dArray = {"ACGTto3dArray", (PyCFunction)__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_19ACGTto3dArray, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_19ACGTto3dArray(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   char *__pyx_v_Seq;
   int __pyx_v_seqlen;
   PyObject *__pyx_r = 0;
@@ -4921,11 +5945,11 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3d
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_seqlen)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("ACGTto3dArray", 1, 2, 2, 1); __PYX_ERR(0, 248, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("ACGTto3dArray", 1, 2, 2, 1); __PYX_ERR(0, 318, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTto3dArray") < 0)) __PYX_ERR(0, 248, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "ACGTto3dArray") < 0)) __PYX_ERR(0, 318, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -4933,25 +5957,25 @@ static PyObject *__pyx_pw_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3d
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L3_error)
-    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L3_error)
+    __pyx_v_Seq = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_Seq) && PyErr_Occurred())) __PYX_ERR(0, 318, __pyx_L3_error)
+    __pyx_v_seqlen = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_seqlen == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 318, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("ACGTto3dArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 248, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("ACGTto3dArray", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 318, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("data_preprocessing_tools.seq_to_binary2.ACGTto3dArray", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3dArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
+  __pyx_r = __pyx_pf_24data_preprocessing_tools_14seq_to_binary2_18ACGTto3dArray(__pyx_self, __pyx_v_Seq, __pyx_v_seqlen);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3dArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
+static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_18ACGTto3dArray(CYTHON_UNUSED PyObject *__pyx_self, char *__pyx_v_Seq, int __pyx_v_seqlen) {
   PyObject *__pyx_v_onehot = 0;
   char __pyx_v_Nuc;
   int __pyx_v_i;
@@ -4966,19 +5990,19 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("ACGTto3dArray", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":249
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":319
  * 
  * def ACGTto3dArray(char *Seq, int seqlen):
  *     cdef list onehot=[]             # <<<<<<<<<<<<<<
  *     cdef char Nuc
  *     cdef int i
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_onehot = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":252
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":322
  *     cdef char Nuc
  *     cdef int i
  *     for i in range(seqlen):             # <<<<<<<<<<<<<<
@@ -4990,7 +6014,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":253
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":323
  *     cdef int i
  *     for i in range(seqlen):
  *         Nuc=Seq[i]             # <<<<<<<<<<<<<<
@@ -4999,7 +6023,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
  */
     __pyx_v_Nuc = (__pyx_v_Seq[__pyx_v_i]);
 
-    /* "data_preprocessing_tools/seq_to_binary2.pyx":255
+    /* "data_preprocessing_tools/seq_to_binary2.pyx":325
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -5010,16 +6034,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       case 'A':
       case 'a':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":256
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":326
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__36); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 256, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__36); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 326, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":255
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":325
  *         Nuc=Seq[i]
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':             # <<<<<<<<<<<<<<
@@ -5028,7 +6052,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":257
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":327
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((0, 0, 1))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -5038,16 +6062,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       case 'C':
       case 'c':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":258
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":328
  *             onehot.append((0, 0, 1))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__37); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 258, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__37); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 328, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":257
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":327
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((0, 0, 1))
  *         elif Nuc=='C' or Nuc=='c':             # <<<<<<<<<<<<<<
@@ -5056,7 +6080,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":259
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":329
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -5066,16 +6090,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       case 'G':
       case 'g':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":260
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":330
  *             onehot.append((0, 1, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__38); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 260, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__38); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 330, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":259
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":329
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))
  *         elif Nuc=='G' or Nuc=='g':             # <<<<<<<<<<<<<<
@@ -5084,7 +6108,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":261
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":331
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -5094,16 +6118,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       case 'T':
       case 't':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":262
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":332
  *             onehot.append((1, 0, 1))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__39); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 262, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__39); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 332, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":261
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":331
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))
  *         elif Nuc=='T' or Nuc=='t':             # <<<<<<<<<<<<<<
@@ -5112,7 +6136,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
  */
       break;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":263
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":333
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -5122,16 +6146,16 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       case 'N':
       case 'n':
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":264
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":334
  *             onehot.append((1, 1, 0))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__40); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 264, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_onehot, __pyx_tuple__40); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 334, __pyx_L1_error)
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":263
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":333
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))
  *         elif Nuc=='N' or Nuc=='n':             # <<<<<<<<<<<<<<
@@ -5141,34 +6165,34 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
       break;
       default:
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":266
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":336
  *             onehot.append((0, 0, 0))
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))             # <<<<<<<<<<<<<<
  *             sys.exit()
  * 
  */
-      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_char(__pyx_v_Nuc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 266, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+      __pyx_t_1 = PyNumber_Add(__pyx_kp_s_sequence_contains_unreadable_cha, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 266, __pyx_L1_error)
+      if (__Pyx_PrintOne(0, __pyx_t_1) < 0) __PYX_ERR(0, 336, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "data_preprocessing_tools/seq_to_binary2.pyx":267
+      /* "data_preprocessing_tools/seq_to_binary2.pyx":337
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  *             sys.exit()             # <<<<<<<<<<<<<<
  * 
  *     return onehot
  */
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 267, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 337, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -5182,10 +6206,10 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -5194,7 +6218,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
     }
   }
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":269
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":339
  *             sys.exit()
  * 
  *     return onehot             # <<<<<<<<<<<<<<
@@ -5204,7 +6228,7 @@ static PyObject *__pyx_pf_24data_preprocessing_tools_14seq_to_binary2_16ACGTto3d
   __pyx_r = __pyx_v_onehot;
   goto __pyx_L0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":248
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":318
  *     return onehot
  * 
  * def ACGTto3dArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
@@ -5690,6 +6714,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
+  {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
   {&__pyx_n_s_ACGTto3dArray, __pyx_k_ACGTto3dArray, sizeof(__pyx_k_ACGTto3dArray), 0, 0, 1, 1},
   {&__pyx_n_s_ACGTtoArray, __pyx_k_ACGTtoArray, sizeof(__pyx_k_ACGTtoArray), 0, 0, 1, 1},
   {&__pyx_n_s_ACGTtoaltArray, __pyx_k_ACGTtoaltArray, sizeof(__pyx_k_ACGTtoaltArray), 0, 0, 1, 1},
@@ -5723,6 +6748,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_label_position, __pyx_k_label_position, sizeof(__pyx_k_label_position), 0, 0, 1, 1},
   {&__pyx_n_s_label_position_append, __pyx_k_label_position_append, sizeof(__pyx_k_label_position_append), 0, 0, 1, 1},
   {&__pyx_n_s_label_reader, __pyx_k_label_reader, sizeof(__pyx_k_label_reader), 0, 0, 1, 1},
+  {&__pyx_n_s_label_reader2, __pyx_k_label_reader2, sizeof(__pyx_k_label_reader2), 0, 0, 1, 1},
   {&__pyx_n_s_line, __pyx_k_line, sizeof(__pyx_k_line), 0, 0, 1, 1},
   {&__pyx_n_s_line_2, __pyx_k_line_2, sizeof(__pyx_k_line_2), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
@@ -5749,6 +6775,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_sum, __pyx_k_sum, sizeof(__pyx_k_sum), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
+  {&__pyx_n_s_v, __pyx_k_v, sizeof(__pyx_k_v), 0, 0, 1, 1},
   {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
   {&__pyx_n_s_value_sum, __pyx_k_value_sum, sizeof(__pyx_k_value_sum), 0, 0, 1, 1},
   {&__pyx_n_s_write, __pyx_k_write, sizeof(__pyx_k_write), 0, 0, 1, 1},
@@ -5757,7 +6785,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_map = __Pyx_GetBuiltinName(__pyx_n_s_map); if (!__pyx_builtin_map) __PYX_ERR(0, 41, __pyx_L1_error)
   __pyx_builtin_sum = __Pyx_GetBuiltinName(__pyx_n_s_sum); if (!__pyx_builtin_sum) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 137, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5767,388 +6795,388 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":71
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":141
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))
  */
-  __pyx_tuple__6 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":73
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":143
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))
  */
-  __pyx_tuple__7 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":75
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":145
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  */
-  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":77
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":147
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-  __pyx_tuple__9 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":79
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":149
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__10 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":98
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":168
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  */
-  __pyx_tuple__11 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 168, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":100
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":170
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  */
-  __pyx_tuple__12 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":102
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":172
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  */
-  __pyx_tuple__13 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":104
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":174
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))
  */
-  __pyx_tuple__14 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":106
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":176
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__15 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__15);
   __Pyx_GIVEREF(__pyx_tuple__15);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":122
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":192
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot_append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))
  */
-  __pyx_tuple__16 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":124
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":194
  *             onehot_append((1, 0, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot_append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))
  */
-  __pyx_tuple__17 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":126
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":196
  *             onehot_append((0, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot_append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))
  */
-  __pyx_tuple__18 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":128
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":198
  *             onehot_append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot_append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))
  */
-  __pyx_tuple__19 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":130
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":200
  *             onehot_append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot_append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__20 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_tuple__20 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(0, 200, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__20);
   __Pyx_GIVEREF(__pyx_tuple__20);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":187
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":257
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))
  */
-  __pyx_tuple__21 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":189
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":259
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  */
-  __pyx_tuple__22 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 189, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":191
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":261
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))
  */
-  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 261, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__23);
   __Pyx_GIVEREF(__pyx_tuple__23);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":193
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":263
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-  __pyx_tuple__24 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_tuple__24 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":195
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":265
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__25 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__25);
   __Pyx_GIVEREF(__pyx_tuple__25);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":210
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":280
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))
  */
-  __pyx_tuple__26 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__26);
   __Pyx_GIVEREF(__pyx_tuple__26);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":212
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":282
  *             onehot.append((1, 0, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))
  */
-  __pyx_tuple__27 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__27);
   __Pyx_GIVEREF(__pyx_tuple__27);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":214
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":284
  *             onehot.append((0, 1, 0, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((0, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))
  */
-  __pyx_tuple__28 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 284, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":216
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":286
  *             onehot.append((0, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-  __pyx_tuple__29 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 286, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":218
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":288
  *             onehot.append((0, 0, 0, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":233
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":303
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((1, 1, 0, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))
  */
-  __pyx_tuple__31 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_1, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":235
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":305
  *             onehot.append((1, 1, 0, 0))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))
  */
-  __pyx_tuple__32 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 305, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":237
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":307
  *             onehot.append((0, 1, 0, 1))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))
  */
-  __pyx_tuple__33 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_tuple__33 = PyTuple_Pack(4, __pyx_int_1, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__33)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":239
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":309
  *             onehot.append((1, 0, 1, 0))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((0, 0, 1, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))
  */
-  __pyx_tuple__34 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_1); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_1, __pyx_int_1); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 309, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__34);
   __Pyx_GIVEREF(__pyx_tuple__34);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":241
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":311
  *             onehot.append((0, 0, 1, 1))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__35 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 311, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":256
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":326
  *         #print Nuc
  *         if Nuc=='A' or Nuc=='a':
  *             onehot.append((0, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))
  */
-  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 256, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__36);
   __Pyx_GIVEREF(__pyx_tuple__36);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":258
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":328
  *             onehot.append((0, 0, 1))
  *         elif Nuc=='C' or Nuc=='c':
  *             onehot.append((0, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))
  */
-  __pyx_tuple__37 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 258, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 328, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":260
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":330
  *             onehot.append((0, 1, 0))
  *         elif Nuc=='G' or Nuc=='g':
  *             onehot.append((1, 0, 1))             # <<<<<<<<<<<<<<
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))
  */
-  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_int_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_int_1, __pyx_int_0, __pyx_int_1); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 330, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":262
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":332
  *             onehot.append((1, 0, 1))
  *         elif Nuc=='T' or Nuc=='t':
  *             onehot.append((1, 1, 0))             # <<<<<<<<<<<<<<
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0))
  */
-  __pyx_tuple__39 = PyTuple_Pack(3, __pyx_int_1, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 262, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(3, __pyx_int_1, __pyx_int_1, __pyx_int_0); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 332, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":264
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":334
  *             onehot.append((1, 1, 0))
  *         elif Nuc=='N' or Nuc=='n':
  *             onehot.append((0, 0, 0))             # <<<<<<<<<<<<<<
  *         else:
  *             print("sequence contains unreadable characters: "+str(Nuc))
  */
-  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 334, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
 
@@ -6164,101 +7192,113 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__41);
   __pyx_codeobj__42 = (PyObject*)__Pyx_PyCode_New(3, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__41, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_label_reader, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__42)) __PYX_ERR(0, 8, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":62
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":67
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
+ * def label_reader2(list file_, list chr_to_skip, float reduce):             # <<<<<<<<<<<<<<
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append
+ */
+  __pyx_tuple__43 = PyTuple_Pack(21, __pyx_n_s_file, __pyx_n_s_chr_to_skip, __pyx_n_s_reduce, __pyx_n_s_label_position, __pyx_n_s_label_position_append, __pyx_n_s_label_list, __pyx_n_s_label_list_append, __pyx_n_s_line, __pyx_n_s_i, __pyx_n_s_value_sum, __pyx_n_s_skipped, __pyx_n_s_pos_no, __pyx_n_s_line_2, __pyx_n_s_p, __pyx_n_s_skipped_chr, __pyx_n_s_name_length, __pyx_n_s_value, __pyx_n_s_r, __pyx_n_s_skipping_2, __pyx_n_s_chr, __pyx_n_s_v); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__43);
+  __Pyx_GIVEREF(__pyx_tuple__43);
+  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(3, 0, 21, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_label_reader2, 67, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 67, __pyx_L1_error)
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":132
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray2(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     #onehot_append=onehot.append
  */
-  __pyx_tuple__43 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__43);
-  __Pyx_GIVEREF(__pyx_tuple__43);
-  __pyx_codeobj__44 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__43, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray2, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__44)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__45);
+  __Pyx_GIVEREF(__pyx_tuple__45);
+  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray2, 132, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 132, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":89
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":159
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray3(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     onehot_append=onehot.append
  */
-  __pyx_tuple__45 = PyTuple_Pack(6, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_onehot_append, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 89, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__45);
-  __Pyx_GIVEREF(__pyx_tuple__45);
-  __pyx_codeobj__46 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__45, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray3, 89, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__46)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(6, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_onehot_append, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__47);
+  __Pyx_GIVEREF(__pyx_tuple__47);
+  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray3, 159, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 159, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":113
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":183
  *     return onehot
  * 
  * def AGCTtoArray5(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     onehot_append=onehot.append
  */
-  __pyx_tuple__47 = PyTuple_Pack(6, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_onehot_append, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 113, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__47);
-  __Pyx_GIVEREF(__pyx_tuple__47);
-  __pyx_codeobj__48 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__47, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray5, 113, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__48)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(6, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_onehot_append, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 183, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__49);
+  __Pyx_GIVEREF(__pyx_tuple__49);
+  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray5, 183, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 183, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":139
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":209
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray4(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     #cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_tuple__49 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_Nuc, __pyx_n_s_i, __pyx_n_s_onehot); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 139, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__49);
-  __Pyx_GIVEREF(__pyx_tuple__49);
-  __pyx_codeobj__50 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__49, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray4, 139, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__50)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_Nuc, __pyx_n_s_i, __pyx_n_s_onehot); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__51);
+  __Pyx_GIVEREF(__pyx_tuple__51);
+  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_AGCTtoArray4, 209, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 209, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":179
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":249
  *     return onehot
  * 
  * def ATGCtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_tuple__51 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 179, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__51);
-  __Pyx_GIVEREF(__pyx_tuple__51);
-  __pyx_codeobj__52 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__51, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ATGCtoArray, 179, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__52)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__53);
+  __Pyx_GIVEREF(__pyx_tuple__53);
+  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ATGCtoArray, 249, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 249, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":202
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":272
  *     return onehot
  * 
  * def ACGTtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_tuple__53 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 202, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__53);
-  __Pyx_GIVEREF(__pyx_tuple__53);
-  __pyx_codeobj__54 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__53, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTtoArray, 202, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__54)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_tuple__55 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__55);
+  __Pyx_GIVEREF(__pyx_tuple__55);
+  __pyx_codeobj__56 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTtoArray, 272, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__56)) __PYX_ERR(0, 272, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":225
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":295
  *     return onehot
  * 
  * def ACGTtoaltArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_tuple__55 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 225, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__55);
-  __Pyx_GIVEREF(__pyx_tuple__55);
-  __pyx_codeobj__56 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__55, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTtoaltArray, 225, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__56)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_tuple__57 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__57);
+  __Pyx_GIVEREF(__pyx_tuple__57);
+  __pyx_codeobj__58 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__57, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTtoaltArray, 295, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__58)) __PYX_ERR(0, 295, __pyx_L1_error)
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":248
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":318
  *     return onehot
  * 
  * def ACGTto3dArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_tuple__57 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 248, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__57);
-  __Pyx_GIVEREF(__pyx_tuple__57);
-  __pyx_codeobj__58 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__57, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTto3dArray, 248, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__58)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_tuple__59 = PyTuple_Pack(5, __pyx_n_s_Seq, __pyx_n_s_seqlen, __pyx_n_s_onehot, __pyx_n_s_Nuc, __pyx_n_s_i); if (unlikely(!__pyx_tuple__59)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__59);
+  __Pyx_GIVEREF(__pyx_tuple__59);
+  __pyx_codeobj__60 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__59, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_deepgmap_data_preprocessing_tool, __pyx_n_s_ACGTto3dArray, 318, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__60)) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6516,7 +7556,7 @@ if (!__Pyx_RefNanny) {
   /* "data_preprocessing_tools/seq_to_binary2.pyx":2
  * cimport cython
  * import sys             # <<<<<<<<<<<<<<
- * 
+ * import time
  * import random
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
@@ -6524,9 +7564,21 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":3
+ * cimport cython
+ * import sys
+ * import time             # <<<<<<<<<<<<<<
+ * import random
+ * 
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_time, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_time, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
   /* "data_preprocessing_tools/seq_to_binary2.pyx":4
  * import sys
- * 
+ * import time
  * import random             # <<<<<<<<<<<<<<
  * 
  * @cython.boundscheck(False)
@@ -6548,106 +7600,118 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_label_reader, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":62
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":67
+ * @cython.boundscheck(False)
+ * @cython.wraparound(False)
+ * def label_reader2(list file_, list chr_to_skip, float reduce):             # <<<<<<<<<<<<<<
+ *     cdef list label_position=[]
+ *     label_position_append=label_position.append
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3label_reader2, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_label_reader2, __pyx_t_1) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":132
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray2(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     #onehot_append=onehot.append
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_3AGCTtoArray2, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray2, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray2, __pyx_t_1) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray2, __pyx_t_1) < 0) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":89
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":159
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray3(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     onehot_append=onehot.append
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_5AGCTtoArray3, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray3, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray3, __pyx_t_1) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray3, __pyx_t_1) < 0) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":113
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":183
  *     return onehot
  * 
  * def AGCTtoArray5(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     onehot_append=onehot.append
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_7AGCTtoArray5, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray5, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray5, __pyx_t_1) < 0) __PYX_ERR(0, 113, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray5, __pyx_t_1) < 0) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":139
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":209
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def AGCTtoArray4(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     #cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_9AGCTtoArray4, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_11AGCTtoArray4, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray4, __pyx_t_1) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AGCTtoArray4, __pyx_t_1) < 0) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":179
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":249
  *     return onehot
  * 
  * def ATGCtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_11ATGCtoArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_13ATGCtoArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ATGCtoArray, __pyx_t_1) < 0) __PYX_ERR(0, 179, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ATGCtoArray, __pyx_t_1) < 0) __PYX_ERR(0, 249, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":202
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":272
  *     return onehot
  * 
  * def ACGTtoArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_13ACGTtoArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTtoArray, __pyx_t_1) < 0) __PYX_ERR(0, 202, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTtoArray, __pyx_t_1) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":225
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":295
  *     return onehot
  * 
  * def ACGTtoaltArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_15ACGTtoaltArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_17ACGTtoaltArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTtoaltArray, __pyx_t_1) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTtoaltArray, __pyx_t_1) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "data_preprocessing_tools/seq_to_binary2.pyx":248
+  /* "data_preprocessing_tools/seq_to_binary2.pyx":318
  *     return onehot
  * 
  * def ACGTto3dArray(char *Seq, int seqlen):             # <<<<<<<<<<<<<<
  *     cdef list onehot=[]
  *     cdef char Nuc
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_17ACGTto3dArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_24data_preprocessing_tools_14seq_to_binary2_19ACGTto3dArray, NULL, __pyx_n_s_data_preprocessing_tools_seq_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTto3dArray, __pyx_t_1) < 0) __PYX_ERR(0, 248, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_ACGTto3dArray, __pyx_t_1) < 0) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "data_preprocessing_tools/seq_to_binary2.pyx":1
  * cimport cython             # <<<<<<<<<<<<<<
  * import sys
- * 
+ * import time
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
