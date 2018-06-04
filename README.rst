@@ -26,7 +26,7 @@ Usage of deepgmap
   deepgmap [-h] [--version]
              {pridict,train,generate_input,genome_divide}
 
-:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/XXXX.meta -o ./data/predictions/ -b ./data/inputs/mm10_dnase_subset/XXXX.bed.labeled -t /home/fast/onimaru/data/test_genome/mm10_window1000_stride200_chr2_*.npz"
+:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/XXXX.meta -o ./data/predictions/ -b ./data/inputs/mm10_dnase_subset/XXXX.bed.labeled -t ./data/test_genome/mm10_window1000_stride200_chr2_*.npz"
 
 :Example for training a model: "deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 1"
 

@@ -15,7 +15,7 @@ Cython_ (>=0.18) is an optional requirement to recompile ``.pyx`` files.
 
 Tensorflow_ (>=1.8)
 
-Scikit learn_ (>=0.19.1)
+Scikitlearn_ (>=0.19.1)
 
 matplotlib_
 
@@ -23,6 +23,10 @@ bedtools_ (>=2.25)
 
 .. _Numpy: http://www.scipy.org/Download
 .. _Cython: http://cython.org/
+.. _Tensorflow: https://www.tensorflow.org/	
+.. _Scikitlearn: http://scikit-learn.org/
+.. _matplotlib: https://matplotlib.org/
+.. _bedtools: http://bedtools.readthedocs.io/
 
 Download source
 ===============
