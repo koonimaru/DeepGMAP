@@ -1,7 +1,7 @@
 ===========================
 README for DeepGMAP (0.0.0)
 ===========================
-Time-stamp: <2018-02-15 13:55:42 Koh>
+Time-stamp: <2018-06-05 13:58:42 Koh>
 
 Introduction
 ============
@@ -32,7 +32,7 @@ Usage of deepgmap
 
 There are five functions currently available.
 
-:train:				Train a model with your data set. The model can be chosen by the option '-c'. deepsea, basset, danq, frss4, frss3 are available choices, but you can also create a new model.
+:train:				Train a model with your data set. The model can be chosen by the option '-c'. deepsea, basset, danq, conv4, conv4frss, conv3frss are available choices, but you can also create a new model.
 :predict:			Predict regulatory sequences in a genome or test a newly trained model.
 :generate_input:	Generate a training data set that is randomly shuffled and distributed into mini-batches.
 :generate_test:		Generate a test data set, or convert a genome sequence that you want to annotate its regulatory regions into input data set 
