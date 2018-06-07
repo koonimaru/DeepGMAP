@@ -132,12 +132,12 @@ class Model(object):
                 # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
                 # Define lstm cells with tensorflow
                 # Forward direction cell
-                #lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
-                lstm_fw_cell = rnn.DropoutWrapper(rnn.LSTMBlockCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
+                lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
+                #lstm_fw_cell = rnn.DropoutWrapper(rnn.LSTMBlockCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
                 #lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2)
                 # Backward direction cell
-                #lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
-                lstm_bw_cell = rnn.DropoutWrapper(rnn.LSTMBlockCell(n_hidden, forget_bias=1.0), self.keep_prob2)
+                lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
+                #lstm_bw_cell = rnn.DropoutWrapper(rnn.LSTMBlockCell(n_hidden, forget_bias=1.0), self.keep_prob2)
                 #lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2)
                 # Get lstm cell output
                 """

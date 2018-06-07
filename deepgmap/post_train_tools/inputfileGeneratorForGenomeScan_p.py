@@ -23,7 +23,8 @@ def DNA_to_array_converter(input_file,target_chr):
     if "," in target_chr:
         target_chr=set(target_chr.split(','))
     else:
-        target_chr=set(target_chr)
+        target_chr=set([target_chr])
+    #print target_chr
     seq_list=[]
     position_list=[]
     b1=0.0
@@ -101,7 +102,7 @@ def main(args=None):
                 threads=int(arg)
     
         print options
-    
+    assert os.path.isfile(input_file), "no input files"
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)
     print seq_num

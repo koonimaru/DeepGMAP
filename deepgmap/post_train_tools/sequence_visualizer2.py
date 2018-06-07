@@ -1,7 +1,5 @@
 
 import cairocffi as cairo
-import gzip
-import cPickle       
 import numpy as np
 
 def _select_color(cr, DNA):
