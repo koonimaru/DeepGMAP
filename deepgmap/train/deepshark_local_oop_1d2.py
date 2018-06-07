@@ -357,7 +357,7 @@ def main(args=None):
                                 flog=open(saving_dir_prefix+'.log', 'a')
                                 flog.write("This is tests for the model at the train step: "+str(h)+"\nThe average of TPR+PPV: "+str(mean_ac)+'\n')
                                 flog.close()
-                                saver.save(sess, str(output_dir)+str(model_name)+"_"+str(start_at)+'_step'+str(h)+'.ckpt', global_step=h)
+                                saver.save(sess, str(output_dir)+str(model_name)+"_"+str(start_at)+'.ckpt', global_step=h)
                                 prev_ac=mean_ac                    
                                 
                             if mean_ac>=0.999:
@@ -455,8 +455,7 @@ def main(args=None):
     plt.axis((x1,x2,0,1.0))
     plt.savefig(saving_dir_prefix+'_plot.pdf', format='pdf')
     np.savez_compressed(saving_dir_prefix+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
-    import send_email
-    send_email.send_email(to_print)
+
     
     plt.show()   
 

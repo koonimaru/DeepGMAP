@@ -33,8 +33,8 @@ Download source
 
  $ git clone https://github.com/koonimaru/DeepGMAP.git
 
-Configure enviroment variables
-==============================
+Configure environment variables
+===============================
 
 You need to add the downloaded location (in this example home directory; $HOME) to your ``PYTHONPATH`` and ``PATH`` environment variables.
 
