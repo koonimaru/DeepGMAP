@@ -1,0 +1,5 @@
+tensorflow-gpu
+numpy
+matplotlib
+sklearn
+cairocffi

@@ -222,7 +222,8 @@ def main(args=None):
             
             pos_rate=np.round(pos_no/float(lnum), 3)*100
             neg_rate=100-pos_rate
-            print("\n"+str(skipped)+" negative sequences are skipped.\nThe rate of positives vs negatives is " + str(pos_rate)+":"+str(neg_rate))
+            to_print1="\n"+str(skipped)+" negative sequences are skipped.\nThe rate of positives vs negatives is " + str(pos_rate)+":"+str(neg_rate)
+            print(to_print1)
             del label_position
             #print("\t".join(label_position[:2])+"\n"+ "\t".join(label_position[:-2])+"\n"+"\t".join(position[:2])+"\n"+"\t".join(position[:-2]))
                     
@@ -276,7 +277,8 @@ def main(args=None):
                 
             del binaryDNAdict, label_list, jobs
         print("still working on something...")
-        
+        with open(output_dir+"data_generation.log", "w") as flog:
+            flog.write("Labeled file:"+labeled_genome+"\Class number:"+str(len(bed_file_list))+"\nExcluded chromosome:"+str(chr_to_skip)+"\n"+to_print1+"\n")
         
         running_time=time.time()-start
         print("Done! A train data set has been saved to "+str(output_dir)+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time)))

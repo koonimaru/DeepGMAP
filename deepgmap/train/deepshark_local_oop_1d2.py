@@ -189,7 +189,9 @@ def main(args=None):
                 
     if input_dir.endswith("/"):
         input_dir=str(input_dir)+"*.npz"
-    elif input_dir.endswith("*") or input_dir.endswith(".npz"):
+    elif input_dir.endswith("*"):
+        input_dir=str(input_dir)+".npz"
+    elif input_dir.endswith("*.npz"):
         pass
     else:
         input_dir=str(input_dir)+"/*.npz"
@@ -325,7 +327,7 @@ def main(args=None):
                             
                             test_step.append(h)
                             if len(test_step)>10:
-                                e, f=test_step[-1],test_step[-10]
+                                e, f=test_step[-1]/TEST_FREQ,test_step[-10]/TEST_FREQ
                                 if e-f<=40:
                                     TEST_THRESHHOLD+=0.02
                                     
@@ -357,7 +359,7 @@ def main(args=None):
                                 flog=open(saving_dir_prefix+'.log', 'a')
                                 flog.write("This is tests for the model at the train step: "+str(h)+"\nThe average of TPR+PPV: "+str(mean_ac)+'\n')
                                 flog.close()
-                                saver.save(sess, str(output_dir)+str(model_name)+"_"+str(start_at)+'.ckpt', global_step=h)
+                                saver.save(sess, saving_dir_prefix+'.ckpt', global_step=h)
                                 prev_ac=mean_ac                    
                                 
                             if mean_ac>=0.999:
@@ -417,15 +419,27 @@ def main(args=None):
     #np.savez(str(output_dir)+str(model_name)+'_local_variables_'+str(start_at)+'.npz', **local_variable)
     mean_ac=np.round(np.nanmean(f1_list),4) 
     running_time=time.time()-start
+    
+    input_log=os.path.split(input_dir)[0]+"/data_generation.log"
+    labeled_file_name=""
+    if os.path.isfile(input_log):
+        with open(input_log, 'r') as ilog:
+            for line in ilog:
+                if line.startswith("Labeled"):
+                    labeled_file_name=line.split(":")[1]
+                    break
     import datetime
-    to_print=("dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
-              +"input directory: "+str(input_dir)+"\n"
-              +"The average of TPR+PPV: "+str(np.round(mean_ac,2))
-              +"\nTotal time "+ str(datetime.timedelta(seconds=running_time))
+    to_print=("Dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
+              +"Input directory: "+str(input_dir)+"\n"
+              +"The average F1: "+str(np.round(mean_ac,2))
+              +"\nTotal time: "+ str(datetime.timedelta(seconds=running_time))
               +"\nMean time for one batch: "+str(np.mean(computation_time))
-              +"\nThe model is "+str(model_name)
-              +"\nArguments are "+str(sys.argv[1:])
-              +"\nGlobal variables: "+str(all_))
+              +"\nModel: "+str(model_name)
+              +"\nThe last check point: "+saving_dir_prefix+".ckpt-"+str(h)+".meta"
+              +"\nArguments: "+" ".join(sys.argv[1:])
+              +"\nTotal class number: "+str(label_dim)
+              +"\nLabeled file: "+labeled_file_name
+              +"\nGlobal variables: "+"\n".join(map(str, all_)))
        
     sess.close()
     print(to_print)

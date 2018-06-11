@@ -77,6 +77,10 @@ def main(args=None):
         TEST=args.test_or_prediction
         GPUID=str(args.gpuid)
         BATCH_SIZE=args.batchsize
+        
+        #if TEST==True and bed_file==None:
+            #sys.exit("To test a trained model, labeled file (-b option) should be specified.")
+        
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
@@ -321,7 +325,7 @@ def main(args=None):
             
     for i in output_handle:
         i.close()
-    print('finished writing the prodictions.')
+    print('finished writing the predictions.')
     
     if TEST==True:
         print("Now, calculating AUROC and AUPRC scores...")

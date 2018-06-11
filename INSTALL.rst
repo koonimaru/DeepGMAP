@@ -5,7 +5,7 @@ INSTALL Guide For DeepGMAP
 Prerequisites
 =============
 
-DeepGMAP is verified to work only on Linux (Ubunru 16.10). 
+DeepGMAP is verified to work on Linux (Ubunru 16.10). 
 
 Python version 2.7.
 

@@ -93,7 +93,7 @@ def add_predict_parser( subparsers ):
                                       help = "an output directory for prediction results. REQUIRED.")
     argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str, default = "",
                                       help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
-    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, required = True,
+    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = None,
                                       help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
     argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
                                       help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
