@@ -140,8 +140,8 @@ def main(args=None):
     loop_num_=None
     test_batch_num=None
     max_to_keep=2
-    TEST_THRESHHOLD=0.75
-    SAVE_THRESHHOLD=0
+    TEST_THRESHOLD=0.75
+    SAVE_THRESHOLD=0
     dropout_1=1.00
     dropout_2=0.80
     dropout_3=0.50
@@ -161,6 +161,7 @@ def main(args=None):
         TEST_FREQ=args.test_frequency
         EPOCHS_TO_TRAIN=args.epochs
         GPUID=str(args.gpuid)
+        TEST_THRESHOLD=args.test_threshold
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
@@ -322,20 +323,20 @@ def main(args=None):
                         temporal_accuracy=np.round((train_accuracy_record[-1]+train_accuracy_record[-2]+train_accuracy_record[-3])/3.0,4)
                         if len(test_step)>1:
                             CHECK_TEST_FR=((h-test_step[-1])>1000)
-                        CHECK_ACCU=(temporal_accuracy>=TEST_THRESHHOLD)
+                        CHECK_ACCU=(temporal_accuracy>=TEST_THRESHOLD)
                         if CHECK_ACCU or CHECK_TEST_FR:
                             
                             test_step.append(h)
                             if len(test_step)>10:
                                 e, f=test_step[-1]/TEST_FREQ,test_step[-10]/TEST_FREQ
                                 if e-f<=40:
-                                    TEST_THRESHHOLD+=0.02
+                                    TEST_THRESHOLD+=0.02
                                     
-                                    if TEST_THRESHHOLD>0.9900:
+                                    if TEST_THRESHOLD>0.9900:
                                         TEST_THRESHHOLD=0.9900
-                                    print("\n"+str(TEST_THRESHHOLD))
+                                    print("\n"+str(TEST_THRESHOLD))
                             if CHECK_TEST_FR:
-                                TEST_THRESHHOLD-=0.02
+                                TEST_THRESHOLD-=0.02
                             #TEST_THRESHHOLD=temporal_accuracy-0.005
                             t_batch = test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length)
                             
@@ -354,10 +355,10 @@ def main(args=None):
                                       +"mean accuracy : "+str(mean_ac)
                                       +"\n Total time "+ str(time.time()-start))
                             print(to_print)
-                            if (prev_ac==None and mean_ac>=SAVE_THRESHHOLD) or (prev_ac!=None and mean_ac>=prev_ac):
+                            if (prev_ac==None and mean_ac>=SAVE_THRESHOLD) or (prev_ac!=None and mean_ac>=prev_ac):
                                 
                                 flog=open(saving_dir_prefix+'.log', 'a')
-                                flog.write("This is tests for the model at the train step: "+str(h)+"\nThe average of TPR+PPV: "+str(mean_ac)+'\n')
+                                flog.write("This is tests for the model at the train step: "+str(h)+"\nThe average of F1: "+str(mean_ac)+'\n')
                                 flog.close()
                                 saver.save(sess, saving_dir_prefix+'.ckpt', global_step=h)
                                 prev_ac=mean_ac                    

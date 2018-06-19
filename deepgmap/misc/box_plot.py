@@ -2,7 +2,7 @@ from small_tools import is_number
 import matplotlib.pyplot as plt
 import numpy as np
 
-f="/home/fast/onimaru/deepgmap/data/misc/AUPRC_ctcf_boxplot_30may2018.txt"
+f="/home/fast2/onimaru/DeepGMAP-dev/data/misc/AUPRC_ctcf_boxplot_14jun2018.txt"
 
 data_list=[]
 sample_list=[]

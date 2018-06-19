@@ -278,7 +278,7 @@ def main(args=None):
             del binaryDNAdict, label_list, jobs
         print("still working on something...")
         with open(output_dir+"data_generation.log", "w") as flog:
-            flog.write("Labeled file:"+labeled_genome+"\Class number:"+str(len(bed_file_list))+"\nExcluded chromosome:"+str(chr_to_skip)+"\n"+to_print1+"\n")
+            flog.write("Labeled file:"+labeled_genome+"\nClass number:"+str(len(bed_file_list))+"\nExcluded chromosome:"+str(chr_to_skip)+"\n"+to_print1+"\n")
         
         running_time=time.time()-start
         print("Done! A train data set has been saved to "+str(output_dir)+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time)))

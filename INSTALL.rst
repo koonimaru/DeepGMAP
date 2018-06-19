@@ -28,11 +28,18 @@ bedtools_ (>=2.25)
 .. _matplotlib: https://matplotlib.org/
 .. _bedtools: http://bedtools.readthedocs.io/
 
-Download source
-===============
+Download source and data
+========================
+To download the source code from our github repository::
 
  $ git clone https://github.com/koonimaru/DeepGMAP.git
+ 
+To download data files that are used in our paper::
 
+ $ wget https://XXXXX
+
+Then, place the folder named "data" under the DeepGMAP directory.
+ 
 Configure environment variables
 ===============================
 

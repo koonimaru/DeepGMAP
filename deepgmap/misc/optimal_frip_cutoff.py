@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import BSpline
 
-fname="/home/fast/onimaru/deepgmap/data/misc/auprcs_frips_cov_peaks_hg38_dnase_full.txt"
+fname="/home/fast2/onimaru/DeepGMAP-dev/data/misc/mm10_ctcf_auprcs_frips.txt"
 
 auprc=[]
 frip=[]
@@ -19,9 +19,9 @@ with open(fname, 'r') as fin:
 with open(fname, 'r') as fin:
     for line in fin:
         line=line.split()
-        if not line[0]=="ID":
+        if not len(line)==0 and not line[0]=="ID":
             auprc.append(float(line[1]))
-            frip.append(float(line[-1]))
+            frip.append(float(line[5]))
 frip, auprc=zip(*sorted(zip(frip, auprc)))
 auprc_av=[]
 for i in range(len(auprc)):
