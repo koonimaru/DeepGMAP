@@ -73,6 +73,8 @@ def add_train_parser( subparsers ):
                                       progress of training. But, it slows computing particularly when the label number is large. Default: 1" )
     group_input.add_argument( "-e", "--epochs", dest = "epochs", type = int,default = 1,
                               help = "The number of epochs to train a model. Default: 1" )
+    group_input.add_argument( "-t", "--test_threshold", dest = "test_threshold", type = float,default = 0.75,
+                              help = "A threshold of train accuracy to test a training model with test batches. Default: 0.75" )
     # group for output files
     group_output = argparser_train.add_argument_group( "Output arguments" )
     #add_outdir_option( group_output )
@@ -87,15 +89,15 @@ def add_predict_parser( subparsers ):
     
     argparser_predict = subparsers.add_parser( "predict",
                                                  help = "Predict regulatory sequences" )
-    argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, required = True,
+    argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, default = "",
                                       help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
-    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                                      help = "an output directory for prediction results. REQUIRED.")
+    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default="./data/predictions/",
+                                      help = "an output directory for prediction results. Default: ./data/predictions/")
     argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str, default = "",
                                       help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
-    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, required = True,
+    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = None,
                                       help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
-    argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, required = True,
+    argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, default = "",
                                       help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
     #argparser_predict.add_argument("-G," "--GPU", dest = "GPU_number", type = int, default = 1,
                                       #help = "The number of GPU in your machine. Currently, the program can use only one GPU. So, multiple GPU won't speed up. Default: 1" )
@@ -107,6 +109,8 @@ def add_predict_parser( subparsers ):
                               help = "Specify which GPUs to use. Default: 0" )
     argparser_predict.add_argument( "-s", "--batch_size", dest = "batchsize", type = int,default = 1000,
                               help = "The number of sequences that are going to be scanned at once. If you get memmory error, reducing this number may solve it. Default: 1000" )
+    argparser_predict.add_argument( "-l", "--logfile", dest = "logfile", type = str,default = "",
+                              help = "The log file of a training model. If you provide this option, you do not need to specify options of -i, -b, and -c. Default: " )
     return
 
 def add_generate_input_parser( subparsers ):

@@ -87,14 +87,16 @@ def label_reader2(list file_, list chr_to_skip, float reduce):
         line_=line.split()
         for _chr in chr_to_skip:
             if line_[0]==_chr:
+                skipping=1
                 if not skipped_chr==line_[0]:
                     sys.stdout.write('skipping '+line_[0]+'\r')
                     sys.stdout.flush()
                     skipped_chr=line_[0]
-                    skipping=1
+                
                 break
             else:
                 skipping=0
+        #print(line_, skipping)
         if skipping==1:
             continue
         
@@ -120,7 +122,7 @@ def label_reader2(list file_, list chr_to_skip, float reduce):
         if i%100000==0:
             #print time.time()-start
             #sys.exit()
-            sys.stdout.write('reading labels %i \r' % (i))
+            sys.stdout.write("reading label "+ str(line))
             sys.stdout.flush()
     return label_position, label_list, skipped, pos_no
 

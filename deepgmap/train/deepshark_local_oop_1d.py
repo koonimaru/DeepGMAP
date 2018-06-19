@@ -425,8 +425,6 @@ def main(args=None):
     plt.axis((x1,x2,0,1.0))
     plt.savefig(str(output_dir)+'plot_'+str(start_at)+'.pdf', format='pdf')
     np.savez_compressed(str(output_dir)+str(model_name)+"_"+str(start_at)+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
-    import send_email
-    send_email.send_email(to_print)
     
     plt.show()   
 

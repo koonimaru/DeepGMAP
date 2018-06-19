@@ -66,17 +66,45 @@ def main(args=None):
     max_to_keep=2
     #GPU=1
     if args is not None:
-        #takes arguments when the code is run through enhancer_prediction_run         
-        input_dir=args.input_ckpt
-        output_dir=args.out_directory
-        model_name=args.model
-        bed_file=args.labeled_bed_file
-        test_genome=args.test_genome_files
-        #GPU=args.GPU_number
-        chromosome_of_interest=args.chromosome
-        TEST=args.test_or_prediction
-        GPUID=str(args.gpuid)
-        BATCH_SIZE=args.batchsize
+        #takes arguments when the code is run through enhancer_prediction_run
+        
+        if args.logfile=="":
+               
+            input_dir=args.input_ckpt
+            output_dir=args.out_directory
+            model_name=args.model
+            bed_file=args.labeled_bed_file
+            test_genome=args.test_genome_files
+            #GPU=args.GPU_number
+            chromosome_of_interest=args.chromosome
+            TEST=args.test_or_prediction
+            GPUID=str(args.gpuid)
+            BATCH_SIZE=args.batchsize
+        else:
+            output_dir="./data/predictions/"
+            test_genome=args.test_genome_files
+            chromosome_of_interest=args.chromosome
+            GPUID=str(args.gpuid)
+            BATCH_SIZE=args.batchsize
+            TEST=args.test_or_prediction
+            with open(args.logfile, "r") as fin:
+                for line in fin:
+                    if line.startswith('The last check point:'):
+                        input_dir=line.split(":")[1].strip(" \n")
+                        #input_dir=line[1]
+                    elif line.startswith("Labeled file:"):
+                        bed_file=line.split(":")[1].strip(" \n")
+                        #bed_file=line[1]
+                    elif line.startswith("Model:"):
+                        model_name=line.split(":")[1].strip(" \n")
+                        #model_name=line[1]
+                        
+                        
+                    
+                        
+        #if TEST==True and bed_file==None:
+            #sys.exit("To test a trained model, labeled file (-b option) should be specified.")
+        
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
@@ -321,7 +349,7 @@ def main(args=None):
             
     for i in output_handle:
         i.close()
-    print('finished writing the prodictions.')
+    print('finished writing the predictions.')
     
     if TEST==True:
         print("Now, calculating AUROC and AUPRC scores...")

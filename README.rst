@@ -26,7 +26,7 @@ Usage of deepgmap
   deepgmap [-h] [--version]
              {pridict,train,generate_input,genome_divide}
 
-:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/XXXX.meta -o ./data/predictions/ -b ./data/inputs/mm10_dnase_subset/XXXX.bed.labeled -t ./data/test_genome/mm10_window1000_stride200_chr2_*.npz"
+:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/conv4frssXXXX.meta -o ./data/predictions/ -t ./data/test_data/mm10_window1000_stride300*.npz -G 0"
 
 :Example for training a model: "deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 1"
 
@@ -55,7 +55,7 @@ deepgmap generate_test -i ./data/genomes/mm10_window1000_stride500.fa -o ./data/
 
 , which produces a series of npz files. To predict regulatory sequences, type
 
-deepgmap predict -i ./data/outputs/conv4frssplus2_Mon_May__7_092815_2018.ckpt-127179.meta -o ./data/predictions/ -t ./data/test_genome/mm10_window1000_stride200*.npz -G 0
+deepgmap predict -i ./data/outputs/conv4frssXXXX.meta -o ./data/predictions/ -t ./data/test_data/mm10_window1000_stride300*.npz -G 0
 
 
 Output files
@@ -102,7 +102,7 @@ predict -i ./data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o ./data/pred
 
 Output files
 ~~~~~~~~~~~~
-1. narrowPeak files are tabular files that contain genomic regions with prediction score from 0 to 1. 
+1. narrowPeak files are tabular files that contain genomic regions with prediction score between 0 and 1. 
    The files can be visualized with the IGV genome viewer (http://software.broadinstitute.org/software/igv/).
    Each file is corresponding to one of labels you have trained your model with.
 2. A npz file is a numpy array of prediction scores. The array coordinate is the same as the labeled file.

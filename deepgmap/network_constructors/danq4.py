@@ -133,20 +133,20 @@ class Model(object):
                 # Define lstm cells with tensorflow
                 # Forward direction cell
                 #lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
-                lstm_fw_cell = cudnn_rnn.CudnnLSTM(1, n_hidden, dropout=self.keep_prob2) #, use_peepholes=True)
+                lstm_fw_cell = rnn.DropoutWrapper(cudnn_rnn.CudnnCompatibleLSTMCell(n_hidden), self.keep_prob2) #, use_peepholes=True)
                 #lstm_fw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2)
                 # Backward direction cell
                 #lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.LSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2) #, use_peepholes=True)
-                lstm_bw_cell = cudnn_rnn.CudnnLSTM(1, n_hidden, dropout=self.keep_prob2)
+                lstm_bw_cell = rnn.DropoutWrapper(cudnn_rnn.CudnnCompatibleLSTMCell(n_hidden), self.keep_prob2)
                 #lstm_bw_cell = rnn.DropoutWrapper(tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0), self.keep_prob2)
                 # Get lstm cell output
-                """
+                
                 try:
                     outputs, _, _ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell, x,
                                                           dtype=tf.float32)
                 except Exception: # Old TensorFlow version only returns outputs not states
                     outputs,_ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell,x,
-                                                    dtype=tf.float32)"""
+                                                    dtype=tf.float32)
                 #outputs,_ = tf.nn.bidirectional_dynamic_rnn(lstm_fw_cell, lstm_bw_cell,x,
                                                     #dtype=tf.float32)
                                                     
