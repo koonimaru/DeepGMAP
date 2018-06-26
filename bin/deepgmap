@@ -185,8 +185,9 @@ def main():
 
     # Parse options
     argparser = prepare_argparser()
+    #print argparser
     args = argparser.parse_args()
-
+    
     subcommand  = args.subcommand_name
 
     if subcommand == "train":
@@ -213,14 +214,14 @@ def main():
         run( args )
         
 if __name__ == '__main__':
-
-    try:
+    main()
+    """try:
         main()
     except:
         print('-'*60)
         traceback.print_exc(file=sys.stdout)
-        print('-'*60)
-        sys.exit("\(x m x)/ \n")
+        print('-'*60+"\n\(x m x)/ \n")
+        #sys.exit()"""
         
         
         
