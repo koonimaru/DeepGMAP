@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 f="/home/fast2/onimaru/DeepGMAP-dev/data/misc/AUPRC_ctcf_boxplot_14jun2018.txt"
-
+#f="/home/fast2/onimaru/DeepGMAP-dev/data/misc/AUPRC_dnase_boxplot_31may2018.txt"
 data_list=[]
 sample_list=[]
 
@@ -69,8 +69,8 @@ for i in range(len(sub_data_list1)):
     for j in range(len(sub_data_list1)):
          
         if not i==j and not str(i)+"-"+str(j) in pair_set:
-            test=stats.ttest_ind(sub_data_list1[i],sub_data_list1[j])
-            #test=stats.mannwhitneyu(sub_data_list1[i],sub_data_list1[j])
+            #test=stats.ttest_ind(sub_data_list1[i],sub_data_list1[j])
+            test=stats.mannwhitneyu(sub_data_list1[i],sub_data_list1[j],alternative="two-sided")
             test_dict[str(i)+"-"+str(j)]=test
             pair_set.add(str(i)+"-"+str(j))
             pair_set.add(str(j)+"-"+str(i))
