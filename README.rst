@@ -51,7 +51,7 @@ deepgmap genome_divide -i ./data/genomes/mm10.fa -w 1000 -s 300
 , which produces mm10_window1000_stride300.bed and mm10_window1000_stride300.fa (you need to change mm10.fa to your multiple fasta file).
 The next step is to convert AGCT symbols to matrices of onehot arrays by the following command:
 
-deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/test_genome/mm10_window1000_stride300_ -t 16 -C all
+deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/test_data/mm10_window1000_stride300_ -t 16 -C all
 
 , which produces a series of npz files. To predict regulatory sequences, type
 
