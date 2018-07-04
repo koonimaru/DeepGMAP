@@ -415,6 +415,8 @@ def main(args=None):
         scope=v.name
         print(scope)
         local_variable[scope]=value"""
+        
+    current_variable["fc1_param"]=model.fc1_param
     all_=tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
     np.savez(saving_dir_prefix+'_trained_variables.npz', **current_variable)
     #np.savez(str(output_dir)+str(model_name)+'_local_variables_'+str(start_at)+'.npz', **local_variable)

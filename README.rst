@@ -57,6 +57,7 @@ deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/
 
 deepgmap predict -i ./data/outputs/conv4frss_Thu_Jun_14_095043_2018.ckpt-22379.meta -o ./data/predictions/ -t ./data/test_data/mm10_window1000_stride300*.npz -G 0
 
+, which will annotate CTCF binding sites as an example.
 
 Output files
 ~~~~~~~~~~~~
