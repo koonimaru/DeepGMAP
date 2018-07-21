@@ -51,10 +51,12 @@ def genome_scan(filename):
 
 
 BATCH_SIZE=1000
-prefix="class_saliency_map.bw"
+prefix="class_saliency_map"
 GPUID="0"
+genome_file=""
 try:
-    options, args =getopt.getopt(sys.argv[1:], 'l:t:o:c:g:', ['log=','test_genome=','output_dir=',"class_of_interest=", "GPUID="])
+    options, args =getopt.getopt(sys.argv[1:], 'l:t:o:c:G:g:p:', 
+                                 ['log=','test_genome=','output_dir=',"class_of_interest=", "GPUID=", "genoem_file=","prefix="])
 except getopt.GetoptError as err:
     print str(err)
     sys.exit(2)
@@ -73,8 +75,16 @@ for opt, arg in options:
         prefix=arg
     elif opt in ('-c', "--class_of_interest"):
         class_of_interest=int(arg)
-    elif opt in ('-g', "--GPUID"):
+    elif opt in ('-G', "--GPUID"):
         GPUID=arg
+    elif opt in ('-g', '--genome_file'):
+        genome_file=arg
+
+chromosome_sizes={}
+with open(genome_file, "r") as fin:
+    for line in fin:
+        line=line.split()
+        chromosome_sizes[line[0]]=int(line[1])
 
 input_file_prefix= os.path.splitext(log_file_name)[0]
 current_variable=np.load(input_file_prefix+"_trained_variables.npz")
@@ -95,70 +105,6 @@ with open(log_file_name, 'r') as fin:
 test_genome_list=natsorted(glob(test_genome))
 if len(test_genome_list)==0:
     sys.exit(test_genome+" does not exist.")
-
-#output_dir=None
-"""
-config = tf.ConfigProto()
-config.gpu_options.allow_growth=True
-sess = tf.Session(config=config)
-
-keep_prob = tf.placeholder(tf.float32)
-keep_prob2 = tf.placeholder(tf.float32)
-keep_prob3 = tf.placeholder(tf.float32)
-
-
-x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-y_ = tf.placeholder(tf.float32, shape=[None, 3])
-phase=tf.placeholder(tf.bool)
-dropout_1=0.95
-dropout_2=0.9
-dropout_3=0.85
-batch_size=100
-data_length=1000
-input_dir=trained_model
-nc=il.import_module("deepgmap.network_constructors."+str(network_constructor))   
-train_speed=0.00005
-a=time.asctime()
-b=a.replace(':', '')
-start_at=b.replace(' ', '_')
-
-model = nc.Model(image=x_image, label=y_, 
-                 output_dir=None,
-                 phase=phase, 
-                 start_at=start_at, 
-                 keep_prob=keep_prob, 
-                 keep_prob2=keep_prob2, 
-                 keep_prob3=keep_prob3, 
-                 data_length=data_length,
-                 max_to_keep=2,
-                 GPUID="1")
-
-
-if 'ckpt' in input_dir.rsplit('.', 1)[1]: 
-    input_dir=input_dir
-elif 'meta'  in input_dir.rsplit('.', 1)[1] or 'index'  in input_dir.rsplit('.', 1)[1]:
-    input_dir=input_dir.rsplit('.', 1)[0]
-else:
-    print("the input file should be a ckpt file")
-    sys.exit(1)
-sess.run(tf.global_variables_initializer())
-saver=model.saver
-saver.restore(sess, input_dir)
-   
-#print positive_image[0]
-current_variable={}
-all_tv=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
-for v in all_tv:
-    value=sess.run(v)
-    scope=v.name
-    current_variable[scope]=value
-fc1_param=model.fc1_param
-dimension22=model.dimension22
-
-sess.close()"""
-
-
-
 
 def recon_variable(shape, variable_name):
     initial = tf.truncated_normal(shape, mean=0.02, stddev=0.02)
@@ -207,7 +153,10 @@ with tf.device('/device:GPU:'+GPUID):
         y_conv_re=tf.add(tf.matmul(h_fc1_re,current_variable["prediction/W_fc4:0"]), current_variable["prediction/b_fc4:0"])
         #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
         #print y_conv_re.shape
-        cost =tf.nn.sigmoid(y_conv_re[:,class_of_interest])
+        #cost =tf.nn.sigmoid(y_conv_re[:,class_of_interest])
+        #cost =tf.nn.relu(y_conv_re[:,class_of_interest])
+        cost =tf.clip_by_value(y_conv_re[:,class_of_interest], -2.0, 100000000.0)
+        #cost =y_conv_re[:,class_of_interest]
         print cost.shape
     w=g.gradient(cost, x_image_recon)
 
@@ -216,20 +165,19 @@ sess2.run(tf.global_variables_initializer())
 position_list=[]
 sal_map=[]
 BREAK=False
-with pbw.open(output_dir+prefix, "w") as bw:
-    bw.addHeader([("chr2", 182113000)])
+with pbw.open(output_dir+prefix+".bw", "w") as bw:
+    
     chrom_list=[]
     start_list=[]
     end_list=[]
     value_list=[]
+    chrom_set=set()
     for test_genome_ in test_genome_list:
         print(test_genome_)
         genome_data=np.load(test_genome_)
         position_list_, seq_list=genome_data['positions'], genome_data['sequences']
-        """if len(position_list)==0:
-            position_list=position_list_
-        else:
-            position_list=np.concatenate([position_list,position_list_])"""
+        
+        
         seq_list=np.array(seq_list, np.int16).reshape(-1, data_length, 4, 1)
         seq_length=seq_list.shape[0]
         print(seq_length)
@@ -240,6 +188,7 @@ with pbw.open(output_dir+prefix, "w") as bw:
             if i*BATCH_SIZE>seq_length:
                 break
             scanning=seq_list[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
+            position=position_list_[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
             len_scanning=len(scanning)
             if len_scanning<BATCH_SIZE:
                 dummy_array=np.zeros([(BATCH_SIZE-len_scanning), data_length, 4, 1])
@@ -250,23 +199,31 @@ with pbw.open(output_dir+prefix, "w") as bw:
             #print w_tmp[1]
             w_tmp_shape=w_tmp.shape
             #print w_tmp[0]
-            w_tmp=np.absolute(np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]]))
-            #w_tmp=np.absolute(np.clip(np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]]), None, 0.0))
+            w_tmp=np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]])
+            #w_tmp=np.amax(np.absolute(np.clip(w_tmp, None, 0.0)), axis=2)
+            w_tmp=np.sum(np.absolute(w_tmp), axis=2)
+            #w_tmp=np.amax(np.clip(w_tmp, 0.0, None), axis=2)
             #print w_tmp[1]
             #print w_tmp[0]
-            w_tmp=np.amax(w_tmp, axis=2)
+            #w_tmp=np.amax(w_tmp, axis=2)
+            #w_tmp=np.sum(w_tmp, axis=2)
             #print w_tmp[0]
         
             #print w_tmp.shape, len(sal_map)
             #print w_tmp[1:3]
             if len_scanning<BATCH_SIZE:
                 w_tmp=w_tmp[:len_scanning]
-            
-            sal_map=np.reshape(w_tmp, [-1])
-            
-            bw.addEntries(["chr2"]*len(sal_map), 
-                          range(i*len_scanning*data_length,(i+1)*len_scanning*data_length), 
-                          ends=range(i*len_scanning*data_length+1,(i+1)*len_scanning*data_length+1), 
+            for j in range(len_scanning):
+                
+                sal_map=np.reshape(w_tmp[j], [-1])
+                current_chr, current_pos=position[j].strip(">").split(':')
+                if not current_chr in chrom_set:
+                    chrom_set.add(current_chr)
+                    bw.addHeader([(current_chr, chromosome_sizes[current_chr])])
+                start, end =map(int, current_pos.split("-"))
+                bw.addEntries([current_chr]*len(sal_map), 
+                          range(start,end), 
+                          ends=range(start+1,end+1), 
                           values=sal_map)
             
             """if len(sal_map)==0:

@@ -175,6 +175,7 @@ def kernel_connector(png_list):
     out_dir=os.path.split(png_list[0])[0]+"/kernels.pdf"
     ims1 = cairo.PDFSurface(out_dir, width, height)
     cr = cairo.Context(ims1)
+    #cr.scale(pt_per_mm,pt_per_mm)
     coordinates={}
     im = Image.open(png_list[0])
     xwidth=int(width*0.8/10.0)+5
@@ -185,9 +186,11 @@ def kernel_connector(png_list):
         
         im=im.resize([xwidth, ywidth], Image.LANCZOS)
         _buffer = StringIO.StringIO()
-        im.save(_buffer, format="PNG",compress_level=0, dpi=(xwidth*2, ywidth*2))
+        im.save(_buffer, format="PNG")#,compress_level=0, dpi=(xwidth, ywidth))
         _buffer.seek(0)
         png_image=cairo.ImageSurface.create_from_png(_buffer)
+        cr.save()
+        #cr.scale(0.5, 0.5)
         cr.set_source_surface(png_image, lateral_lim+(xwidth-5)*(k%10), upper_lim+ywidth*((k/10)))
         cr.paint()
 
@@ -198,7 +201,7 @@ def main():
     if len(sys.argv)>1:
         npz_file=sys.argv[1]
     else:
-        npz_file='/home/slow/onimaru/data_by_19_May_2018/output/deepsea_trained_variables_Thu_Apr_26_115030_2018.npz'
+        npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
     #output_file='/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_28_170548_2018.npz'
     png_list, kernel_shape_ic_list=seuquence_visualizer(npz_file)
     kernel_connector(png_list)
