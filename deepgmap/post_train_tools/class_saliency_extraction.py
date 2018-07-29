@@ -155,7 +155,7 @@ with tf.device('/device:GPU:'+GPUID):
         #print y_conv_re.shape
         #cost =tf.nn.sigmoid(y_conv_re[:,class_of_interest])
         #cost =tf.nn.relu(y_conv_re[:,class_of_interest])
-        cost =tf.clip_by_value(y_conv_re[:,class_of_interest], -2.0, 100000000.0)
+        cost =tf.clip_by_value(y_conv_re[:,class_of_interest], -4.0, 1000000000.0)
         #cost =y_conv_re[:,class_of_interest]
         print cost.shape
     w=g.gradient(cost, x_image_recon)
