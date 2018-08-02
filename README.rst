@@ -55,7 +55,7 @@ deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/
 
 , which produces a series of npz files. To predict regulatory sequences, type
 
-deepgmap predict -i ./data/outputs/conv4frss_Thu_Jun_14_095043_2018.ckpt-22379.meta -o ./data/predictions/ -t ./data/test_data/mm10_window1000_stride300*.npz -G 0
+deepgmap predict -i ./data/outputs/conv4frss_Thu_Jun_14_095043_2018.ckpt-22379.meta -o ./data/predictions/ -t "./data/test_data/mm10_window1000_stride300*.npz" -G 0
 
 , which will annotate CTCF binding sites as an example.
 
@@ -98,8 +98,11 @@ It is just for convenience to analyze trained models.
 3. To test a trained model with test data.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Run:
-predict -i ./data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o ./data/predictions/ -b ../data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300.bed.labeled 
--t ./data/test_data/mm10_window1000_stride300_chr2_*.npz
+deepgmap predict -i ./data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o ./data/predictions/ -b ./data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300.bed.labeled 
+-t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
+
+Alternatively, run:
+deepgmap predict -i ./data/outputs/conv4frss_<date>.log -t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
 
 Output files
 ~~~~~~~~~~~~
