@@ -72,7 +72,7 @@ Output files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you want to train a model with your data set, first, you need to generate genomic sequences labeled with your data. To do so, run the following command: 
 
-deepgmap generate_input -b ./data/inputs/mm10_ctcf/*.bed -g ./data/genomes/mm10_window1000_stride300 -p ctcf -t 16 -s 100 -r 0.80
+deepgmap generate_input -b "./data/inputs/mm10_ctcf/*.bed" -g ./data/genomes/mm10_window1000_stride300 -p ctcf -t 16 -s 100 -r 0.80
 
 This command would take 10 min to a few hours depending on your machine and the amount of data. If you see a memory error, you can reduce the RAM usage by increasing the 
 integer of -n option. It is not the optimal algorithm, will be improved in the future. Next, to train a model run 
