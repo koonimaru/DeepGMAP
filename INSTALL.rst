@@ -5,7 +5,7 @@ INSTALL Guide For DeepGMAP
 Prerequisites
 =============
 
-DeepGMAP is verified to work on Linux (Ubunru 16.10). 
+DeepGMAP is verified to work on Linux (Ubunru 16.10). Also using GPU is highly recommended. 
 
 Python version 2.7.
 
@@ -13,7 +13,7 @@ Numpy_ (>=1.6).
 
 Cython_ (>=0.18) is an optional requirement to recompile ``.pyx`` files.
 
-Tensorflow_ (>=1.8)
+Tensorflow_ (>=1.8) Note that Tensorflow requires cuDNN and cudna libraries. 
 
 Scikitlearn_ (>=0.19.1)
 
@@ -27,6 +27,15 @@ bedtools_ (>=2.25)
 .. _Scikitlearn: http://scikit-learn.org/
 .. _matplotlib: https://matplotlib.org/
 .. _bedtools: http://bedtools.readthedocs.io/
+
+Installing tensorflow-gpu
+=========================
+To accelerate computing, I highly recommend you to use `cuda-enabled GPUs`_.tensorflow-gpu itself can be easily installed with pip 
+(sudo pip install tensorflow-gpu or sudo pip install -r requirements.txt). But, to make tensorflow-gpu work, you need the right versions 
+and right combination of cuDNN and cuda toolkit libraries (please check the `tensorflow web site`_). 
+
+.. _cuda-enabled GPUs: https://developer.nvidia.com/cuda-gpus
+.. _tensorflow web site: https://www.tensorflow.org/install/install_linux
 
 Download source and data
 ========================
@@ -43,7 +52,7 @@ Then, decompress it with "tar -xvzf DeepGMAPdatalight.tar.gz", and place the fol
 Configure environment variables
 ===============================
 
-You need to add the downloaded location (in this example home directory; $HOME) to your ``PYTHONPATH`` and ``PATH`` environment variables.
+You need to add the downloaded location (in this example home directory: $HOME) to your ``PYTHONPATH`` and ``PATH`` environment variables.
 
 PYTHONPATH
 ~~~~~~~~~~

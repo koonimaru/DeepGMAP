@@ -311,7 +311,7 @@ def main(args=None):
                     sys.stdout.write("\r"+"step "+str(h)
                           +", cost: "+str(loss_val)
                           +", train_accuracy: "
-                          +str(curr_accu))            
+                          +str(curr_accu)+"                ")            
                     sys.stdout.flush()
                     
                     #train_accuracy_record.append(TPR_list[0]-FPR_list[0])
