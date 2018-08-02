@@ -69,7 +69,7 @@ class Model(object):
         self.max_to_keep=kwargs["max_to_keep"]
         self.GPUID=kwargs["GPUID"]
         self.fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((#math.ceil((
-            self.data_length-self.conv1_filter+1)/2.0)
+            self.data_length)/2.0)
                         -self.conv2_filter+1)/2.0)
                         #-self.conv20_filter+1)/2.0)
                         -self.conv21_filter+1)/2.0)
@@ -119,6 +119,8 @@ class Model(object):
             
             def conv2d_1(x, W):
                 return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+            def conv2d_1_same(x, W):
+                return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
             def conv2d(x, W):
                 return tf.nn.conv2d(x, W, strides=[1, 2, 1, 1], padding='VALID')
             def conv2d_depth(x, W):
@@ -136,15 +138,15 @@ class Model(object):
             wconv1_l2=tf.reduce_sum(tf.square(W_conv1))
             l2norm_list.append(wconv1_l2)
             W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
-            h_conv11=conv2d_1(x_image, W_conv1)
+            h_conv11=conv2d_1_same(x_image, W_conv1)
             W_conv1_rc=tf.reverse(W_conv1, [0, 1])
-            h_conv12=conv2d_1(x_image, W_conv1_rc)
+            h_conv12=conv2d_1_same(x_image, W_conv1_rc)
             h_conv11_ = tf.nn.dropout(tf.nn.relu(h_conv11), self.keep_prob)
             h_conv12_ = tf.nn.dropout(tf.nn.relu(h_conv12), self.keep_prob)
             h_pool1 = max_pool_2x2(h_conv11_)
             h_pool1_rc = max_pool_2x2(h_conv12_)
             
-            W_conv2 = weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2')
+            W_conv2 = weight_variable([self.conv2_filter, 4, self.dimension1, self.dimension2], 'W_conv2')
             wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
             l2norm_list.append(wconv2_l2)
             W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
@@ -238,7 +240,6 @@ class Model(object):
     @define_scope
     def error(self):
         with tf.device('/device:GPU:'+self.GPUID):
-        #with tf.device('/cpu:0'):
             class_n=self.label.shape[1]
             FPR_list=[]
             TPR_list=[]

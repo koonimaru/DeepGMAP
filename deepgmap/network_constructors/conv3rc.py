@@ -49,9 +49,9 @@ class Model(object):
     dimension21=480
     dimension22=480
     dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
-    conv1_filter=9
-    conv2_filter=9
-    conv21_filter=7
+    conv1_filter=15
+    conv2_filter=15
+    conv21_filter=14
     conv22_filter=8
     max_to_keep=2
     train_speed=0.0001
@@ -118,7 +118,7 @@ class Model(object):
                 return tf.Variable(initial, name=variable_name)
             
             def conv2d_1(x, W):
-                return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='VALID')
+                return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
             def conv2d(x, W):
                 return tf.nn.conv2d(x, W, strides=[1, 2, 1, 1], padding='VALID')
             def conv2d_depth(x, W):
@@ -136,37 +136,30 @@ class Model(object):
             wconv1_l2=tf.reduce_sum(tf.square(W_conv1))
             l2norm_list.append(wconv1_l2)
             W_conv1.assign(tf.cond(wconv1_l2>cond, lambda: tf.multiply(W_conv1, cond/wconv1_l2),lambda: W_conv1 ))
-            h_conv11=conv2d_1(x_image, W_conv1)
+            h_conv1=tf.nn.dropout(tf.nn.relu(conv2d_1(x_image, W_conv1)), self.keep_prob)
+            
             W_conv1_rc=tf.reverse(W_conv1, [0, 1])
-            h_conv12=conv2d_1(x_image, W_conv1_rc)
-            h_conv11_ = tf.nn.dropout(tf.nn.relu(h_conv11), self.keep_prob)
-            h_conv12_ = tf.nn.dropout(tf.nn.relu(h_conv12), self.keep_prob)
-            h_pool1 = max_pool_2x2(h_conv11_)
-            h_pool1_rc = max_pool_2x2(h_conv12_)
+            h_conv1_rc=tf.nn.dropout(tf.nn.relu(conv2d_1(x_image, W_conv1_rc)), self.keep_prob)
+
             
             W_conv2 = weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2')
             wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
             l2norm_list.append(wconv2_l2)
             W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
+            h_conv2 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_conv1, W_conv2)), self.keep_prob2)            
             W_conv2_rc=tf.reverse(W_conv2, [0,1])
-            h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
-            h_pool2 = max_pool_2x2(h_conv2)
-                             
-            W_conv21 = weight_variable([self.conv21_filter, 1, self.dimension2, self.dimension21], 'W_conv21')
-            wconv21_l2=tf.reduce_sum(tf.square(W_conv21))
-            l2norm_list.append(wconv21_l2)
-            W_conv21.assign(tf.cond(wconv21_l2>cond, lambda: tf.multiply(W_conv21, cond/wconv21_l2),lambda: W_conv21 ))
-            h_conv21 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_pool2, W_conv21)), self.keep_prob2)
-            h_pool21 = max_pool_2x2(h_conv21)
+            h_conv2_rc = tf.nn.dropout(tf.nn.relu(conv2d_1(h_conv1_rc, W_conv2_rc)), self.keep_prob2)
     
             W_conv22 = weight_variable([self.conv22_filter, 1, self.dimension21, self.dimension22], 'W_conv22')
             wconv22_l2=tf.reduce_sum(tf.square(W_conv22))
             l2norm_list.append(wconv22_l2)
             W_conv22.assign(tf.cond(wconv22_l2>cond, lambda: tf.multiply(W_conv22, cond/wconv22_l2),lambda: W_conv22 ))
-            h_conv22 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_pool21, W_conv22)), self.keep_prob2)
-            h_pool22 = max_pool_4x1(h_conv22)
+            h_conv22 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_conv2, W_conv22)), self.keep_prob2)            
+            W_conv22_rc=tf.reverse(W_conv22, [0,1])
+            h_conv22_rc = tf.nn.dropout(tf.nn.relu(conv2d_1(h_conv2_rc, W_conv22_rc)), self.keep_prob2)
+            
         
-            W_fc1 = weight_variable([1 * self.fc1_param * self.dimension22, self.dimension4], 'W_fc1')
+            W_fc1 = weight_variable([2 * self.fc1_param * self.dimension22, self.dimension4], 'W_fc1')
             wfc1_l2=tf.reduce_sum(tf.square(W_fc1))
             l2norm_list.append(wfc1_l2)
             W_fc1.assign(tf.cond(wfc1_l2>cond, lambda: tf.multiply(W_fc1, cond/wfc1_l2),lambda: W_fc1 ))
@@ -238,7 +231,6 @@ class Model(object):
     @define_scope
     def error(self):
         with tf.device('/device:GPU:'+self.GPUID):
-        #with tf.device('/cpu:0'):
             class_n=self.label.shape[1]
             FPR_list=[]
             TPR_list=[]

@@ -113,7 +113,7 @@ def main(args=None):
     genome_1000=genome_pref+".bed"
     genome_fasta=genome_pref+".fa"
     if os.path.isfile(genome_1000)==False:
-        print(genome_1000+"is missing.")
+        print(genome_1000+" is missing.")
         sys.exit(1)
     if os.path.isfile(genome_fasta)==False:
         print(genome_fasta+" is missing.")

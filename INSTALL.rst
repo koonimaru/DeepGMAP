@@ -34,11 +34,11 @@ To download the source code from our github repository::
 
  $ git clone https://github.com/koonimaru/DeepGMAP.git
  
-To download data files that are used in our paper::
+To download a trial data set::
 
- $ wget https://XXXXX
+ $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12257744/DeepGMAPdatalight.tar.gz
 
-Then, place the folder named "data" under the DeepGMAP directory.
+Then, decompress it with "tar -xvzf DeepGMAPdatalight.tar.gz", and place the folder named "data" under the DeepGMAP directory.
  
 Configure environment variables
 ===============================

@@ -148,7 +148,10 @@ class Model(object):
             wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
             l2norm_list.append(wconv2_l2)
             W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
-            W_conv2_rc=tf.reverse(W_conv2, [0,1])
+            W_conv2_rc = weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2_rc')
+            wconv2_rc_l2=tf.reduce_sum(tf.square(W_conv2_rc))
+            l2norm_list.append(wconv2_rc_l2)
+            W_conv2_rc.assign(tf.cond(wconv2_rc_l2>cond, lambda: tf.multiply(W_conv2_rc, cond/wconv2_rc_l2),lambda: W_conv2_rc ))
             h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
             h_pool2 = max_pool_2x2(h_conv2)
                              
@@ -238,7 +241,6 @@ class Model(object):
     @define_scope
     def error(self):
         with tf.device('/device:GPU:'+self.GPUID):
-        #with tf.device('/cpu:0'):
             class_n=self.label.shape[1]
             FPR_list=[]
             TPR_list=[]

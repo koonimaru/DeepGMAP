@@ -13,13 +13,22 @@ import importlib as il
 import getopt
 from glob import glob 
 from natsort import natsorted
-import pyBigWig as pbw 
-def test_batch(test_batch_file):
-    with np.load(test_batch_file) as f:
-        dnase_data_labels1=f['labels'], f['data_array']
-        images=np.reshape(dnase_data_labels1[1], (batch_size, data_length, 4, 1))
-        labels=dnase_data_labels1[0]
-    return images, labels
+import pyBigWig as pbw
+
+
+"""
+conv4_Thu_Jun__7_100401_2018.ckpt-16190.data-00000-of-00001
+conv4_Thu_Jun__7_100401_2018.ckpt-16190.index
+conv4_Thu_Jun__7_100401_2018.ckpt-16190.meta
+conv4_Thu_Jun__7_100401_2018.ckpt-16747.data-00000-of-00001
+conv4_Thu_Jun__7_100401_2018.ckpt-16747.index
+conv4_Thu_Jun__7_100401_2018.ckpt-16747.meta
+conv4_Thu_Jun__7_100401_2018.log
+conv4_Thu_Jun__7_100401_2018_plot.pdf
+conv4_Thu_Jun__7_100401_2018_trained_variables.npz
+conv4_Thu_Jun__7_100401_2018_train_rec.npz
+"""
+
 
 start=time.time()
 
@@ -42,76 +51,60 @@ def genome_scan(filename):
 
 
 BATCH_SIZE=1000
+prefix="class_saliency_map"
+GPUID="0"
+genome_file=""
 try:
-    options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:', ['model=','test_genome=','network_constructor=','output_dir='])
+    options, args =getopt.getopt(sys.argv[1:], 'l:t:o:c:G:g:p:', 
+                                 ['log=','test_genome=','output_dir=',"class_of_interest=", "GPUID=", "genoem_file=","prefix="])
 except getopt.GetoptError as err:
     print str(err)
     sys.exit(2)
 if len(options)<3:
     print('too few argument')
     sys.exit(0)
+    
 for opt, arg in options:
-    if opt in ('-m', '--model'):
-        trained_model=arg
+    if opt in ('-l', '--log'):
+        log_file_name=arg
     elif opt in ('-t', '--test_genome'):
         test_genome=arg
-    elif opt in ('-n', '--network_constructor'):
-        network_constructor=arg
     elif opt in ('-o', '--output_dir'):
         output_dir=arg
-        
+    elif opt in ('-p','--prefix'):
+        prefix=arg
+    elif opt in ('-c', "--class_of_interest"):
+        class_of_interest=int(arg)
+    elif opt in ('-G', "--GPUID"):
+        GPUID=arg
+    elif opt in ('-g', '--genome_file'):
+        genome_file=arg
+
+chromosome_sizes={}
+with open(genome_file, "r") as fin:
+    for line in fin:
+        line=line.split()
+        chromosome_sizes[line[0]]=int(line[1])
+
+input_file_prefix= os.path.splitext(log_file_name)[0]
+current_variable=np.load(input_file_prefix+"_trained_variables.npz")
+
+with open(log_file_name, 'r') as fin:
+    for line in fin:
+        if line.startswith('<tf.Variable'):
+            line=line.split(' ')
+            print line
+            if line[1]=="'prediction/W_fc1:0'":
+                line=line[2].split('=(')[1].strip(",'")
+                first_fc_shape=int(line)
+        elif line.startswith("data"):
+            line=line.split(':')[1]
+            data_length=int(line)
+        elif line.startswith("Total class number:"):
+            class_num=int(line.split(': ')[1])
 test_genome_list=natsorted(glob(test_genome))
 if len(test_genome_list)==0:
     sys.exit(test_genome+" does not exist.")
-
-#output_dir=None
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth=True
-sess = tf.Session(config=config)
-
-keep_prob = tf.placeholder(tf.float32)
-keep_prob2 = tf.placeholder(tf.float32)
-keep_prob3 = tf.placeholder(tf.float32)
-
-
-x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-y_ = tf.placeholder(tf.float32, shape=[None, 54])
-phase=tf.placeholder(tf.bool)
-dropout_1=0.95
-dropout_2=0.9
-dropout_3=0.85
-batch_size=100
-data_length=1000
-input_dir=trained_model
-nc=il.import_module("deepgmap.network_constructors."+str(network_constructor))   
-train_speed=0.00005
-a=time.asctime()
-b=a.replace(':', '')
-start_at=b.replace(' ', '_')
-
-model = nc.Model(image=x_image, label=y_, 
-                 output_dir=output_dir,
-                 phase=phase, 
-                 start_at=start_at, 
-                 keep_prob=keep_prob, 
-                 keep_prob2=keep_prob2, 
-                 keep_prob3=keep_prob3, 
-                 data_length=data_length,
-                 max_to_keep=2,
-                 GPUID="1")
-
-
-if 'ckpt' in input_dir.rsplit('.', 1)[1]: 
-    input_dir=input_dir
-elif 'meta'  in input_dir.rsplit('.', 1)[1] or 'index'  in input_dir.rsplit('.', 1)[1]:
-    input_dir=input_dir.rsplit('.', 1)[0]
-else:
-    print("the input file should be a ckpt file")
-    sys.exit(1)
-sess.run(tf.global_variables_initializer())
-saver=model.saver
-saver.restore(sess, input_dir)
 
 def recon_variable(shape, variable_name):
     initial = tf.truncated_normal(shape, mean=0.02, stddev=0.02)
@@ -131,75 +124,60 @@ def max_pool_4x1_with_argmax(x):
     return tf.nn.max_pool_with_argmax(x, ksize=[1, 4, 1, 1], strides=[1, 4, 1, 1], padding='SAME')    
 
 
+config = tf.ConfigProto()
+config.gpu_options.allow_growth=True
+sess2 = tf.Session(config=config)
 
-index_of_image=0
-positive_image=[]
-"""for y in batch[1]:
-    print y[0]
-    if y[0]==1:
-        positive_image.append(np.reshape(batch[0][index_of_image], [1,1000,4,1]))
-    index_of_image+=1"""
-    
-#print positive_image[0]
-current_variable={}
-all_tv=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
-for v in all_tv:
-    value=sess.run(v)
-    scope=v.name
-    current_variable[scope]=value
-fc1_param=model.fc1_param
-dimension22=model.dimension22
-
-sess.close()
-
-sess2 = tf.Session()
-    
 #x_image_recon = recon_variable([1, 1000, 4, 1], 'x_image_recon')
-x_image_recon=tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-with tf.GradientTape() as g:
-    g.watch(x_image_recon)
-    h_conv11_re=conv2d_1(x_image_recon, current_variable["prediction/W_conv1:0"])
-    h_conv12_re=conv2d_1(x_image_recon, tf.reverse(current_variable["prediction/W_conv1:0"], [0,1]))
-    h_conv11_re_ = tf.nn.relu(h_conv11_re)
-    h_conv12_re_ = tf.nn.relu(h_conv12_re)
-    h_pool1_re = max_pool_2x2(h_conv11_re_)
-    h_pool1_rc_re = max_pool_2x2(h_conv12_re_)
-    h_conv2_re = tf.add(tf.nn.relu(conv2d_1(h_pool1_re, current_variable["prediction/W_conv2:0"])), tf.nn.relu(conv2d_1(h_pool1_rc_re, tf.reverse(current_variable["prediction/W_conv2:0"], [0,1]))))
-    h_pool2_re = max_pool_2x2(h_conv2_re)
-    h_conv21_re = tf.nn.relu(conv2d_1(h_pool2_re, current_variable["prediction/W_conv21:0"]))
-    h_pool21_re = max_pool_2x2(h_conv21_re)
-    h_conv22_re = tf.nn.relu(conv2d_1(h_pool21_re, current_variable["prediction/W_conv22:0"]))
-    h_pool22_re = max_pool_4x1(h_conv22_re)
-    
-    h_pool3_flat_re = tf.reshape(h_pool22_re, [-1, 1*fc1_param*dimension22])
-    
-    h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, current_variable["prediction/W_fc1:0"]), current_variable["prediction/b_fc1:0"]))
-    y_conv_re=tf.add(tf.matmul(h_fc1_re,current_variable["prediction/W_fc4:0"]), current_variable["prediction/b_fc4:0"])
-    #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
-    #print y_conv_re.shape
-    cost =tf.nn.sigmoid(y_conv_re[:,39])
-    print cost.shape
-w=g.gradient(cost, x_image_recon)
+print GPUID
+with tf.device('/device:GPU:'+GPUID):
+    x_image_recon=tf.placeholder(tf.float32, shape=[BATCH_SIZE, data_length, 4, 1])
+    with tf.GradientTape() as g:
+        g.watch(x_image_recon)
+        h_conv11_re=conv2d_1(x_image_recon, current_variable["prediction/W_conv1:0"])
+        h_conv12_re=conv2d_1(x_image_recon, tf.reverse(current_variable["prediction/W_conv1:0"], [0,1]))
+        h_conv11_re_ = tf.nn.relu(h_conv11_re)
+        h_conv12_re_ = tf.nn.relu(h_conv12_re)
+        h_pool1_re = max_pool_2x2(h_conv11_re_)
+        h_pool1_rc_re = max_pool_2x2(h_conv12_re_)
+        h_conv2_re = tf.add(tf.nn.relu(conv2d_1(h_pool1_re, current_variable["prediction/W_conv2:0"])), tf.nn.relu(conv2d_1(h_pool1_rc_re, tf.reverse(current_variable["prediction/W_conv2:0"], [0,1]))))
+        h_pool2_re = max_pool_2x2(h_conv2_re)
+        h_conv21_re = tf.nn.relu(conv2d_1(h_pool2_re, current_variable["prediction/W_conv21:0"]))
+        h_pool21_re = max_pool_2x2(h_conv21_re)
+        h_conv22_re = tf.nn.relu(conv2d_1(h_pool21_re, current_variable["prediction/W_conv22:0"]))
+        h_pool22_re = max_pool_4x1(h_conv22_re)
+        
+        h_pool3_flat_re = tf.reshape(h_pool22_re, [-1, 1*first_fc_shape])
+        
+        h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, current_variable["prediction/W_fc1:0"]), current_variable["prediction/b_fc1:0"]))
+        y_conv_re=tf.add(tf.matmul(h_fc1_re,current_variable["prediction/W_fc4:0"]), current_variable["prediction/b_fc4:0"])
+        #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+        #print y_conv_re.shape
+        #cost =tf.nn.sigmoid(y_conv_re[:,class_of_interest])
+        #cost =tf.nn.relu(y_conv_re[:,class_of_interest])
+        cost =tf.clip_by_value(y_conv_re[:,class_of_interest], -4.0, 1000000000.0)
+        #cost =y_conv_re[:,class_of_interest]
+        print cost.shape
+    w=g.gradient(cost, x_image_recon)
 
 sess2.run(tf.global_variables_initializer())
 #x_image_recon.assign(positive_image[1])
 position_list=[]
 sal_map=[]
 BREAK=False
-with pbw.open(output_dir+"liver_ctcf_minimum_test.bw", "w") as bw:
-    bw.addHeader([("chr2", 182113000)])
+with pbw.open(output_dir+prefix+".bw", "w") as bw:
+    
     chrom_list=[]
     start_list=[]
     end_list=[]
     value_list=[]
+    chrom_set=set()
     for test_genome_ in test_genome_list:
         print(test_genome_)
         genome_data=np.load(test_genome_)
         position_list_, seq_list=genome_data['positions'], genome_data['sequences']
-        if len(position_list)==0:
-            position_list=position_list_
-        else:
-            position_list=np.concatenate([position_list,position_list_])
+        
+        
         seq_list=np.array(seq_list, np.int16).reshape(-1, data_length, 4, 1)
         seq_length=seq_list.shape[0]
         print(seq_length)
@@ -210,26 +188,42 @@ with pbw.open(output_dir+"liver_ctcf_minimum_test.bw", "w") as bw:
             if i*BATCH_SIZE>seq_length:
                 break
             scanning=seq_list[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
-            
+            position=position_list_[i*BATCH_SIZE:(i+1)*BATCH_SIZE]
+            len_scanning=len(scanning)
+            if len_scanning<BATCH_SIZE:
+                dummy_array=np.zeros([(BATCH_SIZE-len_scanning), data_length, 4, 1])
+                scanning=np.concatenate([scanning, dummy_array])
+                
             w_tmp=sess2.run(w, feed_dict={x_image_recon: scanning})
             print w_tmp.shape
             #print w_tmp[1]
             w_tmp_shape=w_tmp.shape
             #print w_tmp[0]
-            #w_tmp=np.absolute(np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]]))
-            w_tmp=np.absolute(np.clip(np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]]), None, 0.0))
+            w_tmp=np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]])
+            #w_tmp=np.amax(np.absolute(np.clip(w_tmp, None, 0.0)), axis=2)
+            w_tmp=np.sum(np.absolute(w_tmp), axis=2)
+            #w_tmp=np.amax(np.clip(w_tmp, 0.0, None), axis=2)
             #print w_tmp[1]
             #print w_tmp[0]
-            w_tmp=np.amax(w_tmp, axis=2)
+            #w_tmp=np.amax(w_tmp, axis=2)
+            #w_tmp=np.sum(w_tmp, axis=2)
             #print w_tmp[0]
         
             #print w_tmp.shape, len(sal_map)
             #print w_tmp[1:3]
-            sal_map=np.reshape(w_tmp, [-1])
-            
-            bw.addEntries(["chr2"]*len(sal_map), 
-                          range(i*BATCH_SIZE*data_length,(i+1)*BATCH_SIZE*data_length), 
-                          ends=range(i*BATCH_SIZE*data_length+1,(i+1)*BATCH_SIZE*data_length+1), 
+            if len_scanning<BATCH_SIZE:
+                w_tmp=w_tmp[:len_scanning]
+            for j in range(len_scanning):
+                
+                sal_map=np.reshape(w_tmp[j], [-1])
+                current_chr, current_pos=position[j].strip(">").split(':')
+                if not current_chr in chrom_set:
+                    chrom_set.add(current_chr)
+                    bw.addHeader([(current_chr, chromosome_sizes[current_chr])])
+                start, end =map(int, current_pos.split("-"))
+                bw.addEntries([current_chr]*len(sal_map), 
+                          range(start,end), 
+                          ends=range(start+1,end+1), 
                           values=sal_map)
             
             """if len(sal_map)==0:

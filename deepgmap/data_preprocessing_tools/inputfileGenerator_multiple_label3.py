@@ -63,20 +63,9 @@ def seqtobinarydict(file_, lpos, _chr_to_skip="chr2"):
 
         elif not line == '\n' and not line=='' and skip==False: 
             line=line.strip("\n")
-            #seqdata=AGCTtoArray2(line)
-            #start=time.time()
             
             seqdata=sb2.AGCTtoArray3(line,len(line))
-            #seqdata=sb2.ATGCtoArray(line,len(line))
-            #print(line)
-            #seqdata=sb2.ACGTto3dArray(line,len(line))
-            #duration+=time.time()-start
-            
-            #print seqdata
-        
-        #if i%100000==0:
-            #print("\n"+str(duration))
-            #duration=0
+
     if not len(seqdata)==0:
         binaryDNAdict_append(seqdata)
     

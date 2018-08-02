@@ -370,6 +370,7 @@ def main(args=None):
                 precision_list.append(precision)
                 recall_list.append(recall)
                 average_precision = average_precision_score(label_array[:,i], y_prediction2[:,i])
+                #average_precision = auc(recall, precision)
                 average_precision_list.append(average_precision)
         else:
             fpr, tpr, roc_auc=roc_space_calc(label_array, y_prediction2)
