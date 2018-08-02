@@ -238,6 +238,7 @@ class Model(object):
     @define_scope
     def error(self):
         with tf.device('/device:GPU:'+self.GPUID):
+        #with tf.device('/cpu:0'):
             class_n=self.label.shape[1]
             FPR_list=[]
             TPR_list=[]
