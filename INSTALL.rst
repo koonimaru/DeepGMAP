@@ -32,7 +32,7 @@ Installing tensorflow-gpu
 =========================
 To accelerate computing, I highly recommend users to use `cuda-enabled GPUs`_. tensorflow-gpu itself can be easily 
 installed by typing "sudo pip install tensorflow-gpu" or "sudo pip install -r requirements.txt". But, to make 
-tensorflow-gpu work, you need the right versions and right combination of cuDNN and cuda toolkit libraries (please 
+tensorflow-gpu work, you need a right version of cuDNN and cuda toolkit libraries (please 
 check the `tensorflow web site`_). I will add a quick guide to install them soon. 
 
 .. _cuda-enabled GPUs: https://developer.nvidia.com/cuda-gpus
