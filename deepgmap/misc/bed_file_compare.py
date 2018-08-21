@@ -38,9 +38,9 @@ fout.write("#combination, intersection, overlapping, distance\n")
 
 for i in file_combination:
     
-    intersect1_=sp.check_output(["bedtools", "intersect","-v", "-a", str(i[0]), "-b", str(i[1])])
+    intersect1_=sp.check_output(["bedtools", "intersect","-u", "-a", str(i[0]), "-b", str(i[1])])
     intersect1=len(intersect1_.split('\n'))
-    intersect2_=sp.check_output(["bedtools", "intersect","-v", "-b", str(i[0]), "-a", str(i[1])])
+    intersect2_=sp.check_output(["bedtools", "intersect","-u", "-b", str(i[0]), "-a", str(i[1])])
     intersect2=len(intersect2_.split('\n'))
     #distance=sp.check_output(["bedtools", "jaccard", "-a", str(i[0]), "-b", str(i[1])])
     #distance=distance.split('\n')

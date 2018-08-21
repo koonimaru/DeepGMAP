@@ -1,7 +1,6 @@
 ===========================
 README for DeepGMAP (0.0.0)
 ===========================
-Time-stamp: <2018-06-05 13:58:42 Koh>
 
 Introduction
 ============
@@ -80,7 +79,7 @@ integer of -n option. It is not the optimal algorithm, will be improved in the f
 deepgmap train -i ./data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set/ -c conv4frss -o ./data/outputs/
 
 , where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). For model types, 
-currently deepsea, basset, danq, dandqblock, conv4, conv3frss, conv4frss, conv4frsspluss, are available.
+currently deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss, are available.
    
 
 Output files
@@ -102,7 +101,7 @@ deepgmap predict -i ./data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o ./
 -t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
 
 Alternatively, run:
-deepgmap predict -i ./data/outputs/conv4frss_<date>.log -t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
+deepgmap predict -l ./data/outputs/conv4frss_<date>.log -t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
 
 Output files
 ~~~~~~~~~~~~

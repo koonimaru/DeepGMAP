@@ -8,6 +8,8 @@ import getopt
 import importlib as il
 import matplotlib.pyplot as plt
 import os
+from scipy.stats import gaussian_kde
+
 def next_batch(loop, input_dir, batch_size, data_length):
     f = glob.glob(str(input_dir)+"*")
     f_srt=natsorted(f)
@@ -26,14 +28,18 @@ def next_batch(loop, input_dir, batch_size, data_length):
 def process(f,half_batch,data_length):
     with np.load(f) as f1:
         try:
-            dnase_data_labels=f1['labels'], f1['data_array']
+            labels, images=f1['labels'], f1['data_array']
             
         except EOFError:
             print("cannot load: "+str(f))
     
-    shape=dnase_data_labels[1].shape
-    images=np.reshape(dnase_data_labels[1], (shape[0], shape[1], shape[2], 1))
-    labels=dnase_data_labels[0]  
+    shape=images.shape
+    if len(shape)<3:
+        print(f)
+        return [], []
+    
+    images=np.reshape(images, (shape[0], shape[1], shape[2], 1))
+    
     #print(shape[0])          
     if shape[0]>half_batch:
         halfimages=images[:half_batch] , images[half_batch:]
@@ -71,6 +77,8 @@ def batch_queuing(file_list, batch_size, data_length):
             #halfimages, halflabels=res.get()
             
             halfimages, halflabels=process(f,half_batch,data_length)
+            if len(halfimages)==0:
+                break
             image_list.append(halfimages)
             label_list.append(halflabels)
         #pool.close()
@@ -187,7 +195,9 @@ def main(args=None):
                 model_name=arg
             elif opt in ('-p', '--pretrained_model'):
                 pretrained_dir=arg
-                
+    
+    
+        
     if input_dir.endswith("/"):
         input_dir=str(input_dir)+"*.npz"
     elif input_dir.endswith("*"):
@@ -247,7 +257,9 @@ def main(args=None):
     sess.run(tf.local_variables_initializer())
     saver=model.saver
 
-    if mode=='pretrain':
+    if not pretrained_dir is None:
+        if not os.path.isfile(pretrained_dir):
+            sys.exit(pretrained_dir + ' does not exist.')
         if pretrained_dir.endswith(".meta"):
             pretrained_dir=os.path.splitext(pretrained_dir)[0]
         saver.restore(sess, pretrained_dir)
@@ -262,6 +274,7 @@ def main(args=None):
     test_step=[]
     CHECK_TEST_FR=False
     computation_time=[]
+    t_batch = test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length)
     if label_dim>100:
         TEST_FREQ=20
     h=0
@@ -338,7 +351,7 @@ def main(args=None):
                             if CHECK_TEST_FR:
                                 TEST_THRESHOLD-=0.02
                             #TEST_THRESHHOLD=temporal_accuracy-0.005
-                            t_batch = test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length)
+                            
                             
                             
                             f1_list=[]
@@ -350,7 +363,7 @@ def main(args=None):
                                 f1_list.append(f1)                    
         
         
-                            mean_ac=np.round(np.nanmean(f1_list),4)
+                            mean_ac=np.round(np.nanmean(f1_list),2)
                             to_print=("\nThis is tests for the model at the train step: "+str(i*queue_len+k)+"\n"
                                       +"mean accuracy : "+str(mean_ac)
                                       +"\n Total time "+ str(time.time()-start))
@@ -390,8 +403,7 @@ def main(args=None):
                     BREAK=True
                     break
     saver.save(sess, saving_dir_prefix+".ckpt", global_step=h)
-             
-    t_batch = test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length)   
+    
     f1_list=[]
     for o in range(3):
         ta=sess.run(model.error, feed_dict={x_image: t_batch[o*2], y_: t_batch[o*2+1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
@@ -425,12 +437,15 @@ def main(args=None):
     
     input_log=os.path.split(input_dir)[0]+"/data_generation.log"
     labeled_file_name=""
+    excluded_chr=""
     if os.path.isfile(input_log):
         with open(input_log, 'r') as ilog:
             for line in ilog:
                 if line.startswith("Labeled"):
                     labeled_file_name=line.split(":")[1]
-                    break
+                elif line.startswith("Excluded"):
+                    excluded_chr=line.split(':')[1].strip('[]\n')
+                    
     import datetime
     to_print=("Dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
               +"Input directory: "+str(input_dir)+"\n"
@@ -441,7 +456,8 @@ def main(args=None):
               +"\nThe last check point: "+saving_dir_prefix+".ckpt-"+str(h)+".meta"
               +"\nArguments: "+" ".join(sys.argv[1:])
               +"\nTotal class number: "+str(label_dim)
-              +"\nLabeled file: "+labeled_file_name
+              +"\nLabeled file: "+labeled_file_name.strip('\n')
+              +"\nExcluded chromosome: "+excluded_chr
               +"\nGlobal variables: "+"\n".join(map(str, all_)))
        
     sess.close()
@@ -450,13 +466,20 @@ def main(args=None):
     flog.write(to_print+'\n')
     flog.close()
     
-    fit=np.polyfit(total_learing, train_accuracy_record, 1)
-    fit_fn=np.poly1d(fit)
+    #fit=np.polyfit(total_learing, train_accuracy_record, 1)
+    #fit_fn=np.poly1d(fit)
     
     plt.figure(1)
     ax1=plt.subplot(211)
     plt.title('Train accuracy')
-    plt.plot(total_learing, train_accuracy_record, 'c.', total_learing, fit_fn(total_learing), 'm-')
+    #plt.plot(total_learing, train_accuracy_record, 'c.', total_learing, fit_fn(total_learing), 'm-')
+    x=np.array(total_learing)
+    y=np.array(train_accuracy_record)
+    xy = np.vstack([x,y])
+    z = gaussian_kde(xy)(xy)
+    idx = z.argsort()
+    x, y, z = x[idx], y[idx], z[idx]
+    ax1.scatter(x, y, c=z, s=10, edgecolor='')
     ax1.grid(True)
 
     x1,x2,y1,y2 = plt.axis()

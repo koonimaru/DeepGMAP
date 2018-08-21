@@ -111,6 +111,9 @@ def add_predict_parser( subparsers ):
                               help = "The number of sequences that are going to be scanned at once. If you get memmory error, reducing this number may solve it. Default: 1000" )
     argparser_predict.add_argument( "-l", "--logfile", dest = "logfile", type = str,default = "",
                               help = "The log file of a training model. If you provide this option, you do not need to specify options of -i, -b, and -c. Default: " )
+    argparser_predict.add_argument( "-w", "--write_prediction", dest = "write_prediction", type = bool,default = True,choices = (True, False),
+                              help = "Choose if predictions in the narrowPeak format are saved or not. Default: True" )
+    
     return
 
 def add_generate_input_parser( subparsers ):
