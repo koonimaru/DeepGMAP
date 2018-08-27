@@ -147,11 +147,9 @@ def main(args=None):
 
     #create labeled genome file (.bed.labeled), only if it does not exist
     if not os.path.isfile(labeled_genome):
-        print("reading narrowPeak files named "+ str(bed_file_list))
+        print("reading "+str(len(bed_file_list))+" narrowPeak files...")
         if len(bed_file_list)==0:
-            print("No peak files in "+str(bed_file_dir))
-            #print(howto)
-            sys.exit()
+            sys.exit("No peak files in "+str(bed_file_dir))
         bed_file_list_2=[]
         
         #preparing for parallel execution of bedtools

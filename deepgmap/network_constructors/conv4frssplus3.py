@@ -42,15 +42,15 @@ class Model(object):
     # parameter lists
     initial_variation=0.005 #standard deviation of initial variables in the convolution filters
     #mini batch size
-    dimension1=640 #the number of the convolution filters in the 1st layer
-    dimension2=960
-    #dimension20=640 #the number of the convolution filters in the 2nd layer
-    dimension21=960
-    dimension22=960
-    dimension4=925*2 #the number of the neurons in each layer of the fully-connected neural network
-    conv1_filter=7
+    dimension1=480 #the number of the convolution filters in the 1st layer
+    dimension2=560
+    dimension20=560 #the number of the convolution filters in the 2nd layer
+    dimension21=560
+    dimension22=560
+    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
+    conv1_filter=9
     #conv1_filter2=49
-    conv2_filter=12
+    conv2_filter=11
     #conv20_filter=8
     conv21_filter=8
     conv22_filter=7
@@ -74,7 +74,7 @@ class Model(object):
                         -self.conv2_filter+1)/2.0)
                         #-self.conv20_filter+1)/2.0)
                         -self.conv21_filter+1)/2.0)
-                        -self.conv22_filter+1)/4.0))
+                        -self.conv22_filter+1)/2.0))
         self.prediction
         self.optimize
         self.error
@@ -156,7 +156,10 @@ class Model(object):
             wconv2_l2=tf.reduce_sum(tf.square(W_conv2))
             l2norm_list.append(wconv2_l2)
             W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
-            W_conv2_rc=tf.reverse(W_conv2, [0,1])
+            W_conv2_rc=weight_variable([self.conv2_filter, 1, self.dimension1, self.dimension2], 'W_conv2_rc')
+            wconv2_rc_l2=tf.reduce_sum(tf.square(W_conv2_rc))
+            l2norm_list.append(wconv2_rc_l2)
+            W_conv2_rc.assign(tf.cond(wconv2_rc_l2>cond, lambda: tf.multiply(W_conv2_rc, cond/wconv2_rc_l2),lambda: W_conv2_rc ))
             #h_conv2 = tf.nn.dropout(tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv1, W_conv2), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001)), keep_prob2)
             h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2_rc))), self.keep_prob2)
             #h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, W_conv2))), self.keep_prob2)
@@ -187,8 +190,10 @@ class Model(object):
             W_conv22.assign(tf.cond(wconv22_l2>cond, lambda: tf.multiply(W_conv22, cond/wconv22_l2),lambda: W_conv22 ))
             #h_conv22 = tf.nn.relu(tf.nn.batch_normalization(conv2d(h_conv2, W_conv22), mean=0.0, variance=1, offset=0, scale=1, variance_epsilon=0.001))
             h_conv22 = tf.nn.dropout(tf.nn.relu(conv2d_1(h_pool21, W_conv22)), self.keep_prob2)
-            h_pool22 = max_pool_4x1(h_conv22)
-        
+            h_pool22 = max_pool_2x2(h_conv22)
+
+
+
             
             W_fc1 = weight_variable([1 * self.fc1_param * self.dimension22, self.dimension4], 'W_fc1')
             wfc1_l2=tf.reduce_sum(tf.square(W_fc1))

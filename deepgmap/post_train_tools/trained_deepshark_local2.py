@@ -67,26 +67,21 @@ def main(args=None):
     #GPU=1
     if args is not None:
         #takes arguments when the code is run through enhancer_prediction_run
-        
+        TEST=args.test_or_prediction
+        GPUID=str(args.gpuid)
+        BATCH_SIZE=args.batchsize
+        test_genome=args.test_genome_files
+        WRITE_PRED=args.write_prediction
         if args.logfile=="":
                
             input_dir=args.input_ckpt
             output_dir=args.out_directory
             model_name=args.model
             bed_file=args.labeled_bed_file
-            test_genome=args.test_genome_files
-            #GPU=args.GPU_number
             chromosome_of_interest=args.chromosome
-            TEST=args.test_or_prediction
-            GPUID=str(args.gpuid)
-            BATCH_SIZE=args.batchsize
         else:
-            output_dir="./data/predictions/"
-            test_genome=args.test_genome_files
-            chromosome_of_interest=args.chromosome
-            GPUID=str(args.gpuid)
-            BATCH_SIZE=args.batchsize
-            TEST=args.test_or_prediction
+            output_dir="./data/predictions/"           
+            
             with open(args.logfile, "r") as fin:
                 for line in fin:
                     if line.startswith('The last check point:'):
@@ -97,6 +92,12 @@ def main(args=None):
                         #bed_file=line[1]
                     elif line.startswith("Model:"):
                         model_name=line.split(":")[1].strip(" \n")
+                    elif line.startswith("Excluded"):
+                        chromosome_of_interest=line.split(":")[1].strip(" \n").strip("'")
+                        if "," in chromosome_of_interest:
+                            c1, c2=chromosome_of_interest.split(', ')
+                            chromosome_of_interest=c1.strip("'")+","+c2.strip("'")
+                        print(chromosome_of_interest)
                         #model_name=line[1]
                         
                         
@@ -139,9 +140,9 @@ def main(args=None):
                 GPU=int(arg)
             
     if not os.path.isfile(input_dir):
-        sys.exit(input_dir+' does not exist')
+        sys.exit(input_dir+' does not exist.')
     if not os.path.isfile(bed_file):
-        sys.exit(bed_file+' does not exist')
+        sys.exit(bed_file+' does not exist.')
     if chromosome_of_interest=="all":
         TEST=False
     if output_dir==None:
@@ -322,34 +323,36 @@ def main(args=None):
     np.savez_compressed(str(out_dir)+"_prediction", prediction=y_prediction2)
     
     #writing the predictions in narrowPeak format
-    out_dir_np=out_dir+"_narrowPeaks/"
-    print('Writing the prodictions in narrowPeak format to '+out_dir_np)
-    
-    if not os.path.exists(out_dir_np):
-            try:
-                os.makedirs(out_dir_np)
-            except OSError as exc:
-                if exc.errno != exc.errno.EEXIST:
-                    raise
-    output_handle=[]
-    for s in sample_list:
-        filename_1=out_dir_np+str(s)+'.narrowPeak'
-        output_handle.append(open(filename_1, 'w'))
-    for i in range(len(y_prediction2)):
-        a=position_list[i].strip('>')
-        a=a.split(':')
-        chrom=a[0]
-        b=a[1].split('-')
-        start_=b[0]
-        end_=b[1]
-        value=y_prediction2[i]
-        for k in range(len(value)):
-            output_handle[k].write("\t".join([str(chrom),str(start_),str(end_),'.',str(value[k]*1000).strip('[]'),'.',
-                                              str(value[k]).strip('[]'),"-1\t-1\t-1\n"]))
-            
-    for i in output_handle:
-        i.close()
-    print('finished writing the predictions.')
+    if WRITE_PRED:
+        out_dir_np=out_dir+"_narrowPeaks/"
+        print('Writing the prodictions in narrowPeak format to '+out_dir_np)
+        
+        if not os.path.exists(out_dir_np):
+                try:
+                    os.makedirs(out_dir_np)
+                except OSError as exc:
+                    if exc.errno != exc.errno.EEXIST:
+                        raise
+        output_handle=[]
+        for s in sample_list:
+            filename_1=out_dir_np+str(s)+'.narrowPeak'
+            output_handle.append(open(filename_1, 'w'))
+        for i in range(len(y_prediction2)):
+            a=position_list[i].strip('>')
+            a=a.split(':')
+            chrom=a[0]
+            b=a[1].split('-')
+            start_=b[0]
+            end_=b[1]
+            value=y_prediction2[i]
+            for k in range(len(value)):
+                output_handle[k].write("\t".join([str(chrom),str(start_),str(end_),
+                                                  '.',str(value[k]*1000).strip('[]'),'.',
+                                                  str(value[k]).strip('[]'),"-1\t-1\t-1\n"]))
+                
+        for i in output_handle:
+            i.close()
+        print('finished writing the predictions.')
     
     if TEST==True:
         print("Now, calculating AUROC and AUPRC scores...")
