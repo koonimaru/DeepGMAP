@@ -420,14 +420,7 @@ def main(args=None):
         value=sess.run(v)
         scope=v.name
         current_variable[scope]=value
-    """all_lv=tf.get_collection(tf.GraphKeys.LOCAL_VARIABLES)
-    local_variable={}
-    for v in all_lv:
-        value=sess.run(v)
-        scope=v.name
-        print(scope)
-        local_variable[scope]=value"""
-        
+
     current_variable["fc1_param"]=model.fc1_param
     all_=tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
     np.savez(saving_dir_prefix+'_trained_variables.npz', **current_variable)
