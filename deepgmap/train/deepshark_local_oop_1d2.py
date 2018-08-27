@@ -410,7 +410,7 @@ def main(args=None):
         FPR_list, TPR_list, PPV_list=ta
         
         f1=float(np.round(np.nanmean(2*np.array(TPR_list)*np.array(PPV_list)/(0.0000001+np.array(PPV_list)+np.array(TPR_list))),4))
-        print(f1)
+        #print(f1)
         f1_list.append(f1)
     
     
@@ -447,7 +447,7 @@ def main(args=None):
                     excluded_chr=line.split(':')[1].strip('[]\n')
                     
     import datetime
-    to_print=("Dropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
+    to_print=("\nDropout parameters: "+str(dropout_1)+", "+str(dropout_2)+", "+str(dropout_3)+"\n"
               +"Input directory: "+str(input_dir)+"\n"
               +"The average F1: "+str(np.round(mean_ac,2))
               +"\nTotal time: "+ str(datetime.timedelta(seconds=running_time))
@@ -473,9 +473,9 @@ def main(args=None):
     ax1=plt.subplot(211)
     plt.title('Train accuracy')
     #plt.plot(total_learing, train_accuracy_record, 'c.', total_learing, fit_fn(total_learing), 'm-')
-    x=np.array(total_learing)
-    y=np.array(train_accuracy_record)
-    xy = np.vstack([x,y])
+    x=np.nan_to_num(np.array(total_learing))
+    y=np.nan_to_num(np.array(train_accuracy_record))
+    xy = np.nan_to_num(np.vstack([x,y]))
     z = gaussian_kde(xy)(xy)
     idx = z.argsort()
     x, y, z = x[idx], y[idx], z[idx]

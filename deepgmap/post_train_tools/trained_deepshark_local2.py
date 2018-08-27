@@ -346,7 +346,8 @@ def main(args=None):
             end_=b[1]
             value=y_prediction2[i]
             for k in range(len(value)):
-                output_handle[k].write("\t".join([str(chrom),str(start_),str(end_),'.',str(value[k]*1000).strip('[]'),'.',
+                output_handle[k].write("\t".join([str(chrom),str(start_),str(end_),
+                                                  '.',str(value[k]*1000).strip('[]'),'.',
                                                   str(value[k]).strip('[]'),"-1\t-1\t-1\n"]))
                 
         for i in output_handle:

@@ -42,18 +42,18 @@ class Model(object):
     # parameter lists
     initial_variation=0.005 #standard deviation of initial variables in the convolution filters
     #mini batch size
-    dimension1=480 #the number of the convolution filters in the 1st layer
-    dimension2=560
-    dimension20=560 #the number of the convolution filters in the 2nd layer
-    dimension21=560
-    dimension22=560
-    dimension4=925 #the number of the neurons in each layer of the fully-connected neural network
-    conv1_filter=11
+    dimension1=640 #the number of the convolution filters in the 1st layer
+    dimension2=960
+    #dimension20=640 #the number of the convolution filters in the 2nd layer
+    dimension21=960
+    dimension22=960
+    dimension4=925*2 #the number of the neurons in each layer of the fully-connected neural network
+    conv1_filter=7
     #conv1_filter2=49
     conv2_filter=12
     #conv20_filter=8
-    conv21_filter=9
-    conv22_filter=6
+    conv21_filter=8
+    conv22_filter=7
     max_to_keep=2
     train_speed=0.0001
 

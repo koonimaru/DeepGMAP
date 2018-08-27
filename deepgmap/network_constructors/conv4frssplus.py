@@ -56,6 +56,7 @@ class Model(object):
     conv22_filter=7
     max_to_keep=2
     train_speed=0.0001
+    threshold=0.3
 
     def __init__(self, *args, **kwargs):
         self.data_length=kwargs["data_length"]
@@ -287,7 +288,7 @@ class Model(object):
                 
                 true=self.label[:,i]
                 prob=self.prediction[1][:,i]
-                FPR, TPR, PPV=ac(true,prob,0.5)
+                FPR, TPR, PPV=ac(true,prob,self.threshold)
                 FPR_list.append(FPR)
                 TPR_list.append(TPR)
                 PPV_list.append(PPV)
