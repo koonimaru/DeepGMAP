@@ -129,8 +129,6 @@ def label_reader2(list file_, list chr_to_skip, float reduce):
 
 
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
 def AGCTtoArray2(char *Seq, int seqlen):
     cdef list onehot=[]
     #onehot_append=onehot.append
@@ -156,8 +154,6 @@ def AGCTtoArray2(char *Seq, int seqlen):
     return onehot
 
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
 def AGCTtoArray3(char *Seq, int seqlen):
     cdef list onehot=[]
     onehot_append=onehot.append
@@ -209,43 +205,27 @@ def AGCTtoArray5(char *Seq, int seqlen):
 @cython.boundscheck(False)
 @cython.wraparound(False)
 def AGCTtoArray4(char *Seq, int seqlen):
-    #cdef list onehot=[]
+    cdef list onehot=[]
+    onehot_append=onehot.append
     cdef char Nuc
-    cdef int i
-    cdef int[1000][4] onehot
-
+    cdef int i, j=0
     for i in range(seqlen):
         Nuc=Seq[i]
         #print Nuc
         if Nuc=='A' or Nuc=='a':
-            onehot[i][0]=1
-            onehot[i][1]=0
-            onehot[i][2]=0
-            onehot[i][3]=0
+            onehot_append((1, 0, 0, 0))
         elif Nuc=='G' or Nuc=='g':
-            onehot[i][0]=0
-            onehot[i][1]=1
-            onehot[i][2]=0
-            onehot[i][3]=0
+            onehot_append((0, 1, 0, 0))
         elif Nuc=='C' or Nuc=='c':
-            onehot[i][0]=0
-            onehot[i][1]=0
-            onehot[i][2]=1
-            onehot[i][3]=0
+            onehot_append((0, 0, 1, 0))
         elif Nuc=='T' or Nuc=='t':
-            onehot[i][0]=0
-            onehot[i][1]=0
-            onehot[i][2]=0
-            onehot[i][3]=1
+            onehot_append((0, 0, 0, 1))
         elif Nuc=='N' or Nuc=='n':
-            onehot[i][0]=0
-            onehot[i][1]=0
-            onehot[i][2]=0
-            onehot[i][3]=0
+            onehot_append((0, 0, 0, 0))
         else:
-            print("sequence contains unreadable characters: "+str(Nuc))
-            sys.exit()
-    
+            onehot_append((0, 0, 0, 0))
+            j+=1
+    #print(str(j)+" bp are not AGCTN.")
     return onehot
 
 def ATGCtoArray(char *Seq, int seqlen):

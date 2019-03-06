@@ -1,6 +1,8 @@
 import sys
 import cairocffi as cairo
 #import cairo
+#from gi.repository import Gtk
+
 import gzip
 import cPickle       
 import numpy as np
@@ -11,13 +13,13 @@ from PIL import Image
 import StringIO
 def _select_color(cr, DNA):
     if DNA=="A":
-        cr.set_source_rgb(0, 1, 0)
+        cr.set_source_rgb(1, 0, 0)
     elif DNA=="G":
         cr.set_source_rgb(0.8, 0.8, 0)
     elif DNA=="C":
         cr.set_source_rgb(0, 0, 1)
     elif DNA=="T":
-        cr.set_source_rgb(1, 0, 0)    
+        cr.set_source_rgb(0, 1, 0)    
     else:
         cr.set_source_rgb(0.8, 0.8, 0.8)
         
@@ -184,9 +186,10 @@ def kernel_connector(png_list):
     for k, i in enumerate(png_list):
         im = Image.open(i)
         
-        im=im.resize([xwidth, ywidth], Image.LANCZOS)
+        im=im.resize([xwidth, ywidth], Image.ANTIALIAS)
+        #im.thumbnail([xwidth, ywidth], Image.LANCZOS)
         _buffer = StringIO.StringIO()
-        im.save(_buffer, format="PNG")#,compress_level=0, dpi=(xwidth, ywidth))
+        im.save(_buffer, format="PNG", quality=100)#,compress_level=0, dpi=(xwidth, ywidth))
         _buffer.seek(0)
         png_image=cairo.ImageSurface.create_from_png(_buffer)
         cr.save()

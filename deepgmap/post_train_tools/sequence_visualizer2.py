@@ -4,13 +4,13 @@ import numpy as np
 
 def _select_color(cr, DNA):
     if DNA=="A":
-        cr.set_source_rgb(0, 1, 0)
+        cr.set_source_rgb(1, 0, 0)
     elif DNA=="G":
         cr.set_source_rgb(0.8, 0.8, 0)
     elif DNA=="C":
         cr.set_source_rgb(0, 0, 1)
     elif DNA=="T":
-        cr.set_source_rgb(1, 0, 0)    
+        cr.set_source_rgb(0, 1, 0)    
     else:
         cr.set_source_rgb(0.8, 0.8, 0.8)
 def seuquence_visualizer2(npz_file, output_file):
@@ -180,10 +180,10 @@ Background letter frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.
     cr.show_page()
 
 def main():
-    npz_file='/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz'
+    npz_file='/home/fast2/onimaru/DeepGMAP-dev/data/activation_max/conv4frss_Fri_Sep_28_160038_2018.ckpt-28907Thu_Dec_20_153804_2018_ese14_re.npz'
     a=npz_file.split('/')[-1]
     a=a.split('.')[0]
-    output_file='/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz_test.pdf'
+    output_file=npz_file+'.pdf'
     seuquence_visualizer2(npz_file, output_file)
 if __name__ == "__main__":    
     main()

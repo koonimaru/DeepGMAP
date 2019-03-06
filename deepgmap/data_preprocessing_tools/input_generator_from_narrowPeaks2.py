@@ -182,6 +182,7 @@ def main(args=None):
                 if thread+threads*jloop<job_num:
                     jobs[thread+threads*jloop].join()
         genome_label(bed_file_list_2, genome_1000,labeled_genome)
+        #sys.exit()
     else:
         print('As '+labeled_genome +' already exists, skipping generating this file. \nIf you want to generate a new one, you need change the prefix or remove the old one.')
 

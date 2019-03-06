@@ -37,7 +37,7 @@ frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.2500 T 0.2500\n\n"
 def main():
     motif_data_dir="/home/fast/onimaru/data/meme/merged.meme"
     #long_motif_dir="/home/fast/onimaru/deepgmap/data/reconstructions/conv4frss_Fri_May_11_075425_2018.ckpt-16747Tue_May_15_112518_2018_all_.pdf.meme"
-    long_motif_dir="/home/fast/onimaru/deepgmap/data/reconstructions/conv4frss_Fri_May_11_075425_2018.ckpt-16747Fri_May_18_065241_2018_ese14_re.pdf.meme"
+    long_motif_dir="/home/fast2/onimaru/DeepGMAP-dev/data/activation_max/conv4frss_Fri_Sep_28_160038_2018.ckpt-28907Thu_Dec_20_131413_2018_ese14_re.pdf.meme"
     #fout=os.path.splitext(long_motif_dir)[0]+".matches"
     #fout="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz.matches"
 

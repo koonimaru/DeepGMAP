@@ -47,7 +47,7 @@ def DNA_to_array_converter(input_file,target_chr):
                 data_width=len(line)
                 #sequence=np.zeros([1,1000,4,1], np.int16)
                                    
-                seq_list.append(sb2.AGCTtoArray3(line,data_width))
+                seq_list.append(sb2.AGCTtoArray4(line,data_width))
                 #seq_list.append(sb2.ACGTtoaltArray(line,data_width))
     return position_list, seq_list
         
