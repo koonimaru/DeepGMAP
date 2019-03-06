@@ -42,7 +42,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
             line=line.strip('\n')
             
             #a1=time.time()
-            seq_list_append(sb2.AGCTtoArray3(line,data_width))
+            seq_list_append(sb2.AGCTtoArray4(line,data_width))
             
             #b1+=time.time()-a1
         i+=1
@@ -67,6 +67,7 @@ def main(args=None):
         target_chr=args.chromosome
         output_file=args.out_directory
         threads=args.thread_number
+        chunck_data=args.chunck_data
         print args
     else:
         try:
@@ -94,7 +95,7 @@ def main(args=None):
     file_size=os.path.getsize(input_file)
     print file_size
     
-    loop_to_reduce_ram=div_roundup(2000000000, file_size)
+    loop_to_reduce_ram=div_roundup(1000000000, file_size)
     try:
         with open(input_file, "r") as fin:
             input_file_read=fin.readlines()

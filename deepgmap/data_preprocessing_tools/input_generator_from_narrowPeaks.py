@@ -5,6 +5,8 @@ from genome_labeling2 import genome_label
 import os
 import subprocess as sp
 import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
+from deepgmap.data_preprocessing_tools.seq_to_binary2 import label_reader
+
 from inputfileGenerator_multiple_label3 import seqtobinarydict
 from inputfileGenerator_multiple_label3 import dicttoarray
 from inputfileGenerator_multiple_label3 import array_saver

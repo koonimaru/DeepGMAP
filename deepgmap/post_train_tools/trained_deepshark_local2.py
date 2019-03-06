@@ -97,7 +97,10 @@ def main(args=None):
                         if "," in chromosome_of_interest:
                             c1, c2=chromosome_of_interest.split(', ')
                             chromosome_of_interest=c1.strip("'")+","+c2.strip("'")
-                        print(chromosome_of_interest)
+            if args.chromosome is not None:
+                chromosome_of_interest=args.chromosome
+            
+            print(chromosome_of_interest)
                         #model_name=line[1]
                         
                         

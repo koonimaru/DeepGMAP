@@ -1,0 +1,13 @@
+/home/fast2/onimaru/DeepGMAP-dev/deepgmap/post_train_tools/activation_maximization.py
+the filer number of conv1:320
+the filer size of conv1:9
+the filer number of conv2:480
+the filer size of conv2:9
+the filer number of conv21:480
+the filer size of conv21:7
+the filer number of conv22:480
+the filer size of conv22:8
+the number of neurons in the fully-connected layer:925
+the standard deviation of initial varialbles:0.005
+train speed:0.0001
+data length:1000
