@@ -204,8 +204,10 @@ def main():
     if len(sys.argv)>1:
         npz_file=sys.argv[1]
     else:
-        npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
+        #npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
+        npz_file='/home/fast2/onimaru/DeepGMAP-dev/data/outputs/conv4frss_Mon_Feb_25_092345_2019_trained_variables.npz'
     #output_file='/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_28_170548_2018.npz'
+    
     png_list, kernel_shape_ic_list=seuquence_visualizer(npz_file)
     kernel_connector(png_list)
 if __name__ == "__main__":    

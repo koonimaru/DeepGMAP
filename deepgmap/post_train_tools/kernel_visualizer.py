@@ -11,13 +11,13 @@ from PIL import Image
 import StringIO
 def _select_color(cr, DNA):
     if DNA=="A":
-        cr.set_source_rgb(0, 1, 0)
+        cr.set_source_rgb(1, 0, 0)
     elif DNA=="G":
         cr.set_source_rgb(0.8, 0.8, 0)
     elif DNA=="C":
         cr.set_source_rgb(0, 0, 1)
     elif DNA=="T":
-        cr.set_source_rgb(1, 0, 0)    
+        cr.set_source_rgb(0, 1, 0)    
     else:
         cr.set_source_rgb(0.8, 0.8, 0.8)
         
@@ -440,7 +440,9 @@ def main():
     if len(sys.argv)>1:
         npz_file=sys.argv[1]
     else:
-        npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_Wed_May_30_174635_2018_trained_variables_26000_.npz'
+        #npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018.npz'
+        npz_file='/home/fast2/onimaru/DeepGMAP-dev/data/outputs/conv4frss_Mon_Feb_25_092345_2019_trained_variables.npz'
+        #npz_file='/home/fast/onimaru/deepgmap/data/outputs/conv4frss_Wed_May_30_174635_2018_trained_variables_16000_.npz'
     #output_file='/home/fast/onimaru/data/output/deepshark_trained_variables_Sat_Apr_28_170548_2018.npz'
     png_list, kernel_shape_ic_list=seuquence_visualizer(npz_file)
     kernel_connector(npz_file, png_list, kernel_shape_ic_list)

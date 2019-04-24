@@ -267,15 +267,7 @@ for c in classes:
             w_tmp=np.reshape(w_tmp,[w_tmp_shape[0], w_tmp_shape[1],w_tmp_shape[2]])
             #w_tmp=np.amax(np.absolute(np.clip(w_tmp, None, 0.0)), axis=2)
             w_tmp=np.sum(np.absolute(w_tmp), axis=2)
-            #w_tmp=np.amax(np.clip(w_tmp, 0.0, None), axis=2)
-            #print w_tmp[1]
-            #print w_tmp[0]
-            #w_tmp=np.amax(w_tmp, axis=2)
-            #w_tmp=np.sum(w_tmp, axis=2)
-            #print w_tmp[0]
-        
-            #print w_tmp.shape, len(sal_map)
-            #print w_tmp[1:3]
+
             if len_scanning<BATCH_SIZE:
                 w_tmp=w_tmp[:len_scanning]
             for j in range(len_scanning):
@@ -330,18 +322,21 @@ for c in classes:
     
     if len(bw_file_merged_list)==0:
         #h, t=os.path.split(bw_file_list[0])
-        tmp_name=out_pf+"_"+start_at+"_tmp"
-        print("merging files to create "+out_pf+".bw")
-        #print bw_file_list
-        subp.check_call(["bigWigMerge"]+bw_file_list+[tmp_name+".bedGraph"])
-        with open(out_pf+".bedGraph" ,"w") as tmp_out:
-            subp.check_call(["sort", "-k1,1", "-k2,2n",tmp_name+".bedGraph"], stdout=tmp_out)
-        
-        subp.check_call(["bedGraphToBigWig", out_pf+".bedGraph", genome_file, out_pf+".bw"])
-        subp.check_call(["rm", out_pf+".bedGraph"])
-        subp.check_call(["rm", tmp_name+".bedGraph"])
-        for _file in bw_file_list:
-            subp.check_call(["rm", _file])
+        if len(bw_file_list)==1:
+            subp.check_call(["mv", bw_file_list[0], out_pf+".bw"])
+        else:
+            tmp_name=out_pf+"_"+start_at+"_tmp"
+            print("merging files to create "+out_pf+".bw")
+            #print bw_file_list
+            subp.check_call(["bigWigMerge"]+bw_file_list+[tmp_name+".bedGraph"])
+            with open(out_pf+".bedGraph" ,"w") as tmp_out:
+                subp.check_call(["sort", "-k1,1", "-k2,2n",tmp_name+".bedGraph"], stdout=tmp_out)
+            
+            subp.check_call(["bedGraphToBigWig", out_pf+".bedGraph", genome_file, out_pf+".bw"])
+            subp.check_call(["rm", out_pf+".bedGraph"])
+            subp.check_call(["rm", tmp_name+".bedGraph"])
+            for _file in bw_file_list:
+                subp.check_call(["rm", _file])
     else:
         if len(bw_file_list)>1:
             #print bw_file_list

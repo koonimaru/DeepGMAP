@@ -34,6 +34,7 @@ colors = np.array([cmap(i) for i in np.linspace(0, 1, 320)])
 colors=(255*colors).astype(int)
 
 gff="/home/fast/onimaru/deepgmap/data/outputs/conv4frss_trained_variables_Fri_May_11_075425_2018_kernels/fimo_out/fimo.gff"
+gff="/home/fast2/onimaru/DeepGMAP-dev/data/outputs/conv4frss_Mon_Feb_25_092345_2019_trained_variables_kernels/fimo_out/fimo.gff"
 bed=os.path.splitext(gff)[0]+".bed"
 
 with open (gff, 'r') as fin, open(bed, 'w') as fout:

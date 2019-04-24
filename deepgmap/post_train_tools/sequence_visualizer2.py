@@ -180,7 +180,7 @@ Background letter frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.
     cr.show_page()
 
 def main():
-    npz_file='/home/fast2/onimaru/DeepGMAP-dev/data/activation_max/conv4frss_Fri_Sep_28_160038_2018.ckpt-28907Thu_Dec_20_153804_2018_ese14_re.npz'
+    npz_file='/home/fast2/onimaru/DeepGMAP-dev/data/reconstructions/conv4frss_Fri_May_11_075425_2018.ckpt-16747Tue_May_15_112518_2018_all_.npz'
     a=npz_file.split('/')[-1]
     a=a.split('.')[0]
     output_file=npz_file+'.pdf'

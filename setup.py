@@ -33,10 +33,10 @@ setup(
     author='Koh Onimaru',
     author_email='koh.onimaru@gmail.com',
     url='',
-    #packages=['deepgmap','deepgmap.train','deepgmap.network_constructors','deepgmap.post_train_tools','deepgmap.data_preprocessing_tools','deepgmap.misc'],
-    packages=find_packages('deepgmap'),
-    
-    package_dir={'':'deepgmap'},
+    packages=['deepgmap','deepgmap.train','deepgmap.network_constructors','deepgmap.post_train_tools','deepgmap.data_preprocessing_tools','deepgmap.misc'],
+    #packages=find_packages('deepgmap'),
+    #packages=['deepgmap.'],
+    package_dir={'DeepGMAP':'deepgmap'},
     #package_data = {
     #     '': ['enhancer_prediction/*', '*.pyx', '*.pxd', '*.c', '*.h'],
     #},
@@ -57,5 +57,4 @@ setup(
     install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn'],
     long_description=open('README.rst').read(),
 )
-
 
