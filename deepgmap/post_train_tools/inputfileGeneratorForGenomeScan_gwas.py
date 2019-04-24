@@ -10,9 +10,9 @@ import time
 
 def div_roundup(x, y):
     if y%x==0:
-        return y/x
+        return y//x
     else:
-        return y/x+1
+        return y//x+1
 
 
 def DNA_to_array_converter(input_file_read,seq_num,target_chr):
@@ -24,7 +24,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
     i=0
     
     data_width=len(input_file_read[1].strip("\n"))
-    print data_width
+    print(data_width)
     SEQ=False
     #print seq_list
     for l, line in enumerate(input_file_read):
@@ -37,7 +37,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
             else:
                 SEQ=False
             if i%100000==0:
-                print line
+                print(line)
         elif SEQ:
             line=line.strip('\n')
             
@@ -68,12 +68,12 @@ def main(args=None):
         output_file=args.out_directory
         threads=args.thread_number
         chunck_data=args.chunck_data
-        print args
+        print(args)
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
         except getopt.GetoptError as err:
-            print str(err)
+            print(str(err))
             sys.exit(2)
         if len(options)<3:
             print('too few argument')
@@ -91,16 +91,16 @@ def main(args=None):
             elif opt in ('-p', '--process'):
                 threads=int(arg)
     
-        print options
+        print(options)
     file_size=os.path.getsize(input_file)
-    print file_size
+    print(file_size)
     
     loop_to_reduce_ram=div_roundup(1000000000, file_size)
     try:
         with open(input_file, "r") as fin:
             input_file_read=fin.readlines()
     except IOError:
-        print 'cannot open', input_file
+        print('cannot open', input_file)
     
     line_num=len(input_file_read)
     #print line_num
@@ -113,7 +113,7 @@ def main(args=None):
     
         position_list, seq_list=DNA_to_array_converter(input_file_read[2*l1*sub_seq_num:2*(l1+1)*sub_seq_num],sub_seq_num,target_chr)
         
-        print position_list[0], input_file_read[2*l1*sub_seq_num]
+        print(position_list[0], input_file_read[2*l1*sub_seq_num])
     
     
         outerloop=div_roundup(threads, DIVIDES_NUM)
@@ -124,7 +124,7 @@ def main(args=None):
         else:
             job_num=DIVIDES_NUM
             
-        print DIVIDES_NUM, threads, outerloop, job_num
+        print(DIVIDES_NUM, threads, outerloop, job_num)
         
         
         for l in range(outerloop):

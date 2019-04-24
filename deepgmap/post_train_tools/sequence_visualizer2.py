@@ -70,7 +70,7 @@ Background letter frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.
             cr.move_to(100, y_center)
             cr.line_to(DNA_len/line_num*30+100, y_center)
             cr.stroke()
-            print y_center
+            print(y_center)
             
         AGCT={}
         values=[]
@@ -86,7 +86,7 @@ Background letter frequencies (from uniform background):\nA 0.2500 C 0.2500 G 0.
         to_print=""
         for i in range(4):
             if np.isnan(probability[i]):
-                print k
+                print(k)
                 probability[i]=0.0
         
         to_print=str(probability[0])+" "+str(probability[2])+" "+str(probability[1])+" "+str(probability[3])+"\n"

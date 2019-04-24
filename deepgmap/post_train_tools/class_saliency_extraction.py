@@ -72,7 +72,7 @@ try:
     options, args =getopt.getopt(sys.argv[1:], 'l:t:o:c:G:g:p:', 
                                  ['log=','test_genome=','output_dir=',"class_of_interest=", "GPUID=", "genoem_file=","prefix="])
 except getopt.GetoptError as err:
-    print str(err)
+    print(str(err))
     sys.exit(2)
 if len(options)<3:
     print('too few argument')
@@ -109,7 +109,7 @@ with open(log_file_name, 'r') as fin:
     for line in fin:
         if line.startswith('<tf.Variable'):
             line=line.split(' ')
-            print line
+            print(line)
             if line[1]=="'prediction/W_fc1:0'":
                 line=line[2].split('=(')[1].strip(",'")
                 first_fc_shape=int(line)
@@ -142,7 +142,7 @@ with open(log_file_name, 'r') as fin:
                     l=l[common_prefix_len:]
                     l=l[:-common_suffix_len]
                     sample_list.append(l)
-                print sample_list
+                print(sample_list)
                 
 test_genome_list=natsorted(glob(test_genome))
 if len(test_genome_list)==0:

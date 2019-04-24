@@ -78,7 +78,7 @@ def batch_queuing(file_list, batch_size, data_length):
                     dnase_data_labels=f1['labels'], f1['data_array']
                     
                 except EOFError:
-                    print "annot load: "+str(f)
+                    print("annot load: "+str(f))
             
             shape=dnase_data_labels[1].shape
             images=np.reshape(dnase_data_labels[1], (shape[0], data_length, 4, 1))
@@ -112,7 +112,7 @@ def main():
     try:
         options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:', ['input_dir=','output_dir=','network_constructor=','bed=', 'test_genome=','genome_bed=','chromosome=','GPU='])
     except getopt.GetoptError as err:
-        print str(err)
+        print(str(err))
         sys.exit(2)
     if len(options)<4:
         print('too few argument')
@@ -168,7 +168,7 @@ def main():
     elif 'meta'  in input_dir.rsplit('.', 1)[1] or 'index'  in input_dir.rsplit('.', 1)[1]:
         input_dir=input_dir.rsplit('.', 1)[0]
     else:
-        print "the input file should be a ckpt file"
+        print("the input file should be a ckpt file")
         sys.exit(1)
     nc=il.import_module("deepgmap.network_constructors."+str(model_name))
     print("runing "+str(model_name))
@@ -186,7 +186,7 @@ def main():
     try:
         saver.restore(sess, input_dir)
     except:
-        print "can't open "+str(input_dir)
+        print("can't open "+str(input_dir))
         sys.exit(0)
     test_genome_list=natsorted(glob(test_genome))
     l=0
@@ -207,7 +207,7 @@ def main():
         seq_list=seq_list[np.random.randint(seq_list.shape[0], size=10000), :]
         seq_list=seq_list.reshape(-1, 1000, 4, 1)
         seq_length=seq_list.shape[0]
-        print seq_length
+        print(seq_length)
         loop=seq_length/1000+1
         
         for i in range(loop):
@@ -216,8 +216,8 @@ def main():
                 y_prediction2, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
                 #neuron_monitor=active_neuron["h_pool3_flat"]/np.amax(active_neuron["h_pool3_flat"],axis=1).reshape([-1,1])
                 neuron_monitor=active_neuron["h_pool3_flat"]
-                print y_prediction2.shape
-                print neuron_monitor.shape
+                print(y_prediction2.shape)
+                print(neuron_monitor.shape)
                 
             else:
                 y_prediction1, active_neuron=sess.run([model.prediction[1],model.prediction[3]], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False})
@@ -225,14 +225,14 @@ def main():
                 #neuron_monitor=np.concatenate([neuron_monitor,active_neuron["h_pool3_flat"]/np.amax(active_neuron["h_pool3_flat"],axis=1).reshape([-1,1])],axis=0)
                 neuron_monitor=np.concatenate([neuron_monitor,active_neuron["h_pool3_flat"]],axis=0)
             if (i+l*loop)%10==0:
-                print i+l*loop
+                print(i+l*loop)
             if neuron_monitor.shape[0]>=10000:
                 BREAK=True
                 break
         l+=1
     sess.close()            
     
-    print neuron_monitor[0], np.max(neuron_monitor[0])
+    print(neuron_monitor[0], np.max(neuron_monitor[0]))
     #print y_prediction2.shape    
     
 

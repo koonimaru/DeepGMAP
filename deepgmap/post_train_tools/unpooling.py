@@ -45,7 +45,7 @@ def unpool(updates, mask, ksize=[1, 2, 1, 1], output_shape=None, name=''):
         indices = tf.transpose(tf.reshape(tf.stack([b, y, x, f]), [4, updates_size]))
         values = tf.reshape(updates, [updates_size])
         ret = tf.scatter_nd(indices, values, output_shape)
-        print ret
+        print(ret)
         return ret
     
     

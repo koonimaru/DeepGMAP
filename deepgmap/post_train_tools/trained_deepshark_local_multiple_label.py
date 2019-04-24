@@ -50,7 +50,7 @@ def process(f, out_dir):
     elif 'meta'  in sys.argv[1].rsplit('.', 1)[1] or 'index'  in sys.argv[1].rsplit('.', 1)[1]:
         input_dir=sys.argv[1].rsplit('.', 1)[0]
     else:
-        print "the input file should be a ckpt file"
+        print("the input file should be a ckpt file")
         sys.exit(1)
     
     model = nc.Model(image=x_image, label_dim=19, label=y_, phase=phase, output_dir=None, start_at=None, keep_prob=keep_prob, keep_prob2=keep_prob2, keep_prob3=keep_prob3, data_length=data_length)
@@ -59,14 +59,14 @@ def process(f, out_dir):
     try:
         saver.restore(sess, input_dir)
     except:
-        print "can't open "+str(input_dir)
+        print("can't open "+str(input_dir))
         sys.exit(0)
     for seq in f:
         
         try:
             genome_seq_re_list, chromosome, chr_position=genome_scan(seq)
         except:
-            print "can't open "+str(file[0])
+            print("can't open "+str(file[0]))
             sys.exit(0)
         y_prediction1=[]
         i=0
@@ -75,9 +75,9 @@ def process(f, out_dir):
             y_prediction2 =np.array(sess.run(model.prediction[0], feed_dict={x_image: scanning, keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0,phase:False}), np.float64)
             y_prediction1.append(1.0 / (1.0 + np.exp(-y_prediction2)))
             if i%10==0:
-                print 'scanning '+str(chromosome)+'_'+str(chr_position)+', '+str(100*i/len(genome_seq_re_list))+' %'    
+                print('scanning '+str(chromosome)+'_'+str(chr_position)+', '+str(100*i/len(genome_seq_re_list))+' %')    
         filename_1=str(out_dir)+str(chromosome)+'.bed'
-        print 'writing '+filename_1
+        print('writing '+filename_1)
         if os.path.isfile(filename_1):
             output_handle=open(filename_1, 'a')
         else:
@@ -99,9 +99,9 @@ def process(f, out_dir):
                 
                     output_handle.write(str(chromosome)+'\t'+str(start_pos)+'\t'+str(end_pos)+'\t'+str(value)+'\n')
                     if i%10==0:
-                        print str(str(chromosome)+'\t'+str(start_pos)+'\t'+str(end_pos)+'\t'+str(value)) 
+                        print(str(str(chromosome)+'\t'+str(start_pos)+'\t'+str(end_pos)+'\t'+str(value))) 
         output_handle.close()
-        print 'finished writing '+filename_1
+        print('finished writing '+filename_1)
     sess.close()
     out=open(str(out_dir)+str(chromosome)+"_srt.bed", 'w')
     sp.check_call(["bedtools", "sort","-i", str(filename_1)], stdout=out)
@@ -134,7 +134,7 @@ def main():
         #x=p.apply_async(process, (t_,))
         #x.get()
     except :
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise      
         
     #for i in f:
@@ -142,7 +142,7 @@ def main():
     
       
         
-    print time.time()-start
+    print(time.time()-start)
 
 
 if __name__== '__main__':
