@@ -25,9 +25,9 @@ Usage of deepgmap
   deepgmap [-h] [--version]
              {pridict,train,generate_input,genome_divide}
 
-:Example for enhancer prediction: "deepgmap predict -i ./data/outputs/conv4frssXXXX.meta -o ./data/predictions/ -t ./data/test_data/mm10_window1000_stride300*.npz -G 0"
+:Example for enhancer prediction: deepgmap predict -i ./data/outputs/conv4frssXXXX.meta -o ./data/predictions/ -t "./data/test_data/mm10_window1000_stride300*.npz" -G 0
 
-:Example for training a model: "deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 1"
+:Example for training a model: deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 0
 
 There are five functions currently available.
 
@@ -47,16 +47,16 @@ Firstly, the multiple fasta file of your genome should be divided into a particu
 
 deepgmap genome_divide -i ./data/genomes/mm10.fa -w 1000 -s 300
 
-, which produces mm10_window1000_stride300.bed and mm10_window1000_stride300.fa (you need to change mm10.fa to your multiple fasta file).
+This produces mm10_window1000_stride300.bed and mm10_window1000_stride300.fa (you need to change mm10.fa to your multiple fasta file).
 The next step is to convert AGCT symbols to matrices of onehot arrays by the following command:
 
 deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/test_data/mm10_window1000_stride300_ -t 16 -C all
 
-, which produces a series of npz files. To predict regulatory sequences, type
+
+To predict regulatory sequences, type
 
 deepgmap predict -i ./data/outputs/conv4frss_Thu_Jun_14_095043_2018.ckpt-22379.meta -o ./data/predictions/ -t "./data/test_data/mm10_window1000_stride300*.npz" -G 0
 
-, which will annotate CTCF binding sites as an example.
 
 Output files
 ~~~~~~~~~~~~
@@ -78,7 +78,7 @@ integer of -n option. It is not the optimal algorithm, will be improved in the f
 
 deepgmap train -i ./data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set/ -c conv4frss -o ./data/outputs/
 
-, where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). For model types, 
+where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). For model types, 
 currently deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss, are available.
    
 

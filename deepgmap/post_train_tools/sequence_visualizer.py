@@ -82,7 +82,7 @@ def main():
                     Nuc2="C"
                 elif max_index2==3:
                     Nuc2="T"
-            else:line_num
+            else:
                 Nuc2="N"
                 
             
