@@ -191,7 +191,7 @@ for i in range(loop_num):
         total_learing[i]+=i*batch_size/1000.0
 
     
-        print "step "+str(i)+", cost: "+str(loss_val)+", train_accuracy: "+str(train_accuracy)
+        print("step "+str(i)+", cost: "+str(loss_val)+", train_accuracy: "+str(train_accuracy))
     if i==loop_num-1:
         saver.save(sess, '/media/koh/HD-PCFU3/mouse/pretrained_'+str(start_at)+'.ckpt', global_step=i)
         tf_variables=sess.run([W_conv1, W_conv2, W_conv3, b_conv1, b_conv2, b_conv3, W_fc1, W_fc2, W_fc3, W_fc4, b_fc1, b_fc2, b_fc3, b_fc4])

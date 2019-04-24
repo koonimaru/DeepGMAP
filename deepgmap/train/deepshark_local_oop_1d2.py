@@ -67,7 +67,7 @@ def process2(f,data_length):
 def batch_queuing(file_list, batch_size, data_length):
     
     with tf.device('/cpu:0'):
-        half_batch=batch_size/2
+        half_batch=batch_size//2
         image_list=[]
         label_list=[]
         #CPU=20
@@ -130,9 +130,9 @@ def test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length):
 
 def div_roundup(x, y):
     if y%x==0:
-        return y/x
+        return y//x
     else:
-        return y/x+1
+        return y//x+1
     
 def run(args):
     main(args)
@@ -174,7 +174,7 @@ def main(args=None):
         try:
             options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
         except getopt.GetoptError as err:
-            print str(err)
+            print(str(err))
             sys.exit(2)
         if len(options)<3:
             print('too few argument')
@@ -341,7 +341,7 @@ def main(args=None):
                             
                             test_step.append(h)
                             if len(test_step)>10:
-                                e, f=test_step[-1]/TEST_FREQ,test_step[-10]/TEST_FREQ
+                                e, f=test_step[-1]//TEST_FREQ,test_step[-10]//TEST_FREQ
                                 if e-f<=40:
                                     TEST_THRESHOLD+=0.02
                                     

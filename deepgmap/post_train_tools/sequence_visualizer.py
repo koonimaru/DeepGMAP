@@ -50,9 +50,9 @@ def main():
                 cr.set_source_rgba(0.0,0.0,0,1.0)
                 y_center+=400
                 cr.move_to(100, y_center)
-                cr.line_to(DNA_len/line_num*30+100, y_center)
+                cr.line_to(DNA_len//line_num*30+100, y_center)
                 cr.stroke()
-                print y_center
+                print(y_center)
             max_value=np.amax(reconstruct[k])
             sum_value=np.sum(reconstruct[k])
             max_value2=np.amax(original_seq[k])
@@ -82,7 +82,7 @@ def main():
                     Nuc2="C"
                 elif max_index2==3:
                     Nuc2="T"
-            else:
+            else:line_num
                 Nuc2="N"
                 
             

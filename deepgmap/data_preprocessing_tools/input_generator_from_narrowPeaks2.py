@@ -58,7 +58,7 @@ def main(args=None):
         try:
             options, args =getopt.getopt(sys.argv[1:], 'b:g:w:t:p:s:r:h:', ['bed=', 'genome=', 'window_size=' 'threads=', 'prefix=','sample_number=','reduce_genome=','help='])
         except getopt.GetoptError as err:
-            print str(err)
+            print(str(err))
             sys.exit(1)
         howto=\
         "usage: input_generator_from_narrowPeaks [-h] [-b FILE_DIR] [-g FILE_DIR] \n\
@@ -193,7 +193,7 @@ def main(args=None):
         
         
         label_genome_length=len(f2)
-        print label_genome_length
+        print(label_genome_length)
         shuf=range(label_genome_length)
         random.shuffle(shuf)
         read_len=int(math.ceil(label_genome_length/float(chunck_data)))
@@ -206,7 +206,7 @@ def main(args=None):
         print(read_len)
         for ooloop in range(chunck_data):
             sub_shuf=sorted(shuf[ooloop*read_len:(ooloop+1)*read_len])
-            print sub_shuf[0:10]
+            print(sub_shuf[0:10])
             f2_=[f2[f2s] for f2s in sub_shuf]
             label_position, label_list, skipped, pos_no=sb2.label_reader2(f2_, chr_to_skip, reduce_genome)
                 #label_list=np.array(label_list, np.int8)
@@ -250,14 +250,14 @@ def main(args=None):
             
             print(dna_dict_length, len(label_list))
             if dna_dict_length%threads==0:
-                batch=dna_dict_length/threads
+                batch=dna_dict_length//threads
             else:
-                batch=dna_dict_length/threads+1
+                batch=dna_dict_length//threads+1
                 
             if dna_dict_length%sample_num==0:
-                total_num=dna_dict_length/(sample_num*threads)
+                total_num=dna_dict_length//(sample_num*threads)
             else:
-                total_num=dna_dict_length/(sample_num*threads)+1
+                total_num=dna_dict_length//(sample_num*threads)+1
                 
             jobs = []
             for i in range(threads):

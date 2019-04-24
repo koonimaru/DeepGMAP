@@ -15,7 +15,7 @@ import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
 import time
 import psutil
 import getopt
-
+#from __future__ import print_function
 
 def DNA_to_array_converter(input_file,target_chr):
     
@@ -36,7 +36,7 @@ def DNA_to_array_converter(input_file,target_chr):
             if line.startswith('>'):
                 _line=line.strip('>').split(':')[0]
                 if _line in target_chr:
-                    print line
+                    print(line)
                     position_list.append(line.strip('\n'))
                     SEQ=True
                     
@@ -78,12 +78,12 @@ def main(args=None):
         target_chr=args.chromosome
         output_file=args.out_directory
         threads=args.thread_number
-        print args
+        print(args)
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
         except getopt.GetoptError as err:
-            print str(err)
+            print(str(err))
             sys.exit(2)
         if len(options)<3:
             print('too few argument')
@@ -101,32 +101,32 @@ def main(args=None):
             elif opt in ('-p', '--process'):
                 threads=int(arg)
     
-        print options
+        print(options)
     assert os.path.isfile(input_file), "no input files"
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)
-    print seq_num
+    print(seq_num)
     
-    DIVIDES_NUM=seq_num/120000
+    DIVIDES_NUM=seq_num//120000
 
     if DIVIDES_NUM%threads==0:
-        outerloop=DIVIDES_NUM/threads
+        outerloop=DIVIDES_NUM//threads
     else:
-        outerloop=DIVIDES_NUM/threads+1
+        outerloop=DIVIDES_NUM//threads+1
         
         
     
     
     if seq_num%DIVIDES_NUM==0:
-        chunk_num=seq_num/DIVIDES_NUM
+        chunk_num=seq_num//DIVIDES_NUM
     else:
-        chunk_num=seq_num/DIVIDES_NUM+1
+        chunk_num=seq_num//DIVIDES_NUM+1
     if DIVIDES_NUM>=threads:
         job_num=threads
     else:
         job_num=DIVIDES_NUM
         
-    print DIVIDES_NUM, threads, outerloop, job_num
+    print(DIVIDES_NUM, threads, outerloop, job_num)
     
     
     for l in range(outerloop):

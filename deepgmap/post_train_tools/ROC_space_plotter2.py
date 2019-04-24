@@ -37,7 +37,7 @@ def roc_space_plotter(label, predictions1,outfile_name):
     label_array=np.array(label)
     label_array_shape=label_array.shape
     for pred in predictions1:
-        print pred["prediction"].shape
+        print(pred["prediction"].shape)
         predictions_list.append(pred["prediction"])
     """df_rearanged = pd.DataFrame({
     ind_list[0] : [[], []],

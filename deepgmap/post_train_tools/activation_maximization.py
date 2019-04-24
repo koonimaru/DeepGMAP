@@ -27,7 +27,7 @@ start=time.time()
 try:
     options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:d:', ['model=','test_batch=','network_constructor=','output_dir=','deconv='])
 except getopt.GetoptError as err:
-    print str(err)
+    print(str(err))
     sys.exit(2)
 if len(options)<3:
     print('too few argument')
@@ -91,7 +91,7 @@ saver=model.saver
 saver.restore(sess, input_dir)
 
 deconv="train"
-print deconv
+print(deconv)
 
 if deconv=="train":
     def recon_variable(shape, variable_name):
@@ -147,7 +147,7 @@ if deconv=="train":
 
     h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, current_variable["prediction/W_fc1:0"]), current_variable["prediction/b_fc1:0"]))
     y_conv_re=tf.add(tf.matmul(h_fc1_re,current_variable["prediction/W_fc4:0"]), current_variable["prediction/b_fc4:0"])
-    print y_conv_re.shape
+    print(y_conv_re.shape)
     #sys.exit()
     #cost =-tf.reshape(y_conv_re,[1])+tf.reduce_sum(tf.square(x_image_recon))/500.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
@@ -178,12 +178,12 @@ if deconv=="train":
         _, progress, y_val, a, b  =sess2.run([train_step2, cost, y_conv_re, h_conv11_re_, h_conv22_re])
         cost_list.append(progress)
         if (i+1)%100==0:
-            print 'step '+str(i)+' cost: '+str(progress) #+', y_conv_re: '+str(y_val)
+            print('step '+str(i)+' cost: '+str(progress)) #+', y_conv_re: '+str(y_val)
         #if progress<=-0.9999:
             #break
         if i>20000:
             if cost_list[i-500]-cost_list[i]<=0.0000001:
-                print cost_list[i-100]-cost_list[i]
+                print(cost_list[i-100]-cost_list[i])
                 break
         #print str(a.shape)+'\n'+str(b.shape)+'\n'+str(1*fc1_param*dimension3)
  
@@ -218,5 +218,5 @@ if deconv=="train":
     
     
 else:
-    print "don't understand the "+str(deconv)+" option"
+    print("don't understand the "+str(deconv)+" option")
                                                
