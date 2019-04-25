@@ -3,7 +3,8 @@ import tensorflow as tf
 import math
 import sys
 from tensorflow.contrib import rnn
-from auc_calc import auc_pr as ac
+_ac=il.import_module("auc_calc") 
+ac=_ac.auc_pr
 from tensorflow.contrib import grid_rnn
 
 def doublewrap(function):

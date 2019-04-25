@@ -2,9 +2,8 @@ import functools
 import tensorflow as tf
 import math
 import sys
-#import numpy as np
-from auc_calc import auc_pr as ac
-
+_ac=il.import_module("auc_calc") 
+ac=_ac.auc_pr
 #the code design came from https://gist.github.com/danijar/8663d3bbfd586bffecf6a0094cd116f2
 
 def doublewrap(function):
