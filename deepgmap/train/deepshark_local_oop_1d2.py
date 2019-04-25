@@ -6,6 +6,8 @@ import glob
 from natsort import natsorted
 import getopt
 import importlib as il
+import matplotlib as mpl
+mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 import os
 from scipy.stats import gaussian_kde
@@ -490,7 +492,7 @@ def main(args=None):
     np.savez_compressed(saving_dir_prefix+'_train_rec',total_learing=total_learing, train_accuracy_record=train_accuracy_record,loss_val_record=loss_val_record)
 
     
-    plt.show()   
+    #plt.show()   
 
 
 if __name__ == '__main__':
