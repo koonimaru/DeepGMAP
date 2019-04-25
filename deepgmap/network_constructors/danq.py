@@ -3,8 +3,8 @@ import tensorflow as tf
 import math
 import sys
 from tensorflow.contrib import rnn
-from auc_calc import auc_pr as ac
-
+_ac=il.import_module("auc_calc") 
+ac=_ac.auc_pr
 def doublewrap(function):
     """
     A decorator decorator, allowing to use the decorator to be used without
@@ -169,7 +169,7 @@ class Model(object):
             
             h_conv1 = tf.nn.relu(conv2d_1(x_image, W_conv1))
             h_pool1 = tf.nn.dropout(max_pool_13x1(h_conv1), self.keep_prob2)
-            print h_pool1.shape
+            print(h_pool1.shape)
             h_pool1_=tf.reshape(h_pool1, [-1, tf.cast(h_pool1.shape[1], tf.int32),tf.cast(h_pool1.shape[3], tf.int32)])
     
             

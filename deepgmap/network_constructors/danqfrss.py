@@ -3,7 +3,8 @@ import tensorflow as tf
 import math
 import sys
 from tensorflow.contrib import rnn
-from auc_calc import auc_pr as ac
+_ac=il.import_module("auc_calc") 
+ac=_ac.auc_pr
 
 def doublewrap(function):
     """
@@ -181,7 +182,7 @@ class Model:
             W_conv2.assign(tf.cond(wconv2_l2>cond, lambda: tf.multiply(W_conv2, cond/wconv2_l2),lambda: W_conv2 ))
             h_conv2 = tf.nn.dropout(tf.add(tf.nn.relu(conv2d_1(h_pool1, W_conv2)), tf.nn.relu(conv2d_1(h_pool1_rc, tf.reverse(W_conv2, [0,1])))), self.keep_prob2)
             h_pool2 = max_pool_6x1(h_conv2)
-            print h_pool2.shape
+            print(h_pool2.shape)
             h_pool1_=tf.reshape(h_pool2, [-1, tf.cast(h_pool2.shape[1], tf.int32),tf.cast(h_pool2.shape[3], tf.int32)])
     
             #weights = {
@@ -189,7 +190,7 @@ class Model:
             #biases = {'out': tf.Variable(tf.random_normal([925]),name="b_rnn")}
             
             pred = tf.nn.dropout(BiRNN(h_pool1_), self.keep_prob2)
-            print pred.shape
+            print(pred.shape)
             
     
             W_fc1 = weight_variable([2*n_hidden*(self.fc1_param-1), self.dimension4], 'W_fc1')
