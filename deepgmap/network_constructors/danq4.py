@@ -3,7 +3,7 @@ import tensorflow as tf
 import math
 import sys
 from tensorflow.contrib import cudnn_rnn, rnn
-_ac=il.import_module("auc_calc") 
+_ac=il.import_module("deepgmap.network_constructors.auc_calc") 
 ac=_ac.auc_pr
 
 def doublewrap(function):
