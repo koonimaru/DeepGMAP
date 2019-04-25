@@ -54,7 +54,7 @@ setup(
         'Topic :: Biology/Machine learning',
     
     ],
-    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado'],
+    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort'],
     long_description=open('README.rst').read(),
 )
 
