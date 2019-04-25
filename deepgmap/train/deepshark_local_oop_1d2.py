@@ -192,6 +192,8 @@ def main(args=None):
             elif opt in ('-b', '--test_batch_num'):
                 test_batch_num=int(arg)
             elif opt in ('-o', '--out_dir'):
+                if not arg.endswith("/"):
+                    arg+="/"
                 output_dir=arg
             elif opt in ('-c', '--network_constructor'):
                 model_name=arg
@@ -229,7 +231,15 @@ def main(args=None):
         _, data_length, dna_dim=_data.shape
         print(batch_size, label_dim)    
     
-    
+    if not os.path.exists(output_dir):
+        yesno=input(output_dir+" does not exist. Do you want to create a new one? y/n: ")
+        if yesno=="y":
+            try:
+                os.makedirs(output_dir)
+            except:
+                sys.exit("cannot create the output directory.")
+        else:
+            sys.exit("please set -o parameter.")
     saving_dir_prefix=str(output_dir)+str(model_name)+"_"+start_at
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True

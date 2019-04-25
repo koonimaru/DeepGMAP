@@ -78,8 +78,8 @@ def add_train_parser( subparsers ):
     # group for output files
     group_output = argparser_train.add_argument_group( "Output arguments" )
     #add_outdir_option( group_output )
-    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default = "../data/output/",
-                               help = "An output directory. Default: '../data/output/'.")
+    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                               help = "An output directory. REQUIRED.")
 
     
     return
