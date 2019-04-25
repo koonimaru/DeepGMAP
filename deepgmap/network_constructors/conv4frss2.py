@@ -2,7 +2,7 @@ import functools
 import tensorflow as tf
 import math
 import sys
-_ac=il.import_module("auc_calc") 
+_ac=il.import_module("deepgmap.network_constructors.auc_calc") 
 ac=_ac.auc_pr
 #the code design came from https://gist.github.com/danijar/8663d3bbfd586bffecf6a0094cd116f2
 
