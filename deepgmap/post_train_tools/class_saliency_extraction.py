@@ -6,6 +6,8 @@ import numpy as np
 import time
 import math
 import os
+import matplotlib as mpl
+mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 import pylab
 from deepgmap.post_train_tools import unpooling

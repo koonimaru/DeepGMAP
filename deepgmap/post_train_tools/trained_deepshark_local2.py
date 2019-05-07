@@ -7,6 +7,8 @@ import math
 import os
 #from natsort import natsorted, ns
 #import subprocess as sp
+import matplotlib as mpl
+mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 #from sklearn.preprocessing import label_binarize
@@ -464,7 +466,7 @@ def main(args=None):
             for s, r, p in zip(sample_list,roc_auc_list, average_precision_list):
                 fo.write(str(s)+"\t"+str(r)+"\t"+str(p)+"\n")
         
-        plt.show()
+        #plt.show()
 
 if __name__== '__main__':
     main()

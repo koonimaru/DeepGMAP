@@ -6,6 +6,8 @@ import numpy as np
 import time
 import math
 import os
+import matplotlib as mpl
+mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 import pylab
 from deepgmap.post_train_tools import unpooling
@@ -212,7 +214,7 @@ if deconv=="train":
     
     sv2.seuquence_visualizer2(final_recon_res, output_dir+'_motif.pdf')
     
-    plt.show()
+    #plt.show()
     
     
     
