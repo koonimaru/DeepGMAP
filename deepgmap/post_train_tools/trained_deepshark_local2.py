@@ -82,13 +82,18 @@ def main(args=None):
             bed_file=args.labeled_bed_file
             chromosome_of_interest=args.chromosome
         else:
-            
-            output_dir=os.path.split(os.path.split(args.logfile)[0])[0]+"/predictions/"      
+            WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
+            output_dir=WORKDIR+"/predictions/"      
             
             with open(args.logfile, "r") as fin:
                 for line in fin:
                     if line.startswith('The last check point:'):
                         input_dir=line.split(":")[1].strip(" \n")
+                        if not os.path.isfile(input_dir):
+                            input_dir=WORKDIR+"/"+os.path.split(input_dir)[1]
+                            if not os.path.isfile(input_dir):
+                                sys.exit("unable to find checkpoint file ("+os.path.split(input_dir)[1]+")")
+                                
                         #input_dir=line[1]
                     elif line.startswith("Labeled file:"):
                         bed_file=line.split(":")[1].strip(" \n")
