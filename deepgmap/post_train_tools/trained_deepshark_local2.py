@@ -82,7 +82,8 @@ def main(args=None):
             bed_file=args.labeled_bed_file
             chromosome_of_interest=args.chromosome
         else:
-            output_dir="./data/predictions/"           
+            
+            output_dir=os.path.split(os.path.split(args.logfile)[0])[0]+"/predictions/"      
             
             with open(args.logfile, "r") as fin:
                 for line in fin:
