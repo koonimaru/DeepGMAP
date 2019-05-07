@@ -16,7 +16,7 @@ import argparse as ap
 from deepgmap.misc.Constants import DeepGMAP_VERSION
 
 VERSION=DeepGMAP_VERSION
-
+HOME=os.path.expanduser("~")
 def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
     function first.   
@@ -78,8 +78,8 @@ def add_train_parser( subparsers ):
     # group for output files
     group_output = argparser_train.add_argument_group( "Output arguments" )
     #add_outdir_option( group_output )
-    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                               help = "An output directory. REQUIRED.")
+    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default = HOME+"/deepgmap-data/outputs/",
+                               help = "An output directory. Default: $HOME/deepgmap-data/outputs/")
 
     
     return
@@ -91,8 +91,8 @@ def add_predict_parser( subparsers ):
                                                  help = "Predict regulatory sequences" )
     argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, default = "",
                                       help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
-    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default="./data/predictions/",
-                                      help = "an output directory for prediction results. Default: ./data/predictions/")
+    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default=HOME+"/deepgmap-data/predictions/",
+                                      help = "an output directory for prediction results. Default: $HOME/deepgmap-data/predictions/")
     argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str, default = "",
                                       help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
     argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = None,
@@ -219,6 +219,10 @@ def main():
         run( args )
         
 if __name__ == '__main__':
+    
+    
+    
+    
     main()
     """try:
         main()

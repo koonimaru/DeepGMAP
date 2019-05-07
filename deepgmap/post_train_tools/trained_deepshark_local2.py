@@ -90,7 +90,7 @@ def main(args=None):
                     if line.startswith('The last check point:'):
                         input_dir=line.split(":")[1].strip(" \n")
                         if not os.path.isfile(input_dir):
-                            input_dir=WORKDIR+"/"+os.path.split(input_dir)[1]
+                            input_dir=os.path.split(args.logfile)[0]+"/"+os.path.split(input_dir)[1]
                             if not os.path.isfile(input_dir):
                                 sys.exit("unable to find checkpoint file ("+os.path.split(input_dir)[1]+")")
                                 
