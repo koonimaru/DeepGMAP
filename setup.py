@@ -14,16 +14,16 @@ ext_modules = [ ]
 
 if use_cython:
     ext_modules += [
-        Extension("data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.pyx" ]),
+        Extension("deepgmap.data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.pyx" ]),
         #Extension("data_preprocessing_tools.queue", [ "deepgmap/data_preprocessing_tools/queue.pyx" ],libraries=["calg"]),
         
-        Extension("post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.pyx" ]),
+        Extension("deepgmap.post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.pyx" ]),
     ]
     cmdclass.update({ 'build_ext': build_ext })
 else:
     ext_modules += [
-        Extension("data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.c" ]),
-        Extension("post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.c" ]),
+        Extension("deepgmap.data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.c" ]),
+        Extension("deepgmap.post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.c" ]),
     ]
 
 setup(
