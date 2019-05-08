@@ -14,7 +14,7 @@ with open(deepsea, 'r') as fin:
             line=line.split()
             if len(line)==0:
                 continue
-            print line
+            print(line)
             if line[4]=="NA":
                 continue
             sname=line[3].split('.')[0]
@@ -33,11 +33,11 @@ with open(deepshark, 'r') as fin:
         elif go:
             line=line.split()
             sname=line[0].split("_")[0]
-            if "Dnase" in sname and deepsea_dict.has_key(sname):
+            if "Dnase" in sname and sname in deepsea_dict:
                 sample_list.append(sname)
                 deepsea_list.append(deepsea_dict[sname])
                 deepshark_list.append(float(line[2]))
-                print sname, deepsea_dict[sname], float(line[2])
+                print(sname, deepsea_dict[sname], float(line[2]))
 
 deepsea_list=np.array(deepsea_list)
 deepshark_list=np.array(deepshark_list)

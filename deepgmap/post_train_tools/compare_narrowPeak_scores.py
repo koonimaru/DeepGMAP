@@ -26,7 +26,7 @@ with open(ind_data,'r') as fin:
         line_=line.split()
         position=str(line_[0])+'\t'+str(line_[1])+'\t'+str(line_[2])
         score=float(line_[4])
-        if ref_data_dict.has_key(position):
+        if position in ref_data_dict:
             score_of_ref=ref_data_dict[position]
             abs_diff=math.fabs(score-score_of_ref)
             

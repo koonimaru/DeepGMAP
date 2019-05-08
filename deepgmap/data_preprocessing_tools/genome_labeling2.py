@@ -87,7 +87,7 @@ def genome_label2(bed_file_list, genome_1000,out_dir):
                     _,a,b=line.split()
                     check_length=int(b)-int(a)
 
-                if not peak_set_dict.has_key(line):
+                if not line in peak_set_dict:
                     peak_set_dict[line]=["0" for h in range(file_num)]
                     #peak_set_dict[line]=copy.deepcopy(zero)
                 peak_set_dict[line][i]="1"
@@ -106,7 +106,7 @@ def genome_label2(bed_file_list, genome_1000,out_dir):
                 if i==0:
                     _,a,b=line.split()
                     assert check_length==int(b)-int(a), "mismatches in sequence lengths"
-                if peak_set_dict.has_key(line):
+                if line in peak_set_dict:
                     fout.write(line.strip('\n')+'\t'+' '.join(peak_set_dict[line])+'\n')
                 else:
                     fout.write(line.strip('\n')+'\t'+zero+'\n')
