@@ -1,20 +1,28 @@
 import sys
 import getopt
 import glob as glb
-from genome_labeling2 import genome_label2 as genome_label
+#from genome_labeling2 import genome_label2 as genome_label
+import importlib as il
+
+genome_label=il.import_module("deepgmap.data_preprocessing_tools.genome_labeling2.genome_label2")
 import os
 import subprocess as sp
-import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
-from inputfileGenerator_multiple_label3 import seqtobinarydict2 as seqtobinary
+#import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
+sb2=il.import_module("deepgmap.data_preprocessing_tools.seq_to_binary2")
+
+#from inputfileGenerator_multiple_label3 import seqtobinarydict2 as seqtobinary
+seqtobinary=il.import_module("deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3.seqtobinarydict2")
 #from inputfileGenerator_multiple_label3 import dicttoarray
 from inputfileGenerator_multiple_label3 import array_saver
+array_saver=il.import_module("deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3.array_saver")
+
 import multiprocessing
 import time 
 import datetime
 import numpy as np
 import random
 import math
-from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
+#from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
 
 def bedtools(cmd, tmpout):
     try:
