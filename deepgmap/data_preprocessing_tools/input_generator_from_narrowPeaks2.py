@@ -110,8 +110,8 @@ def main(args=None):
             elif opt in ('-r', '--reduce_genome'):
                 reduce_genome=float(arg)
                 
-    genome_1000=genome_pref+".bed"
-    genome_fasta=genome_pref+".fa"
+    genome_1000=genome_pref+"/genome.bed"
+    genome_fasta=genome_pref+"/genome.fa"
     if os.path.isfile(genome_1000)==False:
         print(genome_1000+" is missing.")
         sys.exit(1)
@@ -139,7 +139,7 @@ def main(args=None):
             bed_file_list=sorted(glb.glob(bed_file_dir_))
             
     if len(bed_file_list)==0:
-        sys.exit('no bed files nor narrowPeak files in '+bed_file_dir)
+        sys.exit('no bed nor narrowPeak files in '+bed_file_dir)
         
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'

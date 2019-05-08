@@ -55,8 +55,8 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None
     try:
         os.makedirs(OUTDIR)
     except OSError as err:
-        print("OS error: {0}".format(err))
-        
+        #print("OS error: {0}".format(err))
+        sys.exit(err)
     
     outbed=OUTDIR+'/genome.bed'
     outfasta=OUTDIR+'/genome.fa'
