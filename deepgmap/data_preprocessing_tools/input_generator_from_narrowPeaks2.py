@@ -134,7 +134,7 @@ def main(args=None):
         line=line.split()
         window_size=int(line[2])-int(line[1])
     bed_file_list=[]
-    if bed_file_dir.endswith('narrowPeak') or bed_file_dir.endswith('bed'):
+    if bed_file_dir.endswith('.narrowPeak') or bed_file_dir.endswith('.bed'):
         bed_file_list=sorted(glb.glob(bed_file_dir))       
         out_dir=os.path.split(bed_file_dir)[0]+"/"
         
@@ -143,7 +143,7 @@ def main(args=None):
             bed_file_dir+="/"
         bed_file_dir_=bed_file_dir+"*.narrowPeak"
         out_dir=bed_file_dir
-        bed_file_list=glb.glob(bed_file_dir_)
+        bed_file_list=sorted(glb.glob(bed_file_dir_))
         if len(bed_file_list)==0:
             bed_file_dir_=bed_file_dir+"*.bed"
             bed_file_list=sorted(glb.glob(bed_file_dir_))
@@ -164,7 +164,7 @@ def main(args=None):
         
         #preparing for parallel execution of bedtools
         jobs=[]
-        print(bed_file_list[0])
+        #print(bed_file_list[0])
         h, t=os.path.split(bed_file_list[0])
         #print(bed_file_list[0])
         bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
