@@ -107,7 +107,6 @@ def main(args=None):
                 """
                 if line.startswith("Labeled file:"):
                     bed_file=line.split(":")[1].strip(" \n")
-                    if not os.path.isfile(bed_file):
                         
                     #bed_file=line[1]
                 elif line.startswith("Model:"):
