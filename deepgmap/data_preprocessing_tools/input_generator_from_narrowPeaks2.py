@@ -207,7 +207,7 @@ def main(args=None):
         
         label_genome_length=len(f2)
         print(label_genome_length)
-        shuf=range(label_genome_length)
+        shuf=list(range(label_genome_length))
         random.shuffle(shuf)
         read_len=int(math.ceil(label_genome_length/float(chunck_data)))
         
@@ -255,7 +255,7 @@ def main(args=None):
             #binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
             #label_list_shuf=[]
             #label_list_shuf_append=label_list_shuf.append
-            shuf2=range(dna_dict_length)
+            shuf2=list(range(dna_dict_length))
             random.shuffle(shuf2)
            
             print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
@@ -276,7 +276,7 @@ def main(args=None):
             for i in range(threads):
                 #print str(len(binaryDNAdict_shuf[i*batch:(i+1)*batch]))+" are passed"
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                        args=(ooloop, range(i*total_num,(i+1)*total_num), 
+                                        args=(ooloop, list(range(i*total_num,(i+1)*total_num)), 
                                               [binaryDNAdict[j] for j in shuf2[i*batch:(i+1)*batch]],
                                               [label_list[k] for k in shuf2[i*batch:(i+1)*batch]], 
                                               sample_num, output_dir,)))
