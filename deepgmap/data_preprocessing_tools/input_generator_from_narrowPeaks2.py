@@ -171,7 +171,7 @@ def main(args=None):
         if not os.path.isdir(bed_dir):
             os.makedirs(bed_dir)
         for b in bed_file_list:
-            
+            h, t=os.path.split(b)
             b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
             if data_type=="dnase-seq":
                 cmd=["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)]
