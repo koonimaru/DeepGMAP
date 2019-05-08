@@ -8,6 +8,7 @@ import random
 #import pyximport; pyximport.install()
 #import seq_to_binary2
 #import seq_to_binary2 as sb2
+import importlib as il
 sb2=il.import_module("deepgmap.data_preprocessing_tools.seq_to_binary2")
 import getopt
 import datetime
