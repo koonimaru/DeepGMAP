@@ -98,7 +98,7 @@ def seqtobinarydict2(file_, lpos):
         elif not line == '\n' and not line=='' and skip==False: 
             line=line.strip("\n")
            
-            binaryDNAdict_append(sb2.AGCTtoArray3(line,len(line)))
+            binaryDNAdict_append(sb2.AGCTtoArray3(line.encode('utf-8'),len(line)))
     
     
     return binaryDNAdict, position
