@@ -164,11 +164,14 @@ def main(args=None):
         
         #preparing for parallel execution of bedtools
         jobs=[]
+        print(bed_file_list[0])
+        h, t=os.path.split(bed_file_list[0])
+        #print(bed_file_list[0])
+        bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
+        if not os.path.isdir(bed_dir):
+            os.makedirs(bed_dir)
         for b in bed_file_list:
-            h, t=os.path.split(b)
-            bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
-            if not os.path.isdir(bed_dir):
-                os.makedirs(bed_dir)
+            
             b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
             if data_type=="dnase-seq":
                 cmd=["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)]
