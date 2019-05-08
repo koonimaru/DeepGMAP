@@ -183,7 +183,7 @@ def main(args=None):
             bed_file_list_2.append(b_)
         dups=list(getDupes_a(bed_file_list_2))
         if len(dups) is not 0:
-            sys.exit(dups+" are duplicated")
+            sys.exit(str(dups)+" are duplicated")
         job_num=len(jobs)
         job_loop=int(math.ceil(job_num/float(threads)))
         
