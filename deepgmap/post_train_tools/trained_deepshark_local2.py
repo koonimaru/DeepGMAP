@@ -67,88 +67,62 @@ def main(args=None):
     bed_file=None
     max_to_keep=2
     #GPU=1
-    if args is not None:
+    if args is None:
+        sys.exit("please specify required options.")
         #takes arguments when the code is run through enhancer_prediction_run
-        TEST=args.test_or_prediction
-        GPUID=str(args.gpuid)
-        BATCH_SIZE=args.batchsize
-        test_genome=args.test_genome_files
-        WRITE_PRED=args.write_prediction
-        if args.logfile=="":
-               
-            input_dir=args.input_ckpt
-            output_dir=args.out_directory
-            model_name=args.model
-            bed_file=args.labeled_bed_file
-            chromosome_of_interest=args.chromosome
-        else:
-            WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
-            output_dir=WORKDIR+"/predictions/"      
-            
-            with open(args.logfile, "r") as fin:
-                for line in fin:
-                    if line.startswith('The last check point:'):
-                        input_dir=line.split(":")[1].strip(" \n")
-                        if not os.path.isfile(input_dir):
-                            input_dir=os.path.split(args.logfile)[0]+"/"+os.path.split(input_dir)[1]
-                            if not os.path.isfile(input_dir):
-                                sys.exit("unable to find checkpoint file ("+os.path.split(input_dir)[1]+")")
-                                
-                        #input_dir=line[1]
-                    elif line.startswith("Labeled file:"):
-                        bed_file=line.split(":")[1].strip(" \n")
-                        #bed_file=line[1]
-                    elif line.startswith("Model:"):
-                        model_name=line.split(":")[1].strip(" \n")
-                    elif line.startswith("Excluded"):
-                        chromosome_of_interest=line.split(":")[1].strip(" \n").strip("'")
-                        if "," in chromosome_of_interest:
-                            c1, c2=chromosome_of_interest.split(', ')
-                            chromosome_of_interest=c1.strip("'")+","+c2.strip("'")
-            if args.chromosome is not None:
-                chromosome_of_interest=args.chromosome
-            
-            print(chromosome_of_interest)
-                        #model_name=line[1]
-                        
-                        
-                    
-                        
-        #if TEST==True and bed_file==None:
-            #sys.exit("To test a trained model, labeled file (-b option) should be specified.")
-        
+    TEST=args.test_or_prediction
+    GPUID=str(args.gpuid)
+    BATCH_SIZE=args.batchsize
+    test_genome=args.test_genome_files
+    WRITE_PRED=args.write_prediction
+    if args.logfile=="":
+           
+        input_dir=args.input_ckpt
+        output_dir=args.out_directory
+        model_name=args.model
+        bed_file=args.labeled_bed_file
+        chromosome_of_interest=args.chromosome
     else:
+        if not args.logfile.endswith("/"):
+            args.logfile+="/"
+        #WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
+        output_dir=args.logfile+"predictions/"      
         try:
-            options, args =getopt.getopt(sys.argv[1:], 'i:o:n:b:t:g:c:G:',
-                                         ['input_dir=','output_dir=','network_constructor=','bed=',
-                                          'test_genome=','genome_bed=','chromosome=','GPU='])
-        except getopt.GetoptError as err:
-            print(str(err))
-            sys.exit(2)
-        if len(options)<4:
-            print('too few argument')
-            sys.exit(0)
+            os.makedirs(output_dir)
+        except OSError:
+            raise
+        input_dir=natsoted(glob(args.logfile+"train*.meta"))[-1]
         
-        for opt, arg in options:
-            if opt in ('-i', '--input_dir'):
-                input_dir=arg                
-            elif opt in ('-o', '--output_dir'):
-                output_dir=arg
-            elif opt in ('-n', '--network_constructor'):
-                model_name=arg
-            elif opt in ('-b', '--bed'):
-                bed_file=arg                
-            elif opt in ('-t', '--test_genome'):
-                test_genome=arg
-            elif opt in ('-g','--genome_bed'):
-                genome_bed=arg
-                if not os.path.isfile(genome_bed):
-                    print(genome_bed+' does not exist')
-                    sys.exit(0)
-            elif opt in ('-c','--chromosome'):
-                chromosome_of_interest=arg
-            elif opt in ('-G','--GPU'):
-                GPU=int(arg)
+        with open(args.logfile+"train.log", "r") as fin:
+            for line in fin:
+                """
+                if line.startswith('The last check point:'):
+                    input_dir=line.split(":")[1].strip(" \n")
+                    if not os.path.isfile(input_dir):
+                        input_dir=os.path.split(args.logfile)[0]+"/"+os.path.split(input_dir)[1]
+                        if not os.path.isfile(input_dir):
+                            sys.exit("unable to find checkpoint file ("+os.path.split(input_dir)[1]+")")
+                            
+                    #input_dir=line[1]
+                """
+                if line.startswith("Labeled file:"):
+                    bed_file=line.split(":")[1].strip(" \n")
+                    if not os.path.isfile(bed_file):
+                        
+                    #bed_file=line[1]
+                elif line.startswith("Model:"):
+                    model_name=line.split(":")[1].strip(" \n")
+                elif line.startswith("Excluded"):
+                    chromosome_of_interest=line.split(":")[1].strip(" \n").strip("'")
+                    if "," in chromosome_of_interest:
+                        c1, c2=chromosome_of_interest.split(', ')
+                        chromosome_of_interest=c1.strip("'")+","+c2.strip("'")
+        if args.chromosome is not None:
+            chromosome_of_interest=args.chromosome
+        
+        print(chromosome_of_interest)
+                    #model_name=line[1]
+                    
             
     if not os.path.isfile(input_dir):
         sys.exit(input_dir+' does not exist.')

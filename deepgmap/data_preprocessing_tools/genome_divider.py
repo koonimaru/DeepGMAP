@@ -5,8 +5,13 @@ import subprocess as sp
 
 
 def genome_divider(genome_fasta, genome_file, WINDOW_SIZE, outname):
-    outbed=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.bed'
-    outfasta=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.fa'
+    OUTDIR=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)
+    try:
+        os.makedirs(OUTDIR)
+    except OSError as err:
+        print("OS error: {0}".format(err))
+    outbed=OUTDIR+'/genome.bed'
+    outfasta=OUTDIR+'/genome.fa'
     #WINDOW_SIZE=1000
     #genome_file="/home/fast/onimaru/lamprey/LetJap1.0.1.genome"
     #with open(genome_file, 'r') as fin, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_altwindow.bed', 'w') as fout1, open('/home/fast/onimaru/data/genome_fasta/hg38_1000_.bed', 'w') as fout2:
@@ -33,7 +38,7 @@ def genome_divider(genome_fasta, genome_file, WINDOW_SIZE, outname):
     try:
         sp.call(["bedtools", "getfasta","-fi",genome_fasta,"-bed",outbed, "-fo", outfasta])
     except OSError as e:
-        print e
+        print(e)
         sys.exit(1)
     
     print(outbed+" and "+outfasta+' were successfully generated.')
@@ -41,6 +46,21 @@ def genome_divider(genome_fasta, genome_file, WINDOW_SIZE, outname):
 def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None):
     
     
+    if outname is not None:
+        OUTDIR=outname
+    elif stride is not None:
+        OUTDIR=os.path.splitext(genome_file)[0]+'_window'+str(WINDOW_SIZE)+'_stride'+str(stride)
+    else:
+        OUTDIR=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)
+    try:
+        os.makedirs(OUTDIR)
+    except OSError as err:
+        print("OS error: {0}".format(err))
+        
+    
+    outbed=OUTDIR+'/genome.bed'
+    outfasta=OUTDIR+'/genome.fa'
+    """
     if outname is not None:
         outbed=outname+'.bed'
         outfasta=outname+'.fa'
@@ -50,6 +70,7 @@ def genome_divider2(genome_fasta, genome_file, WINDOW_SIZE, outname, stride=None
     else:
         outbed=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.bed'
         outfasta=os.path.splitext(genome_file)[0]+'_'+str(WINDOW_SIZE)+'.fa'
+    """
     #if stride==None:
         #stride=WINDOW_SIZE/2
     #adding=WINDOW_SIZE/stride
