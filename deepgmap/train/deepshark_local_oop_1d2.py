@@ -246,7 +246,7 @@ def main(args=None):
             os.makedirs(output_dir)
         except:
             sys.exit("cannot create an output directory. Please set a valid output directory with -o option.")
-
+    output_dir+="/"
     saving_dir_prefix=str(output_dir)+str(model_name)+"_"+start_at
     if not os.path.exists(saving_dir_prefix):
         os.makedirs(saving_dir_prefix)
