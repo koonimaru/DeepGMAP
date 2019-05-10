@@ -140,10 +140,11 @@ def main(args=None):
     
     
     
-    
+    if not test_genome.endswith("/"):
+        test_genome+="/*.npz"
     test_genome_list=natsorted(glob(test_genome))
     if len(test_genome_list)==0:
-        sys.exit(test_genome+" does not exist.")
+        sys.exit('test genome named '+test_genome+" does not exist.")
                 
     input_dir_=input_dir.rsplit('.', 1)[0]
     sample_list=[]
@@ -321,7 +322,7 @@ def main(args=None):
             filename_1=out_dir_np+str(s)+'.narrowPeak'
             output_handle.append(open(filename_1, 'w'))
         for i in range(len(y_prediction2)):
-            a=position_list[i].strip('>')
+            a=position_list[i].decode('utf8').strip('>')
             a=a.split(':')
             chrom=a[0]
             b=a[1].split('-')

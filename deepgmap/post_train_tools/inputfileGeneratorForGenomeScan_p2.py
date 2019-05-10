@@ -88,10 +88,13 @@ def main(args=None):
                 target_chr=arg
             elif opt in ('-o', '--output_dir'):
                 output_file=arg
+                
             elif opt in ('-p', '--process'):
                 threads=int(arg)
     
         print(options)
+    
+    os.makedirs(output_file)
     file_size=os.path.getsize(input_file)
     print(file_size)
     
@@ -133,7 +136,7 @@ def main(args=None):
                 if i*chunk_num+l*job_num*chunk_num>sub_seq_num:
                     break
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                    args=(str(output_file)+"_"+str(l1)+"_"+str(i+l*job_num), 
+                                    args=(str(output_file)+"/"+str(l1)+"_"+str(i+l*job_num), 
                                           position_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num], 
                                           seq_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num])))
             for j in jobs:

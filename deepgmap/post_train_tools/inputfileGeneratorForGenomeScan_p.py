@@ -103,6 +103,8 @@ def main(args=None):
     
         print(options)
     assert os.path.isfile(input_file), "no input files"
+    os.makedirs(output_file)
+    output_file+="/"
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)
     print(seq_num)
