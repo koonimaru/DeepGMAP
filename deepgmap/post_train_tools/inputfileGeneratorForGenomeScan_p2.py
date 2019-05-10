@@ -62,38 +62,16 @@ def run(args):
     main(args)
 
 def main(args=None):
-    if args is not None:
-        input_file=args.input_genome
-        target_chr=args.chromosome
-        output_file=args.out_directory
-        threads=args.thread_number
-        chunck_data=args.chunck_data
-        print(args)
-    else:
-        try:
-            options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
-        except getopt.GetoptError as err:
-            print(str(err))
-            sys.exit(2)
-        if len(options)<3:
-            print('too few argument')
-            sys.exit(0)
-            
-        threads=psutil.cpu_count()
-        
-        for opt, arg in options:
-            if opt in ('-i', '--input_dir'):
-                input_file=arg
-            elif opt in ('-t', '--target_chr'):
-                target_chr=arg
-            elif opt in ('-o', '--output_dir'):
-                output_file=arg
-                
-            elif opt in ('-p', '--process'):
-                threads=int(arg)
     
-        print(options)
+    input_file=args.input_genome
+    target_chr=args.chromosome
+    output_file=args.out_directory
+    threads=args.thread_number
+    chunck_data=args.chunck_data
+    print(args)
     
+    if threads==0:
+        threads=multiprocessing.cpu_count()//2
     os.makedirs(output_file)
     file_size=os.path.getsize(input_file)
     print(file_size)

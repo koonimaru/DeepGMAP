@@ -59,47 +59,27 @@ def run(args):
     main(args)
 
 def main(args=None):
-    if args is not None:
-        """
-        argparser_generate_test = subparsers.add_parser( "generate_test",
-                                                    help = "Generate a data set for a test or an application of a trained model." )
-        argparser_generate_test.add_argument( "-i", "--in_file", dest = "input_genome" , type = str, required = True,
-                                         help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
-        argparser_generate_test.add_argument("-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
-                                      help = "Set a target chromosome or a contig for prediction. Default: chr2" )
-        argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                                         help = "")
-        argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
-        """
-        input_file=args.input_genome
-        target_chr=args.chromosome
-        output_file=args.out_directory
-        threads=args.thread_number
-        print(args)
-    else:
-        try:
-            options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
-        except getopt.GetoptError as err:
-            print(str(err))
-            sys.exit(2)
-        if len(options)<3:
-            print('too few argument')
-            sys.exit(0)
-            
-        threads=psutil.cpu_count()
-        
-        for opt, arg in options:
-            if opt in ('-i', '--input_dir'):
-                input_file=arg
-            elif opt in ('-t', '--target_chr'):
-                target_chr=arg
-            elif opt in ('-o', '--output_dir'):
-                output_file=arg
-            elif opt in ('-p', '--process'):
-                threads=int(arg)
     
-        print(options)
+    """
+    argparser_generate_test = subparsers.add_parser( "generate_test",
+                                                help = "Generate a data set for a test or an application of a trained model." )
+    argparser_generate_test.add_argument( "-i", "--in_file", dest = "input_genome" , type = str, required = True,
+                                     help = "A multiple fasta file containing genome DNA sequences. REQUIRED" )
+    argparser_generate_test.add_argument("-C", "--chromosome", dest = "chromosome", type = str, default = "chr2",
+                                  help = "Set a target chromosome or a contig for prediction. Default: chr2" )
+    argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
+                                     help = "")
+    argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
+                                   help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+    """
+    input_file=args.input_genome
+    target_chr=args.chromosome
+    output_file=args.out_directory
+    threads=args.thread_number
+    if threads==0:
+        threads=multiprocessing.cpu_count()//2
+    print(args)
+    
     assert os.path.isfile(input_file), "no input files"
     os.makedirs(output_file)
     output_file+="/"

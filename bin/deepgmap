@@ -23,7 +23,7 @@ def prepare_argparser ():
     """
     
     description = "%(prog)s -- regulatory sequence prediction"
-    epilog = "For command line options of each command, type: %(prog)s COMMAND -h"
+    epilog = "For the options of each function, type: %(prog)s <positional_argument> -h"
     argparser = ap.ArgumentParser( description = description, epilog = epilog ) #, usage = usage )
     argparser.add_argument("--version", action="version", version="%(prog)s "+VERSION)
     subparsers = argparser.add_subparsers( dest = 'subcommand_name' ) #help="sub-command help")
@@ -39,7 +39,7 @@ def prepare_argparser ():
     # command for 'genome_divide'
     add_genome_divide_parser( subparsers )
    
-    return argparser
+    return argparser, subparsers
 
 def add_train_parser( subparsers ):
  
@@ -131,7 +131,7 @@ def add_generate_input_parser( subparsers ):
                                         binned with a particular window size. If you have path/to/mm10_1000.bed and\
                                          /path/to/mm10_1000.fa,the input would be '-g /path/to/mm10_1000'. REQUIRED." )
     argparser_generate_input.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: the half of CPUs", default = 0 )
     argparser_generate_input.add_argument( "-s", "--sample_number", dest = "sample_number", type = int,
                                        help = "The number of samples in a mini-batch. Default: 100", default = 100 )
     argparser_generate_input.add_argument( "-r", "--reduse_genome", dest="genome_fraction",type = float, 
@@ -162,7 +162,7 @@ def add_generate_test_parser( subparsers ):
     argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
                                          help = "")
     argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: the half of CPUs", default = 0)
     argparser_generate_test.add_argument("-n", "--chunck_data", dest="chunck_data", type = int,
                                         help = "If input data is too large to process, you can reduce RAM usage by increasing this value. \
                                         Default: 1", default = 1 )
@@ -191,18 +191,23 @@ def add_genome_divide_parser( subparsers ):
 def main():
 
     # Parse options
-    argparser = prepare_argparser()
+    argparser, subap = prepare_argparser()
     #print argparser
     args = argparser.parse_args()
-    
     subcommand  = args.subcommand_name
-
+    if subcommand==None:
+        argparser.print_help()
+        sys.exit()
     if subcommand == "train":
         # train a model
         from deepgmap.train.deepshark_local_oop_1d2 import run
         run( args )
     elif subcommand == "predict":
         # predict regulatory sequences or test a trained model
+        if args.input_ckpt=="" and args.logfile=="":
+            sys.exit(subap.choices["predict"].format_help())
+            
+        
         from deepgmap.post_train_tools.trained_deepshark_local2 import run
         run( args )
     elif subcommand == "generate_input":
@@ -219,7 +224,6 @@ def main():
     elif subcommand == "genome_divide":
         from deepgmap.data_preprocessing_tools.genome_divider import run
         run( args )
-        
 if __name__ == '__main__':
     
     
