@@ -5,7 +5,6 @@ import numpy as np
 import time
 import math
 import os
-#from natsort import natsorted, ns
 #import subprocess as sp
 import matplotlib as mpl
 mpl.use("WebAgg")
@@ -91,7 +90,7 @@ def main(args=None):
             os.makedirs(output_dir)
         except OSError:
             raise
-        input_dir=natsoted(glob(args.logfile+"train*.meta"))[-1]
+        input_dir=natsorted(glob(args.logfile+"train*.meta"))[-1]
         
         with open(args.logfile+"train.log", "r") as fin:
             for line in fin:

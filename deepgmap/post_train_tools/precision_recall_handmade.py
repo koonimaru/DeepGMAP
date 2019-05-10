@@ -16,7 +16,7 @@ def pr_curve_writer(label, pred):
         label1=csr_matrix(label)
         label2=csr_matrix(1*np.logical_not(label))
         
-        print 'calculating the first ROC space'
+        print('calculating the first ROC space')
 
         for i in range(curve_resolution):
             print "creating binary array"
