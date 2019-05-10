@@ -2,10 +2,8 @@ import re
 import numpy as np
 import gzip
 #output_handle=open("/home/koh/MLData/test.txt", 'w')
-import cPickle
 import time 
 import gzip
-import pickle
 import math
 import os.path
 import multiprocessing
