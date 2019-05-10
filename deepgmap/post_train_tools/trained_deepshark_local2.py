@@ -91,7 +91,7 @@ def main(args=None):
         except OSError:
             raise
         input_dir=natsorted(glob(args.logfile+"train*.meta"))[-1]
-        
+        print('saved models are '+str(input_dir))
         with open(args.logfile+"train.log", "r") as fin:
             for line in fin:
                 """
@@ -123,9 +123,9 @@ def main(args=None):
                     
             
     if not os.path.isfile(input_dir):
-        sys.exit(input_dir+' does not exist.')
+        sys.exit('the input file named '+input_dir+' does not exist.')
     if not os.path.isfile(bed_file):
-        sys.exit(bed_file+' does not exist.')
+        sys.exit('the bed file named '+bed_file+' does not exist.')
     if chromosome_of_interest=="all":
         TEST=False
     if output_dir==None:
