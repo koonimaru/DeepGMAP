@@ -42,7 +42,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
             line=line.strip('\n')
             
             #a1=time.time()
-            seq_list_append(sb2.AGCTtoArray4(line,data_width))
+            seq_list_append(sb2.AGCTtoArray4(line.encode('utf-8'),data_width))
             
             #b1+=time.time()-a1
         i+=1
