@@ -74,7 +74,7 @@ def main(args=None):
     """
     input_file=args.input_genome
     target_chr=args.chromosome
-    output_file=args.out_directory
+    output_file=args.out_directory+"_"+target_chr
     threads=args.thread_number
     if threads==0:
         threads=multiprocessing.cpu_count()//2
