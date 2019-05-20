@@ -2,12 +2,38 @@
 INSTALL Guide For DeepGMAP
 ==========================
 
+
+Install with docker
+===================
+
+Prerequisites
+~~~~~~~~~~~~~
+nvidia-driver_ 396?
+ndivie-docker_ 2.0.3
+docker_ 18.06
+
+Run deepgmap with an existing image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+First, pull a docker image of deepgmap from the docker repository.
+$ docker pull koonimaru/deepgmap:dev3
+
+Next, download several data for a test run.
+$ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12257744/DeepGMAPdatalight.tar.gz
+$ tar -xvzf DeepGMAPdatalight.tar.gz
+
+If you want, move "data" directory to your working directory for deepgmap.
+
+
+
+Install manually
+================
+
 Prerequisites
 =============
 
 DeepGMAP is verified to work on Linux (Ubunru 16.10). Also using GPU is highly recommended. 
 
-Python version 2.7.
+Python version 3.6.
 
 Numpy_ (>=1.6). 
 
