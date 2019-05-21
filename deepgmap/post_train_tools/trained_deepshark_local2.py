@@ -85,7 +85,8 @@ def main(args=None):
         if not args.logfile.endswith("/"):
             args.logfile+="/"
         #WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
-        output_dir=args.logfile+"predictions/"      
+        output_dir=args.logfile+"predictions/"
+        _prefix=args.prefix
         input_dir=natsorted(glob(args.logfile+"train*.meta"))[-1]
         print('saved models are '+str(input_dir))
         with open(args.logfile+"train.log", "r") as fin:
@@ -127,10 +128,8 @@ def main(args=None):
     if output_dir==None:
         sys.exit("output directory should be specified.")
     elif not os.path.exists(output_dir):
-        try:
-            os.makedirs(output_dir)
-        except OSError as exc:
-            sys.exit(exc)
+        os.makedirs(output_dir)
+        
     
     
     
@@ -210,7 +209,7 @@ def main(args=None):
     a=time.asctime()
     b=a.replace(':', '')
     start_at=b.replace(' ', '_')
-    out_dir=output_dir+"_"+file_name[-2]+"-"+file_name[-1]
+    out_dir=output_dir+_prefix+"-"+file_name[-1]
     
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
