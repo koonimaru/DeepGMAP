@@ -317,7 +317,7 @@ def main(args=None):
             filename_1=out_dir_np+str(s)+'.narrowPeak'
             output_handle.append(open(filename_1, 'w'))
         for i in range(len(y_prediction2)):
-            a=str(position_list[i]).decode('utf8').strip('>')
+            a=str(position_list[i]).strip('>')
             a=a.split(':')
             chrom=a[0]
             b=a[1].split('-')
@@ -439,7 +439,7 @@ def main(args=None):
                      "sample\troc_auc\tprecision_auc\n")
             for s, r, p in zip(sample_list,roc_auc_list, average_precision_list):
                 fo.write(str(s)+"\t"+str(r)+"\t"+str(p)+"\n")
-        
+        print("done. predictions have been written in "+out_dir+".")
         #plt.show()
 
 if __name__== '__main__':
