@@ -439,7 +439,7 @@ def main(args=None):
                      "sample\troc_auc\tprecision_auc\n")
             for s, r, p in zip(sample_list,roc_auc_list, average_precision_list):
                 fo.write(str(s)+"\t"+str(r)+"\t"+str(p)+"\n")
-        print("done. predictions have been written in "+out_dir+".")
+        print("done. predictions have been written in a directory, "+os.path.split(out_dir)[0]+".")
         #plt.show()
 
 if __name__== '__main__':
