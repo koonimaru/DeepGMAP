@@ -112,7 +112,7 @@ def main(args=None):
                     if "," in chromosome_of_interest:
                         c1, c2=chromosome_of_interest.split(', ')
                         chromosome_of_interest=c1.strip("'")+","+c2.strip("'")
-        if args.chromosome is not None:
+        if args.chromosome is not "None":
             chromosome_of_interest=args.chromosome
         
         print(chromosome_of_interest)
