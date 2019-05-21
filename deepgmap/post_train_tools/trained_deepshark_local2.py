@@ -214,7 +214,7 @@ def main(args=None):
     a=time.asctime()
     b=a.replace(':', '')
     start_at=b.replace(' ', '_')
-    out_dir=output_dir+file_name[-1]
+    out_dir=output_dir+"_"+file_name[-2]+"-"+file_name[-1]
     
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
@@ -322,7 +322,7 @@ def main(args=None):
             filename_1=out_dir_np+str(s)+'.narrowPeak'
             output_handle.append(open(filename_1, 'w'))
         for i in range(len(y_prediction2)):
-            a=position_list[i].decode('utf8').strip('>')
+            a=str(position_list[i]).decode('utf8').strip('>')
             a=a.split(':')
             chrom=a[0]
             b=a[1].split('-')
