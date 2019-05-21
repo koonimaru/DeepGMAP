@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 """Description: enhancer_prediction main executable.
-Copyright (c) 20XX Koh Onimaru <koh.onimaru@gmail.com>
+Copyright 2018 Koh Onimaru <koh.onimaru@gmail.com>
 This code is free software; you can redistribute it and/or modify it
-under the terms of the XXX License (see the file COPYING included with
+under the terms of the Apache License (see the file LICENSE included with
 the distribution).
 @author:  Koh Onimaru
 @contact: koh.onimaru@gmail.com
@@ -13,9 +13,8 @@ the distribution).
 import os
 import sys, traceback
 import argparse as ap
-from deepgmap.misc.Constants import DeepGMAP_VERSION
+from deepgmap.__init__ import __version__ as VERSION
 
-VERSION=DeepGMAP_VERSION
 HOME=os.path.expanduser("~")
 def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
