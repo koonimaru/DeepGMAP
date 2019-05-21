@@ -86,10 +86,6 @@ def main(args=None):
             args.logfile+="/"
         #WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
         output_dir=args.logfile+"predictions/"      
-        try:
-            os.makedirs(output_dir)
-        except OSError:
-            raise
         input_dir=natsorted(glob(args.logfile+"train*.meta"))[-1]
         print('saved models are '+str(input_dir))
         with open(args.logfile+"train.log", "r") as fin:
