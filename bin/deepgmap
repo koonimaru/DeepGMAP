@@ -114,7 +114,7 @@ def add_predict_parser( subparsers ):
                               help = "The log file of a training model. If you provide this option, you do not need to specify options of -i, -b, and -c. Default: " )
     argparser_predict.add_argument( "-w", "--write_prediction", dest = "write_prediction", type = bool,default = True,choices = (True, False),
                               help = "Choose if predictions in the narrowPeak format are saved or not. Default: True" )
-    argparser_predict.add_argument( "-p", "--prefix", dest = "prefix", type = bool,default = "",
+    argparser_predict.add_argument( "-p", "--prefix", dest = "prefix", type = str,default = "",
                               help = "Choose if predictions in the narrowPeak format are saved or not. Default: " )
 
     return
