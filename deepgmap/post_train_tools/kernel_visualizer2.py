@@ -10,7 +10,10 @@ import os
 import math
 import enum
 from PIL import Image
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 def _select_color(cr, DNA):
     if DNA=="A":
         cr.set_source_rgb(1, 0, 0)
@@ -182,7 +185,7 @@ def kernel_connector(png_list):
     im = Image.open(png_list[0])
     xwidth=int(width*0.8/10.0)+5
     ywidth=int(im.size[1]*xwidth/float(im.size[0]))
-    print xwidth, ywidth
+    #print xwidth, ywidth
     for k, i in enumerate(png_list):
         im = Image.open(i)
         

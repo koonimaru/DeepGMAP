@@ -13,7 +13,7 @@ import pylab
 from deepgmap.post_train_tools import unpooling
 import importlib as il
 import getopt
-import sequence_visualizer2 as sv2
+import deepgmap.post_train_tools.sequence_visualizer2 as sv2
 
 
 def test_batch(test_batch_file):
@@ -209,7 +209,7 @@ if deconv=="train":
     axcolor = fig.add_axes([0.8,0.05,0.02,0.9])
     pylab.colorbar(im, cax=axcolor)
     fig.savefig(output_dir+'.png')
-    import sequence_visualizer2 as sq
+    import deepgmap.post_train_tools.sequence_visualizer2 as sq
     sq.seuquence_visualizer2(final_recon_res, output_dir+'.pdf')
     
     sv2.seuquence_visualizer2(final_recon_res, output_dir+'_motif.pdf')

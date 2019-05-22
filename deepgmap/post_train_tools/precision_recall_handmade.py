@@ -19,22 +19,22 @@ def pr_curve_writer(label, pred):
         print('calculating the first ROC space')
 
         for i in range(curve_resolution):
-            print "creating binary array"
+            print("creating binary array")
             pred_ = np.where(pred >= linspace[i], np.ones_like(pred), np.zeros_like(pred))
             pred2=1*np.logical_not(pred_)
             #pred_=csc_matrix(pred_)
             #print pred_
             #print "calc logical and"
             tp = label1.dot(pred_)
-            print tp
+            
             #print sum(tp)
             
             fp = label2.dot(pred_)
-            print fp
+            #print fp
             fn = label1.dot(pred2)
-            print fn
+            #print fn
             tn = label2.dot(pred2)
-            print tn
+            #print tn
             
             FPR_array[i] += np.true_divide(fp,tn+fp)
             TPR_array[i] += np.true_divide(tp,tp+fn)
@@ -43,8 +43,8 @@ def pr_curve_writer(label, pred):
             else:
                 PPV_array[i] += np.true_divide(tp,tp+fp)
             #print i
-            if i>=curve_resolution-3:
-                print TPR_array[i],PPV_array[i]
+            #if i>=curve_resolution-3:
+                #print TPR_array[i],PPV_array[i]
         
     else:
         for i in range(curve_resolution):
@@ -64,8 +64,8 @@ def pr_curve_writer(label, pred):
                 PPV_array[i] = np.true_divide(np.nansum(tp),
                              np.nansum(np.logical_or(tp, fp)))
                 
-            if i>=curve_resolution-3:
-                print TPR_array[i],PPV_array[i]
+            #if i>=curve_resolution-3:
+                #print TPR_array[i],PPV_array[i]
             #rint i
     area=0.0
     k=curve_resolution-1
@@ -83,7 +83,7 @@ array_file='/home/fast/onimaru/data/prediction/network_constructor_deepsea_1d3_T
 #genome_bed=''
 np_in=np.load(array_file)
 pred=np_in["prediction"]
-print len(pred)
+#print len(pred)
 label_array=np_in["label_array"]
 #print pred[:,0]
 if len(label_array.shape)==1:

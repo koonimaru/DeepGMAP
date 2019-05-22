@@ -201,7 +201,7 @@ def main():
         sys.exit()
     if subcommand == "train":
         # train a model
-        from deepgmap.train.deepshark_local_oop_1d2 import run
+        from deepgmap.train.train_loop import run
         run( args )
     elif subcommand == "predict":
         # predict regulatory sequences or test a trained model
@@ -209,7 +209,7 @@ def main():
             sys.exit(subap.choices["predict"].format_help())
             
         
-        from deepgmap.post_train_tools.trained_deepshark_local2 import run
+        from deepgmap.post_train_tools.predict import run
         run( args )
     elif subcommand == "generate_input":
         # generate a train data set

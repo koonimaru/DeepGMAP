@@ -103,7 +103,7 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
                         DIST=DIST_comp
                         ori="-"
                     Z_SCORE=(DIST-RAND_MEAN)/RAND_DEV
-                    print Z_SCORE
+                    #print Z_SCORE
                     Z_SCORE_list.append(Z_SCORE)
                     if Z_SCORE<=THRESHOLD:
                         l+=1

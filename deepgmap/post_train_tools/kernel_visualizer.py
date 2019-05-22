@@ -8,7 +8,10 @@ import os
 import math
 import enum
 from PIL import Image
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 def _select_color(cr, DNA):
     if DNA=="A":
         cr.set_source_rgb(1, 0, 0)
