@@ -11,13 +11,13 @@ iris = load_iris()
 X = iris.data
 y = iris.target
 
-print X.shape
+#print X.shape
 
 n_components = 2
 ipca = IncrementalPCA(n_components=n_components, batch_size=10)
 X_ipca = ipca.fit_transform(X)
 
-print X_ipca.shape
+#print X_ipca.shape
 
 pca = PCA(n_components=n_components)
 X_pca = pca.fit_transform(X)

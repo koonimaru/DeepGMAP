@@ -161,7 +161,7 @@ def main(args=None):
         try:
             options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
         except getopt.GetoptError as err:
-            print str(err)
+            print(str(err))
             sys.exit(2)
         if len(options)<3:
             print('too few argument')

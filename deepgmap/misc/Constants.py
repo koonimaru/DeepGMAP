@@ -1,1 +1,1 @@
-DeepGMAP_VERSION = "0.0.0.20180601"
+DeepGMAP_VERSION = "dev3"

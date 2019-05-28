@@ -26,7 +26,7 @@ start=time.time()
 try:
     options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:d:', ['model=','test_batch=','network_constructor=','output_dir=','deconv='])
 except getopt.GetoptError as err:
-    print str(err)
+    #print str(err)
     sys.exit(2)
 if len(options)<3:
     print('too few argument')
@@ -87,8 +87,8 @@ saver.restore(sess, input_dir)
 
 batch = test_batch(test_batch_file)
 test_accuracy1, y_label1, y_prediction1 =sess.run([model.error, y_, model.prediction[1]], feed_dict={x_image: batch[0], y_: batch[1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0}) 
-print "test accuracy (true:false=5:5): "+str(test_accuracy1)
-print deconv
+#print "test accuracy (true:false=5:5): "+str(test_accuracy1)
+#print deconv
 
 if deconv=="transpose":
     
@@ -110,7 +110,7 @@ if deconv=="transpose":
         if np.sum(y)>0:
             positive_image.append(index_of_image)
         index_of_image+=1
-    print len(positive_image)
+    #print len(positive_image)
     for k in range(len(positive_image)):  
     
         images4=np.reshape(batch[0][positive_image[k]], (1, data_length, 4, 1))
@@ -285,7 +285,7 @@ elif deconv=="train":
 
     h_fc1_re = tf.nn.relu(tf.add(tf.matmul(h_pool3_flat_re, variavl_dict["W_fc1"]), variavl_dict["b_fc1"]))
     y_conv_re=tf.add(tf.matmul(h_fc1_re,variavl_dict["W_fc4"]), variavl_dict["b_fc4"])
-    print y_conv_re.shape
+    #print y_conv_re.shape
     #cost =-tf.reshape(y_conv_re,[1])+tf.reduce_sum(tf.square(x_image_recon))/500.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])*tf.log(tf.nn.sigmoid(y_conv_re[0][1]+0.000001)/(tf.nn.sigmoid(y_conv_re[0][0])+0.000001))+tf.reduce_sum(tf.square(x_image_recon))/2000.0
@@ -304,12 +304,12 @@ elif deconv=="train":
         _, progress, y_val, a, b  =sess2.run([train_step2, cost, y_conv_re, h_conv11_re_, h_conv22_re])
         cost_list.append(progress)
         if (i+1)%100==0:
-            print 'step '+str(i)+' cost: '+str(progress)+', y_conv_re: '+str(y_val)
+            print('step '+str(i)+' cost: '+str(progress)+', y_conv_re: '+str(y_val))
         #if progress<=-0.9999:
             #break
         if i>20000:
             if cost_list[i-500]-cost_list[i]<=0.0000001:
-                print cost_list[i-100]-cost_list[i]
+                print(cost_list[i-100]-cost_list[i])
                 break
         #print str(a.shape)+'\n'+str(b.shape)+'\n'+str(1*fc1_param*dimension3)
  
@@ -329,10 +329,10 @@ elif deconv=="train":
     axcolor = fig.add_axes([0.8,0.05,0.02,0.9])
     pylab.colorbar(im, cax=axcolor)
     fig.savefig(str(trained_model)+'_max_act_'+str(start_at)+'.png')
-    import sequence_visualizer2 as sq
+    import deepgmap.post_train_tools.sequence_visualizer2 as sq
     sq.seuquence_visualizer2(final_recon_res, str(trained_model)+'_max_act_seq_'+str(start_at)+'.pdf')
     plt.show()
     sess2.close()
 else:
-    print "don't understand the "+str(deconv)+" option"
+    print("don't understand the "+str(deconv)+" option")
                                                

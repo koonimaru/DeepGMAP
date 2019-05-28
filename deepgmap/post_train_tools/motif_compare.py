@@ -2,7 +2,8 @@ import numpy as np
 import sys
 #from curses.ascii import isdigit
 from scipy.spatial.distance import cdist
-from cython_util import motif_compare as mc
+import deepgmap.post_train_tools.cython_util as cutil
+mc=cutil.motif_compare
 from matplotlib import pyplot as plt 
 import os
 def _is_number(s):
@@ -94,7 +95,7 @@ def motif_compare(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5.0):
                     print JSD"""
                     DIST=np.mean(np.diagonal(cdist(v2, partial_motif,metric='cosine')))
                     Z_SCORE=(DIST-RAND_MEAN)/RAND_DEV
-                    print Z_SCORE
+                    #print Z_SCORE
                     if Z_SCORE<=THRESHOLD:
                         f.write(str(k2)+"\t"+str(i)+"\t"+str(i+v2shape[0])+"\t"+str(Z_SCORE)+"\n")
 
@@ -105,9 +106,9 @@ def main():
     fout=os.path.splitext(long_motif_dir)[0]+".matches"
     #fout="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz.matches"
     motif_data_dict=motif_reader(motif_data_dir)
-    print len(motif_data_dict)
+    #print len(motif_data_dict)
     long_motif_dict=motif_reader(long_motif_dir)
-    print len(long_motif_dict)
+    #print len(long_motif_dict)
     #motif_compare(motif_data_dict, long_motif_dict, fout)
     Z_SCORE_list=mc(motif_data_dict, long_motif_dict, fout, THRESHOLD=-5)
     plt.hist(Z_SCORE_list, 1000)

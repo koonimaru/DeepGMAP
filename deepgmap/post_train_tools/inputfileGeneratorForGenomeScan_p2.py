@@ -42,7 +42,7 @@ def DNA_to_array_converter(input_file_read,seq_num,target_chr):
             line=line.strip('\n')
             
             #a1=time.time()
-            seq_list_append(sb2.AGCTtoArray4(line,data_width))
+            seq_list_append(sb2.AGCTtoArray4(line.encode('utf-8'),data_width))
             
             #b1+=time.time()-a1
         i+=1
@@ -62,36 +62,17 @@ def run(args):
     main(args)
 
 def main(args=None):
-    if args is not None:
-        input_file=args.input_genome
-        target_chr=args.chromosome
-        output_file=args.out_directory
-        threads=args.thread_number
-        chunck_data=args.chunck_data
-        print(args)
-    else:
-        try:
-            options, args =getopt.getopt(sys.argv[1:], 'i:t:o:p:', ['input_dir=','target_chr=', 'output_dir=','process='])
-        except getopt.GetoptError as err:
-            print(str(err))
-            sys.exit(2)
-        if len(options)<3:
-            print('too few argument')
-            sys.exit(0)
-            
-        threads=psutil.cpu_count()
-        
-        for opt, arg in options:
-            if opt in ('-i', '--input_dir'):
-                input_file=arg
-            elif opt in ('-t', '--target_chr'):
-                target_chr=arg
-            elif opt in ('-o', '--output_dir'):
-                output_file=arg
-            elif opt in ('-p', '--process'):
-                threads=int(arg)
     
-        print(options)
+    input_file=args.input_genome
+    target_chr=args.chromosome
+    output_file=args.out_directory
+    threads=args.thread_number
+    chunck_data=args.chunck_data
+    print(args)
+    
+    if threads==0:
+        threads=multiprocessing.cpu_count()//2
+    os.makedirs(output_file)
     file_size=os.path.getsize(input_file)
     print(file_size)
     
@@ -133,7 +114,7 @@ def main(args=None):
                 if i*chunk_num+l*job_num*chunk_num>sub_seq_num:
                     break
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                    args=(str(output_file)+"_"+str(l1)+"_"+str(i+l*job_num), 
+                                    args=(str(output_file)+"/"+str(l1)+"_"+str(i+l*job_num), 
                                           position_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num], 
                                           seq_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num])))
             for j in jobs:

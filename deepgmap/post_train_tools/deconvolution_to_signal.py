@@ -43,7 +43,7 @@ start=time.time()
 try:
     options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:', ['model=','test_genome=','network_constructor=','output_dir='])
 except getopt.GetoptError as err:
-    print str(err)
+    #print str(err)
     sys.exit(2)
 if len(options)<3:
     print('too few argument')

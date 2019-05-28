@@ -8,7 +8,10 @@ import os
 import math
 import enum
 from PIL import Image
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 def _select_color(cr, DNA):
     if DNA=="A":
         cr.set_source_rgb(1, 0, 0)
@@ -217,7 +220,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
             cr.show_text("hidden"+str(i+1))
             coordinates["hidden"+str(i+1)]=[]
             conv_shape=conv.shape
-            print conv_shape
+            print(conv_shape)
             for j in range(conv_shape[0]):
                 y=upper_lim+0.0018*height*j
                 #cr.move_to(width*0.1, height*0.1+0.0008*height*j)
@@ -261,7 +264,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
             cr.show_text("fc"+str(i+1))
             coordinates["fc"+str(i+1)]=[]
             fc_shape=fc.shape
-            print fc_shape
+            print(fc_shape)
             y=upper_lim
             #cr.move_to(width*0.1, height*0.1+0.0008*height*j)
             
@@ -335,7 +338,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
         w_fc1=fc_kernels[0]
         w_fc1_max=np.amax(w_fc1)
         w_fc1_shape=w_fc1.shape
-        print w_fc1_shape
+        print(w_fc1_shape)
         
         linked2=set()
         unfilterd_links=[]
@@ -345,7 +348,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
                 if k in linked:
                     unfilterd_links.append([j[k],i/last_seq_length, k])
         rev_sort=sorted(unfilterd_links, reverse=True)
-        print rev_sort[:5]
+        print(rev_sort[:5])
         if len(rev_sort)<conv_kernels[-1].shape[-1]/10:
             _limit=len(rev_sort)
         else:
@@ -370,7 +373,7 @@ def kernel_connector(npz_file, png_list, kernel_shape_ic_list):
         for i, conv in reversed(list(enumerate(conv_kernels_sum))):
             
             conv_shape=conv.shape
-            print i, conv_shape
+            print(i, conv_shape)
             convf=conv.flatten()
             convf=convf[(-convf).argsort()]
            # topN=convf[600]

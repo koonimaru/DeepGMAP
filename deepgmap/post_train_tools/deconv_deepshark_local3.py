@@ -26,7 +26,7 @@ start=time.time()
 try:
     options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:d:', ['model=','test_batch=','network_constructor=','output_dir=','deconv='])
 except getopt.GetoptError as err:
-    print str(err)
+    #print str(err)
     sys.exit(2)
 if len(options)<3:
     print('too few argument')
@@ -89,8 +89,8 @@ saver.restore(sess, input_dir)
 
 batch = test_batch(test_batch_file)
 test_accuracy1, y_label1, y_prediction1 =sess.run([model.error, y_, model.prediction[1]], feed_dict={x_image: batch[0], y_: batch[1], keep_prob: 1.0, keep_prob2: 1.0, keep_prob3: 1.0}) 
-print "test accuracy (true:false=5:5): "+str(test_accuracy1)
-print deconv
+#print "test accuracy (true:false=5:5): "+str(test_accuracy1)
+#print deconv
   
 def conv2d_tp(x, W, output_shape):
     return tf.nn.conv2d_transpose(x, W, output_shape, strides=[1, 1, 1, 1], padding='VALID')
@@ -110,7 +110,7 @@ for y in batch[1]:
     if np.sum(y)>0:
         positive_image.append(index_of_image)
     index_of_image+=1
-print len(positive_image)
+#print len(positive_image)
 for k in range(len(positive_image)):  
 
     images4=np.reshape(batch[0][positive_image[k]], (1, data_length, 4, 1))

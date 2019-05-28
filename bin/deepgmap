@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 """Description: enhancer_prediction main executable.
-Copyright (c) 20XX Koh Onimaru <koh.onimaru@gmail.com>
+Copyright 2018 Koh Onimaru <koh.onimaru@gmail.com>
 This code is free software; you can redistribute it and/or modify it
-under the terms of the XXX License (see the file COPYING included with
+under the terms of the Apache License (see the file LICENSE included with
 the distribution).
 @author:  Koh Onimaru
 @contact: koh.onimaru@gmail.com
@@ -13,17 +13,16 @@ the distribution).
 import os
 import sys, traceback
 import argparse as ap
-from deepgmap.misc.Constants import DeepGMAP_VERSION
+from deepgmap.__init__ import __version__ as VERSION
 
-VERSION=DeepGMAP_VERSION
-
+HOME=os.path.expanduser("~")
 def prepare_argparser ():
     """Prepare optparser object. New options will be added in this
     function first.   
     """
     
     description = "%(prog)s -- regulatory sequence prediction"
-    epilog = "For command line options of each command, type: %(prog)s COMMAND -h"
+    epilog = "For the options of each function, type: %(prog)s <positional_argument> -h"
     argparser = ap.ArgumentParser( description = description, epilog = epilog ) #, usage = usage )
     argparser.add_argument("--version", action="version", version="%(prog)s "+VERSION)
     subparsers = argparser.add_subparsers( dest = 'subcommand_name' ) #help="sub-command help")
@@ -39,7 +38,7 @@ def prepare_argparser ():
     # command for 'genome_divide'
     add_genome_divide_parser( subparsers )
    
-    return argparser
+    return argparser, subparsers
 
 def add_train_parser( subparsers ):
  
@@ -78,8 +77,8 @@ def add_train_parser( subparsers ):
     # group for output files
     group_output = argparser_train.add_argument_group( "Output arguments" )
     #add_outdir_option( group_output )
-    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
-                               help = "An output directory. REQUIRED.")
+    group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default = HOME+"/deepgmap-data/outputs/",
+                               help = "An output directory. Default: $HOME/deepgmap-data/outputs/")
 
     
     return
@@ -91,8 +90,8 @@ def add_predict_parser( subparsers ):
                                                  help = "Predict regulatory sequences" )
     argparser_predict.add_argument( "-i", "--in_file", dest = "input_ckpt", type = str, default = "",
                                       help = "A ckpt-xxxxx.meta file (an output file from training, which contains information of trained variables). REQUIRED." )
-    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default="./data/predictions/",
-                                      help = "an output directory for prediction results. Default: ./data/predictions/")
+    argparser_predict.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default=HOME+"/deepgmap-data/predictions/",
+                                      help = "an output directory for prediction results. Default: $HOME/deepgmap-data/predictions/")
     argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str, default = "",
                                       help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
     argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = None,
@@ -109,11 +108,15 @@ def add_predict_parser( subparsers ):
                               help = "Specify which GPUs to use. Default: 0" )
     argparser_predict.add_argument( "-s", "--batch_size", dest = "batchsize", type = int,default = 1000,
                               help = "The number of sequences that are going to be scanned at once. If you get memmory error, reducing this number may solve it. Default: 1000" )
+    #argparser_predict.add_argument( "-l", "--logfile", dest = "logfile", type = str,default = "",
+                              #help = "The log file of a training model. If you provide this option, you do not need to specify options of -i, -b, and -c. Default: " )
     argparser_predict.add_argument( "-l", "--logfile", dest = "logfile", type = str,default = "",
                               help = "The log file of a training model. If you provide this option, you do not need to specify options of -i, -b, and -c. Default: " )
     argparser_predict.add_argument( "-w", "--write_prediction", dest = "write_prediction", type = bool,default = True,choices = (True, False),
                               help = "Choose if predictions in the narrowPeak format are saved or not. Default: True" )
-    
+    argparser_predict.add_argument( "-p", "--prefix", dest = "prefix", type = str,default = "prediction",
+                              help = "Choose if predictions in the narrowPeak format are saved or not. Default: prediction" )
+
     return
 
 def add_generate_input_parser( subparsers ):
@@ -129,7 +132,7 @@ def add_generate_input_parser( subparsers ):
                                         binned with a particular window size. If you have path/to/mm10_1000.bed and\
                                          /path/to/mm10_1000.fa,the input would be '-g /path/to/mm10_1000'. REQUIRED." )
     argparser_generate_input.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: the half of CPUs", default = 0 )
     argparser_generate_input.add_argument( "-s", "--sample_number", dest = "sample_number", type = int,
                                        help = "The number of samples in a mini-batch. Default: 100", default = 100 )
     argparser_generate_input.add_argument( "-r", "--reduse_genome", dest="genome_fraction",type = float, 
@@ -160,7 +163,7 @@ def add_generate_test_parser( subparsers ):
     argparser_generate_test.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, required = True,
                                          help = "")
     argparser_generate_test.add_argument( "-t", "--threads", dest = "thread_number", type = int,
-                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
+                                       help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: the half of CPUs", default = 0)
     argparser_generate_test.add_argument("-n", "--chunck_data", dest="chunck_data", type = int,
                                         help = "If input data is too large to process, you can reduce RAM usage by increasing this value. \
                                         Default: 1", default = 1 )
@@ -189,19 +192,24 @@ def add_genome_divide_parser( subparsers ):
 def main():
 
     # Parse options
-    argparser = prepare_argparser()
+    argparser, subap = prepare_argparser()
     #print argparser
     args = argparser.parse_args()
-    
     subcommand  = args.subcommand_name
-
+    if subcommand==None:
+        argparser.print_help()
+        sys.exit()
     if subcommand == "train":
         # train a model
-        from deepgmap.train.deepshark_local_oop_1d2 import run
+        from deepgmap.train.train_loop import run
         run( args )
     elif subcommand == "predict":
         # predict regulatory sequences or test a trained model
-        from deepgmap.post_train_tools.trained_deepshark_local2 import run
+        if args.input_ckpt=="" and args.logfile=="":
+            sys.exit(subap.choices["predict"].format_help())
+            
+        
+        from deepgmap.post_train_tools.predict import run
         run( args )
     elif subcommand == "generate_input":
         # generate a train data set
@@ -217,8 +225,11 @@ def main():
     elif subcommand == "genome_divide":
         from deepgmap.data_preprocessing_tools.genome_divider import run
         run( args )
-        
 if __name__ == '__main__':
+    
+    
+    
+    
     main()
     """try:
         main()

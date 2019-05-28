@@ -1,20 +1,30 @@
 import sys
 import getopt
 import glob as glb
-from genome_labeling2 import genome_label2 as genome_label
+#from genome_labeling2 import genome_label2 as genome_label
+import importlib as il
+
+_genome_label=il.import_module("deepgmap.data_preprocessing_tools.genome_labeling2")
+genome_label=_genome_label.genome_label2
 import os
 import subprocess as sp
-import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
-from inputfileGenerator_multiple_label3 import seqtobinarydict2 as seqtobinary
+#import deepgmap.data_preprocessing_tools.seq_to_binary2 as sb2
+sb2=il.import_module("deepgmap.data_preprocessing_tools.seq_to_binary2")
+
+#from inputfileGenerator_multiple_label3 import seqtobinarydict2 as seqtobinary
+inputfileGenerator_multiple_label3=il.import_module("deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3")
+seqtobinary=inputfileGenerator_multiple_label3.seqtobinarydict2
 #from inputfileGenerator_multiple_label3 import dicttoarray
-from inputfileGenerator_multiple_label3 import array_saver
+#from inputfileGenerator_multiple_label3 import array_saver
+array_saver=inputfileGenerator_multiple_label3.array_saver
+
 import multiprocessing
 import time 
 import datetime
 import numpy as np
 import random
 import math
-from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
+#from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
 
 def bedtools(cmd, tmpout):
     try:
@@ -110,8 +120,8 @@ def main(args=None):
             elif opt in ('-r', '--reduce_genome'):
                 reduce_genome=float(arg)
                 
-    genome_1000=genome_pref+".bed"
-    genome_fasta=genome_pref+".fa"
+    genome_1000=genome_pref+"/genome.bed"
+    genome_fasta=genome_pref+"/genome.fa"
     if os.path.isfile(genome_1000)==False:
         print(genome_1000+" is missing.")
         sys.exit(1)
@@ -124,7 +134,7 @@ def main(args=None):
         line=line.split()
         window_size=int(line[2])-int(line[1])
     bed_file_list=[]
-    if bed_file_dir.endswith('narrowPeak') or bed_file_dir.endswith('bed'):
+    if bed_file_dir.endswith('.narrowPeak') or bed_file_dir.endswith('.bed'):
         bed_file_list=sorted(glb.glob(bed_file_dir))       
         out_dir=os.path.split(bed_file_dir)[0]+"/"
         
@@ -133,13 +143,13 @@ def main(args=None):
             bed_file_dir+="/"
         bed_file_dir_=bed_file_dir+"*.narrowPeak"
         out_dir=bed_file_dir
-        bed_file_list=glb.glob(bed_file_dir_)
+        bed_file_list=sorted(glb.glob(bed_file_dir_))
         if len(bed_file_list)==0:
             bed_file_dir_=bed_file_dir+"*.bed"
             bed_file_list=sorted(glb.glob(bed_file_dir_))
             
     if len(bed_file_list)==0:
-        sys.exit('no bed files nor narrowPeak files in '+bed_file_dir)
+        sys.exit('no bed nor narrowPeak files in '+bed_file_dir)
         
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
@@ -154,11 +164,14 @@ def main(args=None):
         
         #preparing for parallel execution of bedtools
         jobs=[]
+        #print(bed_file_list[0])
+        h, t=os.path.split(bed_file_list[0])
+        #print(bed_file_list[0])
+        bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
+        if not os.path.isdir(bed_dir):
+            os.makedirs(bed_dir)
         for b in bed_file_list:
             h, t=os.path.split(b)
-            bed_dir=h+"/"+str(pref)+"_"+str(tail)+"_list"
-            if not os.path.isdir(bed_dir):
-                os.makedirs(bed_dir)
             b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
             if data_type=="dnase-seq":
                 cmd=["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)]
@@ -170,7 +183,7 @@ def main(args=None):
             bed_file_list_2.append(b_)
         dups=list(getDupes_a(bed_file_list_2))
         if len(dups) is not 0:
-            sys.exit(dups+" are duplicated")
+            sys.exit(str(dups)+" are duplicated")
         job_num=len(jobs)
         job_loop=int(math.ceil(job_num/float(threads)))
         
@@ -194,7 +207,7 @@ def main(args=None):
         
         label_genome_length=len(f2)
         print(label_genome_length)
-        shuf=range(label_genome_length)
+        shuf=list(range(label_genome_length))
         random.shuffle(shuf)
         read_len=int(math.ceil(label_genome_length/float(chunck_data)))
         
@@ -242,7 +255,7 @@ def main(args=None):
             #binaryDNAdict_shuf_append=binaryDNAdict_shuf.append
             #label_list_shuf=[]
             #label_list_shuf_append=label_list_shuf.append
-            shuf2=range(dna_dict_length)
+            shuf2=list(range(dna_dict_length))
             random.shuffle(shuf2)
            
             print("\nsaving train data set to "+output_dir+" with "+str(threads)+" threads")
@@ -263,7 +276,7 @@ def main(args=None):
             for i in range(threads):
                 #print str(len(binaryDNAdict_shuf[i*batch:(i+1)*batch]))+" are passed"
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                        args=(ooloop, range(i*total_num,(i+1)*total_num), 
+                                        args=(ooloop, list(range(i*total_num,(i+1)*total_num)), 
                                               [binaryDNAdict[j] for j in shuf2[i*batch:(i+1)*batch]],
                                               [label_list[k] for k in shuf2[i*batch:(i+1)*batch]], 
                                               sample_num, output_dir,)))

@@ -2,7 +2,8 @@ import numpy as np
 import sys
 #from curses.ascii import isdigit
 from scipy.spatial.distance import cdist
-from cython_util import motif_compare as mc
+import deepgmap.post_train_tools.cython_util as cutil
+mc=cutil.motif_compare
 from matplotlib import pyplot as plt 
 import os
 def _is_number(s):
@@ -42,7 +43,7 @@ def main():
     #fout="/home/fast/onimaru/data/output/network_constructor_deepsea_1d3_Fri_Oct_13_133809_2017.ckpt-15899Mon_Oct_16_105338_2017.npz.matches"
 
     fname=motif_reader(long_motif_dir)
-    print fname
+    #print fname
 if __name__== '__main__':
     main()                
                 

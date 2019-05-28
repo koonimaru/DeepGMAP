@@ -18,7 +18,7 @@ with open(narrowPeak_prediction, 'r') as fin, open(narrowPeak_prediction+".hg38.
     for line in fin:
         a=line.split()
         b=str(a[0])+":"+str(a[1])+"-"+str(a[2])
-        if map_dict.has_key(b):
+        if b in map_dict:
             new_coo=map_dict[b]
             new_coo=re.findall(r"[\w']+", new_coo)
             fout.write(str(new_coo[0])+"\t"

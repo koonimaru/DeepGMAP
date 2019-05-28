@@ -242,15 +242,17 @@ def main(args=None):
             sys.exit("please set -o parameter.")
     """
     if not os.path.exists(output_dir):
-        yesno=input(output_dir+" does not exist. Do you want to create a new one? y/n: ")
-        if yesno=="y":
-            try:
-                os.makedirs(output_dir)
-            except:
-                sys.exit("cannot create the output directory.")
-        else:
-            sys.exit("please set -o parameter.")
+        try:
+            os.makedirs(output_dir)
+        except:
+            sys.exit("cannot create an output directory. Please set a valid output directory with -o option.")
+    output_dir+="/"
     saving_dir_prefix=str(output_dir)+str(model_name)+"_"+start_at
+    if not os.path.exists(saving_dir_prefix):
+        os.makedirs(saving_dir_prefix)
+    else:
+        sys.exit(saving_dir_prefix +" already exists.")
+    saving_dir_prefix+="/train"
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
     #config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1

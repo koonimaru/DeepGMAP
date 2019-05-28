@@ -4,6 +4,8 @@ import sys
 import numpy as np
 from sklearn.decomposition import KernelPCA as pca_f
 import os
+import matplotlib as mpl
+mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 from scipy.spatial.distance import pdist
 import scipy.cluster.hierarchy as sch
@@ -85,12 +87,12 @@ def genome_label2(bed_file_list, genome_1000,out_dir):
                     _,a,b=line.split()
                     check_length=int(b)-int(a)
 
-                if not peak_set_dict.has_key(line):
+                if not line in peak_set_dict:
                     peak_set_dict[line]=["0" for h in range(file_num)]
                     #peak_set_dict[line]=copy.deepcopy(zero)
                 peak_set_dict[line][i]="1"
         i+=1
-    print time.time()-start
+    print(time.time()-start)
     fo_name=out_dir
     label_array_list=[]
     label_array_list_append=label_array_list.append
@@ -104,7 +106,7 @@ def genome_label2(bed_file_list, genome_1000,out_dir):
                 if i==0:
                     _,a,b=line.split()
                     assert check_length==int(b)-int(a), "mismatches in sequence lengths"
-                if peak_set_dict.has_key(line):
+                if line in peak_set_dict:
                     fout.write(line.strip('\n')+'\t'+' '.join(peak_set_dict[line])+'\n')
                 else:
                     fout.write(line.strip('\n')+'\t'+zero+'\n')
@@ -133,14 +135,14 @@ def main():
         bed_file_dir=bed_file_dir+"*.bed"
     
     bed_file_list=sorted(glb.glob(bed_file_dir))
-    print bed_file_list
+    print(bed_file_list)
     if len(bed_file_list)==0:
         print("no files in "+str(bed_file_dir))
         sys.exit()
     label_array_list=genome_label2(bed_file_list, genome_1000,out_dir)
-    print label_array_list[0]
+    print(label_array_list[0])
     label_array_list_=np.transpose(label_array_list)
-    print sum(label_array_list_[0])
+    print(sum(label_array_list_[0]))
     pca = pca_f(n_components=2, kernel="rbf")
     X_pca=pca.fit_transform(label_array_list_)
     dist1=pdist(label_array_list_, 'cosine')
@@ -158,14 +160,14 @@ def main():
     ax1.set_xticklabels(new_sample_list , rotation=90)
     
     
-    print X_pca.shape
+    print(X_pca.shape)
     _, ax2=plt.subplots()
     ax2.scatter(X_pca[:,0], X_pca[:,1])
     for i, txt in enumerate(bed_file_list):
         txt=txt.split("/")[-1]
         ax2.annotate(txt, (X_pca[i,0],X_pca[i,1]))
     
-    plt.show()
+    #plt.show()
 if __name__ == '__main__':
     main()
     

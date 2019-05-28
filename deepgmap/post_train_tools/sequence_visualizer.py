@@ -56,7 +56,7 @@ def main():
             max_value=np.amax(reconstruct[k])
             sum_value=np.sum(reconstruct[k])
             max_value2=np.amax(original_seq[k])
-            print max_value
+            print(max_value)
             if max_value>0.0:
                 max_index=np.argmax(reconstruct[k])
             

@@ -89,7 +89,7 @@ with open(intersect_file,"r") as fin:
             a=line.split()
             position=str(a[0])+"\t"+str(a[1])+"\t"+str(a[2])
             logq=float(a[11])
-            if not fimo_peak_dict.has_key(position):
+            if not position in fimo_peak_dict:
                 fimo_peak_dict[position]=logq
             elif logq>fimo_peak_dict[position]:
                 fimo_peak_dict[position]=logq
@@ -104,7 +104,7 @@ with open(genome_1000, "r") as fin, open(bed_file,'w') as fout:
             if fimo_peak_dict.has_key(a):
                 fout.write(a+"\n")
                 qvalue_list.append(fimo_peak_dict[a])
-                print line
+                print(line)
             else:
                 qvalue_list.append(0.00)
 

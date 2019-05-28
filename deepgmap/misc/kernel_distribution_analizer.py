@@ -26,14 +26,14 @@ for f in flist:
     h,t=os.path.split(f)
     t=t.split('_')
     t=t[2]
-    print t 
+    print(t)
     with open(f, 'r') as fin:
         for line in fin:
             line=line.split()
             if float(line[7])>=500:
                 pos="\t".join(line[:3])
                 kernel_num=int(line[6].split("_")[1])
-                if not pos_dict.has_key(pos):
+                if not pos in pos_dict:
                     pos_dict[pos]=np.zeros([320], np.float64)
                 pos_dict[pos][kernel_num]+=1.0   
     
@@ -52,7 +52,7 @@ for k, v in pos_dict_dict.items():
         data_array.append(_v)
         mycolors.append(rgb)
     
-print sample_class
+print(sample_class)
 X = np.array(data_array, np.float64)
 saving_dir_prefix=fname.split('*')[0]
 

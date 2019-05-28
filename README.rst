@@ -1,6 +1,6 @@
-===========================
-README for DeepGMAP (0.0.0)
-===========================
+===================
+README for DeepGMAP
+===================
 
 Introduction
 ============
@@ -111,4 +111,9 @@ Output files
 2. A npz file is a numpy array of prediction scores. The array coordinate is the same as the labeled file.
 3. A log file that contains AUROC and AUPRC scores.
 4. A pdf file of ROC and PRC.
+
+Running a docker image
+======================
+docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
+docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/<output_directory_of_train> -t /full/path/to/mm10_window1000_stride300
 

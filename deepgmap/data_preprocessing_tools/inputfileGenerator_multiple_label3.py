@@ -7,7 +7,9 @@ import random
 #from seq_to_binary import AGCTtoArray2
 #import pyximport; pyximport.install()
 #import seq_to_binary2
-import seq_to_binary2 as sb2
+#import seq_to_binary2 as sb2
+import importlib as il
+sb2=il.import_module("deepgmap.data_preprocessing_tools.seq_to_binary2")
 import getopt
 import datetime
 
@@ -96,7 +98,7 @@ def seqtobinarydict2(file_, lpos):
         elif not line == '\n' and not line=='' and skip==False: 
             line=line.strip("\n")
            
-            binaryDNAdict_append(sb2.AGCTtoArray3(line,len(line)))
+            binaryDNAdict_append(sb2.AGCTtoArray3(line.encode('utf-8'),len(line)))
     
     
     return binaryDNAdict, position
@@ -117,11 +119,11 @@ def array_saver(ooloop, index_list, binaryDNAdict_shuf,label_list_shuf, sample_n
             with open(filename, "wb") as output_file:
                 np.savez_compressed(output_file,labels=labels, data_array=data_array)
         except IOError as e:    
-            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+            print("I/O error({0}): {1}".format(e.errno, e.strerror))
         except ValueError:
-            print "Could not convert data"
+            print("Could not convert data")
         except:
-            print "Unexpected error:", sys.exc_info()[0]
+            print("Unexpected error:", sys.exc_info()[0])
             raise
 
 def array_saver_one_by_one(index, binaryDNAdict_shuf,label_list_shuf,out_dir):
@@ -131,11 +133,11 @@ def array_saver_one_by_one(index, binaryDNAdict_shuf,label_list_shuf,out_dir):
         with open(filename, "wb") as output_file:
             np.savez_compressed(output_file,labels=label_list_shuf, data_array=binaryDNAdict_shuf)
     except IOError as e:    
-        print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        print("I/O error({0}): {1}".format(e.errno, e.strerror))
     except ValueError:
-        print "Could not convert data"
+        print("Could not convert data")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
 
 
@@ -177,9 +179,9 @@ def dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
                 x+=1
             else:
                 y+=1
-        prog=100.0*float(k+y+x)/num_seq
+        prog=100.0*float(k+y+x)//num_seq
         if prog%10.0==0.0:
-            print prog
+            print(prog)
     z=float(x)/float(y+x)
     print(str(k)+" of negative sequences are skipped\n"+"negative/total="+str(z))
     return binaryDNAdict_shuf, label_list_shuf
@@ -190,7 +192,7 @@ def main():
     try:
         options, args =getopt.getopt(sys.argv[1:], 'i:l:o:p:s:r:', ['input_dir=','label=', 'output_dir=','process=','sample_number=','reduce_genome='])
     except getopt.GetoptError as err:
-        print str(err)
+        print(str(err))
         sys.exit(2)
     if len(options)<3:
         print('too few argument')
@@ -248,16 +250,16 @@ def main():
         binaryDNAdict_shuf, label_list_shuf=dicttoarray(binaryDNAdict,position, label_list,label_position,reduce_genome)
         
         dna_dict_length=len(binaryDNAdict_shuf)
-        print len(label_list_shuf), dna_dict_length
+        print(len(label_list_shuf), dna_dict_length)
         if dna_dict_length%threads==0:
-            batch=dna_dict_length/threads
+            batch=dna_dict_length//threads
         else:
-            batch=dna_dict_length/threads+1
+            batch=dna_dict_length//threads+1
             
         if dna_dict_length%sample_num==0:
-            total_num=dna_dict_length/(sample_num*threads)
+            total_num=dna_dict_length//(sample_num*threads)
         else:
-            total_num=dna_dict_length/(sample_num*threads)+1
+            total_num=dna_dict_length//(sample_num*threads)+1
             
         jobs = []
         for i in range(threads):
@@ -280,7 +282,7 @@ def main():
         raise
     gc.collect()
     running_time=time.time()-start
-    print "Done!"+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time))
+    print("Done!"+"\nTotal time: "+ str(datetime.timedelta(seconds=running_time)))
     
 if __name__== '__main__':
     main()
