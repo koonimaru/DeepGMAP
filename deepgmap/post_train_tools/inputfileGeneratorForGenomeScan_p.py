@@ -73,6 +73,10 @@ def main(args=None):
                                    help = "The number of threads. Multithreading is performed only when saving output numpy arrays. Default: 1", default = 1 )
     """
     input_file=args.input_genome
+    if not input_file.endswtih(".fa") and not input_file.endswtih(".fasta"):
+        input_file+="/genome.fa"
+    if not os.path.isfile(input_file):
+        print("input file must be a dirctory containing genome.fa or a fasta file.")
     target_chr=args.chromosome
     output_file=args.out_directory+"_"+target_chr
     threads=args.thread_number
@@ -80,7 +84,7 @@ def main(args=None):
         threads=multiprocessing.cpu_count()//2
     print(args)
     
-    assert os.path.isfile(input_file), "no input files"
+    
     os.makedirs(output_file)
     output_file+="/"
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
