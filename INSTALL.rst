@@ -19,15 +19,16 @@ $ docker pull koonimaru/deepgmap:dev3
 
 Build a new docker image
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Alternatively, by building a new image with Dockerfile, you may be able to get a latest version of deepgmap or to change tensorflow version. In this case, please use Dockerfile in this package.
-$ mkdir deepgmap-docker
-$ cp DeepGMAP/Dockerfile ./deepgmap-docker/
-$ cd deepgmap-docker
-$ docker build --no-cache -t koonimaru/deepgmap .
+Alternatively, by building a new image with Dockerfile, you may be able to get a latest version of deepgmap or to change tensorflow version. In this case, please use Dockerfile in this package::
+ $ mkdir deepgmap-docker
+ $ cp DeepGMAP/Dockerfile ./deepgmap-docker/
+ $ cd deepgmap-docker
+ $ docker build --no-cache -t koonimaru/deepgmap .
 
-Next, download several data for a test run.
-$ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12257744/DeepGMAPdatalight.tar.gz
-$ tar -xvzf DeepGMAPdatalight.tar.gz
+Next, download several data for a test run::
+
+ $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/15268919/DeepGMAPdatalight.tar.lzma
+ $ lzma -d DeepGMAPdatalight.tar.lzma && tar -xvf DeepGMAPdatalight.tar && rm DeepGMAPdatalight.tar
 
 If you want, move "data" directory to your working directory for deepgmap. Otherwise, it's ready, please see README.rst for how to run deepgmap.
 

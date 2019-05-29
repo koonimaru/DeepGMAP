@@ -43,19 +43,19 @@ There are five functions currently available.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you have a de novo genome sequence and want to annotate their regulatory sequences with an already trained model, you need to convert AGCT sequences to onehot vectors.
-Firstly, the multiple fasta file of your genome should be divided into a particular window size and stride by the following command:
+Firstly, the multiple fasta file of your genome should be divided into a particular window size and stride by the following command::
 
-deepgmap genome_divide -i ./data/genomes/mm10.fa -w 1000 -s 300
+ $ deepgmap genome_divide -i /path/to/genomes/mm10.fa -w 1000 -s 300
 
 This produces mm10_window1000_stride300.bed and mm10_window1000_stride300.fa (you need to change mm10.fa to your multiple fasta file).
-The next step is to convert AGCT symbols to matrices of onehot arrays by the following command:
+The next step is to convert AGCT symbols to matrices of onehot arrays::
 
-deepgmap generate_test -i ./data/genomes/mm10_window1000_stride300.fa -o ./data/test_data/mm10_window1000_stride300_ -t 16 -C all
+ $ deepgmap generate_test -i /path/to/genomes/mm10_window1000_stride300 -o /path/to/test_data/mm10_window1000_stride300 -t 16 -C all
 
 
-To predict regulatory sequences, type
+To predict regulatory sequences, type::
 
-deepgmap predict -i ./data/outputs/conv4frss_Thu_Jun_14_095043_2018.ckpt-22379.meta -o ./data/predictions/ -t "./data/test_data/mm10_window1000_stride300*.npz" -G 0
+ $ deepgmap predict -i /path/to/outputs/conv4frss_Tue_May_21_004410_2019/train.ckpt-26259/train.ckpt-26259.meta -o /path/to/predictions/ -t /path/to/data/test_data/mm10_window1000_stride300
 
 
 Output files
@@ -69,17 +69,17 @@ Output files
 
 2. To train a model with epigenomic data.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you want to train a model with your data set, first, you need to generate genomic sequences labeled with your data. To do so, run the following command: 
+If you want to train a model with your data set, first, you need to generate genomic sequences labeled with your data::
 
-deepgmap generate_input -b "./data/inputs/mm10_ctcf/*.bed" -g ./data/genomes/mm10_window1000_stride300 -p ctcf -t 16 -s 100 -r 0.80
+ $ deepgmap generate_input -b /path/to/data/inputs/mm10_ctcf -g /path/to/data/genomes/mm10_window1000_stride300 -p ctcf_test -t 8
 
 This command would take 10 min to a few hours depending on your machine and the amount of data. If you see a memory error, you can reduce the RAM usage by increasing the 
-integer of -n option. It is not the optimal algorithm, will be improved in the future. Next, to train a model run 
+integer of -n option. It is not the optimal algorithm, will be improved in the future. Next, to train a model run::
 
-deepgmap train -i ./data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set/ -c conv4frss -o ./data/outputs/
+ $ deepgmap train -i /path/to/data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300s100r0.8_train_data_set -c conv4frss -o /path/to/data/outputs/
 
-where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). For model types, 
-currently deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss, are available.
+where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). Currently available models are  
+ deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss.
    
 
 Output files
@@ -96,12 +96,13 @@ It is just for convenience to analyze trained models.
 
 3. To test a trained model with test data.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Run:
-deepgmap predict -i ./data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o ./data/predictions/ -b ./data/inputs/mm10_ctcf/ctcf_mm10_window1000_stride300.bed.labeled 
--t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
+Run::
+ $ deepgmap predict -i /path/to/data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o /path/to/data/predictions/ -b ./data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300.bed.labeled \
+ -t /path/to/data/test_data/mm10_window1000_stride300_chr2
 
-Alternatively, run:
-deepgmap predict -l ./data/outputs/conv4frss_<date>.log -t "./data/test_data/mm10_window1000_stride300_chr2_*.npz"
+Alternatively, you can test a trained model just by giving the directory of a train output with option -l::
+ $ deepgmap predict -l /path/to/data/outputs/conv4frss_<date>
+In this case, the prediction result is generated under the input directory. 
 
 Output files
 ~~~~~~~~~~~~
@@ -112,8 +113,11 @@ Output files
 3. A log file that contains AUROC and AUPRC scores.
 4. A pdf file of ROC and PRC.
 
-Running a docker image
+Examples of running a docker image
 ======================
-docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
-docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/<output_directory_of_train> -t /full/path/to/mm10_window1000_stride300
 
+$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap genome_divide -i /path/to/genomes/mm10.fa -w 1000 -s 300
+$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
+$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/output_directory_of_train -t /full/path/to/mm10_window1000_stride300
+
+If you are running docker through qsub, remove "-it".
