@@ -14,12 +14,14 @@ docker_ 18.06
 
 Pull an existing docker image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-First, pull a docker image of deepgmap from the docker repository.
-$ docker pull koonimaru/deepgmap:dev3
+First, pull a docker image of deepgmap from the docker repository.::
+
+ $ docker pull koonimaru/deepgmap:dev3
 
 Build a new docker image
 ~~~~~~~~~~~~~~~~~~~~~~~~
 Alternatively, by building a new image with Dockerfile, you may be able to get a latest version of deepgmap or to change tensorflow version. In this case, please use Dockerfile in this package::
+
  $ mkdir deepgmap-docker
  $ cp DeepGMAP/Dockerfile ./deepgmap-docker/
  $ cd deepgmap-docker

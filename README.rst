@@ -78,8 +78,8 @@ integer of -n option. It is not the optimal algorithm, will be improved in the f
 
  $ deepgmap train -i /path/to/data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300s100r0.8_train_data_set -c conv4frss -o /path/to/data/outputs/
 
-where -i option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). Currently available models are  
- deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss.
+The "-i" option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). Currently available models are  
+deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss.
    
 
 Output files
@@ -97,11 +97,14 @@ It is just for convenience to analyze trained models.
 3. To test a trained model with test data.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Run::
+
  $ deepgmap predict -i /path/to/data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o /path/to/data/predictions/ -b ./data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300.bed.labeled \
  -t /path/to/data/test_data/mm10_window1000_stride300_chr2
 
 Alternatively, you can test a trained model just by giving the directory of a train output with option -l::
+
  $ deepgmap predict -l /path/to/data/outputs/conv4frss_<date>
+ 
 In this case, the prediction result is generated under the input directory. 
 
 Output files
@@ -116,8 +119,10 @@ Output files
 Examples of running a docker image
 ======================
 
-$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap genome_divide -i /path/to/genomes/mm10.fa -w 1000 -s 300
-$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
-$ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/output_directory_of_train -t /full/path/to/mm10_window1000_stride300
+ $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap genome_divide -i /path/to/genomes/mm10.fa -w 1000 -s 300
+
+ $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
+
+ $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/output_directory_of_train -t /full/path/to/mm10_window1000_stride300
 
 If you are running docker through qsub, remove "-it".
