@@ -242,7 +242,7 @@ def main(args=None):
         print("the input file should be a ckpt file")
         sys.exit(1)
     if model_name=="":
-        model_name=input_dir.split(path_sep)[-1].split("_")
+        model_name=input_dir.split(path_sep)[-2].split("_")
         model_name=model_name[0]
     print("runing "+str(model_name))
     

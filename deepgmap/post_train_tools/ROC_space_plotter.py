@@ -28,7 +28,7 @@ def roc_space_plotter(label, predictions, name_list,outfile_name):
     predictions_list=[]
     label_array=label
     for pred in predictions:
-        print pred["prediction"].shape
+        print(pred["prediction"].shape)
         predictions_list.append(pred["prediction"])
         
     fpr_list=[]

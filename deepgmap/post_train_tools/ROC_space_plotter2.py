@@ -71,7 +71,7 @@ def roc_space_plotter(label, predictions1,outfile_name):
         a=data_dict['deepsea'][k]
         b=data_dict['conv4-frss'][k]
         s,p=stats.ttest_ind(a,b)
-        print p, k
+        print(p, k)
     
     
     
