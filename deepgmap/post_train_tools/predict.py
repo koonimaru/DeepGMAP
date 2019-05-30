@@ -60,7 +60,7 @@ def run(args):
 def main(args=None):
     TEST=True
     path_sep=os.path.sep
-    chromosome_of_interest='chr2'
+    chromosome_of_interest='all'
     output_dir=None
     model_name=""
     bed_file=None
@@ -81,6 +81,18 @@ def main(args=None):
         model_name=args.model
         bed_file=args.labeled_bed_file
         chromosome_of_interest=args.chromosome
+        if bed_file=="":
+            if input_dir.endswith(".meta"):
+                _logfile=os.path.splitext(os.path.splitext(input_dir)[0])[0]+".log"
+            else:
+                _logfile=os.path.splitext(input_dir)[0]+".log"
+            with open(_logfile, "r") as fin:
+                for line in fin:
+    
+                    if line.startswith("Labeled file:"):
+                        bed_file=line.split(":")[1].strip(" \n")
+        if bed_file=="":
+            sys.exit("please specify -b option.")
     else:
         if not args.logfile.endswith("/"):
             args.logfile+="/"
@@ -118,7 +130,7 @@ def main(args=None):
         print(chromosome_of_interest)
                     #model_name=line[1]
                     
-            
+    
     if not os.path.isfile(input_dir):
         sys.exit('the input file named '+input_dir+' does not exist.')
     if not os.path.isfile(bed_file):
