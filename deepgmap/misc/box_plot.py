@@ -1,4 +1,4 @@
-from small_tools import is_number
+from deepgmap.misc.small_tools import is_number
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -20,8 +20,8 @@ with open(f, 'r') as fin:
                 data_tmp.append(float(l))
         data_list.append(data_tmp)
 
-print sample_list
-print data_list[-1]
+#print sample_list
+#print data_list[-1]
 fig, ax = plt.subplots()
 font = {'family' : 'Sans',
         'weight' : 'normal',
@@ -74,7 +74,7 @@ for i in range(len(sub_data_list1)):
             test_dict[str(i)+"-"+str(j)]=test
             pair_set.add(str(i)+"-"+str(j))
             pair_set.add(str(j)+"-"+str(i))
-print test_dict
+#print test_dict
 
 
 plt.show()

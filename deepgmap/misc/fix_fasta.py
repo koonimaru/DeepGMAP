@@ -15,7 +15,7 @@ with open(infile, "r") as fin, open(os.path.split(infile)[0]+"/_tmp.fa", "w") as
                 i+=1
             else:
                 line="\n"+">chr"+line.strip(">")+"\n"
-            print line
+            #print line
             fo.write(line)
         else:
             fo.write(line.strip("\n"))
@@ -28,7 +28,7 @@ with open(os.path.split(infile)[0]+"/_tmp.fa", "r") as fin, open(outfile, "w") a
     for line in fin:
         if line.startswith(">"):
             fo.write(line)
-            print line
+            #print line
         else:
             i=0
             lline=(line)

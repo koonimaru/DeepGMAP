@@ -1,6 +1,6 @@
 from cairocffi import cairo
 import gzip
-import cPickle       
+import pickle       
 import numpy as np
 
 def select_color(cr, DNA):
@@ -15,7 +15,7 @@ def select_color(cr, DNA):
    
 def main():
     with gzip.open('/media/koh/HD-PCFU3/mouse/variables_999_Sun_Oct_30_120751_2016.cpickle.gz', 'r') as f:
-        variables=cPickle.load(f)
+        variables=pickle.load(f)
         filter1=variables[0]
     
     
