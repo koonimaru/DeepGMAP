@@ -80,7 +80,9 @@ def main(args=None):
         output_dir=args.out_directory
         model_name=args.model
         bed_file=args.labeled_bed_file
-        chromosome_of_interest=args.chromosome
+        _prefix=args.prefix
+        if not args.chromosome =="None":
+            chromosome_of_interest=args.chromosome
         if bed_file=="":
             if input_dir.endswith(".meta"):
                 _logfile=os.path.splitext(os.path.splitext(input_dir)[0])[0]+".log"
@@ -133,8 +135,6 @@ def main(args=None):
     
     if not os.path.isfile(input_dir):
         sys.exit('the input file named '+input_dir+' does not exist.')
-    if not os.path.isfile(bed_file):
-        sys.exit('the bed file named '+bed_file+' does not exist.')
     if chromosome_of_interest=="all":
         TEST=False
     if output_dir==None:
