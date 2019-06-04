@@ -19,7 +19,7 @@ with open(labeledf, 'r') as fin:
             neg_num+=1
             
 
-print pos_num, neg_num
+#print pos_num, neg_num
 
 r=float(pos_num)/(0.75*neg_num)
 

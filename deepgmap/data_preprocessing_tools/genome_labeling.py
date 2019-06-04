@@ -7,7 +7,7 @@ narrow_peak_list=glb.glob(sys.argv[1])
 label_array=[]
 for i in range(len(narrow_peak_list)):
     label_array.append(0)
-print label_array
+#print label_array
 
 genome_file=sys.argv[2]
 genome_segments=[]
@@ -47,7 +47,7 @@ for f in narrow_peak_list:
             elif len(line)==10:
                 score=int(line[4])
             else:
-                print f
+                #print f
                 break
             
             if chrm in chrm_list:
@@ -66,7 +66,7 @@ for f in narrow_peak_list:
                         if genome_segments[genome_location][i]==0:
                             genome_segments[genome_location][i]+=1
                             j+=1
-                            print j
+                            #print j
                     else:
                         
                         
@@ -85,7 +85,7 @@ for f in narrow_peak_list:
                             if genome_segments[genome_location][i]==0:
                                 genome_segments[genome_location][i]+=1
                                 j+=1
-                                print j
+                                #print j
                                 #print "longer than 1000 "+ str(genome_location)
                             k+=1
                         

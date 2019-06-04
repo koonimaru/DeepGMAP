@@ -58,11 +58,11 @@ def array_saver(index_list, binaryDNAdict_shuf,label_list_shuf, sample_num,out_d
             with open(filename, "wb") as output_file:
                 np.savez_compressed(output_file,labels=labels, data_array=data_array)
         except IOError as e:    
-            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+            print("I/O error({0}): {1}".format(e.errno, e.strerror))
         except ValueError:
-            print "Could not convert data"
+            print("Could not convert data")
         except:
-            print "Unexpected error:", sys.exc_info()[0]
+            print("Unexpected error:", sys.exc_info()[0])
             raise
 
 fname="/home/fast/onimaru/encode/deepsea/deepsea_train/train.npz"

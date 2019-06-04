@@ -8,7 +8,7 @@ with open(file_name, "r") as fin, open(file_name+"_"+chromosome_name, "w") as fo
         if line.startswith('>'):
             #line1=line.split()
             a=line.strip('>\n')
-            print a
+            #print a
             if a.startswith(chromosome_name):
                 fout.write(line)
                 WRITE=True

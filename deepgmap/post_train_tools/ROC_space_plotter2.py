@@ -71,7 +71,7 @@ def roc_space_plotter(label, predictions1,outfile_name):
         a=data_dict['deepsea'][k]
         b=data_dict['conv4-frss'][k]
         s,p=stats.ttest_ind(a,b)
-        print p, k
+        print(p, k)
     
     
     
@@ -107,8 +107,8 @@ def roc_space_plotter(label, predictions1,outfile_name):
     """
     #print df
     yerr=df.pivot(index='class2',columns='class1',values='stdv')
-    print np.shape(yerr)
-    print df.pivot(index='class2',columns='class1',values='mean')
+    #print np.shape(yerr)
+    #print df.pivot(index='class2',columns='class1',values='mean')
     df.pivot(index='class2',columns='class1',values='mean').plot(kind='bar', yerr=yerr)
     
     #df.pivot(index='class1',columns='class2',values='mean').plot(kind='bar', yerr=df.std.reshape((2,3)))
@@ -150,7 +150,7 @@ def main():
             for line in fin:
                 if line.startswith(chromosome):
                     line=line.split()
-                    print line
+                    #print line
                     label_array_append(map(int, line[3:]))
         label_array=np.array(label_array)
         np.savez_compressed( label_file_array,  labels=label_array,)

@@ -79,7 +79,7 @@ setup(
         'Topic :: Biology/Machine learning',
     
     ],
-    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort', 'psutil'],
+    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort', 'psutil', 'pyBigWig'],
     long_description=open('README.rst').read(),
 )
 

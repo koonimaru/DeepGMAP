@@ -14,5 +14,5 @@ with open(f, "r") as fin:
             frips.append(float(line[2]))
             cfrips.append(float(line[5]))
 
-print sc.spearmanr(frips, peaks)
-print sc.spearmanr(cfrips, peaks)
+#print sc.spearmanr(frips, peaks)
+#print sc.spearmanr(cfrips, peaks)

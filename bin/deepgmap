@@ -37,7 +37,7 @@ def prepare_argparser ():
     add_generate_input_parser( subparsers )
     # command for 'genome_divide'
     add_genome_divide_parser( subparsers )
-   
+    add_saliency_extraction_parser(subparsers)
     return argparser, subparsers
 
 def add_train_parser( subparsers ):
@@ -94,7 +94,7 @@ def add_predict_parser( subparsers ):
                                       help = "an output directory for prediction results. Default: $HOME/deepgmap-data/predictions/")
     argparser_predict.add_argument( "-c", "--network_constructor", dest = "model", type = str, default = "",
                                       help = "The name of a model to train. Model files should be in network_constructors directory. If not specified, the program automatically infer it from the ckpt_file." )
-    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = None,
+    argparser_predict.add_argument( "-b", "--bed", dest = "labeled_bed_file", type = str, default = "",
                                       help = "A labeled_bed_file (.bed.labeled), which can be created by 'generate_input' command, or included in the data directory." )
     argparser_predict.add_argument( "-t", "--test_genome", dest = "test_genome_files", type = str, default = "",
                                       help = "Test genome files, e.g. /path/to/test_files/*.npz. Files can be created by 'generate_test' command. REQUIRED." )
@@ -184,7 +184,26 @@ def add_genome_divide_parser( subparsers ):
                                          help = "the size of the stride of windows. Default: half window size", default=None)
     return
     
+def add_saliency_extraction_parser( subparsers ):
+    """options, args =getopt.getopt(sys.argv[1:], 'l:t:o:c:G:g:p:', 
+                                 ['log=','test_genome=','output_dir=',"class_of_interest=", "GPUID=", "genoem_file=","prefix="])
+    """
+    argparser_saliency_extraction = subparsers.add_parser( "saliency_extraction",
+                                                    help = "Evaluate sequences at single-nucleotide level" )
+    argparser_saliency_extraction.add_argument( "-l", "--log", dest = "log" , type = str, required = True,
+                                         help = "A log file created during training. REQUIRED" )
+    argparser_saliency_extraction.add_argument( "-c", "--class_of_interest", dest = "class_of_interest", type = int, default = -1,
+                                         help = "Class number to evaluate. If you do not specify, all classes will be evaluated (, which may be time-consuming).")
+    argparser_saliency_extraction.add_argument( "-o", "--output_dir", dest = "output_dir", type = str,
+                                         help = "the prefix of output files. ", default=None)
+    argparser_saliency_extraction.add_argument( "-G", "--GPUID", dest = "GPUID", type = str,
+                                         help = "GPU ID", default="0")
+    argparser_saliency_extraction.add_argument( "-g", "--genome_file", dest = "genome_file", type = str,
+                                         help = "directory containing divided genome files with npz format.", required = True)
+    argparser_saliency_extraction.add_argument( "-p", "--prefix", dest = "prefix", type = str,
+                                         help = "prefix for output files.", default="class_saliency_extraction")
 
+    return
 # ------------------------------------
 # Main function
 # ------------------------------------
@@ -224,6 +243,9 @@ def main():
         run( args )
     elif subcommand == "genome_divide":
         from deepgmap.data_preprocessing_tools.genome_divider import run
+        run( args )
+    elif subcommand == "saliency_extraction":
+        from deepgmap.post_train_tools.class_saliency_extraction import run
         run( args )
 if __name__ == '__main__':
     

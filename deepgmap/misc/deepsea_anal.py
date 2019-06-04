@@ -15,7 +15,7 @@ with open(f, 'r') as fin:
         
         line=line.split("\t")
         if len(line)==7:
-            print line[1], line[5]
+            #print line[1], line[5]
             if is_number(line[5]):
                 if datadict.has_key(line[1]):
                     datadict[line[1]].append(float(line[5]))
