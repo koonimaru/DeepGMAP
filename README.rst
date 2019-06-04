@@ -25,9 +25,9 @@ Usage of deepgmap
   deepgmap [-h] [--version]
              {pridict,train,generate_input,genome_divide}
 
-:Example for enhancer prediction: deepgmap predict -i ./data/outputs/conv4frssXXXX.meta -o ./data/predictions/ -t "./data/test_data/mm10_window1000_stride300*.npz" -G 0
+:Example for enhancer prediction: deepgmap predict -i /path/to/conv4frssXXXX.meta -o /path/to/predictions/ -t /path/to/test_data/mm10_window1000_stride300
 
-:Example for training a model: deepgmap train -i ./data/inputs/mm10_dnase_subset/ -c conv4frss -o ./data/outputs/ -G 0
+:Example for training a model: deepgmap train -i /path/to/inputs/mm10_dnase_subset/ -c conv4frss -o /path/to/outputs/
 
 There are five functions currently available.
 
