@@ -54,17 +54,17 @@ def main():
         bed_file_dir=bed_file_dir+"*.bed"
     
     bed_file_list=glb.glob(bed_file_dir)
-    print bed_file_list
+    #print bed_file_list
     if len(bed_file_list)==0:
-        print("no files in "+str(bed_file_dir))
+       # print("no files in "+str(bed_file_dir))
         sys.exit()
     label_array_list=genome_label(bed_file_list, genome_1000)
-    print label_array_list[0]
+    #print label_array_list[0]
     label_array_list=label_array_list[np.random.randint(label_array_list.shape[0], size=5000), :]
     
     
     label_array_list_=np.transpose(label_array_list)
-    print sum(label_array_list_[0])
+    #print sum(label_array_list_[0])
     lshape=label_array_list.shape
     C=[]
     for i in range(lshape[0]):
@@ -94,7 +94,7 @@ def main():
     ax1.set_xticklabels(new_sample_list , rotation=90)
     
     
-    print X_pca.shape
+    #print X_pca.shape
     _, ax2=plt.subplots()
     ax2.scatter(X_pca[:,0], X_pca[:,1],c=C)
     """for i, txt in enumerate(bed_file_list):

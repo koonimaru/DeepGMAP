@@ -16,7 +16,7 @@ with open(file_name,'r') as fin:
             seq=[]
             chromosome_list[a]=seq
             seq_list.append(a)
-            print a
+            print(a)
             WRITE=True
 
 
@@ -32,7 +32,7 @@ with open(file_name,'r') as fin:
 
 with open(file_name+'.ed','w') as fout:
     for k in seq_list:
-        print k
+        #print k
         fout.write(">"+str(k)+"\n")
         for i in chromosome_list[k]:
             fout.write(str(i))
