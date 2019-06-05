@@ -34,7 +34,7 @@ ABout.close()
 fAB=open('./intersectAB.bed', 'r')
 AB=len(fAB.readlines())
 fAB.close()
-print AB, peak_counts[node_list[0]]
+#print AB, peak_counts[node_list[0]]
 
 ABout_=open('./intersectAB_.bed', 'w')
 sp.check_call(["bedtools", "intersect","-u","-F","1.0","-f","1.0", "-a", str(file_list[1]), "-b", str(file_list[0])], stdout=ABout_)
@@ -42,7 +42,7 @@ ABout_.close()
 fAB_=open('./intersectAB_.bed', 'r')
 AB_=len(fAB_.readlines())
 fAB_.close()
-print AB_, peak_counts[node_list[1]]
+#print AB_, peak_counts[node_list[1]]
 
 if AB>AB_:
     AB=AB_
@@ -53,7 +53,7 @@ ACout.close()
 fAC=open('intersectAC.bed', 'r')
 AC=len(fAC.readlines())
 fAC.close()
-print AC, peak_counts[node_list[2]]
+#print AC, peak_counts[node_list[2]]
 
 ACout_=open('./intersectAC_.bed', 'w')
 sp.check_call(["bedtools", "intersect","-u","-F","1.0","-f","1.0", "-a", str(file_list[2]), "-b", str(file_list[0])], stdout=ACout_)
@@ -61,7 +61,7 @@ ACout_.close()
 fAC_=open('intersectAC_.bed', 'r')
 AC_=len(fAC_.readlines())
 fAC_.close()
-print AC_
+#print AC_
 
 if AC>AC_:
     AC=AC_
@@ -72,7 +72,7 @@ BCout.close()
 fBC=open('intersectBC.bed', 'r')
 BC=len(fBC.readlines())
 fBC.close()
-print BC
+#print BC
 
 BCout_=open('./intersectBC_.bed', 'w')
 sp.check_call(["bedtools", "intersect","-u","-F","1.0","-f","1.0", "-a", str(file_list[1]), "-b", str(file_list[2])], stdout=BCout_)
@@ -80,7 +80,7 @@ BCout_.close()
 fBC_=open('intersectBC_.bed', 'r')
 BC_=len(fBC_.readlines())
 fBC_.close()
-print BC_
+#print BC_
 
 if BC>BC_:
     BC=BC_
