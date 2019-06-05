@@ -32,7 +32,7 @@ Next, download several data for a test run::
  $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/15268919/DeepGMAPdatalight.tar.lzma
  $ lzma -d DeepGMAPdatalight.tar.lzma && tar -xvf DeepGMAPdatalight.tar && rm DeepGMAPdatalight.tar
 
-If you want, move "data" directory to your working directory for deepgmap. Otherwise, it's ready, please see README.rst for how to run deepgmap.
+If you want, move "data" directory in the DeepGMAP-data-light folder to your working directory for deepgmap. Otherwise, it's ready, please see README.rst for how to run deepgmap.
 
 
 
@@ -67,10 +67,10 @@ bedtools_ (>=2.25)
 
 Installing tensorflow-gpu
 =========================
-To accelerate computing, I highly recommend users to use `cuda-enabled GPUs`_. tensorflow-gpu itself can be easily 
+To accelerate computing, users need to use `cuda-enabled GPUs`_. tensorflow-gpu itself can be easily 
 installed by typing "sudo pip install tensorflow-gpu" or "sudo pip install -r requirements.txt". But, to make 
 tensorflow-gpu work, you need a right version of cuDNN and cuda toolkit libraries (please 
-check the `tensorflow web site`_). I will add a quick guide to install them soon. 
+check the `tensorflow web site`_). If you do not want to care about these softwares, please consider using docker. 
 
 .. _cuda-enabled GPUs: https://developer.nvidia.com/cuda-gpus
 .. _tensorflow web site: https://www.tensorflow.org/install/install_linux
@@ -83,9 +83,10 @@ To download the source code from our github repository::
  
 To download a trial data set::
 
- $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/12257744/DeepGMAPdatalight.tar.gz
+ $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/15268919/DeepGMAPdatalight.tar.lzma
+ $ lzma -d DeepGMAPdatalight.tar.lzma && tar -xvf DeepGMAPdatalight.tar && rm DeepGMAPdatalight.tar
 
-Then, decompress it with "tar -xvzf DeepGMAPdatalight.tar.gz", and place the folder named "data" under the DeepGMAP directory.
+Place the folder named "data" under the DeepGMAP directory.
  
 Configure environment variables
 ===============================
