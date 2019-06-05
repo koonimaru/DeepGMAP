@@ -24,7 +24,7 @@ def DNA(length, percentA, percentG, percentC, percentT, percentN):
         dnachoice+='N'
         
     
-    return ''.join(random.choice(str(dnachoice)) for _ in xrange(length))
+    return ''.join(random.choice(str(dnachoice)) for _ in range(length))
 
 def statistics(file):
     lengthdist=[]
@@ -55,7 +55,7 @@ def AGCTcontent(file2):
     C_percent=float(C_count)/float(length)
     T_percent=float(T_count)/float(length)
     N_percent=float(N_count)/float(length)
-    print A_percent, G_percent, C_percent, T_percent, N_percent
+    #print A_percent, G_percent, C_percent, T_percent, N_percent
     return A_percent, G_percent, C_percent, T_percent, N_percent
 
 with open('/media/koh/HD-PCFU3/mouse/various_dnase_data/all_peak_75cutoff_sorted_merge.bed', 'r') as f1, open('/media/koh/HD-PCFU3/mouse/various_dnase_data/all_peak_75cutoff_sorted_merge.fa', 'r') as f2:
