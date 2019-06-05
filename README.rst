@@ -76,7 +76,7 @@ If you want to train a model with your data set, first, you need to generate gen
 This command would take 10 min to a few hours depending on your machine and the amount of data. If you see a memory error, you can reduce the RAM usage by increasing the 
 integer of -n option. It is not the optimal algorithm, will be improved in the future. Next, to train a model run::
 
- $ deepgmap train -i /path/to/data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300s100r0.8_train_data_set -c conv4frss -o /path/to/data/outputs/
+ $ deepgmap train -i /path/to/data/inputs/mm10_ctcf/for_figshare_genomes100r0.75_train_data_set -c conv4frss -o /path/to/data/outputs/
 
 The "-i" option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). Currently available models are  
 deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss.
@@ -95,7 +95,7 @@ It is just for convenience to analyze trained models.
 
 
 3. To test a trained model with test data.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Run::
 
  $ deepgmap predict -i /path/to/data/outputs/conv4frss_<date>.ckpt-<train step>.meta -o /path/to/data/predictions/ -b ./data/inputs/mm10_ctcf/ctcf_test_mm10_window1000_stride300.bed.labeled \
@@ -117,12 +117,12 @@ Output files
 4. A pdf file of ROC and PRC.
 
 Examples of running a docker image
-======================
+==================================
 
  $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap genome_divide -i /path/to/genomes/mm10.fa -w 1000 -s 300
 
- $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/ctcf_mm10_window1000_stride300s100r0.8_train_data_set -o /full/path/to/outputs -c conv4frss
+ $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap train -i /full/path/to/mm10_ctcf/for_figshare_genomes100r0.75_train_data_set -o /full/path/to/data/outputs -c conv4frss
 
- $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/output_directory_of_train -t /full/path/to/mm10_window1000_stride300
+ $ docker run -v $HOME:$HOME --runtime=nvidia -it --rm koonimaru/deepgmap deepgmap predict -l /full/path/to/output_directory_of_train -t /full/path/to/data/test_data/mm10_window1000_stride300_chr2
 
 If you are running docker through qsub, remove "-it".
