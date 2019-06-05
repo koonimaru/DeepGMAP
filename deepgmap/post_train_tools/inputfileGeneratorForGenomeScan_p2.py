@@ -73,7 +73,7 @@ def main(args=None):
     if threads==0:
         threads=multiprocessing.cpu_count()//2
     
-    if not input_file.endswtih(".fa") and not input_file.endswtih(".fasta"):
+    if not input_file.endswith(".fa") and not input_file.endswith(".fasta"):
         input_file+="/genome.fa"
     if not os.path.isfile(input_file):
         print("input file must be a dirctory containing genome.fa or a fasta file.")

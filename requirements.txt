@@ -5,3 +5,4 @@ sklearn
 cairocffi
 cython
 tornado
+pyBigWig
