@@ -87,6 +87,7 @@ def main(args=None):
             input_file_read=fin.readlines()
     except IOError:
         print('cannot open', input_file)
+    output_file+="_all"
     os.makedirs(output_file)
     line_num=len(input_file_read)
     #print line_num
@@ -119,7 +120,7 @@ def main(args=None):
                 if i*chunk_num+l*job_num*chunk_num>sub_seq_num:
                     break
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                    args=(str(output_file)+"_all/"+str(l1)+"_"+str(i+l*job_num), 
+                                    args=(str(output_file)+"/"+str(l1)+"_"+str(i+l*job_num), 
                                           position_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num], 
                                           seq_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num])))
             for j in jobs:
