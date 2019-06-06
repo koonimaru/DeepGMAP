@@ -49,7 +49,7 @@ else:
         Extension("deepgmap.data_preprocessing_tools.seq_to_binary2", [ "deepgmap/data_preprocessing_tools/seq_to_binary2.c" ]),
         Extension("deepgmap.post_train_tools.cython_util", [ "deepgmap/post_train_tools/cython_util.c" ]),
     ]
-print(find_version("deepgmap", "__init__.py"))
+#print(find_version("deepgmap", "__init__.py"))
 setup(
     name='DeepGMAP',
     #version=VERSION,
