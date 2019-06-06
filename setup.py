@@ -71,7 +71,7 @@ setup(
     cmdclass = cmdclass,
     ext_modules=ext_modules,
     classifiers=[
-        'Development Status :: 0',
+        'Development Status :: 2',
         'Environment :: X11 Applications',
         'Intended Audience :: Developers',
         'Operating System :: UBUNTU :: Linux',
