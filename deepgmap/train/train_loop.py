@@ -114,7 +114,6 @@ def softmax(w, t = 1.0):
 def test_batch(input_dir,output_dir,test_batch_num,batch_size, data_length):
     f = glob.glob(str(input_dir))
     f_srt=natsorted(f, key=lambda y: y.lower())
-    test_dir=output_dir.replace('output/', '')
     #print len(f_srt), test_batch_num
     data_list=[]
     labels_list=[]

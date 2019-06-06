@@ -136,9 +136,11 @@ Description: ===================
         If you are running docker through qsub, remove "-it".
         
 Platform: UNKNOWN
-Classifier: Development Status :: 0
-Classifier: Environment :: X11 Applications
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
 Classifier: Intended Audience :: Developers
-Classifier: Operating System :: UBUNTU :: Linux
-Classifier: Programming Language :: Python :: 2.7
-Classifier: Topic :: Biology/Machine learning
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: Apache Software License 
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence

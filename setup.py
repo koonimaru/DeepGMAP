@@ -71,12 +71,15 @@ setup(
     cmdclass = cmdclass,
     ext_modules=ext_modules,
     classifiers=[
-        'Development Status :: 2',
-        'Environment :: X11 Applications',
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
         'Intended Audience :: Developers',
-        'Operating System :: UBUNTU :: Linux',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Biology/Machine learning',
+        'Programming Language :: Python :: 3.6',
+        'License :: OSI Approved :: Apache Software License ',
+        'Operating System :: POSIX :: Linux',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
+        'Topic :: Scientific/Engineering :: Artificial Intelligence',
+        
     
     ],
     install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort', 'psutil', 'pyBigWig'],
