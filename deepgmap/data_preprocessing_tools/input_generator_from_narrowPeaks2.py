@@ -25,7 +25,7 @@ import numpy as np
 import random
 import math
 #from deepgmap.data_preprocessing_tools.inputfileGenerator_multiple_label3 import array_saver_one_by_one
-
+PATH_SEP=os.path.sep
 def bedtools(cmd, tmpout):
     try:
         tmp_out=open(tmpout, 'w')
@@ -120,8 +120,8 @@ def main(args=None):
             elif opt in ('-r', '--reduce_genome'):
                 reduce_genome=float(arg)
                 
-    genome_1000=genome_pref+"/genome.bed"
-    genome_fasta=genome_pref+"/genome.fa"
+    genome_1000=genome_pref+PATH_SEP+"genome.bed"
+    genome_fasta=genome_pref+PATH_SEP+"genome.fa"
     if os.path.isfile(genome_1000)==False:
         print(genome_1000+" is missing.")
         sys.exit(1)
@@ -139,8 +139,8 @@ def main(args=None):
         out_dir=os.path.split(bed_file_dir)[0]+"/"
         
     else:
-        if not bed_file_dir.endswith("/"):
-            bed_file_dir+="/"
+        if not bed_file_dir.endswith(PATH_SEP):
+            bed_file_dir+=PATH_SEP
         bed_file_dir_=bed_file_dir+"*.narrowPeak"
         out_dir=bed_file_dir
         bed_file_list=sorted(glb.glob(bed_file_dir_))
@@ -153,7 +153,7 @@ def main(args=None):
         
     head, tail = os.path.split(genome_1000)
     labeled_genome=str(out_dir)+str(pref)+'_'+str(tail)+'.labeled'
-    output_dir=str(out_dir)+str(pref)+'_'+str(tail.split('.')[0])+"s"+str(sample_num)+"r"+str(reduce_genome)+'_train_data_set/'
+    output_dir=str(out_dir)+str(pref)+'_'+str(tail.split('.')[0])+"s"+str(sample_num)+"r"+str(reduce_genome)+'_train_data_set'+PATH_SEP
 
     #create labeled genome file (.bed.labeled), only if it does not exist
     if not os.path.isfile(labeled_genome):
@@ -172,7 +172,7 @@ def main(args=None):
             os.makedirs(bed_dir)
         for b in bed_file_list:
             h, t=os.path.split(b)
-            b_=bed_dir+"/"+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
+            b_=bed_dir+PATH_SEP+os.path.splitext(t)[0]+"_"+str(window_size)+".bed"
             if data_type=="dnase-seq":
                 cmd=["bedtools", "intersect", "-u", "-a", str(genome_1000), "-b", str(b)]
             else:

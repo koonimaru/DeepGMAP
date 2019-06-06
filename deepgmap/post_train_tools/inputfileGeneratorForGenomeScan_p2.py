@@ -7,7 +7,7 @@ import psutil
 import getopt
 import time
 
-
+PATH_SEP=os.path.sep
 def div_roundup(x, y):
     if y%x==0:
         return y//x
@@ -74,7 +74,7 @@ def main(args=None):
         threads=multiprocessing.cpu_count()//2
     
     if not input_file.endswith(".fa") and not input_file.endswith(".fasta"):
-        input_file+="/genome.fa"
+        input_file+=PATH_SEP+"genome.fa"
     if not os.path.isfile(input_file):
         print("input file must be a dirctory containing genome.fa or a fasta file.")
         
@@ -120,7 +120,7 @@ def main(args=None):
                 if i*chunk_num+l*job_num*chunk_num>sub_seq_num:
                     break
                 jobs.append(multiprocessing.Process(target=array_saver, 
-                                    args=(str(output_file)+"/"+str(l1)+"_"+str(i+l*job_num), 
+                                    args=(str(output_file)+PATH_SEP+str(l1)+"_"+str(i+l*job_num), 
                                           position_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num], 
                                           seq_list[i*chunk_num+l*job_num*chunk_num:(i+1)*chunk_num+l*job_num*chunk_num])))
             for j in jobs:

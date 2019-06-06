@@ -14,7 +14,7 @@ import time
 import psutil
 import getopt
 #from __future__ import print_function
-
+PATH_SEP=os.path.sep
 def DNA_to_array_converter(input_file,target_chr):
     
     
@@ -74,7 +74,7 @@ def main(args=None):
     """
     input_file=args.input_genome
     if not input_file.endswith(".fa") and not input_file.endswith(".fasta"):
-        input_file+="/genome.fa"
+        input_file+=PATH_SEP+"genome.fa"
     if not os.path.isfile(input_file):
         print("input file must be a dirctory containing genome.fa or a fasta file.")
     target_chr=args.chromosome
@@ -86,7 +86,7 @@ def main(args=None):
     
     
     os.makedirs(output_file)
-    output_file+="/"
+    output_file+=PATH_SEP
     position_list, seq_list=DNA_to_array_converter(input_file,target_chr)
     seq_num=len(position_list)
     print(seq_num)

@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 import os
 from scipy.stats import gaussian_kde
 
+PATH_SEP=os.path.sep
+
 def next_batch(loop, input_dir, batch_size, data_length):
     f = glob.glob(str(input_dir)+"*")
     f_srt=natsorted(f)
@@ -191,8 +193,8 @@ def main(args=None):
             elif opt in ('-b', '--test_batch_num'):
                 test_batch_num=int(arg)
             elif opt in ('-o', '--out_dir'):
-                if not arg.endswith("/"):
-                    arg+="/"
+                if not arg.endswith(PATH_SEP):
+                    arg+=PATH_SEP
                 output_dir=arg
             elif opt in ('-c', '--network_constructor'):
                 model_name=arg
@@ -201,14 +203,14 @@ def main(args=None):
     
     
         
-    if input_dir.endswith("/"):
+    if input_dir.endswith(PATH_SEP):
         input_dir=str(input_dir)+"*.npz"
     elif input_dir.endswith("*"):
         input_dir=str(input_dir)+".npz"
     elif input_dir.endswith("*.npz"):
         pass
     else:
-        input_dir=str(input_dir)+"/*.npz"
+        input_dir=str(input_dir)+PATH_SEP+"*.npz"
     f = glob.glob(input_dir)
     if len(f)==0:
         print("can't open input files, no such a directory")
@@ -245,13 +247,13 @@ def main(args=None):
             os.makedirs(output_dir)
         except:
             sys.exit("cannot create an output directory. Please set a valid output directory with -o option.")
-    output_dir+="/"
+    output_dir+=PATH_SEP
     saving_dir_prefix=str(output_dir)+str(model_name)+"_"+start_at
     if not os.path.exists(saving_dir_prefix):
         os.makedirs(saving_dir_prefix)
     else:
         sys.exit(saving_dir_prefix +" already exists.")
-    saving_dir_prefix+="/train"
+    saving_dir_prefix=saving_dir_prefix+PATH_SEP+"train"
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
     #config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
@@ -451,7 +453,7 @@ def main(args=None):
     mean_ac=np.round(np.nanmean(f1_list),4) 
     running_time=time.time()-start
     
-    input_log=os.path.split(input_dir)[0]+"/data_generation.log"
+    input_log=os.path.split(input_dir)[0]+PATH_SEP+"data_generation.log"
     labeled_file_name=""
     excluded_chr=""
     if os.path.isfile(input_log):
