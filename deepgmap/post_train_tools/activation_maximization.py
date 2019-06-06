@@ -16,86 +16,84 @@ import getopt
 import deepgmap.post_train_tools.sequence_visualizer2 as sv2
 
 
-def test_batch(test_batch_file):
+def test_batch(test_batch_file, _batch_size,_data_length):
     with np.load(test_batch_file) as f:
         dnase_data_labels1=f['labels'], f['data_array']
-        images=np.reshape(dnase_data_labels1[1], (batch_size, data_length, 4, 1))
+        images=np.reshape(dnase_data_labels1[1], (_batch_size, _data_length, 4, 1))
         labels=dnase_data_labels1[0]
     return images, labels
 
-start=time.time()
 
+def run():
+    start=time.time()
+    
+    
+    try:
+        options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:d:', ['model=','test_batch=','network_constructor=','output_dir=','deconv='])
+    except getopt.GetoptError as err:
+        print(str(err))
+        sys.exit(2)
+    if len(options)<3:
+        print('too few argument')
+        sys.exit(0)
+    for opt, arg in options:
+        if opt in ('-m', '--model'):
+            trained_model=arg
+        elif opt in ('-t', '--test_batch'):
+            test_batch_file=arg
+        elif opt in ('-n', '--network_constructor'):
+            network_constructor=arg
+        elif opt in ('-o', '--output_dir'):
+            output_dir=arg
+        elif opt in ('-d','--deconv'):
+            deconv=arg
+    
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
+    if not output_dir.endswith("/"):
+        output_dir+="/"
+    #output_dir=None
+    
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth=True
+    sess = tf.Session(config=config)
+    
+    keep_prob = tf.placeholder(tf.float32)
+    keep_prob2 = tf.placeholder(tf.float32)
+    keep_prob3 = tf.placeholder(tf.float32)
+    
+    
+    x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
+    y_ = tf.placeholder(tf.float32, shape=[None, 12])
+    phase=tf.placeholder(tf.bool)
+    dropout_1=0.95
+    dropout_2=0.9
+    dropout_3=0.85
+    batch_size=100
+    data_length=1000 
+    input_dir=trained_model
+    nc=il.import_module("deepgmap.network_constructors."+str(network_constructor))   
+    train_speed=0.00005
+    a=time.asctime()
+    b=a.replace(':', '')
+    start_at=b.replace(' ', '_')
+    
+    model = nc.Model(image=x_image, label=y_, 
+                     output_dir=output_dir+start_at,
+                     phase=phase, 
+                     start_at=start_at, 
+                     keep_prob=keep_prob, 
+                     keep_prob2=keep_prob2, 
+                     keep_prob3=keep_prob3, 
+                     data_length=data_length,
+                     max_to_keep=2,
+                     GPUID="1")
+    
+    
+    sess.run(tf.global_variables_initializer())
+    saver=model.saver
+    saver.restore(sess, input_dir)
 
-try:
-    options, args =getopt.getopt(sys.argv[1:], 'm:t:n:o:d:', ['model=','test_batch=','network_constructor=','output_dir=','deconv='])
-except getopt.GetoptError as err:
-    print(str(err))
-    sys.exit(2)
-if len(options)<3:
-    print('too few argument')
-    sys.exit(0)
-for opt, arg in options:
-    if opt in ('-m', '--model'):
-        trained_model=arg
-    elif opt in ('-t', '--test_batch'):
-        test_batch_file=arg
-    elif opt in ('-n', '--network_constructor'):
-        network_constructor=arg
-    elif opt in ('-o', '--output_dir'):
-        output_dir=arg
-    elif opt in ('-d','--deconv'):
-        deconv=arg
-
-if not os.path.isdir(output_dir):
-    os.makedirs(output_dir)
-if not output_dir.endswith("/"):
-    output_dir+="/"
-#output_dir=None
-
-config = tf.ConfigProto()
-config.gpu_options.allow_growth=True
-sess = tf.Session(config=config)
-
-keep_prob = tf.placeholder(tf.float32)
-keep_prob2 = tf.placeholder(tf.float32)
-keep_prob3 = tf.placeholder(tf.float32)
-
-
-x_image = tf.placeholder(tf.float32, shape=[None, 1000, 4, 1])
-y_ = tf.placeholder(tf.float32, shape=[None, 12])
-phase=tf.placeholder(tf.bool)
-dropout_1=0.95
-dropout_2=0.9
-dropout_3=0.85
-batch_size=100
-data_length=1000 
-input_dir=trained_model
-nc=il.import_module("deepgmap.network_constructors."+str(network_constructor))   
-train_speed=0.00005
-a=time.asctime()
-b=a.replace(':', '')
-start_at=b.replace(' ', '_')
-
-model = nc.Model(image=x_image, label=y_, 
-                 output_dir=output_dir+start_at,
-                 phase=phase, 
-                 start_at=start_at, 
-                 keep_prob=keep_prob, 
-                 keep_prob2=keep_prob2, 
-                 keep_prob3=keep_prob3, 
-                 data_length=data_length,
-                 max_to_keep=2,
-                 GPUID="1")
-
-
-sess.run(tf.global_variables_initializer())
-saver=model.saver
-saver.restore(sess, input_dir)
-
-deconv="train"
-print(deconv)
-
-if deconv=="train":
     def recon_variable(shape, variable_name):
         initial = tf.truncated_normal(shape, mean=0.02, stddev=0.01)
         return tf.Variable(initial, name=variable_name, trainable=True)
@@ -156,14 +154,14 @@ if deconv=="train":
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])-tf.nn.sigmoid(y_conv_re[0][0]),[1])*tf.log(tf.nn.sigmoid(y_conv_re[0][1]+0.000001)/(tf.nn.sigmoid(y_conv_re[0][0])+0.000001))+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][1])*tf.nn.sigmoid(y_conv_re[0][0]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
-    #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][0])/(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][1])+0.000001),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][3:6]))/(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][0:3]))\
                                                                        #+tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][6:]))+0.000001),[1])\
                                                                        #+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     
-    cost =-tf.reshape(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][6:12]))/(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][0:12]))\
-                                                                       +0.000001),[1])\
-                                                                       +tf.reduce_sum(tf.square(x_image_recon))/2000.0
+    #cost =-tf.reshape(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][6:12]))/(tf.reduce_sum(tf.nn.sigmoid(y_conv_re[0][0:12]))\
+                                                                       #+0.000001),[1])\
+                                                                       #+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     #cost =-tf.reshape(tf.nn.sigmoid(y_conv_re[0][2])+tf.nn.sigmoid(y_conv_re[0][0])+tf.nn.sigmoid(y_conv_re[0][1]),[1])+tf.reduce_sum(tf.square(x_image_recon))/2000.0
     
     
@@ -213,12 +211,6 @@ if deconv=="train":
     sq.seuquence_visualizer2(final_recon_res, output_dir+'.pdf')
     
     sv2.seuquence_visualizer2(final_recon_res, output_dir+'_motif.pdf')
-    
-    #plt.show()
-    
-    
-    
-    
-else:
-    print("don't understand the "+str(deconv)+" option")
-                                               
+        
+if __name__== '__main__':
+    run()

@@ -1,0 +1,8 @@
+tensorflow-gpu
+numpy
+matplotlib
+sklearn
+tornado
+natsort
+psutil
+pyBigWig
