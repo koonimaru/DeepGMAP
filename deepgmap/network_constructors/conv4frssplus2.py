@@ -3,7 +3,9 @@ import tensorflow as tf
 import math
 import sys
 import numpy as np
-from auc_calc import auc_pr as ac
+import importlib as il
+_ac=il.import_module("deepgmap.network_constructors.auc_calc") 
+ac=_ac.auc_pr
 
 def doublewrap(function):
     @functools.wraps(function)

@@ -26,6 +26,7 @@ deepgmap/data_preprocessing_tools/remove_excess_negatives.py
 deepgmap/data_preprocessing_tools/remove_variant_annotations.py
 deepgmap/data_preprocessing_tools/seq_to_binary.py
 deepgmap/data_preprocessing_tools/seq_to_binary2.c
+deepgmap/data_preprocessing_tools/seq_to_binary2.pyx
 deepgmap/data_preprocessing_tools/setup.py
 deepgmap/misc/Constants.py
 deepgmap/misc/TSS_bedfile.py
@@ -80,6 +81,7 @@ deepgmap/post_train_tools/activation_maximization.py
 deepgmap/post_train_tools/class_saliency_extraction.py
 deepgmap/post_train_tools/compare_narrowPeak_scores.py
 deepgmap/post_train_tools/cython_util.c
+deepgmap/post_train_tools/cython_util.pyx
 deepgmap/post_train_tools/deconv_deepshark_local3.py
 deepgmap/post_train_tools/deconv_deepshark_local4.py
 deepgmap/post_train_tools/deconv_deepshark_local_extend.py
