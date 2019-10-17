@@ -3,6 +3,7 @@ import tensorflow as tf
 import math
 import sys
 from tensorflow.contrib import cudnn_rnn, rnn
+import importlib as il
 _ac=il.import_module("deepgmap.network_constructors.auc_calc") 
 ac=_ac.auc_pr
 

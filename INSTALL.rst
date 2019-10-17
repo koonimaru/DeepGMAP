@@ -8,9 +8,12 @@ Install with docker
 
 Prerequisites
 ~~~~~~~~~~~~~
-nvidia-driver_ 396?
-ndivie-docker_ 2.0.3
-docker_ 18.06
+nvidia-driver 396?.
+
+ndivie-docker 2.0.3.
+
+docker 18.06.
+
 
 Pull an existing docker image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,7 +43,7 @@ Install manually
 ================
 
 Prerequisites
-=============
+~~~~~~~~~~~~~
 
 DeepGMAP is verified to work on Linux (Ubunru 16.10). Also using GPU is highly recommended. 
 
@@ -66,7 +69,7 @@ bedtools_ (>=2.25)
 .. _bedtools: http://bedtools.readthedocs.io/
 
 Installing tensorflow-gpu
-=========================
+~~~~~~~~~~~~~~~~~~~~~~~~~
 To accelerate computing, users need to use `cuda-enabled GPUs`_. tensorflow-gpu itself can be easily 
 installed by typing "sudo pip install tensorflow-gpu" or "sudo pip install -r requirements.txt". But, to make 
 tensorflow-gpu work, you need a right version of cuDNN and cuda toolkit libraries (please 
@@ -76,7 +79,7 @@ check the `tensorflow web site`_). If you do not want to care about these softwa
 .. _tensorflow web site: https://www.tensorflow.org/install/install_linux
 
 Download source and data
-========================
+~~~~~~~~~~~~~~~~~~~~~~~~
 To download the source code from our github repository::
 
  $ git clone https://github.com/koonimaru/DeepGMAP.git
@@ -88,8 +91,8 @@ To download a trial data set::
 
 Place the folder named "data" under the DeepGMAP directory.
  
-Configure environment variables
-===============================
+Local installation by configuring environment variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You need to add the downloaded location (in this example home directory: $HOME) to your ``PYTHONPATH`` and ``PATH`` environment variables.
 
@@ -115,6 +118,21 @@ PATH environment variable so that you can use the deepgmap command line
 directly::
 
  $ export PATH=$HOME/DeepGMAP/bin/:$PATH
+
+
+Installation system-wide 
+~~~~~~~~~~~~~~~~~~~~~~~~
+Using pip::
+
+ $ sudo pip install deepgmap
+
+Alternatively, go to the DeepGMAP directory, and type::
+
+ $ sudo python3 setup.py install
+ 
+
+These commands work only if cuda and cuDNN are already installed and you have a root user priviledge. 
+
 
 --
 Koh Onimaru <koh.oinmaru@gmail.com>

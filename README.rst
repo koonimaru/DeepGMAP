@@ -37,7 +37,15 @@ There are five functions currently available.
 :generate_test:		Generate a test data set, or convert a genome sequence that you want to annotate its regulatory regions into input data set 
 :genome_divide:		This function creates input files for "generate_input" and "generate_test" function. The genomic data of humans and mice is already included in this package under XX directory. If you have a de novo genome sequence or want to try other species to train a model.  
 
+0. Download a trial dataset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+If you have not downloaded a trial dataset yet, download it::
+
+ $ wget https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/15268919/DeepGMAPdatalight.tar.lzma
+ $ lzma -d DeepGMAPdatalight.tar.lzma && tar -xvf DeepGMAPdatalight.tar && rm DeepGMAPdatalight.tar
+
+You will find several directories such as "genomes", "inputs" and "outputs" under DeepGMAP-data-light/data/. These directories contain files used in the instruction below.
 
 1. To annotate regulatory regions in a genome with a trained model. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,12 +79,12 @@ Output files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you want to train a model with your data set, first, you need to generate genomic sequences labeled with your data::
 
- $ deepgmap generate_input -b /path/to/data/inputs/mm10_ctcf -g /path/to/data/genomes/mm10_window1000_stride300 -p ctcf_test -t 8
+ $ deepgmap generate_input -b /path/to/inputs/mm10_ctcf -g /path/to/genomes/mm10_window1000_stride300 -p ctcf_test -t 8
 
 This command would take 10 min to a few hours depending on your machine and the amount of data. If you see a memory error, you can reduce the RAM usage by increasing the 
 integer of -n option. It is not the optimal algorithm, will be improved in the future. Next, to train a model run::
 
- $ deepgmap train -i /path/to/data/inputs/mm10_ctcf/for_figshare_genomes100r0.75_train_data_set -c conv4frss -o /path/to/data/outputs/
+ $ deepgmap train -i /path/to/inputs/mm10_ctcf/for_figshare_genomes100r0.75_train_data_set -c conv4frss -o /path/to/data/outputs/
 
 The "-i" option is to feed a training data set, -c to specify a model type, -o to specify the output directory, and -G to specify index of GPUs (optional). Currently available models are  
 deepsea, basset, danq, danqblock, conv4, conv3frss, conv4frss, conv4frsspluss.

@@ -11,7 +11,7 @@ import pyBigWig as pbw
 import subprocess as subp
 
 
-
+PATH_SEP=os.path.sep
 
 
 def longest_common_prefix(seq1, seq2):
@@ -84,8 +84,8 @@ def run(args=None):
         log_file_name=args.log
         test_genome=args.test_genome
         output_dir=args.output_dir
-        if not output_dir.endswith("/"):
-            output_dir+="/"
+        if not output_dir.endswith(PATH_SEP):
+            output_dir+=PATH_SEP
         prefix=args.prefix
         class_of_interest=args.class_of_interest
         GPUID=args.GPUID
@@ -139,7 +139,7 @@ def run(args=None):
                     print(sample_list)
                     
     if not "*" in test_genome:
-        test_genome+="/*npz"
+        test_genome+=PATH_SEP+"*npz"
     test_genome_list=natsorted(glob(test_genome))
     if len(test_genome_list)==0:
         sys.exit(test_genome+" does not exist.")

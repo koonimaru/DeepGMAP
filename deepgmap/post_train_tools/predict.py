@@ -20,7 +20,7 @@ from natsort import natsorted
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 #from matplotlib import cm
-
+PATH_SEP=os.path.sep
 start=time.time()
 
 def roc_space_calc(label,pred):
@@ -96,10 +96,10 @@ def main(args=None):
         if bed_file=="":
             sys.exit("please specify -b option.")
     else:
-        if not args.logfile.endswith("/"):
-            args.logfile+="/"
+        if not args.logfile.endswith(PATH_SEP):
+            args.logfile+=PATH_SEP
         #WORKDIR=os.path.split(os.path.split(args.logfile)[0])[0]
-        output_dir=args.logfile+"predictions/"
+        output_dir=args.logfile+"predictions"+PATH_SEP
         _prefix=args.prefix
         input_dir=natsorted(glob(args.logfile+"train*.meta"))[-1]
         print('saved models are '+str(input_dir))
@@ -147,8 +147,8 @@ def main(args=None):
     
     
     
-    if not test_genome.endswith("/"):
-        test_genome+="/*.npz"
+    if not test_genome.endswith(PATH_SEP):
+        test_genome=test_genome+PATH_SEP+"*.npz"
     test_genome_list=natsorted(glob(test_genome))
     if len(test_genome_list)==0:
         sys.exit('test genome named '+test_genome+" does not exist.")
@@ -315,7 +315,7 @@ def main(args=None):
     
     #writing the predictions in narrowPeak format
     if WRITE_PRED:
-        out_dir_np=out_dir+"_narrowPeaks/"
+        out_dir_np=out_dir+"_narrowPeaks"+PATH_SEP
         print('Writing the prodictions in narrowPeak format to '+out_dir_np)
         
         if not os.path.exists(out_dir_np):
