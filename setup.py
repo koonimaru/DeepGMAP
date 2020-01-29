@@ -82,7 +82,7 @@ setup(
         
     
     ],
-    install_requires=['tensorflow-gpu', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort', 'psutil', 'pyBigWig'],
+    install_requires=['tensorflow==1.15', 'numpy', 'matplotlib', 'sklearn', 'tornado', 'natsort', 'psutil', 'pyBigWig'],
     long_description=open('README.rst').read(),
 )
 

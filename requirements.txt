@@ -1,4 +1,4 @@
-tensorflow-gpu
+tensorflow==1.15
 numpy
 matplotlib
 sklearn
