@@ -142,6 +142,7 @@ class Model(object):
      
             l2norm_list=[]
             if not self.initial_variable is None:
+                print("initializing variables with the -v option")
                 W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1', initial_variable=self.initial_variable)
             else:
                 W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
