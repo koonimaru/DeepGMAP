@@ -71,6 +71,10 @@ class Model(object):
         self.output_dir=kwargs["output_dir"]
         self.max_to_keep=kwargs["max_to_keep"]
         self.GPUID=kwargs["GPUID"]
+        if "kernels" in kwargs:
+            self.initial_variable=kwargs["kernels"]
+        else:
+            self.initial_variable=None
         self.fc1_param=int(math.ceil((math.ceil((math.ceil((math.ceil((#math.ceil((
             self.data_length-self.conv1_filter+1)/2.0)
                         -self.conv2_filter+1)/2.0)
@@ -108,8 +112,11 @@ class Model(object):
         with tf.device('/device:GPU:'+self.GPUID):
             x_image = self.image
     
-            def weight_variable(shape, variable_name):
-                initial = tf.truncated_normal(shape, mean=0, stddev=self.initial_variation)
+            def weight_variable(shape, variable_name, initial_variable=None):
+                if initial_variable is not None:
+                    initial=initial_variable
+                else:
+                    initial = tf.truncated_normal(shape, mean=0, stddev=self.initial_variation)
                 return tf.Variable(initial, name=variable_name)
               
             def bias_variable(shape, variable_name):
@@ -134,7 +141,10 @@ class Model(object):
                 return tf.nn.max_pool(x, ksize=[1, 17, 1, 1], strides=[1, 17, 1, 1], padding='SAME')
      
             l2norm_list=[]
-            W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
+            if not self.initial_variable is None:
+                W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1', initial_variable=self.initial_variable)
+            else:
+                W_conv1 = weight_variable([self.conv1_filter, 4, 1, self.dimension1], 'W_conv1')
             cond=tf.constant(0.9)
             wconv1_l2=tf.reduce_sum(tf.square(W_conv1))
             l2norm_list.append(wconv1_l2)
