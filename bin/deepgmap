@@ -230,7 +230,8 @@ def main():
         if args.input_ckpt=="" and args.logfile=="":
             sys.exit(subap.choices["predict"].format_help())
             
-        
+
+
         from deepgmap.post_train_tools.predict import run
         run( args )
     elif subcommand == "generate_input":
