@@ -9,7 +9,8 @@ from glob import glob
 from natsort import natsorted
 import pyBigWig as pbw
 import subprocess as subp
-
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
 
 PATH_SEP=os.path.sep
 

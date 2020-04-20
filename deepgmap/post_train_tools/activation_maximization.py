@@ -14,7 +14,8 @@ from deepgmap.post_train_tools import unpooling
 import importlib as il
 import getopt
 import deepgmap.post_train_tools.sequence_visualizer2 as sv2
-
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
 
 def test_batch(test_batch_file, _batch_size,_data_length):
     with np.load(test_batch_file) as f:

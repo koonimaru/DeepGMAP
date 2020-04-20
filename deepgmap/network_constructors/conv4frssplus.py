@@ -4,6 +4,8 @@ import math
 import sys
 import numpy as np
 import importlib as il
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
 _ac=il.import_module("deepgmap.network_constructors.auc_calc") 
 ac=_ac.auc_pr
 def doublewrap(function):

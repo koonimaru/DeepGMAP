@@ -19,6 +19,9 @@ from glob import glob
 from natsort import natsorted
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
+
 #from matplotlib import cm
 PATH_SEP=os.path.sep
 start=time.time()

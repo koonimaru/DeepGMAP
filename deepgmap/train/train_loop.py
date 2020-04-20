@@ -11,7 +11,8 @@ mpl.use("WebAgg")
 import matplotlib.pyplot as plt
 import os
 from scipy.stats import gaussian_kde
-
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
 PATH_SEP=os.path.sep
 
 def next_batch(loop, input_dir, batch_size, data_length):

@@ -2,6 +2,8 @@ import functools
 import tensorflow as tf
 import math
 import sys
+tf.compat.v1.disable_eager_execution()
+tf=tf.compat.v1
 def doublewrap(function):
     """
     A decorator decorator, allowing to use the decorator to be used without
