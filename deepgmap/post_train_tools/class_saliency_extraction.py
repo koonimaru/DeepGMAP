@@ -125,7 +125,7 @@ def run(args=None):
                 if not os.path.isfile(label_file):
                     sys.exit("cannot find "+line)
                 with open(label_file) as fin:
-                    line2=fin.next()
+                    line2=next(fin)
                     line2=line2.split()[1:]
                     common_prefix = longest_common_prefix(line2[0],line2[-1])
                     common_suffix = longest_common_suffix(line2[0],line2[-1])

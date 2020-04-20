@@ -202,10 +202,12 @@ def add_saliency_extraction_parser( subparsers ):
     argparser_saliency_extraction.add_argument( "-G", "--GPUID", dest = "GPUID", type = str,
                                          help = "GPU ID", default="0")
     argparser_saliency_extraction.add_argument( "-g", "--genome_file", dest = "genome_file", type = str,
-                                         help = "directory containing divided genome files with npz format.", required = True)
+                                         help = ".genome file.", required = True)
     argparser_saliency_extraction.add_argument( "-p", "--prefix", dest = "prefix", type = str,
                                          help = "prefix for output files.", default="class_saliency_extraction")
-
+    argparser_saliency_extraction.add_argument( "-t", "--test_genome", dest = "test_genome", type = str, , required = True,
+                                         help = "directory containing divided genome files with npz format.")
+    
     return
 # ------------------------------------
 # Main function
