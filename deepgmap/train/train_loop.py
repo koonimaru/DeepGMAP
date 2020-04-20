@@ -173,6 +173,7 @@ def main(args=None):
         EPOCHS_TO_TRAIN=args.epochs
         GPUID=str(args.gpuid)
         TEST_THRESHOLD=args.test_threshold
+        initial_variables=args.initial_variables
     else:
         try:
             options, args =getopt.getopt(sys.argv[1:], 'm:i:n:b:o:c:p:', ['mode=', 'in_dir=', 'loop_num=', 'test_batch_num=', 'out_dir=','network_constructor=','pretrained_model='])
@@ -231,17 +232,7 @@ def main(args=None):
         batch_size, label_dim=labels.shape
         _, data_length, dna_dim=_data.shape
         print(batch_size, label_dim)    
-    """
-    if not os.path.exists(output_dir):
-        yesno=input(output_dir+" does not exist. Do you want to create a new one? y/n: ")
-        if yesno=="y":
-            try:
-                os.makedirs(output_dir)
-            except:
-                sys.exit("cannot create the output directory.")
-        else:
-            sys.exit("please set -o parameter.")
-    """
+    
     if not os.path.exists(output_dir):
         try:
             os.makedirs(output_dir)
@@ -253,7 +244,12 @@ def main(args=None):
         os.makedirs(saving_dir_prefix)
     else:
         sys.exit(saving_dir_prefix +" already exists.")
+    
     saving_dir_prefix=saving_dir_prefix+PATH_SEP+"train"
+    
+    if not initial_variables is None:
+        _initial_variables=np.load(initial_variables)
+        W_conv1=_initial_variables["prediction/W_conv1:0"]
     config = tf.ConfigProto()
     config.gpu_options.allow_growth=True
     #config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
@@ -276,7 +272,8 @@ def main(args=None):
                      keep_prob3=keep_prob3, 
                      data_length=data_length,
                      max_to_keep=max_to_keep,
-                     GPUID=GPUID)
+                     GPUID=GPUID,
+                     kernels=W_conv1)
 
     sess.run(tf.global_variables_initializer())
     sess.run(tf.local_variables_initializer())

@@ -79,7 +79,8 @@ def add_train_parser( subparsers ):
     #add_outdir_option( group_output )
     group_output.add_argument( "-o", "--out_dir", dest = "out_directory", type = str, default = HOME+"/deepgmap-data/outputs/",
                                help = "An output directory. Default: $HOME/deepgmap-data/outputs/")
-
+    group_output.add_argument( "-v", "--variables", dest = "initial_variables", type = str, default = None,
+                               help = "")
     
     return
 
