@@ -13,6 +13,8 @@ the distribution).
 import os
 import sys, traceback
 import argparse as ap
+import importlib as il
+#VERSION=il.import_module("deepgmap.__init__").__version__ 
 from deepgmap.__init__ import __version__ as VERSION
 
 HOME=os.path.expanduser("~")

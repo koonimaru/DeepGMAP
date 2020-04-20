@@ -91,8 +91,11 @@ def main(args=None):
     seq_num=len(position_list)
     print(seq_num)
     
-    DIVIDES_NUM=seq_num//120000
-
+    if seq_num%120000==0:
+        DIVIDES_NUM=seq_num//120000
+    else:
+        DIVIDES_NUM=seq_num//120000+1
+    
     if DIVIDES_NUM%threads==0:
         outerloop=DIVIDES_NUM//threads
     else:
